@@ -21,6 +21,7 @@ Each prompt file should:
 |---|---|
 | `stage-template.prompt.md` | Copy this when starting a new stage. |
 | `stage-1-ui-ux.prompt.md` | Reserved for the Stage 1 kickoff (do not run yet). |
+| `stage-3-database-design.prompt.md` | Stage 3 MySQL database architecture and ER design scope; saved, not executed. |
 
 ## Example usage
 
