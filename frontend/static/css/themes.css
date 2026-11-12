@@ -1,0 +1,135 @@
+/* ==========================================================================
+   NEXUS — Semantic themes
+   Light = Apple-inspired calm. Dark = Nothing-inspired technical.
+   ========================================================================== */
+
+:root,
+[data-theme="light"] {
+  color-scheme: light;
+
+  --nx-bg: var(--nx-paper);
+  --nx-bg-subtle: #ededE8;
+  --nx-surface: var(--nx-white);
+  --nx-surface-raised: var(--nx-white);
+  --nx-surface-sunken: #f0f0eb;
+  --nx-surface-hover: #f7f7f3;
+  --nx-sidebar-bg: var(--nx-white);
+  --nx-header-bg: rgba(245, 245, 242, 0.88);
+
+  --nx-text: var(--nx-obsidian);
+  --nx-text-muted: #5c5c5c;
+  --nx-text-subtle: #6e6e6e;
+
+  --nx-border: #dadada;
+  --nx-border-strong: var(--nx-silver);
+  --nx-border-subtle: #e8e8e4;
+  --nx-border-control: #767676;
+
+  --nx-accent: var(--nx-lime);
+  --nx-accent-text: var(--nx-obsidian);
+  --nx-accent-soft: #f0f9c8;
+  --nx-accent-border: #b8d92a;
+  --nx-indicator: var(--nx-obsidian);
+  --nx-nav-active-bg: #f0f9c8;
+  --nx-nav-active-text: var(--nx-obsidian);
+
+  --nx-focus: var(--nx-obsidian);
+  --nx-focus-halo: rgba(215, 255, 53, 0.55);
+
+  --nx-danger: var(--nx-danger-light);
+  --nx-danger-soft: #fdecea;
+  --nx-success: var(--nx-success-light);
+  --nx-success-soft: #e8f5ec;
+  --nx-warning: var(--nx-warning-light);
+  --nx-warning-soft: #fff4d6;
+  --nx-info: #245b8a;
+  --nx-info-soft: #eaf2fa;
+
+  --nx-btn-primary-bg: var(--nx-obsidian);
+  --nx-btn-primary-text: var(--nx-paper);
+  --nx-btn-primary-hover: var(--nx-graphite);
+  --nx-btn-danger-bg: var(--nx-danger-light);
+  --nx-btn-danger-text: var(--nx-white);
+
+  --nx-shadow-sm: 0 1px 2px rgba(17, 17, 17, 0.05);
+  --nx-shadow-md: 0 8px 24px rgba(17, 17, 17, 0.08);
+  --nx-shadow-lg: 0 24px 64px rgba(17, 17, 17, 0.14);
+  --nx-overlay: rgba(17, 17, 17, 0.45);
+  --nx-dot: rgba(17, 17, 17, 0.16);
+
+  --nx-chart-grid: #e8e8e4;
+  --nx-chart-primary: var(--nx-obsidian);
+  --nx-chart-secondary: #8a8a8a;
+  --nx-chart-tertiary: var(--nx-silver);
+  --nx-chart-fill: rgba(17, 17, 17, 0.06);
+
+  --nx-control-accent: var(--nx-obsidian);
+  --nx-skeleton: linear-gradient(90deg, #ededE8 25%, #f7f7f3 37%, #ededE8 63%);
+  --nx-selection-bg: var(--nx-lime);
+  --nx-selection-text: var(--nx-obsidian);
+}
+
+[data-theme="dark"] {
+  color-scheme: dark;
+
+  --nx-bg: var(--nx-obsidian);
+  --nx-bg-subtle: var(--nx-neutral-950);
+  --nx-surface: var(--nx-neutral-800);
+  --nx-surface-raised: var(--nx-graphite);
+  --nx-surface-sunken: #151515;
+  --nx-surface-hover: #262626;
+  --nx-sidebar-bg: #151515;
+  --nx-header-bg: rgba(17, 17, 17, 0.88);
+
+  --nx-text: var(--nx-paper);
+  --nx-text-muted: var(--nx-silver);
+  --nx-text-subtle: #9a9a9a;
+
+  --nx-border: #3a3a3a;
+  --nx-border-strong: #4a4a4a;
+  --nx-border-subtle: #2a2a2a;
+  --nx-border-control: #6a6a6a;
+
+  --nx-accent: var(--nx-lime);
+  --nx-accent-text: var(--nx-obsidian);
+  --nx-accent-soft: rgba(215, 255, 53, 0.12);
+  --nx-accent-border: #6e7f1a;
+  --nx-indicator: var(--nx-lime);
+  --nx-nav-active-bg: rgba(215, 255, 53, 0.12);
+  --nx-nav-active-text: var(--nx-paper);
+
+  --nx-focus: var(--nx-lime);
+  --nx-focus-halo: rgba(215, 255, 53, 0.3);
+
+  --nx-danger: var(--nx-danger-dark);
+  --nx-danger-soft: rgba(255, 138, 128, 0.12);
+  --nx-success: var(--nx-success-dark);
+  --nx-success-soft: rgba(126, 226, 168, 0.12);
+  --nx-warning: var(--nx-warning-dark);
+  --nx-warning-soft: rgba(255, 210, 122, 0.12);
+  --nx-info: #8fc7f0;
+  --nx-info-soft: rgba(143, 199, 240, 0.12);
+
+  --nx-btn-primary-bg: var(--nx-lime);
+  --nx-btn-primary-text: var(--nx-obsidian);
+  --nx-btn-primary-hover: #c4eb25;
+  --nx-btn-danger-bg: var(--nx-danger-dark);
+  --nx-btn-danger-text: var(--nx-obsidian);
+
+  --nx-shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.3);
+  --nx-shadow-md: 0 8px 24px rgba(0, 0, 0, 0.35);
+  --nx-shadow-lg: 0 24px 64px rgba(0, 0, 0, 0.55);
+  --nx-overlay: rgba(0, 0, 0, 0.62);
+  --nx-dot: rgba(245, 245, 242, 0.18);
+
+  --nx-chart-grid: #333333;
+  --nx-chart-primary: var(--nx-lime);
+  --nx-chart-secondary: var(--nx-silver);
+  --nx-chart-tertiary: var(--nx-neutral-500);
+  --nx-chart-fill: rgba(215, 255, 53, 0.1);
+
+  --nx-control-accent: var(--nx-lime);
+  --nx-skeleton: linear-gradient(90deg, #1c1c1c 25%, #292929 37%, #1c1c1c 63%);
+  --nx-selection-bg: var(--nx-lime);
+  --nx-selection-text: var(--nx-obsidian);
+}

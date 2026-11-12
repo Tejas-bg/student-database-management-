@@ -1,0 +1,310 @@
+# NEXUS — Design System
+
+> **Stage 1 · Implemented design foundation.** This document explains how the CSS and JavaScript are organised, what each file does, and how to extend the system without breaking the themes.
+
+---
+
+## 1. What “design system” means here
+
+A design system is a small set of shared decisions:
+
+- **Tokens** — named values for colour, type, spacing, radii, shadows, and motion.
+- **Themes** — semantic mappings of those values for light and dark mode.
+- **Components** — reusable HTML/CSS patterns built only from tokens.
+- **Layout** — the app shell and responsive rules.
+- **Documentation** — this folder plus the live `frontend/styleguide.html`.
+
+The goal is simple: change a value once, and every screen updates consistently.
+
+---
+
+## 2. File map
+
+```
+frontend/
+├── index.html                  Dashboard preview (demo data)
+├── styleguide.html             Live component and token reference
+└── static/
+    ├── css/
+    │   ├── tokens.css          Primitive values: palette, type, space, radii, motion
+    │   ├── themes.css          Light/dark semantic tokens
+    │   ├── reset.css           Reset, base typography, focus, a11y utilities
+    │   ├── layout.css          Shell, sidebar, header, grids, docs layout
+    │   ├── components.css      Buttons, cards, forms, tables, dialogs, charts…
+    │   └── responsive.css      Breakpoints, mobile drawer, print styles
+    ├── js/
+    │   ├── theme-init.js       Blocking pre-paint theme selection
+    │   ├── theme.js            Theme switch, localStorage, system preference
+    │   └── main.js             Drawer, menus, tabs, dialogs, toasts, filter
+    └── img/
+        ├── favicon.svg         Browser icon
+        └── nexus-mark.svg      Standalone brand mark
+```
+
+### Load order (important)
+
+`tokens.css` → `themes.css` → `reset.css` → `layout.css` → `components.css` → `responsive.css`
+
+CSS variables must be declared before the files that use them. Responsive rules load last so they can override layout and component defaults.
+
+---
+
+## 3. Token architecture
+
+Tokens live on `:root` in `tokens.css`. They are **primitive** values and should not be used directly in components unless there is a clear reason.
+
+```css
+:root {
+  --nx-obsidian: #111111;
+  --nx-space-4: 16px;
+  --nx-radius-lg: 16px;
+  --nx-text-sm: 0.875rem;
+}
+```
+
+`themes.css` maps primitives to **semantic** tokens:
+
+```css
+:root,
+[data-theme="light"] {
+  --nx-bg: var(--nx-paper);
+  --nx-surface: var(--nx-white);
+  --nx-text: var(--nx-obsidian);
+  --nx-border-control: #767676;
+}
+
+[data-theme="dark"] {
+  --nx-bg: var(--nx-obsidian);
+  --nx-surface: var(--nx-neutral-800);
+  --nx-text: var(--nx-paper);
+  --nx-border-control: #6a6a6a;
+}
+```
+
+Components use semantic tokens only:
+
+```css
+.nx-card {
+  background: var(--nx-surface);
+  border: 1px solid var(--nx-border-subtle);
+  border-radius: var(--nx-radius-lg);
+  color: var(--nx-text);
+}
+```
+
+### Token groups
+
+| Group | Examples | Notes |
+|---|---|---|
+| Palette | `--nx-obsidian`, `--nx-lime` | Fixed brand values |
+| Neutrals | `--nx-neutral-950` … `--nx-neutral-0` | Supporting steps |
+| Text | `--nx-text`, `--nx-text-muted`, `--nx-text-subtle` | Three levels only |
+| Surfaces | `--nx-bg`, `--nx-surface`, `--nx-surface-sunken`, `--nx-surface-hover` | Theme-aware |
+| Borders | `--nx-border-subtle`, `--nx-border`, `--nx-border-strong`, `--nx-border-control` | Control borders meet 3:1 |
+| Accent | `--nx-accent`, `--nx-accent-soft`, `--nx-indicator` | Lime roles |
+| Status | `--nx-success`, `--nx-warning`, `--nx-danger`, `--nx-info` + soft variants | Always paired with text |
+| Charts | `--nx-chart-primary`, `--nx-chart-secondary`, `--nx-chart-tertiary`, `--nx-chart-grid`, `--nx-chart-fill` | Theme-aware series |
+| Focus | `--nx-focus`, `--nx-focus-halo` | Obsidian in light, lime in dark |
+| Type | `--nx-font-sans`, `--nx-font-mono`, `--nx-text-*`, `--nx-leading-*` | Two families, fixed scale |
+| Space | `--nx-space-1` … `--nx-space-10` | 4px base |
+| Radius | `--nx-radius-sm` … `--nx-radius-pill` | Consistent shape |
+| Layout | `--nx-sidebar-width`, `--nx-header-height`, `--nx-content-max`, `--nx-page-pad` | Shell |
+| Motion | `--nx-duration-*`, `--nx-ease-*` | Short and calm |
+| Layers | `--nx-z-header` … `--nx-z-toast` | Predictable stacking |
+
+**Rule:** if a value appears more than twice, it belongs in a token. Do not copy hex codes into components.
+
+---
+
+## 4. Themes
+
+### How the theme is chosen
+
+1. `theme-init.js` runs in `<head>` before the page paints.
+2. It checks, in order:
+   - `?theme=light` or `?theme=dark` in the URL (preview override, not saved),
+   - `localStorage["nexus-theme"]`,
+   - the operating system preference.
+3. It sets `<html data-theme="…">` immediately, preventing a flash of the wrong theme.
+4. `theme.js` handles the toggle buttons, saves the choice, updates the browser theme colour, and exposes `NEXUS.theme`.
+
+### Preview without changing the saved preference
+
+Open either page with:
+
+```
+index.html?theme=light
+index.html?theme=dark
+styleguide.html?theme=light
+styleguide.html?theme=dark
+```
+
+A normal toggle click **does** save the choice.
+
+### Adding a token
+
+1. Add the primitive to `tokens.css` if it is a new raw value.
+2. Add the semantic name to **both** light and dark blocks in `themes.css`.
+3. Use the semantic name in the component.
+4. Document it here or in `UI_COMPONENTS.md` if it is important.
+5. Check contrast in both themes (see `ACCESSIBILITY.md`).
+
+---
+
+## 5. Typography system
+
+- **Inter** for interface text.
+- **JetBrains Mono** for IDs, codes, timestamps, technical labels, and chart labels.
+- Fonts are loaded from Google Fonts with system fallbacks. If the network is unavailable, the fallbacks keep the layout readable.
+
+Use the utility classes where possible:
+
+| Class | Use |
+|---|---|
+| `.nx-mono` | Technical label / identifier |
+| `.nx-eyebrow` | Small uppercase section marker with a line |
+| `.nx-stat__label` | Compact mono label used above values |
+| `.nx-hint` | Secondary help text |
+| `.nx-text-muted` / `.nx-subtle` | Text levels |
+| `.nx-truncate` | Single-line truncation |
+
+Headings use the reset defaults: `h1` 2.75rem, `h2` 1.5rem, `h3` 1.125rem. Hero headings override with `clamp()`.
+
+---
+
+## 6. Spacing, radii, and elevation
+
+- Spacing follows a 4px base: 4, 8, 12, 16, 24, 32, 48, 64, 96, 128.
+- Component padding is usually `var(--nx-space-4)`; page gaps are `var(--nx-space-5)`.
+- Radii: controls 10px, cards 16px, large surfaces 24px, badges pill.
+- Elevation is intentionally limited:
+  - `--nx-shadow-sm`: tiny control lift,
+  - `--nx-shadow-md`: menus and toasts,
+  - `--nx-shadow-lg`: dialogs and the mobile drawer.
+
+Do not add decorative shadows to ordinary cards. Thin borders and spacing carry the hierarchy.
+
+---
+
+## 7. Layout system
+
+### App shell
+
+```
+.nx-app
+├── .nx-sidebar          fixed left navigation
+├── .nx-overlay          mobile dim layer
+└── .nx-shell
+    ├── .nx-header       sticky top bar
+    ├── .nx-main
+    │   └── .nx-page     max-width content column
+    └── .nx-footer
+```
+
+### Grid helpers
+
+| Class | Desktop behaviour |
+|---|---|
+| `.nx-grid--stats` | 4 equal columns |
+| `.nx-grid--split` | 1.35fr / 1fr |
+| `.nx-grid--halves` | 2 equal columns |
+| `.nx-grid--thirds` | 3 equal columns |
+| `.nx-stack` | Vertical flex with 16px gap |
+| `.nx-cluster` | Wrapping horizontal flex |
+
+### Breakpoints
+
+| Width | Change |
+|---|---|
+| ≤ 1280px | Stats become 2-up; thirds become 2-up |
+| ≤ 1120px | Split and halves stack to one column |
+| ≤ 1024px | Sidebar becomes an off-canvas drawer |
+| ≤ 860px | Header title hides; thirds become 1-up; footer stacks |
+| ≤ 640px | Phone spacing; quick actions 1-up; dialogs full-width buttons |
+| ≤ 420px | Stats 1-up; header search hides |
+| Print | Chrome/navigation hidden; cards avoid page breaks |
+
+The layout is desktop-first with `max-width` queries. Mobile navigation is fully keyboard operable.
+
+---
+
+## 8. JavaScript responsibilities
+
+| File | Responsibility | Must not do |
+|---|---|---|
+| `theme-init.js` | Choose and apply the initial theme before paint | Contain UI logic |
+| `theme.js` | Toggle theme, persist choice, update labels and meta | Fetch data |
+| `main.js` | Drawer, menus, tabs, dialogs, toasts, doc filter | Pretend to save data |
+
+No framework, build step, or package manager is required in Stage 1. This is deliberate: it keeps the foundation readable for a beginner and avoids a toolchain before the backend exists.
+
+### Public API
+
+```js
+NEXUS.theme.get();      // "light" | "dark"
+NEXUS.theme.set("dark");
+NEXUS.theme.toggle();
+NEXUS.toast("Title", "Message", { duration: 4200 });
+```
+
+Custom event: `nexus:themechange` fires on `document` with `{ detail: { theme } }`.
+
+---
+
+## 9. Charts in Stage 1
+
+Charts are hand-built with CSS and inline SVG:
+
+- donut gauge using `conic-gradient`,
+- bar charts using flex heights,
+- meters using width percentages,
+- sparkline using an SVG path.
+
+No chart library is loaded. Every chart has a text summary, an `aria-label`, or a data-table alternative. Chart.js can replace these in Stage 2 without changing the layout tokens.
+
+---
+
+## 10. How to add a component
+
+1. Check whether the component already exists in `components.css`.
+2. Use existing tokens; do not introduce raw colours.
+3. Add a documented example to `styleguide.html`.
+4. Add a short entry to `UI_COMPONENTS.md`.
+5. Test:
+   - keyboard focus and Escape behaviour,
+   - light and dark themes,
+   - desktop and 375px widths,
+   - browser console for errors.
+
+---
+
+## 11. How to add a page (Stage 2)
+
+1. Copy the shell structure from `index.html`.
+2. Keep landmarks: skip link, sidebar, header, main, footer.
+3. Mark the current navigation item with `aria-current="page"`.
+4. Use `.nx-page`, `.nx-section`, and the grid helpers.
+5. Reuse components; add new CSS only when needed.
+6. Verify the design in both themes and at mobile width.
+
+---
+
+## 12. Dependencies
+
+Stage 1 intentionally uses only:
+
+- HTML, CSS, and vanilla JavaScript,
+- Google Fonts for Inter and JetBrains Mono,
+- inline SVG icons.
+
+Bootstrap 5 may be introduced in Stage 2 only if it solves a concrete problem. It is **not** included now because the custom token system already covers layout and components, and adding a framework early would duplicate styling.
+
+---
+
+## 13. Known limitations
+
+- The font CDN requires a network connection; fallbacks are defined but visually different.
+- Charts are static illustrations, not data-driven.
+- The styleguide filter is a small convenience, not a search engine.
+- No automated visual regression or axe run is configured yet.
+- Borders on decorative cards are intentionally subtle; control borders use a stronger token to meet the 3:1 UI target.

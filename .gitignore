@@ -1,0 +1,53 @@
+# NEXUS — .gitignore
+
+# Environment and secrets
+.env
+.env.*
+!.env.example
+
+# Python
+__pycache__/
+*.py[cod]
+*.pyo
+.venv/
+venv/
+env/
+.pytest_cache/
+.coverage
+.coverage.*
+htmlcov/
+.mypy_cache/
+.ruff_cache/
+
+# Flask
+instance/
+*.sqlite3
+
+# Database dumps and backups (may contain data)
+*.dump
+*.sql.gz
+*.bak
+
+# Node (only if a frontend build tool is ever approved)
+node_modules/
+
+# VS Code (keep shared recommendations and settings)
+.vscode/*
+!.vscode/extensions.json
+!.vscode/settings.json
+
+# Operating system
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Logs
+*.log
+
+# Generated report assets
+reports/generated/
+
+# Temporary files
+*.tmp
+*.temp
+~$*

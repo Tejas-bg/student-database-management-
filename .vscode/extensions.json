@@ -1,0 +1,10 @@
+{
+  "recommendations": [
+    "ms-python.python",
+    "ms-python.vscode-pylance",
+    "ms-python.debugpy",
+    "github.copilot",
+    "github.copilot-chat",
+    "esbenp.prettier-vscode"
+  ]
+}

@@ -1,0 +1,103 @@
+/* ==========================================================================
+   NEXUS — Design tokens (Stage 1)
+   Primitive values only. Semantic light/dark mappings live in themes.css.
+   ========================================================================== */
+
+:root {
+  /* Brand palette */
+  --nx-obsidian: #111111;
+  --nx-paper: #f5f5f2;
+  --nx-white: #ffffff;
+  --nx-silver: #bdbdbd;
+  --nx-graphite: #292929;
+  --nx-lime: #d7ff35;
+
+  /* Neutral steps */
+  --nx-neutral-950: #0b0b0b;
+  --nx-neutral-900: #111111;
+  --nx-neutral-800: #1c1c1c;
+  --nx-neutral-700: #292929;
+  --nx-neutral-600: #3a3a3a;
+  --nx-neutral-500: #5c5c5c;
+  --nx-neutral-400: #8a8a8a;
+  --nx-neutral-300: #bdbdbd;
+  --nx-neutral-200: #dadada;
+  --nx-neutral-100: #e8e8e4;
+  --nx-neutral-50: #f5f5f2;
+  --nx-neutral-0: #ffffff;
+
+  /* Status colours */
+  --nx-danger-light: #b42318;
+  --nx-danger-dark: #ff8a80;
+  --nx-success-light: #1f7a3d;
+  --nx-success-dark: #7ee2a8;
+  --nx-warning-light: #8a5a00;
+  --nx-warning-dark: #ffd27a;
+
+  /* Typography */
+  --nx-font-sans: "Inter", system-ui, -apple-system, "Segoe UI", sans-serif;
+  --nx-font-mono: "JetBrains Mono", "SFMono-Regular", Consolas, "Liberation Mono", monospace;
+  --nx-text-xs: 0.75rem;
+  --nx-text-sm: 0.875rem;
+  --nx-text-base: 1rem;
+  --nx-text-lg: 1.125rem;
+  --nx-text-xl: 1.5rem;
+  --nx-text-2xl: 2rem;
+  --nx-text-3xl: 2.75rem;
+  --nx-text-4xl: clamp(2.25rem, 5vw, 3.5rem);
+  --nx-leading-tight: 1.08;
+  --nx-leading-snug: 1.3;
+  --nx-leading-normal: 1.6;
+  --nx-weight-regular: 400;
+  --nx-weight-medium: 500;
+  --nx-weight-semibold: 600;
+  --nx-weight-bold: 700;
+  --nx-tracking-tight: -0.025em;
+  --nx-tracking-normal: 0;
+  --nx-tracking-wide: 0.08em;
+  --nx-tracking-wider: 0.14em;
+
+  /* Spacing — 4px base */
+  --nx-space-1: 4px;
+  --nx-space-2: 8px;
+  --nx-space-3: 12px;
+  --nx-space-4: 16px;
+  --nx-space-5: 24px;
+  --nx-space-6: 32px;
+  --nx-space-7: 48px;
+  --nx-space-8: 64px;
+  --nx-space-9: 96px;
+  --nx-space-10: 128px;
+
+  /* Radii */
+  --nx-radius-sm: 6px;
+  --nx-radius-md: 10px;
+  --nx-radius-lg: 16px;
+  --nx-radius-xl: 24px;
+  --nx-radius-pill: 999px;
+
+  /* Layout */
+  --nx-sidebar-width: 272px;
+  --nx-header-height: 72px;
+  --nx-content-max: 1280px;
+  --nx-page-pad: clamp(20px, 3vw, 48px);
+
+  /* Print — theme-independent so dark mode still prints legibly */
+  --nx-print-border: #cccccc;
+
+  /* Motion */
+  --nx-duration-fast: 120ms;
+  --nx-duration-base: 180ms;
+  --nx-duration-slow: 300ms;
+  --nx-ease-out: cubic-bezier(0.2, 0.8, 0.2, 1);
+  --nx-ease-in: cubic-bezier(0.4, 0, 1, 1);
+  --nx-ease-standard: cubic-bezier(0.2, 0, 0, 1);
+
+  /* Layers */
+  --nx-z-header: 20;
+  --nx-z-overlay: 30;
+  --nx-z-sidebar: 40;
+  --nx-z-popover: 50;
+  --nx-z-dialog: 60;
+  --nx-z-toast: 70;
+}
