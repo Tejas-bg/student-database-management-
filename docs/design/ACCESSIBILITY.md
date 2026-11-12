@@ -1,6 +1,6 @@
 # GM University Management System — Accessibility
 
-> **Stage 1 · WCAG 2.1 AA target.** This document records what was implemented, how it was checked, the measured contrast results, and the limitations that remain.
+> **Stage 1 foundation · Stage 2 dashboards verified.** This document records what was implemented, how it was checked, the measured contrast results, and the limitations that remain.
 
 ---
 
@@ -198,8 +198,10 @@ Not yet performed. Recommended next checks with NVDA (Windows) or VoiceOver:
 | Contrast calculations | Done (WCAG formula, values above) |
 | Login layout, validation, password toggle, dialog focus, reduced motion, console | Done (Chrome DevTools Protocol; see `project-context/CURRENT_STATUS.md`) |
 | CSS token audit for raw hex in components | Done (`components.css` uses semantic tokens) |
-| Browser console errors | Checked during Stage 1 verification (see `project-context/CURRENT_STATUS.md`) |
+| Browser console errors | Checked during Stage 1 and Stage 2 verification (see `project-context/CURRENT_STATUS.md`) |
 | Responsive layout screenshots | Checked at desktop, tablet, and mobile widths |
+| Dashboard control, field, image, and sprite-name audit (34 pages) | Done — zero unnamed controls, unlabelled fields, missing `alt`, or missing symbols |
+| Dashboard keyboard checks (skip link, `/`, drawer Escape, menu Escape) | Done — Chrome DevTools Protocol |
 | Automated axe scan | Not configured yet |
 | Visual regression tests | Not configured yet |
 | Screen reader pass | Not performed yet |
@@ -212,7 +214,7 @@ Not yet performed. Recommended next checks with NVDA (Windows) or VoiceOver:
 2. **Fonts come from Google Fonts.** Offline use falls back to system fonts; metrics may shift slightly.
 3. **Native `<dialog>` support** is assumed (current Chrome, Edge, Firefox, Safari). Very old browsers will not open dialogs.
 4. **Charts are static.** Their text alternatives describe the visual, but future dynamic charts need a generated data table or accessible description.
-5. **No automated accessibility test** is part of the workflow yet. Add axe or Playwright checks in Stage 2.
+5. **No committed automated accessibility test** is part of the workflow yet. The Stage 2 audit was scripted through the DevTools Protocol; add axe or Playwright checks in Stage 7.
 6. **The styleguide filter** hides blocks visually but does not announce a result count. It is a documentation convenience, not product UI.
 7. **Decorative hairlines** intentionally sit below 3:1; see the exception note above.
 

@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Faculty Profile · Faculty · GMU Management System</title>
+  <meta name="description" content="Faculty profile — GM University Management System. Stage 2 interface preview with sample data.">
+  <meta name="theme-color" content="#f8f6f0">
+  <link rel="icon" href="../../static/img/branding/gmu-official-logo.jpg" type="image/jpeg">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+  <script src="../../static/js/theme-init.js"></script>
+  <link rel="stylesheet" href="../../static/css/tokens.css">
+  <link rel="stylesheet" href="../../static/css/themes.css">
+  <link rel="stylesheet" href="../../static/css/reset.css">
+  <link rel="stylesheet" href="../../static/css/layout.css">
+  <link rel="stylesheet" href="../../static/css/components.css">
+  <link rel="stylesheet" href="../../static/css/dashboard.css">
+  <link rel="stylesheet" href="../../static/css/responsive.css">
+</head>
+<body data-role="faculty" data-page="profile"
+      data-title="Faculty Profile" data-subtitle="Staff profile · Sample data"
+      data-breadcrumb="Faculty Profile" data-search="Search profile details…">
+
+  <div class="nx-app" data-app-shell>
+    <main class="nx-main" id="main-content">
+      <div class="nx-page">
+
+        <section class="nx-section" aria-labelledby="profile-title">
+          <div class="nx-section__head">
+            <h2 id="profile-title">Faculty profile</h2>
+            <p>Illustrative staff record · not from a database</p>
+          </div>
+
+          <div class="dashboard-split">
+            <section class="nx-card" aria-labelledby="personal-title">
+              <div class="nx-card__head">
+                <h3 id="personal-title">Personal information</h3>
+                <span class="nx-badge nx-badge--success">Sample record</span>
+              </div>
+              <div class="nx-card__body">
+                <div class="dashboard-avatar-block">
+                  <span class="nx-avatar nx-avatar--accent" aria-hidden="true">AR</span>
+                  <div>
+                    <strong>Dr. Anita Rao</strong>
+                    <span>Employee ID · GMU-FAC-0142</span>
+                  </div>
+                </div>
+
+                <dl class="dashboard-def-list">
+                  <div><dt>Designation</dt><dd>Associate Professor</dd></div>
+                  <div><dt>Department</dt><dd>Computer Science and Engineering</dd></div>
+                  <div><dt>Qualification</dt><dd>Ph.D. in Computer Science</dd></div>
+                  <div><dt>Specialisation</dt><dd>Database Systems, Data Engineering</dd></div>
+                  <div><dt>Joining year</dt><dd>2016</dd></div>
+                  <div><dt>Email</dt><dd>demo.faculty@gmu.ac.in</dd></div>
+                  <div><dt>Phone</dt><dd>+91 98765 67890</dd></div>
+                  <div><dt>Office</dt><dd>Block C · Room C-208</dd></div>
+                </dl>
+              </div>
+              <div class="nx-card__foot">
+                <span class="dashboard-note">Profile editing is planned for a later stage</span>
+                <button class="nx-btn nx-btn--secondary nx-btn--sm" type="button"
+                        data-toast="Preview only|Profile editing needs the Flask API and MySQL update queries planned for a later stage.">
+                  Edit profile
+                </button>
+              </div>
+            </section>
+
+            <div class="nx-stack" style="gap: var(--nx-space-4);">
+              <section class="nx-card" aria-labelledby="teaching-title">
+                <div class="nx-card__head">
+                  <h3 id="teaching-title">Teaching load</h3>
+                  <span class="nx-badge">Sample</span>
+                </div>
+                <div class="nx-card__body">
+                  <dl class="dashboard-def-list">
+                    <div><dt>Assigned subjects</dt><dd>3</dd></div>
+                    <div><dt>Sections</dt><dd>A, B, and Laboratory</dd></div>
+                    <div><dt>Students</dt><dd>142</dd></div>
+                    <div><dt>Weekly contact hours</dt><dd>14</dd></div>
+                    <div><dt>Mentees</dt><dd>20</dd></div>
+                  </dl>
+                </div>
+                <div class="nx-card__foot">
+                  <span class="dashboard-note">Illustrative allocation</span>
+                  <a class="nx-link" href="subjects.html">View subjects</a>
+                </div>
+              </section>
+
+              <section class="nx-card" aria-labelledby="service-title">
+                <div class="nx-card__head">
+                  <h3 id="service-title">Departmental service</h3>
+                </div>
+                <div class="nx-card__body">
+                  <ul class="nx-activity">
+                    <li class="nx-activity__item">
+                      <span class="nx-activity__icon" aria-hidden="true"><svg class="nx-icon nx-icon--sm"><use href="#i-clipboard"/></svg></span>
+                      <div class="nx-activity__body">
+                        <strong>Board of Studies member</strong>
+                        <p>Sample committee role · 2024–26</p>
+                      </div>
+                    </li>
+                    <li class="nx-activity__item">
+                      <span class="nx-activity__icon" aria-hidden="true"><svg class="nx-icon nx-icon--sm"><use href="#i-users"/></svg></span>
+                      <div class="nx-activity__body">
+                        <strong>Student mentoring coordinator</strong>
+                        <p>Sample coordination role · Semester 5</p>
+                      </div>
+                    </li>
+                    <li class="nx-activity__item">
+                      <span class="nx-activity__icon" aria-hidden="true"><svg class="nx-icon nx-icon--sm"><use href="#i-book"/></svg></span>
+                      <div class="nx-activity__body">
+                        <strong>Database Systems course lead</strong>
+                        <p>Sample course ownership · 2025–26</p>
+                      </div>
+                    </li>
+                  </ul>
+                </div>
+              </section>
+            </div>
+          </div>
+
+          <div class="nx-callout" style="margin-top: var(--nx-space-4);">
+            <svg class="nx-icon nx-icon--sm" aria-hidden="true"><use href="#i-info"/></svg>
+            <div>
+              <strong>Sample staff profile</strong>
+              <p>No faculty record is stored or retrieved. These details exist only to demonstrate the interface layout.</p>
+            </div>
+          </div>
+        </section>
+
+      </div>
+    </main>
+  </div>
+
+  <div class="nx-toast-region" data-toast-region aria-live="polite" aria-atomic="false"></div>
+
+  <script src="../../static/js/theme.js"></script>
+  <script src="../../static/js/app-shell.js"></script>
+  <script src="../../static/js/main.js"></script>
+  <script src="../../static/js/dashboard.js"></script>
+</body>
+</html>

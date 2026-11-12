@@ -9,8 +9,8 @@ This is a one-page summary. The detailed version, with tasks, deliverables, depe
 | Stage | Name | Status |
 |---|---|---|
 | 0 | Project Workspace and Context Setup | Complete and approved |
-| 1 | UI/UX Design System and Visual Identity | Implemented and verified; awaiting approval |
-| 2 | Frontend Development | Not started |
+| 1 | UI/UX Design System and Visual Identity | Complete and approved |
+| 2 | Frontend Development | Implemented and verified; awaiting review |
 | 3 | MySQL Database Design and Implementation | Not started |
 | 4 | Flask Backend and Database Connection | Not started |
 | 5 | Functional Module Development | Not started |
@@ -36,7 +36,13 @@ Do not start the next stage until:
 
 ## Immediate next step
 
-Stage 1 is complete for review. Open `frontend/login.html`, `frontend/index.html`, and `frontend/styleguide.html` through a local server and inspect the common login preview, the dashboard, and the component reference in both themes.
+Stage 2 is complete for review. Open `frontend/login.html` and the three workspaces through a local server:
+
+- `frontend/dashboard/student/`
+- `frontend/dashboard/faculty/`
+- `frontend/dashboard/admin/`
+
+Inspect navigation, filters, dialogs, the profile menu, notifications, sidebar collapse, and both themes. Every page labels its content as sample data.
 
 For example, from the project folder:
 
@@ -46,8 +52,8 @@ python -m http.server 8000 --directory frontend
 
 Then open `http://127.0.0.1:8000/login.html`.
 
-When you are satisfied, approve Stage 2:
+When you are satisfied, approve Stage 3:
 
-> "Start Stage 2: Frontend Development."
+> "Start Stage 3: MySQL Database Design and Implementation."
 
 Until then, do not build the backend or the database.

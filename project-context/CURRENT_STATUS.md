@@ -1,19 +1,19 @@
 # GM University Management System — Current Status
 
 > **This file must reflect verified reality, not intentions.**
-> **Last updated:** 2026-11-12 (Stage 1 design system, GMU rebrand, and common login preview implemented and verified; awaiting approval).
+> **Last updated:** 2026-11-12 (Stage 2 application shell and 34 role dashboards implemented and browser-verified; awaiting review).
 > **Update rule:** Change a status only after the work is implemented and verified.
 
 ---
 
 ## Status at a glance
 
-- **Current Stage:** Stage 1 – UI/UX Design System and Visual Identity
+- **Current Stage:** Stage 2 – Frontend Development
 - **Project implementation status:** UI preview only — no backend or database
-- **Frontend status:** Stage 1 design system, GMU rebrand, and login preview implemented; awaiting approval
+- **Frontend status:** Stage 2 shared shell and student/faculty/administration pages implemented and verified
 - **Backend status:** Not Started
 - **Database status:** Not Started (schema still PLANNING)
-- **Testing status:** Manual browser verification done; no automated suite
+- **Testing status:** Scripted browser verification via the Chrome DevTools Protocol; no committed automated suite
 
 ---
 
@@ -21,10 +21,10 @@
 
 | Field | Value |
 |---|---|
-| Current stage | **Stage 1 — UI/UX Design System and Visual Identity** |
-| Stage 1 deliverable state | Design system, dashboard preview, themes, components, official GMU rebrand, common login preview, and documentation implemented and verified; awaiting user approval |
-| Next stage | Stage 2 — Frontend Development (not started) |
-| Approval required | Yes — do not start Stage 2 without explicit user approval |
+| Current stage | **Stage 2 — Frontend Development** |
+| Stage 2 deliverable state | Shared application shell and 34 role dashboards implemented and browser-verified; awaiting user review |
+| Next stage | Stage 3 — MySQL Database Design and Implementation (not started) |
+| Approval required | Yes — do not start Stage 3 without explicit user approval |
 
 ---
 
@@ -32,12 +32,12 @@
 
 | Area | Status | Notes |
 |---|---|---|
-| Project implementation | **UI preview** | Stage 1 static HTML/CSS/JS exists. No application logic or persistence. |
-| Frontend | **Stage 1 complete for review** | `frontend/login.html`, `frontend/index.html`, `frontend/styleguide.html`, seven CSS files, four JS files, one official logo asset. |
+| Project implementation | **UI preview** | Static HTML/CSS/JS only. No application logic or persistence. |
+| Frontend | **Stage 2 complete for review** | Stage 1 design system and login preview, plus the shared shell and 34 student/faculty/administration pages. |
 | Backend | **Not Started** | No Flask app, routes, or API. |
 | Database | **Not Started** | No MySQL tables created or executed. |
-| Testing | **Manual verification only** | Chrome DevTools Protocol checks for layout, keyboard, dialogs, validation, and console; no automated test suite yet. |
-| Documentation | **Stage 1 docs created and rebranded** | Context docs plus `docs/design/` (visual identity, brand guidelines, login design, design system, components, accessibility). |
+| Testing | **Scripted browser verification** | Chrome DevTools Protocol harness covered all 34 pages, interactions, accessibility, and four viewport widths; the harness is not committed. |
+| Documentation | **Stage 2 docs current** | Stage 1 design docs plus `docs/design/GMU_DASHBOARD_DESIGN.md`, changelog, tasks, and this status. |
 
 ---
 
@@ -73,16 +73,27 @@ The schema has not been reviewed or approved. Do not create tables yet.
 - Maroon, gold, and ivory palette applied through the token and theme files.
 - `docs/design/VISUAL_IDENTITY.md`, `GMU_BRAND_GUIDELINES.md`, `GMU_LOGIN_DESIGN.md`, `DESIGN_SYSTEM.md`, `UI_COMPONENTS.md`, `ACCESSIBILITY.md`.
 
+### Added in Stage 2
+
+- `frontend/static/js/app-shell.js` — shared role-aware shell, navigation, header, menus, breadcrumbs, demo notice, and footer.
+- `frontend/static/js/dashboard.js` — frontend-only table/list filters, pagination, mark-read, inert demo forms, and `/` search shortcut.
+- `frontend/static/css/dashboard.css` — dashboard grids, hero, filters, meters, and pagination.
+- 10 student pages under `frontend/dashboard/student/`.
+- 10 faculty pages under `frontend/dashboard/faculty/`.
+- 14 administration pages under `frontend/dashboard/admin/`.
+- `docs/design/GMU_DASHBOARD_DESIGN.md` — page map, page contract, shell architecture, interaction hooks, responsive rules, and verification evidence.
+- Delegated theme-toggle handling in `theme.js`, so the header control injected by the shell works on every page.
+
 ---
 
 ## 5. What is not complete
 
-- User approval of Stage 1.
-- Stage 2 module pages and Jinja2 templates.
+- User review of Stage 2.
+- Authentication pages beyond the existing login preview (error pages), and converting the login into a Jinja2 template.
 - Flask backend, authentication, sessions, and role checks.
 - MySQL schema, migrations, and seed data.
 - Real data integration, forms that save, and report generation.
-- Automated tests (unit, integration, accessibility, visual regression).
+- A committed automated test suite (the browser harness used for Stage 2 lives outside the repository).
 - Manual screen-reader pass.
 - College report and viva material.
 
@@ -120,6 +131,24 @@ The schema has not been reviewed or approved. Do not create tables yet.
 | Login page scrolls naturally on mobile | At 768x1024 and 375x812, the document scrolled by 297px and 556px, panel `scrollTop` stayed 0, and the brand panel moved with the page |
 | Login has no horizontal or nested scrollbars | `scrollWidth === clientWidth` at 1920, 1366, 768, and 375px; real-scrollbar run also reported no horizontal overflow |
 | No backend, database, or auth is active | No such files or dependencies exist; the UI reports this in the system-status card and login notice |
+| All 34 dashboard pages load the shared shell | Scripted run at 1366×768: sidebar, header, footer, breadcrumb, skip link, and demo notice present; exactly one active nav item; role attribute matched its folder; zero console/JS errors |
+| Table filters, search, and pagination work on sample rows | Chip filter kept only matching rows; no-match search showed the empty state; pagination showed 6 then 4 rows, disabled Next on the last page, and returned to page 1 |
+| Header search filters the current page's tables | Entering a no-match query hid all rows and showed the empty state; clearing it restored the rows |
+| Dialogs and demo forms never submit | Dialog opened by trigger, submitted with `requestSubmit()`, showed a preview-only toast, stayed on the page, and closed back to its trigger |
+| Profile menu and logout behave correctly | Menu opened, closed on outside click; Sign out points to `../../login.html` |
+| Notifications mark read | Header menu opened with 3 unread, mark-all-read cleared them; page-level mark-read removed the page's 3 unread dots, updated its summary to “0 unread”, and showed a toast |
+| Sidebar collapse persists | Control visible and functional at 1366px; `.is-sidebar-collapsed` and `localStorage["gmu-sidebar-collapsed"]="1"` survived a reload |
+| Theme toggle works on the injected header control | Delegated handler switched `data-theme`, stored `gmu-theme`, and restored the original theme on a second click |
+| Tabs switch panels accessibly | Faculty semester-marks tabs hid the inactive panel and set `aria-selected="true"` on the active tab |
+| List filters combine and reset | Feedback status and category chips filtered items, produced the empty state for an impossible combination, and restored all items on reset |
+| Responsive layouts have no horizontal overflow | 10 representative pages at 1920×1080, 1366×768, 768×1024, and 375×812: zero out-of-viewport elements and zero document overflow |
+| Dashboard grids collapse as designed | Stat grids 4-up at 1920, 2-up at 768, 1-up at 375; report template row 3/2/1 at the same widths |
+| Mobile navigation works | At 375px the drawer toggle is visible, the collapse control is hidden, the drawer opens with an overlay, and Escape closes it |
+| Mobile tables scroll inside their wrapper | Table wrapper scrolled horizontally while the document width stayed at the viewport width |
+| Dashboard controls and fields are named | Accessibility audit of 34 pages: no unnamed buttons/links, no unlabelled fields, no image without `alt`, no missing sprite symbol |
+| Keyboard entry points work | Skip link is first focusable and targets `#main-content`; `/` focuses header search; sidebar collapse is focusable; notification menu closes on Escape |
+| Dashboard pages make no data requests | No `fetch`, `XMLHttpRequest`, `WebSocket`, or form submission exists in the dashboard JavaScript; demo forms call `preventDefault()` |
+| Dashboard markup and links are internally consistent | Static validation of 34 pages: balanced tags, no duplicate IDs, page contract present, all local assets and links resolve |
 
 Anything not in this table is unverified.
 
@@ -132,12 +161,14 @@ Anything not in this table is unverified.
 | Final schema and cardinalities | Open — Stage 3 |
 | Exact role model | Open — Stage 4 |
 | Manual screen-reader review | Open — before submission |
-| Automated accessibility testing | Open — add in Stage 2 or 7 |
-| Chart library choice for dynamic data | Open — Chart.js can be added in Stage 2 if needed |
+| Automated accessibility testing | Open — the Stage 2 audit was scripted but the harness is not committed |
+| Chart library choice for dynamic data | Deferred — Stage 2 uses CSS/SVG charts; Chart.js remains an option for Stage 5 |
+| Header unread count vs page notifications | Open — the header menu and page list are separate sample sets; marking page items read does not change the header badge |
 | College submission format | Open — confirm with the student |
 | Local MySQL version | Open - confirm before Stage 3 |
-| ADR-005 database access strategy | Proposed - awaiting approval with Stage 1 |
-| Manual screen-reader pass for the login page | Open - before submission |
+| ADR-005 database access strategy | Proposed - awaiting approval |
+| Manual screen-reader pass for the login page and dashboards | Open - before submission |
+| Stage 2 commit | Open — git was unavailable in the working environment; Stage 2 files are not yet committed |
 
 ---
 
@@ -148,3 +179,4 @@ Anything not in this table is unverified.
 | 2026-11-12 | Initial status after Stage 0 workspace setup. |
 | 2026-11-12 | Updated after Stage 1 design-system implementation and browser verification; Stage 1 marked In Review. |
 | 2026-11-12 | Rebranded to GM University Management System, added the official logo, common login preview, and login verification evidence. |
+| 2026-11-12 | Updated after Stage 2: shared shell, 34 role dashboards, interaction tests, responsive/accessibility audits, and current limitations. |

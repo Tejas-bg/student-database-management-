@@ -1,6 +1,6 @@
 # GM University Management System — Task Board
 
-> **Status:** Stage 1 design system implemented and verified; awaiting user approval. Stage 2 has not started.
+> **Status:** Stage 2 application shell and role dashboards implemented and browser-verified; awaiting user review. The Stage 1 login preview is unchanged and no backend, database, or real authentication exists.
 > **Rule:** A task is only `Done` when it is implemented and verified. File creation is not verification of an application feature.
 
 ---
@@ -52,13 +52,13 @@
 | S1-04 | Build light and dark reference pages. | 1 | P0 | Done | S1-01–S1-03 | `index.html` dashboard + `styleguide.html`; theme toggle, `?theme=` preview, persisted preference. |
 | S1-05 | Check contrast and keyboard accessibility. | 1 | P0 | Done | S1-04 | Contrast computed; keyboard, focus return, drawer trap, no console errors verified via Chrome DevTools Protocol. See `docs/design/ACCESSIBILITY.md`. |
 | S1-06 | Document the design system. | 1 | P1 | Done | S1-04 | Design documents in `docs/design/` plus the live styleguide. |
-| S1-07 | Rebrand the interface and documentation to the GM University identity. | 1 | P0 | In Review | S1-04 | Maroon/gold/ivory palette, official name, tagline, metadata, and all active docs updated. |
-| S1-08 | Integrate the official GM University logo without modification. | 1 | P0 | In Review | S1-07 | `frontend/static/img/branding/gmu-official-logo.jpg`; source and checksum recorded in `GMU_BRAND_GUIDELINES.md`. |
-| S1-09 | Build the common login page for all roles. | 1 | P0 | In Review | S1-07 | `login.html`, `login.css`, `login.js`; no role selector, no real authentication. |
+| S1-07 | Rebrand the interface and documentation to the GM University identity. | 1 | P0 | Done | S1-04 | Maroon/gold/ivory palette, official name, tagline, metadata, and all active docs updated. |
+| S1-08 | Integrate the official GM University logo without modification. | 1 | P0 | Done | S1-07 | `frontend/static/img/branding/gmu-official-logo.jpg`; source and checksum recorded in `GMU_BRAND_GUIDELINES.md`. |
+| S1-09 | Build the common login page for all roles. | 1 | P0 | Done | S1-07 | `login.html`, `login.css`, `login.js`; no role selector, no real authentication. |
 | S1-10 | Document brand usage and the login specification. | 1 | P0 | Done | S1-07 | `GMU_BRAND_GUIDELINES.md` and `GMU_LOGIN_DESIGN.md`. |
 | S1-11 | Verify the login preview across widths, keyboard, reduced motion, and console. | 1 | P0 | Done | S1-09 | Verified at 1920/1366/768/375px for scrolling; earlier layout pass covered 1440/1024/390/320px. Validation, password toggle, preview state, dialog focus, reduced motion, and console checked. See `CURRENT_STATUS.md`. |
 
-**Stage 1 status:** In Review - implementation and verification are complete; awaiting user approval before Stage 2. Stage 1 is UI-only: no MySQL, Flask, authentication, backend, or real student data.
+**Stage 1 status:** Done — retained unchanged as the foundation for Stage 2. Stage 1 is UI-only: no MySQL, Flask, authentication, backend, or real student data.
 
 ---
 
@@ -66,13 +66,17 @@
 
 | ID | Task | Stage | Priority | Status | Dependencies | Notes |
 |---|---|---|---|---|---|---|
-| S2-01 | Create base layout and partials. | 2 | P0 | Not Started | S1-06 | Header, sidebar, footer, theme toggle. |
-| S2-02 | Build remaining authentication pages and convert the login preview into a template. | 2 | P0 | Not Started | S2-01 | Logout, error pages; no real authentication until Stage 4. |
-| S2-03 | Build student and department pages. | 2 | P0 | Not Started | S2-01 | Static or preview data. |
-| S2-04 | Build course, subject, and faculty pages. | 2 | P0 | Not Started | S2-01 | Static or preview data. |
-| S2-05 | Build attendance and marks pages. | 2 | P0 | Not Started | S2-01 | Forms and tables. |
-| S2-06 | Build fee, feedback, and report pages. | 2 | P0 | Not Started | S2-01 | Charts where useful. |
-| S2-07 | Add responsive and accessibility checks. | 2 | P0 | Not Started | S2-02–S2-06 | Mobile, tablet, desktop. |
+| S2-01 | Create base layout and partials. | 2 | P0 | Done | S1-06 | Shared shell in `app-shell.js` and `dashboard.css`: sidebar, header, breadcrumbs, footer, notice, menus, theme toggle. Verified on all 34 pages. |
+| S2-02 | Build remaining authentication pages and convert the login preview into a template. | 2 | P0 | Not Started | S2-01 | Deliberately deferred. Logout links to the existing login preview; no fake authentication or session was added. Template conversion belongs with Flask in Stage 4. |
+| S2-03 | Build student and department pages. | 2 | P0 | Done | S2-01 | 10 student pages; department management lives under the administration workspace. Sample data only. |
+| S2-04 | Build course, subject, and faculty pages. | 2 | P0 | Done | S2-01 | Course, subject, faculty, and semester management pages plus the faculty workspace. |
+| S2-05 | Build attendance and marks pages. | 2 | P0 | Done | S2-01 | Attendance, internal assessment, marks entry, semester marks, and marks management pages with tables and inert forms. |
+| S2-06 | Build fee, feedback, and report pages. | 2 | P0 | Done | S2-01 | Fee details/management, feedback workspaces, performance, reports, and analytics. Charts are CSS/SVG. |
+| S2-07 | Add responsive and accessibility checks. | 2 | P0 | Done | S2-03–S2-06 | 376 browser assertions passed; zero overflow at 1920/1366/768/375; 34-page accessibility and static audits clean. |
+| S2-08 | Build the administration management workspace. | 2 | P0 | Done | S2-01 | 14 pages, including enrolment and user/role management. |
+| S2-09 | Document Stage 2 and record verification evidence. | 2 | P1 | In Review | S2-01–S2-08 | `docs/design/GMU_DASHBOARD_DESIGN.md`, changelog, status, and this board updated. Awaiting user review. |
+
+**Stage 2 status:** In Review — all planned role pages are implemented and browser-verified. The interface is UI-only: no backend, database, authentication, session, or persistence. Every dashboard labels its data as sample/demo.
 
 ---
 
@@ -187,6 +191,19 @@
 
 ## 13. Current focus
 
-Stage 1 is **In Review**. The design system, GMU rebrand, and common login preview are implemented and verified. User approval of Stage 1 is the only remaining gate.
+Stage 2 is **In Review**. The shared shell and all 34 student, faculty, and administration pages are implemented and verified. The login page remains unchanged.
 
-Do not start Stage 2 work until Stage 1 is approved.
+Next gates:
+
+1. User review of the Stage 2 interface.
+2. Approval before Stage 3 (MySQL schema and implementation) begins.
+
+Stage 2 remains UI-only. Do not add fake authentication, mock success messages, or claims of database storage.
+
+---
+
+## 14. Verification references
+
+- `docs/design/GMU_DASHBOARD_DESIGN.md` — Stage 2 page map, contract, behaviour, responsive rules, and evidence.
+- `project-context/CURRENT_STATUS.md` — verified facts and current limitations.
+- `CHANGELOG.md` — dated record of the Stage 2 work.

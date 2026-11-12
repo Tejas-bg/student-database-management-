@@ -1,0 +1,316 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Reports and Analytics · Administration · GMU Management System</title>
+  <meta name="description" content="Administration reports and analytics — GM University Management System. Stage 2 interface preview with sample data.">
+  <meta name="theme-color" content="#f8f6f0">
+  <link rel="icon" href="../../static/img/branding/gmu-official-logo.jpg" type="image/jpeg">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+  <script src="../../static/js/theme-init.js"></script>
+  <link rel="stylesheet" href="../../static/css/tokens.css">
+  <link rel="stylesheet" href="../../static/css/themes.css">
+  <link rel="stylesheet" href="../../static/css/reset.css">
+  <link rel="stylesheet" href="../../static/css/layout.css">
+  <link rel="stylesheet" href="../../static/css/components.css">
+  <link rel="stylesheet" href="../../static/css/dashboard.css">
+  <link rel="stylesheet" href="../../static/css/responsive.css">
+</head>
+<body data-role="admin" data-page="reports"
+      data-title="Reports and Analytics" data-subtitle="Institution reporting · Sample data"
+      data-breadcrumb="Reports and Analytics" data-search="Search sample reports…">
+
+  <div class="nx-app" data-app-shell>
+    <main class="nx-main" id="main-content">
+      <div class="nx-page">
+
+        <section class="nx-section" aria-labelledby="reports-title">
+          <div class="nx-section__head">
+            <h2 id="reports-title">Reports and analytics</h2>
+            <p>Sample institution-wide reporting · academic year 2026–27</p>
+          </div>
+
+          <div class="dashboard-stat-grid" aria-label="Sample reporting summary">
+            <article class="nx-stat">
+              <div class="nx-stat__top"><span class="nx-stat__label">Report templates</span><span class="nx-stat__icon" aria-hidden="true"><svg class="nx-icon nx-icon--sm"><use href="#i-clipboard"/></svg></span></div>
+              <p class="nx-stat__value">6</p>
+              <p class="nx-stat__foot">Sample templates available</p>
+            </article>
+            <article class="nx-stat">
+              <div class="nx-stat__top"><span class="nx-stat__label">Generated</span><span class="nx-stat__icon" aria-hidden="true"><svg class="nx-icon nx-icon--sm"><use href="#i-check"/></svg></span></div>
+              <p class="nx-stat__value">4</p>
+              <p class="nx-stat__foot">Illustrative ready reports</p>
+            </article>
+            <article class="nx-stat">
+              <div class="nx-stat__top"><span class="nx-stat__label">Scheduled</span><span class="nx-stat__icon" aria-hidden="true"><svg class="nx-icon nx-icon--sm"><use href="#i-calendar"/></svg></span></div>
+              <p class="nx-stat__value">2</p>
+              <p class="nx-stat__foot">Sample monthly schedule</p>
+            </article>
+            <article class="nx-stat">
+              <div class="nx-stat__top"><span class="nx-stat__label">Export format</span><span class="nx-stat__icon" aria-hidden="true"><svg class="nx-icon nx-icon--sm"><use href="#i-download"/></svg></span></div>
+              <p class="nx-stat__value">PDF</p>
+              <p class="nx-stat__foot">Export is not implemented</p>
+            </article>
+          </div>
+
+          <div class="dashboard-split">
+            <section class="nx-card" aria-labelledby="trend-title">
+              <div class="nx-card__head">
+                <div>
+                  <h3 id="trend-title">Attendance trend</h3>
+                  <p>Sample monthly average · all departments</p>
+                </div>
+                <span class="nx-badge">Static</span>
+              </div>
+              <div class="nx-card__body">
+                <div class="nx-chart">
+                  <div class="nx-bars" role="img" aria-label="Sample attendance trend: July 89, August 90, September 91, October 92, November 91, December 88">
+                    <div class="nx-bar"><span class="nx-bar__value">89</span><div class="nx-bar__fill" style="height: 89%"></div><span class="nx-bar__label">Jul</span></div>
+                    <div class="nx-bar"><span class="nx-bar__value">90</span><div class="nx-bar__fill" style="height: 90%"></div><span class="nx-bar__label">Aug</span></div>
+                    <div class="nx-bar"><span class="nx-bar__value">91</span><div class="nx-bar__fill" style="height: 91%"></div><span class="nx-bar__label">Sep</span></div>
+                    <div class="nx-bar"><span class="nx-bar__value">92</span><div class="nx-bar__fill" style="height: 92%"></div><span class="nx-bar__label">Oct</span></div>
+                    <div class="nx-bar"><span class="nx-bar__value">91</span><div class="nx-bar__fill" style="height: 91%"></div><span class="nx-bar__label">Nov</span></div>
+                    <div class="nx-bar"><span class="nx-bar__value">88</span><div class="nx-bar__fill" style="height: 88%"></div><span class="nx-bar__label">Dec</span></div>
+                  </div>
+                  <div class="nx-chart__legend">
+                    <span class="nx-legend-item"><span class="nx-legend-item__swatch" aria-hidden="true"></span>Sample attendance percentage</span>
+                  </div>
+                </div>
+              </div>
+              <div class="nx-card__foot">
+                <span class="dashboard-note">Trend values are pre-written sample content</span>
+              </div>
+            </section>
+
+            <section class="nx-card" aria-labelledby="pass-title">
+              <div class="nx-card__head">
+                <div>
+                  <h3 id="pass-title">Result overview</h3>
+                  <p>Sample semester outcome</p>
+                </div>
+                <a class="nx-link" href="marks.html">Marks</a>
+              </div>
+              <div class="nx-card__body">
+                <div class="nx-donut-row">
+                  <div class="nx-donut" style="--value: 94;" role="img" aria-label="Pass rate 94 percent. Sample data.">
+                    <div class="nx-donut__center">
+                      <strong>94%</strong>
+                      <span>pass rate</span>
+                    </div>
+                  </div>
+                  <div class="nx-donut-row__meta">
+                    <div class="nx-meter">
+                      <div class="nx-meter__top"><span>Pass</span><span>1,124</span></div>
+                      <div class="nx-meter__track"><div class="nx-meter__fill" style="width: 94%"></div></div>
+                    </div>
+                    <div class="nx-meter nx-meter--secondary">
+                      <div class="nx-meter__top"><span>Backlog</span><span>72</span></div>
+                      <div class="nx-meter__track"><div class="nx-meter__fill dashboard-meter-row__fill--danger" style="width: 6%"></div></div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="nx-card__foot">
+                <span class="dashboard-note">Illustrative pass and backlog counts</span>
+              </div>
+            </section>
+          </div>
+
+          <div class="nx-section__head" style="margin-top: var(--nx-space-6);">
+            <h2>Report templates</h2>
+            <p>Each action below is a non-functional preview</p>
+          </div>
+
+          <div class="dashboard-grid-3">
+            <section class="nx-card">
+              <div class="nx-card__head">
+                <div>
+                  <h3>Institution summary</h3>
+                  <p>Students, faculty, and programmes</p>
+                </div>
+                <span class="nx-badge">Sample</span>
+              </div>
+              <div class="nx-card__body">
+                <p class="dashboard-note">Headcount, department mix, intake, and overall attendance in one sample report.</p>
+              </div>
+              <div class="nx-card__foot">
+                <button class="nx-btn nx-btn--secondary nx-btn--sm" type="button"
+                        data-toast="Preview only|Report generation needs the Flask API and MySQL queries planned for a later stage. No file was created.">
+                  Generate
+                </button>
+              </div>
+            </section>
+
+            <section class="nx-card">
+              <div class="nx-card__head">
+                <div>
+                  <h3>Attendance audit</h3>
+                  <p>Department and subject register</p>
+                </div>
+                <span class="nx-badge">Sample</span>
+              </div>
+              <div class="nx-card__body">
+                <p class="dashboard-note">Marked sessions, shortage lists, and department comparisons.</p>
+              </div>
+              <div class="nx-card__foot">
+                <button class="nx-btn nx-btn--secondary nx-btn--sm" type="button"
+                        data-toast="Preview only|Report generation needs the Flask API and MySQL queries planned for a later stage. No file was created.">
+                  Generate
+                </button>
+              </div>
+            </section>
+
+            <section class="nx-card">
+              <div class="nx-card__head">
+                <div>
+                  <h3>Marks and results</h3>
+                  <p>Assessment and semester outcomes</p>
+                </div>
+                <span class="nx-badge">Sample</span>
+              </div>
+              <div class="nx-card__body">
+                <p class="dashboard-note">Subject averages, grade distributions, and backlog summaries.</p>
+              </div>
+              <div class="nx-card__foot">
+                <button class="nx-btn nx-btn--secondary nx-btn--sm" type="button"
+                        data-toast="Preview only|Report generation needs the Flask API and MySQL queries planned for a later stage. No file was created.">
+                  Generate
+                </button>
+              </div>
+            </section>
+
+            <section class="nx-card">
+              <div class="nx-card__head">
+                <div>
+                  <h3>Fee collection</h3>
+                  <p>Demand, receipts, and balance</p>
+                </div>
+                <span class="nx-badge">Sample</span>
+              </div>
+              <div class="nx-card__body">
+                <p class="dashboard-note">Programme-wise collection, outstanding balances, and concessions.</p>
+              </div>
+              <div class="nx-card__foot">
+                <button class="nx-btn nx-btn--secondary nx-btn--sm" type="button"
+                        data-toast="Preview only|Report generation needs the Flask API and MySQL queries planned for a later stage. No file was created.">
+                  Generate
+                </button>
+              </div>
+            </section>
+
+            <section class="nx-card">
+              <div class="nx-card__head">
+                <div>
+                  <h3>Feedback themes</h3>
+                  <p>Sample course feedback</p>
+                </div>
+                <span class="nx-badge">Sample</span>
+              </div>
+              <div class="nx-card__body">
+                <p class="dashboard-note">Aggregated ratings, category counts, and illustrative comments.</p>
+              </div>
+              <div class="nx-card__foot">
+                <button class="nx-btn nx-btn--secondary nx-btn--sm" type="button"
+                        data-toast="Preview only|Report generation needs the Flask API and MySQL queries planned for a later stage. No file was created.">
+                  Generate
+                </button>
+              </div>
+            </section>
+
+            <section class="nx-card">
+              <div class="nx-card__head">
+                <div>
+                  <h3>Enrolment funnel</h3>
+                  <p>Applications to confirmation</p>
+                </div>
+                <span class="nx-badge">Sample</span>
+              </div>
+              <div class="nx-card__body">
+                <p class="dashboard-note">Programme-wise applications, approvals, waitlists, and withdrawals.</p>
+              </div>
+              <div class="nx-card__foot">
+                <button class="nx-btn nx-btn--secondary nx-btn--sm" type="button"
+                        data-toast="Preview only|Report generation needs the Flask API and MySQL queries planned for a later stage. No file was created.">
+                  Generate
+                </button>
+              </div>
+            </section>
+          </div>
+
+          <div data-table-section style="margin-top: var(--nx-space-4);">
+            <div class="dashboard-filter-bar">
+              <label class="nx-search">
+                <span class="nx-sr-only">Filter report history</span>
+                <svg class="nx-icon" aria-hidden="true"><use href="#i-search"/></svg>
+                <input type="search" data-table-search placeholder="Filter by report, period, or state…" autocomplete="off">
+              </label>
+              <div class="dashboard-chip-row" role="group" aria-label="Filter report history by state">
+                <button class="nx-chip is-active" type="button" data-filter="state" data-value="" aria-pressed="true">All reports</button>
+                <button class="nx-chip" type="button" data-filter="state" data-value="ready" aria-pressed="false">Ready</button>
+                <button class="nx-chip" type="button" data-filter="state" data-value="scheduled" aria-pressed="false">Scheduled</button>
+              </div>
+            </div>
+
+            <div class="nx-table-wrap">
+              <table class="nx-table" data-demo-table data-page-size="6">
+                <caption>Sample report history</caption>
+                <thead>
+                  <tr>
+                    <th scope="col">Report</th>
+                    <th scope="col">Period</th>
+                    <th scope="col">Scope</th>
+                    <th scope="col">Updated</th>
+                    <th scope="col">State</th>
+                    <th scope="col"><span class="nx-sr-only">Action</span></th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr data-state="ready"><td><strong>Institution summary</strong></td><td>October 2026</td><td>All departments</td><td>01 Nov 2026</td><td><span class="nx-badge nx-badge--success">Ready</span></td><td><button class="nx-btn nx-btn--ghost nx-btn--sm" type="button" data-toast="Preview only|Opening a report needs the Flask API and MySQL queries planned for a later stage.">Open</button></td></tr>
+                  <tr data-state="ready"><td><strong>Attendance audit</strong></td><td>October 2026</td><td>All departments</td><td>01 Nov 2026</td><td><span class="nx-badge nx-badge--success">Ready</span></td><td><button class="nx-btn nx-btn--ghost nx-btn--sm" type="button" data-toast="Preview only|Opening a report needs the Flask API and MySQL queries planned for a later stage.">Open</button></td></tr>
+                  <tr data-state="scheduled"><td><strong>Marks and results</strong></td><td>Semester 5</td><td>CSE</td><td>—</td><td><span class="nx-badge nx-badge--warning">Scheduled</span></td><td><button class="nx-btn nx-btn--ghost nx-btn--sm" type="button" data-toast="Preview only|Scheduled reports are not generated in Stage 2.">Preview</button></td></tr>
+                  <tr data-state="ready"><td><strong>Fee collection</strong></td><td>Q2 2026–27</td><td>All programmes</td><td>28 Oct 2026</td><td><span class="nx-badge nx-badge--success">Ready</span></td><td><button class="nx-btn nx-btn--ghost nx-btn--sm" type="button" data-toast="Preview only|Opening a report needs the Flask API and MySQL queries planned for a later stage.">Open</button></td></tr>
+                  <tr data-state="ready"><td><strong>Feedback themes</strong></td><td>Semester 4</td><td>All departments</td><td>20 Oct 2026</td><td><span class="nx-badge nx-badge--success">Ready</span></td><td><button class="nx-btn nx-btn--ghost nx-btn--sm" type="button" data-toast="Preview only|Opening a report needs the Flask API and MySQL queries planned for a later stage.">Open</button></td></tr>
+                  <tr data-state="scheduled"><td><strong>Enrolment funnel</strong></td><td>2026–27 cycle</td><td>All programmes</td><td>—</td><td><span class="nx-badge nx-badge--warning">Scheduled</span></td><td><button class="nx-btn nx-btn--ghost nx-btn--sm" type="button" data-toast="Preview only|Scheduled reports are not generated in Stage 2.">Preview</button></td></tr>
+                </tbody>
+              </table>
+            </div>
+
+            <div class="nx-empty" data-table-empty hidden>
+              <span class="nx-empty__icon" aria-hidden="true"><svg class="nx-icon nx-icon--lg"><use href="#i-search"/></svg></span>
+              <strong>No sample reports match</strong>
+              <p>Try another report name, period, or state.</p>
+            </div>
+
+            <div class="dashboard-pagination">
+              <span data-page-info>Showing 1–6 of 6 sample records</span>
+              <div class="dashboard-pagination__controls">
+                <button class="nx-btn nx-btn--ghost nx-btn--sm" type="button" data-page-prev>Previous</button>
+                <button class="nx-btn nx-btn--ghost nx-btn--sm" type="button" data-page-next>Next</button>
+              </div>
+            </div>
+          </div>
+
+          <div class="nx-callout">
+            <svg class="nx-icon nx-icon--sm" aria-hidden="true"><use href="#i-info"/></svg>
+            <div>
+              <strong>No report is generated</strong>
+              <p>Charts, templates, and history entries are illustrative. PDF export, scheduling, aggregation queries, and storage require backend services planned for a later stage.</p>
+            </div>
+          </div>
+        </section>
+
+      </div>
+    </main>
+  </div>
+
+  <div class="nx-toast-region" data-toast-region aria-live="polite" aria-atomic="false"></div>
+
+  <script src="../../static/js/theme.js"></script>
+  <script src="../../static/js/app-shell.js"></script>
+  <script src="../../static/js/main.js"></script>
+  <script src="../../static/js/dashboard.js"></script>
+</body>
+</html>

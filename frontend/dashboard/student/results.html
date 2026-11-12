@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Semester Results · Student · GMU Management System</title>
+  <meta name="description" content="Student semester results — GM University Management System. Stage 2 interface preview with sample data.">
+  <meta name="theme-color" content="#f8f6f0">
+  <link rel="icon" href="../../static/img/branding/gmu-official-logo.jpg" type="image/jpeg">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+  <script src="../../static/js/theme-init.js"></script>
+  <link rel="stylesheet" href="../../static/css/tokens.css">
+  <link rel="stylesheet" href="../../static/css/themes.css">
+  <link rel="stylesheet" href="../../static/css/reset.css">
+  <link rel="stylesheet" href="../../static/css/layout.css">
+  <link rel="stylesheet" href="../../static/css/components.css">
+  <link rel="stylesheet" href="../../static/css/dashboard.css">
+  <link rel="stylesheet" href="../../static/css/responsive.css">
+</head>
+<body data-role="student" data-page="results"
+      data-title="Semester Results" data-subtitle="Academic results · Sample data"
+      data-breadcrumb="Semester Results" data-search="Search results…">
+
+  <div class="nx-app" data-app-shell>
+    <main class="nx-main" id="main-content">
+      <div class="nx-page">
+
+        <section class="nx-section" aria-labelledby="results-title">
+          <div class="nx-section__head">
+            <h2 id="results-title">Semester results</h2>
+            <p>Semester 5 · sample grade sheet</p>
+          </div>
+
+          <div class="dashboard-stat-grid" aria-label="Sample result summary">
+            <article class="nx-stat">
+              <div class="nx-stat__top"><span class="nx-stat__label">SGPA</span><span class="nx-stat__icon" aria-hidden="true"><svg class="nx-icon nx-icon--sm"><use href="#i-trend"/></svg></span></div>
+              <p class="nx-stat__value">8.6<small> /10</small></p>
+              <p class="nx-stat__foot"><span class="nx-delta nx-delta--up">+0.4</span> vs sample Semester 4</p>
+            </article>
+            <article class="nx-stat">
+              <div class="nx-stat__top"><span class="nx-stat__label">CGPA</span><span class="nx-stat__icon" aria-hidden="true"><svg class="nx-icon nx-icon--sm"><use href="#i-award"/></svg></span></div>
+              <p class="nx-stat__value">8.4<small> /10</small></p>
+              <p class="nx-stat__foot">Illustrative cumulative average</p>
+            </article>
+            <article class="nx-stat">
+              <div class="nx-stat__top"><span class="nx-stat__label">Credits earned</span><span class="nx-stat__icon" aria-hidden="true"><svg class="nx-icon nx-icon--sm"><use href="#i-layers"/></svg></span></div>
+              <p class="nx-stat__value">26<small> /26</small></p>
+              <p class="nx-stat__foot">All sample Semester 5 credits</p>
+            </article>
+            <article class="nx-stat">
+              <div class="nx-stat__top"><span class="nx-stat__label">Backlogs</span><span class="nx-stat__icon" aria-hidden="true"><svg class="nx-icon nx-icon--sm"><use href="#i-check"/></svg></span></div>
+              <p class="nx-stat__value">0</p>
+              <p class="nx-stat__foot">No sample backlog recorded</p>
+            </article>
+          </div>
+
+          <div class="dashboard-split">
+            <section class="nx-card" aria-labelledby="grade-title">
+              <div class="nx-card__head">
+                <div>
+                  <h3 id="grade-title">Semester 5 grade sheet</h3>
+                  <p>Sample marks and letter grades</p>
+                </div>
+                <button class="nx-btn nx-btn--secondary nx-btn--sm" type="button"
+                        data-toast="Preview only|Marksheet download needs the Flask API and MySQL queries planned for a later stage. Nothing was generated.">
+                  <svg class="nx-icon nx-icon--sm" aria-hidden="true"><use href="#i-download"/></svg>
+                  Download
+                </button>
+              </div>
+              <div class="nx-card__body" style="padding: 0;">
+                <div class="nx-table-wrap" style="border: none; border-radius: 0;">
+                  <table class="nx-table">
+                    <caption>Sample Semester 5 grade sheet · all results illustrative</caption>
+                    <thead>
+                      <tr>
+                        <th scope="col">Code</th>
+                        <th scope="col">Subject</th>
+                        <th scope="col" class="nx-table__num">Credits</th>
+                        <th scope="col" class="nx-table__num">Marks</th>
+                        <th scope="col" class="nx-table__num">Grade</th>
+                        <th scope="col" class="nx-table__num">Points</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr><td class="nx-mono">CS301</td><td><strong>Database Systems</strong></td><td class="nx-table__num">4</td><td class="nx-table__num">87</td><td class="nx-table__num">A</td><td class="nx-table__num">9</td></tr>
+                      <tr><td class="nx-mono">CS302</td><td><strong>Operating Systems</strong></td><td class="nx-table__num">4</td><td class="nx-table__num">78</td><td class="nx-table__num">B+</td><td class="nx-table__num">8</td></tr>
+                      <tr><td class="nx-mono">CS303</td><td><strong>Software Engineering</strong></td><td class="nx-table__num">3</td><td class="nx-table__num">71</td><td class="nx-table__num">B</td><td class="nx-table__num">7</td></tr>
+                      <tr><td class="nx-mono">CS304</td><td><strong>Computer Networks</strong></td><td class="nx-table__num">4</td><td class="nx-table__num">84</td><td class="nx-table__num">A</td><td class="nx-table__num">9</td></tr>
+                      <tr><td class="nx-mono">CS305</td><td><strong>Web Technologies</strong></td><td class="nx-table__num">3</td><td class="nx-table__num">80</td><td class="nx-table__num">A</td><td class="nx-table__num">9</td></tr>
+                      <tr><td class="nx-mono">CS306</td><td><strong>Database Laboratory</strong></td><td class="nx-table__num">2</td><td class="nx-table__num">92</td><td class="nx-table__num">O</td><td class="nx-table__num">10</td></tr>
+                      <tr><td class="nx-mono">CS307</td><td><strong>Networks Laboratory</strong></td><td class="nx-table__num">2</td><td class="nx-table__num">89</td><td class="nx-table__num">A</td><td class="nx-table__num">9</td></tr>
+                      <tr><td class="nx-mono">CS381</td><td><strong>Data Science Elective</strong></td><td class="nx-table__num">4</td><td class="nx-table__num">76</td><td class="nx-table__num">B+</td><td class="nx-table__num">8</td></tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+              <div class="nx-card__foot">
+                <span class="dashboard-note">Sample grade scale: O 10, A 9, B+ 8, B 7</span>
+                <span class="nx-badge nx-badge--accent">SGPA 8.6</span>
+              </div>
+            </section>
+
+            <div class="nx-stack" style="gap: var(--nx-space-4);">
+              <section class="nx-card" aria-labelledby="sgpa-title">
+                <div class="nx-card__head">
+                  <div>
+                    <h3 id="sgpa-title">SGPA progression</h3>
+                    <p>Sample values across five semesters</p>
+                  </div>
+                </div>
+                <div class="nx-card__body">
+                  <div class="nx-chart">
+                    <div class="nx-bars" role="img" aria-label="Sample SGPA trend: 8.1, 8.3, 8.0, 8.2, 8.6">
+                      <div class="nx-bar"><span class="nx-bar__value">8.1</span><div class="nx-bar__fill" style="height: 81%"></div><span class="nx-bar__label">S1</span></div>
+                      <div class="nx-bar"><span class="nx-bar__value">8.3</span><div class="nx-bar__fill" style="height: 83%"></div><span class="nx-bar__label">S2</span></div>
+                      <div class="nx-bar"><span class="nx-bar__value">8.0</span><div class="nx-bar__fill" style="height: 80%"></div><span class="nx-bar__label">S3</span></div>
+                      <div class="nx-bar"><span class="nx-bar__value">8.2</span><div class="nx-bar__fill" style="height: 82%"></div><span class="nx-bar__label">S4</span></div>
+                      <div class="nx-bar"><span class="nx-bar__value">8.6</span><div class="nx-bar__fill" style="height: 86%"></div><span class="nx-bar__label">S5</span></div>
+                      <div class="nx-bar"><span class="nx-bar__value">—</span><div class="nx-bar__fill" style="height: 2%"></div><span class="nx-bar__label">S6</span></div>
+                    </div>
+                    <div class="nx-chart__legend">
+                      <span class="nx-legend-item"><span class="nx-legend-item__swatch" aria-hidden="true"></span>SGPA out of 10 · sample</span>
+                    </div>
+                  </div>
+                </div>
+              </section>
+
+              <section class="nx-card" aria-labelledby="standing-title">
+                <div class="nx-card__head">
+                  <h3 id="standing-title">Academic standing</h3>
+                </div>
+                <div class="nx-card__body">
+                  <dl class="dashboard-def-list">
+                    <div><dt>Current standing</dt><dd>Good standing</dd></div>
+                    <div><dt>Credits earned</dt><dd>86 / 160</dd></div>
+                    <div><dt>Class rank</dt><dd>Not published in preview</dd></div>
+                    <div><dt>Result status</dt><dd>Sample · provisional</dd></div>
+                  </dl>
+                </div>
+              </section>
+            </div>
+          </div>
+        </section>
+
+      </div>
+    </main>
+  </div>
+
+  <div class="nx-toast-region" data-toast-region aria-live="polite" aria-atomic="false"></div>
+
+  <script src="../../static/js/theme.js"></script>
+  <script src="../../static/js/app-shell.js"></script>
+  <script src="../../static/js/main.js"></script>
+  <script src="../../static/js/dashboard.js"></script>
+</body>
+</html>

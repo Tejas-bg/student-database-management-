@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Feedback · Student · GMU Management System</title>
+  <meta name="description" content="Student feedback — GM University Management System. Stage 2 interface preview with sample data.">
+  <meta name="theme-color" content="#f8f6f0">
+  <link rel="icon" href="../../static/img/branding/gmu-official-logo.jpg" type="image/jpeg">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+  <script src="../../static/js/theme-init.js"></script>
+  <link rel="stylesheet" href="../../static/css/tokens.css">
+  <link rel="stylesheet" href="../../static/css/themes.css">
+  <link rel="stylesheet" href="../../static/css/reset.css">
+  <link rel="stylesheet" href="../../static/css/layout.css">
+  <link rel="stylesheet" href="../../static/css/components.css">
+  <link rel="stylesheet" href="../../static/css/dashboard.css">
+  <link rel="stylesheet" href="../../static/css/responsive.css">
+</head>
+<body data-role="student" data-page="feedback"
+      data-title="Feedback" data-subtitle="Course feedback · Sample data"
+      data-breadcrumb="Feedback" data-search="Search feedback…">
+
+  <div class="nx-app" data-app-shell>
+    <main class="nx-main" id="main-content">
+      <div class="nx-page">
+
+        <section class="nx-section" aria-labelledby="feedback-title">
+          <div class="nx-section__head">
+            <h2 id="feedback-title">Course feedback</h2>
+            <p>Sample form · responses are not saved</p>
+          </div>
+
+          <div class="dashboard-split">
+            <section class="nx-card" aria-labelledby="form-title">
+              <div class="nx-card__head">
+                <div>
+                  <h3 id="form-title">Submit feedback</h3>
+                  <p>Semester 5 · sample course evaluation</p>
+                </div>
+                <span class="nx-badge nx-badge--warning">Preview only</span>
+              </div>
+              <div class="nx-card__body">
+                <form class="nx-stack" style="gap: var(--nx-space-4);" data-demo-form
+                      data-demo-message="Feedback submission is not connected. No rating, comment, or student identity was stored or sent to a server.">
+                  <div class="dashboard-form-grid">
+                    <div class="nx-field dashboard-span-2">
+                      <label class="nx-label" for="fb-course">Course <span>· required in a real form</span></label>
+                      <select class="nx-select" id="fb-course" name="course" required>
+                        <option value="">Select a sample course</option>
+                        <option>Database Systems · CS301</option>
+                        <option>Operating Systems · CS302</option>
+                        <option>Software Engineering · CS303</option>
+                        <option>Computer Networks · CS304</option>
+                        <option>Web Technologies · CS305</option>
+                      </select>
+                    </div>
+
+                    <div class="nx-field">
+                      <label class="nx-label" for="fb-faculty">Faculty</label>
+                      <select class="nx-select" id="fb-faculty" name="faculty">
+                        <option>Dr. Anita Rao</option>
+                        <option>Prof. Rajesh Kumar</option>
+                        <option>Ms. Sneha Reddy</option>
+                        <option>Dr. Vikram Singh</option>
+                        <option>Ms. Priya Nair</option>
+                      </select>
+                    </div>
+
+                    <div class="nx-field">
+                      <label class="nx-label" for="fb-term">Term</label>
+                      <select class="nx-select" id="fb-term" name="term">
+                        <option>Semester 5 · 2025–26</option>
+                        <option>Semester 4 · 2024–25</option>
+                      </select>
+                    </div>
+                  </div>
+
+                  <fieldset class="nx-fieldset">
+                    <legend>Overall rating</legend>
+                    <div class="dashboard-chip-row" role="radiogroup" aria-label="Overall course rating">
+                      <label class="nx-chip"><input type="radio" name="rating" value="1" style="margin-right:6px;">1 · Poor</label>
+                      <label class="nx-chip"><input type="radio" name="rating" value="2" style="margin-right:6px;">2 · Fair</label>
+                      <label class="nx-chip"><input type="radio" name="rating" value="3" style="margin-right:6px;">3 · Good</label>
+                      <label class="nx-chip"><input type="radio" name="rating" value="4" style="margin-right:6px;">4 · Very good</label>
+                      <label class="nx-chip"><input type="radio" name="rating" value="5" style="margin-right:6px;">5 · Excellent</label>
+                    </div>
+                  </fieldset>
+
+                  <div class="nx-field">
+                    <label class="nx-label" for="fb-comment">Comments <span>· optional</span></label>
+                    <textarea class="nx-textarea" id="fb-comment" name="comment" rows="4"
+                              placeholder="Describe what worked well and what could improve. This sample text is never sent."></textarea>
+                    <p class="nx-hint">Sample form only. Do not enter personal or sensitive information.</p>
+                  </div>
+
+                  <label class="nx-check">
+                    <input type="checkbox" name="consent" required>
+                    I understand this is an interface preview and no feedback will be stored.
+                  </label>
+
+                  <div class="nx-cluster" style="justify-content: flex-end; gap: var(--nx-space-2);">
+                    <button class="nx-btn nx-btn--secondary" type="reset">Reset</button>
+                    <button class="nx-btn nx-btn--primary" type="submit">
+                      <svg class="nx-icon nx-icon--sm" aria-hidden="true"><use href="#i-check"/></svg>
+                      Submit sample feedback
+                    </button>
+                  </div>
+                </form>
+              </div>
+            </section>
+
+            <div class="nx-stack" style="gap: var(--nx-space-4);">
+              <section class="nx-card" aria-labelledby="cycles-title">
+                <div class="nx-card__head">
+                  <h3 id="cycles-title">Feedback cycles</h3>
+                  <span class="nx-badge nx-badge--success">1 open</span>
+                </div>
+                <div class="nx-card__body">
+                  <ul class="nx-activity">
+                    <li class="nx-activity__item">
+                      <span class="nx-activity__icon" aria-hidden="true"><svg class="nx-icon nx-icon--sm"><use href="#i-message"/></svg></span>
+                      <div class="nx-activity__body">
+                        <strong>Semester 5 course feedback</strong>
+                        <p>Sample window · 1–20 December 2026</p>
+                      </div>
+                      <span class="nx-activity__time">Open</span>
+                    </li>
+                    <li class="nx-activity__item">
+                      <span class="nx-activity__icon" aria-hidden="true"><svg class="nx-icon nx-icon--sm"><use href="#i-check"/></svg></span>
+                      <div class="nx-activity__body">
+                        <strong>Semester 4 course feedback</strong>
+                        <p>Sample window · closed April 2026</p>
+                      </div>
+                      <span class="nx-activity__time">Closed</span>
+                    </li>
+                  </ul>
+                </div>
+              </section>
+
+              <section class="nx-card" aria-labelledby="submitted-title">
+                <div class="nx-card__head">
+                  <h3 id="submitted-title">Submitted feedback</h3>
+                </div>
+                <div class="nx-card__body" style="padding: 0;">
+                  <div class="nx-table-wrap" style="border: none; border-radius: 0;">
+                    <table class="nx-table">
+                      <caption>Sample submitted feedback</caption>
+                      <thead>
+                        <tr><th scope="col">Course</th><th scope="col">Term</th><th scope="col" class="nx-table__num">Rating</th></tr>
+                      </thead>
+                      <tbody>
+                        <tr><td><strong>Operating Systems</strong></td><td>Semester 4</td><td class="nx-table__num">4 / 5</td></tr>
+                        <tr><td><strong>Data Structures</strong></td><td>Semester 3</td><td class="nx-table__num">5 / 5</td></tr>
+                      </tbody>
+                    </table>
+                  </div>
+                </div>
+                <div class="nx-card__foot">
+                  <span class="dashboard-note">Static sample history</span>
+                </div>
+              </section>
+
+              <div class="nx-callout">
+                <svg class="nx-icon nx-icon--sm" aria-hidden="true"><use href="#i-lock"/></svg>
+                <div>
+                  <strong>No data leaves this page</strong>
+                  <p>Submitting the form shows a preview notice only. Nothing is validated on a server, stored, or linked to a student account.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+      </div>
+    </main>
+  </div>
+
+  <div class="nx-toast-region" data-toast-region aria-live="polite" aria-atomic="false"></div>
+
+  <script src="../../static/js/theme.js"></script>
+  <script src="../../static/js/app-shell.js"></script>
+  <script src="../../static/js/main.js"></script>
+  <script src="../../static/js/dashboard.js"></script>
+</body>
+</html>

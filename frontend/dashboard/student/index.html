@@ -1,0 +1,340 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Dashboard · Student · GMU Management System</title>
+  <meta name="description" content="Student dashboard overview — GM University Management System. Stage 2 interface preview with sample data.">
+  <meta name="theme-color" content="#f8f6f0">
+  <link rel="icon" href="../../static/img/branding/gmu-official-logo.jpg" type="image/jpeg">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+
+  <script src="../../static/js/theme-init.js"></script>
+
+  <link rel="stylesheet" href="../../static/css/tokens.css">
+  <link rel="stylesheet" href="../../static/css/themes.css">
+  <link rel="stylesheet" href="../../static/css/reset.css">
+  <link rel="stylesheet" href="../../static/css/layout.css">
+  <link rel="stylesheet" href="../../static/css/components.css">
+  <link rel="stylesheet" href="../../static/css/dashboard.css">
+  <link rel="stylesheet" href="../../static/css/responsive.css">
+</head>
+<body data-role="student" data-page="index"
+      data-title="Dashboard" data-subtitle="Student workspace · Sample data"
+      data-breadcrumb="Dashboard" data-search="Search this student workspace…">
+
+  <div class="nx-app" data-app-shell>
+    <main class="nx-main" id="main-content">
+      <div class="nx-page">
+
+        <section class="dashboard-hero" aria-labelledby="student-welcome-title">
+          <div class="dashboard-hero__pattern" aria-hidden="true"></div>
+          <div class="dashboard-hero__copy">
+            <p class="nx-eyebrow"><span class="nx-eyebrow__line" aria-hidden="true"></span>Academic year 2025–26 · Semester 5</p>
+            <h1 id="student-welcome-title">Good morning, Demo Student.</h1>
+            <p class="dashboard-hero__lede">Your sample academic overview — courses, attendance, assessments, results, and fees in one connected view.</p>
+            <div class="dashboard-hero__meta">
+              <span class="nx-badge nx-badge--accent">Computer Science</span>
+              <span class="nx-badge">Semester 5</span>
+              <span class="nx-badge nx-badge--warning">Sample data</span>
+            </div>
+          </div>
+          <div class="dashboard-hero__aside">
+            <a class="nx-btn nx-btn--primary" href="timetable.html">
+              <svg class="nx-icon nx-icon--sm" aria-hidden="true"><use href="#i-clock"/></svg>
+              View timetable
+            </a>
+            <button class="nx-btn nx-btn--secondary" type="button" data-dialog-open="#demo-dialog">
+              <svg class="nx-icon nx-icon--sm" aria-hidden="true"><use href="#i-download"/></svg>
+              Download transcript
+            </button>
+          </div>
+        </section>
+
+        <section class="nx-section" aria-labelledby="stats-title">
+          <div class="nx-section__head">
+            <h2 id="stats-title">At a glance</h2>
+            <p>Illustrative figures · not from a database</p>
+          </div>
+          <div class="dashboard-stat-grid">
+            <article class="nx-stat">
+              <div class="nx-stat__top">
+                <span class="nx-stat__label">Enrolled courses</span>
+                <span class="nx-stat__icon" aria-hidden="true"><svg class="nx-icon nx-icon--sm"><use href="#i-book"/></svg></span>
+              </div>
+              <p class="nx-stat__value">5 <small>sample</small></p>
+              <p class="nx-stat__foot"><span class="nx-delta nx-delta--flat">0 change</span> vs sample last term</p>
+            </article>
+
+            <article class="nx-stat">
+              <div class="nx-stat__top">
+                <span class="nx-stat__label">Current attendance</span>
+                <span class="nx-stat__icon" aria-hidden="true"><svg class="nx-icon nx-icon--sm"><use href="#i-calendar-check"/></svg></span>
+              </div>
+              <p class="nx-stat__value">92.4<small>% sample</small></p>
+              <p class="nx-stat__foot"><span class="nx-delta nx-delta--up"><svg class="nx-icon nx-icon--sm" aria-hidden="true"><use href="#i-trend"/></svg>1.8%</span> vs sample last month</p>
+            </article>
+
+            <article class="nx-stat">
+              <div class="nx-stat__top">
+                <span class="nx-stat__label">Pending assignments</span>
+                <span class="nx-stat__icon" aria-hidden="true"><svg class="nx-icon nx-icon--sm"><use href="#i-file-text"/></svg></span>
+              </div>
+              <p class="nx-stat__value">3 <small>sample</small></p>
+              <p class="nx-stat__foot"><span class="nx-delta nx-delta--up">2 due</span> this sample week</p>
+            </article>
+
+            <article class="nx-stat">
+              <div class="nx-stat__top">
+                <span class="nx-stat__label">Average CGPA</span>
+                <span class="nx-stat__icon" aria-hidden="true"><svg class="nx-icon nx-icon--sm"><use href="#i-award"/></svg></span>
+              </div>
+              <p class="nx-stat__value">8.4<small> /10 sample</small></p>
+              <p class="nx-stat__foot"><span class="nx-delta nx-delta--up"><svg class="nx-icon nx-icon--sm" aria-hidden="true"><use href="#i-trend"/></svg>+0.3</span> sample last term</p>
+            </article>
+          </div>
+        </section>
+
+        <div class="dashboard-split">
+          <section class="nx-card" aria-labelledby="attendance-title">
+            <div class="nx-card__head">
+              <div>
+                <h3 id="attendance-title">Attendance overview</h3>
+                <p>Current semester · sample figures</p>
+              </div>
+              <span class="nx-badge">Static preview</span>
+            </div>
+            <div class="nx-card__body">
+              <div class="nx-donut-row">
+                <div class="nx-donut" style="--value: 92;" role="img" aria-label="Attendance: 92.4 percent present. Sample data.">
+                  <div class="nx-donut__center">
+                    <strong>92.4%</strong>
+                    <span>present</span>
+                  </div>
+                </div>
+                <div class="nx-donut-row__meta">
+                  <div class="nx-meter">
+                    <div class="nx-meter__top"><span>Present</span><span>92.4%</span></div>
+                    <div class="nx-meter__track"><div class="nx-meter__fill" style="width: 92.4%"></div></div>
+                  </div>
+                  <div class="nx-meter nx-meter--secondary">
+                    <div class="nx-meter__top"><span>Absent</span><span>5.1%</span></div>
+                    <div class="nx-meter__track"><div class="nx-meter__fill" style="width: 5.1%"></div></div>
+                  </div>
+                  <div class="nx-meter nx-meter--secondary">
+                    <div class="nx-meter__top"><span>Excused</span><span>2.5%</span></div>
+                    <div class="nx-meter__track"><div class="nx-meter__fill" style="width: 2.5%"></div></div>
+                  </div>
+                </div>
+              </div>
+
+              <hr class="nx-divider">
+
+              <div class="nx-stack" style="gap: var(--nx-space-3);">
+                <p class="nx-stat__label">By subject · sample</p>
+                <div class="dashboard-meter-row">
+                  <div class="dashboard-meter-row__top"><span>Database Systems</span><span>95%</span></div>
+                  <div class="dashboard-meter-row__track"><div class="dashboard-meter-row__fill" style="width: 95%"></div></div>
+                </div>
+                <div class="dashboard-meter-row">
+                  <div class="dashboard-meter-row__top"><span>Operating Systems</span><span>90%</span></div>
+                  <div class="dashboard-meter-row__track"><div class="dashboard-meter-row__fill" style="width: 90%"></div></div>
+                </div>
+                <div class="dashboard-meter-row">
+                  <div class="dashboard-meter-row__top"><span>Software Engineering</span><span>72%</span></div>
+                  <div class="dashboard-meter-row__track"><div class="dashboard-meter-row__fill dashboard-meter-row__fill--danger" style="width: 72%"></div></div>
+                </div>
+                <div class="dashboard-meter-row">
+                  <div class="dashboard-meter-row__top"><span>Computer Networks</span><span>95%</span></div>
+                  <div class="dashboard-meter-row__track"><div class="dashboard-meter-row__fill" style="width: 95%"></div></div>
+                </div>
+                <div class="dashboard-meter-row">
+                  <div class="dashboard-meter-row__top"><span>Web Technologies</span><span>91%</span></div>
+                  <div class="dashboard-meter-row__track"><div class="dashboard-meter-row__fill" style="width: 91%"></div></div>
+                </div>
+              </div>
+            </div>
+            <div class="nx-card__foot">
+              <span class="dashboard-note">Attendance capture is planned for a later stage</span>
+              <a class="nx-link" href="attendance.html">Full attendance record</a>
+            </div>
+          </section>
+
+          <section class="nx-card" aria-labelledby="results-title">
+            <div class="nx-card__head">
+              <div>
+                <h3 id="results-title">Recent results</h3>
+                <p>Sample internal assessment marks</p>
+              </div>
+              <a class="nx-link" href="results.html">View all</a>
+            </div>
+            <div class="nx-card__body" style="padding: 0;">
+              <div class="nx-table-wrap" style="border: none; border-radius: 0;">
+                <table class="nx-table">
+                  <caption class="nx-sr-only">Recent sample internal assessment marks</caption>
+                  <thead>
+                    <tr>
+                      <th scope="col">Subject</th>
+                      <th scope="col" class="nx-table__num">IA-1</th>
+                      <th scope="col" class="nx-table__num">IA-2</th>
+                      <th scope="col" class="nx-table__num">Status</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td><strong>Database Systems</strong></td>
+                      <td class="nx-table__num">18</td>
+                      <td class="nx-table__num">20</td>
+                      <td class="nx-table__num"><span class="nx-badge nx-badge--success">Pass</span></td>
+                    </tr>
+                    <tr>
+                      <td><strong>Operating Systems</strong></td>
+                      <td class="nx-table__num">16</td>
+                      <td class="nx-table__num">17</td>
+                      <td class="nx-table__num"><span class="nx-badge nx-badge--success">Pass</span></td>
+                    </tr>
+                    <tr>
+                      <td><strong>Software Engineering</strong></td>
+                      <td class="nx-table__num">15</td>
+                      <td class="nx-table__num">14</td>
+                      <td class="nx-table__num"><span class="nx-badge nx-badge--warning">Review</span></td>
+                    </tr>
+                    <tr>
+                      <td><strong>Computer Networks</strong></td>
+                      <td class="nx-table__num">19</td>
+                      <td class="nx-table__num">18</td>
+                      <td class="nx-table__num"><span class="nx-badge nx-badge--success">Pass</span></td>
+                    </tr>
+                    <tr>
+                      <td><strong>Web Technologies</strong></td>
+                      <td class="nx-table__num">17</td>
+                      <td class="nx-table__num">16</td>
+                      <td class="nx-table__num"><span class="nx-badge nx-badge--success">Pass</span></td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+            <div class="nx-card__foot">
+              <span class="dashboard-note">Out of 20 marks per assessment · sample only</span>
+              <span class="nx-badge nx-badge--success">Average 16.9</span>
+            </div>
+          </section>
+        </div>
+
+        <div class="dashboard-split">
+          <section class="nx-card" aria-labelledby="announcements-title">
+            <div class="nx-card__head">
+              <div>
+                <h3 id="announcements-title">Announcements</h3>
+                <p>Sample notices from the university</p>
+              </div>
+              <a class="nx-link" href="notifications.html">View all</a>
+            </div>
+            <div class="nx-card__body">
+              <ul class="nx-activity">
+                <li class="nx-activity__item">
+                  <span class="nx-activity__icon" aria-hidden="true"><svg class="nx-icon nx-icon--sm"><use href="#i-bell"/></svg></span>
+                  <div class="nx-activity__body">
+                    <strong>Semester 5 timetable released</strong>
+                    <p>Sample timetable is now shown for Computer Science students.</p>
+                  </div>
+                  <span class="nx-activity__time">Demo · 2 hr</span>
+                </li>
+                <li class="nx-activity__item">
+                  <span class="nx-activity__icon" aria-hidden="true"><svg class="nx-icon nx-icon--sm"><use href="#i-calendar-check"/></svg></span>
+                  <div class="nx-activity__body">
+                    <strong>IA-2 examination schedule</strong>
+                    <p>Sample internal assessment dates are listed for Semester 5.</p>
+                  </div>
+                  <span class="nx-activity__time">Demo · 1 day</span>
+                </li>
+                <li class="nx-activity__item">
+                  <span class="nx-activity__icon" aria-hidden="true"><svg class="nx-icon nx-icon--sm"><use href="#i-credit-card"/></svg></span>
+                  <div class="nx-activity__body">
+                    <strong>Fee payment reminder</strong>
+                    <p>A sample tuition instalment is shown as due next week.</p>
+                  </div>
+                  <span class="nx-activity__time">Demo · 3 days</span>
+                </li>
+              </ul>
+            </div>
+          </section>
+
+          <section class="nx-card" aria-labelledby="quick-title">
+            <div class="nx-card__head">
+              <h3 id="quick-title">Quick actions</h3>
+              <span class="nx-badge">Preview only</span>
+            </div>
+            <div class="nx-card__body">
+              <div class="dashboard-quick-grid">
+                <a class="dashboard-quick" href="courses.html">
+                  <span class="dashboard-quick__icon" aria-hidden="true"><svg class="nx-icon nx-icon--sm"><use href="#i-book"/></svg></span>
+                  <strong>My Courses</strong>
+                  <span>View enrolled subjects</span>
+                </a>
+                <a class="dashboard-quick" href="attendance.html">
+                  <span class="dashboard-quick__icon" aria-hidden="true"><svg class="nx-icon nx-icon--sm"><use href="#i-calendar-check"/></svg></span>
+                  <strong>Attendance</strong>
+                  <span>Check attendance record</span>
+                </a>
+                <a class="dashboard-quick" href="results.html">
+                  <span class="dashboard-quick__icon" aria-hidden="true"><svg class="nx-icon nx-icon--sm"><use href="#i-award"/></svg></span>
+                  <strong>Results</strong>
+                  <span>View assessment marks</span>
+                </a>
+                <a class="dashboard-quick" href="fees.html">
+                  <span class="dashboard-quick__icon" aria-hidden="true"><svg class="nx-icon nx-icon--sm"><use href="#i-credit-card"/></svg></span>
+                  <strong>Fees</strong>
+                  <span>Check fee status</span>
+                </a>
+              </div>
+            </div>
+          </section>
+        </div>
+
+      </div>
+    </main>
+  </div>
+
+  <dialog class="nx-dialog" id="demo-dialog" aria-labelledby="demo-dialog-title">
+    <div class="nx-dialog__head">
+      <span class="nx-dialog__icon" aria-hidden="true">
+        <svg class="nx-icon"><use href="#i-download"/></svg>
+      </span>
+      <div>
+        <h2 id="demo-dialog-title">Download sample transcript?</h2>
+        <p>This is a visual preview of a confirmation dialog.</p>
+      </div>
+    </div>
+    <div class="nx-dialog__body">
+      <p>No file will be created and no database will be queried. The button below simply closes this dialog and shows a confirmation toast.</p>
+      <div class="nx-callout">
+        <svg class="nx-icon nx-icon--sm" aria-hidden="true"><use href="#i-info"/></svg>
+        <div>
+          <strong>Stage 2 limitation</strong>
+          <p>Transcript generation needs the Flask API and MySQL queries planned for later stages.</p>
+        </div>
+      </div>
+    </div>
+    <div class="nx-dialog__foot">
+      <button class="nx-btn nx-btn--secondary" type="button" data-dialog-close>Cancel</button>
+      <button class="nx-btn nx-btn--primary" type="button" data-dialog-close
+              data-toast="Sample transcript queued|Nothing was generated. Transcript logic arrives in a later stage.">
+        <svg class="nx-icon nx-icon--sm" aria-hidden="true"><use href="#i-check"/></svg>
+        Confirm preview
+      </button>
+    </div>
+  </dialog>
+
+  <div class="nx-toast-region" data-toast-region aria-live="polite" aria-atomic="false"></div>
+
+  <script src="../../static/js/theme.js"></script>
+  <script src="../../static/js/app-shell.js"></script>
+  <script src="../../static/js/main.js"></script>
+  <script src="../../static/js/dashboard.js"></script>
+</body>
+</html>

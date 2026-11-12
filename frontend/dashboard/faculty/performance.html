@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Class Performance · Faculty · GMU Management System</title>
+  <meta name="description" content="Faculty class performance — GM University Management System. Stage 2 interface preview with sample data.">
+  <meta name="theme-color" content="#f8f6f0">
+  <link rel="icon" href="../../static/img/branding/gmu-official-logo.jpg" type="image/jpeg">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+  <script src="../../static/js/theme-init.js"></script>
+  <link rel="stylesheet" href="../../static/css/tokens.css">
+  <link rel="stylesheet" href="../../static/css/themes.css">
+  <link rel="stylesheet" href="../../static/css/reset.css">
+  <link rel="stylesheet" href="../../static/css/layout.css">
+  <link rel="stylesheet" href="../../static/css/components.css">
+  <link rel="stylesheet" href="../../static/css/dashboard.css">
+  <link rel="stylesheet" href="../../static/css/responsive.css">
+</head>
+<body data-role="faculty" data-page="performance"
+      data-title="Class Performance" data-subtitle="Cohort analysis · Sample data"
+      data-breadcrumb="Class Performance" data-search="Search class performance…">
+
+  <div class="nx-app" data-app-shell>
+    <main class="nx-main" id="main-content">
+      <div class="nx-page">
+
+        <section class="nx-section" aria-labelledby="performance-title">
+          <div class="nx-section__head">
+            <h2 id="performance-title">Class performance</h2>
+            <p>Database Systems · all sections · sample analytics</p>
+          </div>
+
+          <div class="dashboard-stat-grid" aria-label="Sample performance summary">
+            <article class="nx-stat">
+              <div class="nx-stat__top"><span class="nx-stat__label">Average marks</span><span class="nx-stat__icon" aria-hidden="true"><svg class="nx-icon nx-icon--sm"><use href="#i-trend"/></svg></span></div>
+              <p class="nx-stat__value">76.3<small> /100</small></p>
+              <p class="nx-stat__foot"><span class="nx-delta nx-delta--up">+2.1</span> vs sample last assessment</p>
+            </article>
+            <article class="nx-stat">
+              <div class="nx-stat__top"><span class="nx-stat__label">Pass rate</span><span class="nx-stat__icon" aria-hidden="true"><svg class="nx-icon nx-icon--sm"><use href="#i-award"/></svg></span></div>
+              <p class="nx-stat__value">94.4<small>%</small></p>
+              <p class="nx-stat__foot">8 sample backlogs across 142 students</p>
+            </article>
+            <article class="nx-stat">
+              <div class="nx-stat__top"><span class="nx-stat__label">Average attendance</span><span class="nx-stat__icon" aria-hidden="true"><svg class="nx-icon nx-icon--sm"><use href="#i-calendar-check"/></svg></span></div>
+              <p class="nx-stat__value">91.2<small>%</small></p>
+              <p class="nx-stat__foot">Three sample sections combined</p>
+            </article>
+            <article class="nx-stat">
+              <div class="nx-stat__top"><span class="nx-stat__label">At risk</span><span class="nx-stat__icon" aria-hidden="true"><svg class="nx-icon nx-icon--sm"><use href="#i-alert"/></svg></span></div>
+              <p class="nx-stat__value">7 <small>students</small></p>
+              <p class="nx-stat__foot">Low attendance or marks · sample</p>
+            </article>
+          </div>
+
+          <div class="dashboard-split">
+            <section class="nx-card" aria-labelledby="distribution-title">
+              <div class="nx-card__head">
+                <div>
+                  <h3 id="distribution-title">Grade distribution</h3>
+                  <p>Sample grades across all sections</p>
+                </div>
+                <span class="nx-badge">Static</span>
+              </div>
+              <div class="nx-card__body">
+                <div class="nx-donut-row">
+                  <div class="nx-donut" style="--value: 94;" role="img" aria-label="Pass rate 94.4 percent. Sample data.">
+                    <div class="nx-donut__center">
+                      <strong>94.4%</strong>
+                      <span>pass rate</span>
+                    </div>
+                  </div>
+                  <div class="nx-donut-row__meta">
+                    <div class="nx-meter">
+                      <div class="nx-meter__top"><span>Grade O and A</span><span>48%</span></div>
+                      <div class="nx-meter__track"><div class="nx-meter__fill" style="width: 48%"></div></div>
+                    </div>
+                    <div class="nx-meter nx-meter--secondary">
+                      <div class="nx-meter__top"><span>Grade B+ and B</span><span>36%</span></div>
+                      <div class="nx-meter__track"><div class="nx-meter__fill" style="width: 36%"></div></div>
+                    </div>
+                    <div class="nx-meter nx-meter--secondary">
+                      <div class="nx-meter__top"><span>Grade C and below</span><span>16%</span></div>
+                      <div class="nx-meter__track"><div class="nx-meter__fill" style="width: 16%"></div></div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="nx-card__foot">
+                <span class="dashboard-note">Illustrative distribution, not computed from a database</span>
+              </div>
+            </section>
+
+            <section class="nx-card" aria-labelledby="section-title">
+              <div class="nx-card__head">
+                <div>
+                  <h3 id="section-title">Average by section</h3>
+                  <p>Sample marks out of 100</p>
+                </div>
+              </div>
+              <div class="nx-card__body">
+                <div class="nx-chart">
+                  <div class="nx-bars" role="img" aria-label="Sample section averages: A 78, B 72, C 69, D 81, E 75, F 83">
+                    <div class="nx-bar"><span class="nx-bar__value">78</span><div class="nx-bar__fill" style="height: 78%"></div><span class="nx-bar__label">A</span></div>
+                    <div class="nx-bar"><span class="nx-bar__value">72</span><div class="nx-bar__fill" style="height: 72%"></div><span class="nx-bar__label">B</span></div>
+                    <div class="nx-bar"><span class="nx-bar__value">69</span><div class="nx-bar__fill" style="height: 69%"></div><span class="nx-bar__label">C</span></div>
+                    <div class="nx-bar"><span class="nx-bar__value">81</span><div class="nx-bar__fill" style="height: 81%"></div><span class="nx-bar__label">D</span></div>
+                    <div class="nx-bar"><span class="nx-bar__value">75</span><div class="nx-bar__fill" style="height: 75%"></div><span class="nx-bar__label">E</span></div>
+                    <div class="nx-bar"><span class="nx-bar__value">83</span><div class="nx-bar__fill" style="height: 83%"></div><span class="nx-bar__label">F</span></div>
+                  </div>
+                  <div class="nx-chart__legend">
+                    <span class="nx-legend-item"><span class="nx-legend-item__swatch" aria-hidden="true"></span>Section average · sample</span>
+                  </div>
+                </div>
+              </div>
+              <div class="nx-card__foot">
+                <span class="dashboard-note">Section F has the highest sample average</span>
+              </div>
+            </section>
+          </div>
+
+          <div data-table-section style="margin-top: var(--nx-space-4);">
+            <div class="dashboard-filter-bar">
+              <label class="nx-search">
+                <span class="nx-sr-only">Search student performance</span>
+                <svg class="nx-icon" aria-hidden="true"><use href="#i-search"/></svg>
+                <input type="search" data-table-search placeholder="Search by student or roll number…" autocomplete="off">
+              </label>
+              <div class="dashboard-chip-row" role="group" aria-label="Filter performance by section">
+                <button class="nx-chip is-active" type="button" data-filter="section" data-value="" aria-pressed="true">All sections</button>
+                <button class="nx-chip" type="button" data-filter="section" data-value="a" aria-pressed="false">Section A</button>
+                <button class="nx-chip" type="button" data-filter="section" data-value="b" aria-pressed="false">Section B</button>
+                <button class="nx-chip" type="button" data-filter="section" data-value="c" aria-pressed="false">Section C</button>
+              </div>
+            </div>
+
+            <div class="nx-table-wrap">
+              <table class="nx-table" data-demo-table data-page-size="8">
+                <caption>Sample student performance · all values illustrative</caption>
+                <thead>
+                  <tr>
+                    <th scope="col">Roll number</th>
+                    <th scope="col">Student</th>
+                    <th scope="col">Section</th>
+                    <th scope="col" class="nx-table__num">Attendance</th>
+                    <th scope="col" class="nx-table__num">IA average</th>
+                    <th scope="col" class="nx-table__num">Total</th>
+                    <th scope="col">Trend</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr data-section="a"><td class="nx-mono">CS2025001</td><td><strong>Aarav Shetty</strong></td><td>A</td><td class="nx-table__num">96%</td><td class="nx-table__num">18.5</td><td class="nx-table__num">87</td><td><span class="nx-badge nx-badge--success">Improving</span></td></tr>
+                  <tr data-section="a"><td class="nx-mono">CS2025002</td><td><strong>Bhavya Nayak</strong></td><td>A</td><td class="nx-table__num">93%</td><td class="nx-table__num">17.5</td><td class="nx-table__num">78</td><td><span class="nx-badge nx-badge--success">Stable</span></td></tr>
+                  <tr data-section="a"><td class="nx-mono">CS2025003</td><td><strong>Chirag Patil</strong></td><td>A</td><td class="nx-table__num">71%</td><td class="nx-table__num">13.0</td><td class="nx-table__num">52</td><td><span class="nx-badge nx-badge--danger">At risk</span></td></tr>
+                  <tr data-section="a"><td class="nx-mono">CS2025004</td><td><strong>Divya Hegde</strong></td><td>A</td><td class="nx-table__num">98%</td><td class="nx-table__num">20.0</td><td class="nx-table__num">94</td><td><span class="nx-badge nx-badge--success">Improving</span></td></tr>
+                  <tr data-section="b"><td class="nx-mono">CS2025005</td><td><strong>Eshan Gowda</strong></td><td>B</td><td class="nx-table__num">88%</td><td class="nx-table__num">15.5</td><td class="nx-table__num">71</td><td><span class="nx-badge nx-badge--success">Stable</span></td></tr>
+                  <tr data-section="b"><td class="nx-mono">CS2025006</td><td><strong>Farhan Khan</strong></td><td>B</td><td class="nx-table__num">74%</td><td class="nx-table__num">12.5</td><td class="nx-table__num">45</td><td><span class="nx-badge nx-badge--danger">At risk</span></td></tr>
+                  <tr data-section="b"><td class="nx-mono">CS2025007</td><td><strong>Gauri Kulkarni</strong></td><td>B</td><td class="nx-table__num">95%</td><td class="nx-table__num">18.5</td><td class="nx-table__num">82</td><td><span class="nx-badge nx-badge--success">Improving</span></td></tr>
+                  <tr data-section="b"><td class="nx-mono">CS2025008</td><td><strong>Harsha Rao</strong></td><td>B</td><td class="nx-table__num">90%</td><td class="nx-table__num">16.0</td><td class="nx-table__num">75</td><td><span class="nx-badge nx-badge--warning">Watch</span></td></tr>
+                  <tr data-section="c"><td class="nx-mono">CS2025009</td><td><strong>Ishita Menon</strong></td><td>C</td><td class="nx-table__num">97%</td><td class="nx-table__num">19.5</td><td class="nx-table__num">91</td><td><span class="nx-badge nx-badge--success">Improving</span></td></tr>
+                  <tr data-section="c"><td class="nx-mono">CS2025010</td><td><strong>Jeevan Prasad</strong></td><td>C</td><td class="nx-table__num">69%</td><td class="nx-table__num">13.5</td><td class="nx-table__num">62</td><td><span class="nx-badge nx-badge--danger">At risk</span></td></tr>
+                  <tr data-section="c"><td class="nx-mono">CS2025011</td><td><strong>Kavya Bhat</strong></td><td>C</td><td class="nx-table__num">92%</td><td class="nx-table__num">17.0</td><td class="nx-table__num">80</td><td><span class="nx-badge nx-badge--success">Stable</span></td></tr>
+                  <tr data-section="c"><td class="nx-mono">CS2025012</td><td><strong>Lakshmi Desai</strong></td><td>C</td><td class="nx-table__num">86%</td><td class="nx-table__num">15.0</td><td class="nx-table__num">73</td><td><span class="nx-badge nx-badge--warning">Watch</span></td></tr>
+                </tbody>
+              </table>
+            </div>
+
+            <div class="nx-empty" data-table-empty hidden>
+              <span class="nx-empty__icon" aria-hidden="true"><svg class="nx-icon nx-icon--lg"><use href="#i-search"/></svg></span>
+              <strong>No sample students match</strong>
+              <p>Try another student, roll number, or section.</p>
+            </div>
+
+            <div class="dashboard-pagination">
+              <span data-page-info>Showing 1–8 of 12 sample records</span>
+              <div class="dashboard-pagination__controls">
+                <button class="nx-btn nx-btn--ghost nx-btn--sm" type="button" data-page-prev>Previous</button>
+                <button class="nx-btn nx-btn--ghost nx-btn--sm" type="button" data-page-next>Next</button>
+              </div>
+            </div>
+          </div>
+
+          <div class="dashboard-split" style="margin-top: var(--nx-space-4);">
+            <section class="nx-card" aria-labelledby="risk-title">
+              <div class="nx-card__head">
+                <div>
+                  <h3 id="risk-title">Students needing support</h3>
+                  <p>Sample attention list</p>
+                </div>
+                <span class="nx-badge nx-badge--danger">3 shown</span>
+              </div>
+              <div class="nx-card__body">
+                <ul class="nx-activity">
+                  <li class="nx-activity__item">
+                    <span class="nx-activity__icon" aria-hidden="true"><svg class="nx-icon nx-icon--sm"><use href="#i-alert"/></svg></span>
+                    <div class="nx-activity__body"><strong>Chirag Patil · CS2025003</strong><p>71% attendance · sample IA average 13.0 / 20</p></div>
+                    <button class="nx-btn nx-btn--ghost nx-btn--sm" type="button" data-toast="Sample note|Support notes are not stored in Stage 2. No student record was changed.">Note</button>
+                  </li>
+                  <li class="nx-activity__item">
+                    <span class="nx-activity__icon" aria-hidden="true"><svg class="nx-icon nx-icon--sm"><use href="#i-alert"/></svg></span>
+                    <div class="nx-activity__body"><strong>Farhan Khan · CS2025006</strong><p>74% attendance · sample IA average 12.5 / 20</p></div>
+                    <button class="nx-btn nx-btn--ghost nx-btn--sm" type="button" data-toast="Sample note|Support notes are not stored in Stage 2. No student record was changed.">Note</button>
+                  </li>
+                  <li class="nx-activity__item">
+                    <span class="nx-activity__icon" aria-hidden="true"><svg class="nx-icon nx-icon--sm"><use href="#i-alert"/></svg></span>
+                    <div class="nx-activity__body"><strong>Jeevan Prasad · CS2025010</strong><p>69% attendance · sample IA average 13.5 / 20</p></div>
+                    <button class="nx-btn nx-btn--ghost nx-btn--sm" type="button" data-toast="Sample note|Support notes are not stored in Stage 2. No student record was changed.">Note</button>
+                  </li>
+                </ul>
+              </div>
+              <div class="nx-card__foot">
+                <span class="dashboard-note">Indicative thresholds only</span>
+                <a class="nx-link" href="reports.html">Open reports</a>
+              </div>
+            </section>
+
+            <section class="nx-card" aria-labelledby="actions-title">
+              <div class="nx-card__head">
+                <h3 id="actions-title">Suggested actions</h3>
+              </div>
+              <div class="nx-card__body">
+                <div class="nx-stack" style="gap: var(--nx-space-3);">
+                  <div class="nx-callout" style="margin: 0;">
+                    <svg class="nx-icon nx-icon--sm" aria-hidden="true"><use href="#i-users"/></svg>
+                    <div>
+                      <strong>Schedule a mentoring check-in</strong>
+                      <p>Sample suggestion for the three students shown.</p>
+                    </div>
+                  </div>
+                  <div class="nx-callout" style="margin: 0;">
+                    <svg class="nx-icon nx-icon--sm" aria-hidden="true"><use href="#i-calendar-check"/></svg>
+                    <div>
+                      <strong>Review attendance exceptions</strong>
+                      <p>Two sample students are below the 75% threshold.</p>
+                    </div>
+                  </div>
+                  <div class="nx-callout" style="margin: 0;">
+                    <svg class="nx-icon nx-icon--sm" aria-hidden="true"><use href="#i-message"/></svg>
+                    <div>
+                      <strong>Read course feedback</strong>
+                      <p>Sample feedback themes are available in reports.</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </section>
+          </div>
+
+          <div class="nx-callout">
+            <svg class="nx-icon nx-icon--sm" aria-hidden="true"><use href="#i-info"/></svg>
+            <div>
+              <strong>Analytics are illustrative</strong>
+              <p>Charts and at-risk flags are static sample content. No calculation, prediction, or database query produces these values.</p>
+            </div>
+          </div>
+        </section>
+
+      </div>
+    </main>
+  </div>
+
+  <div class="nx-toast-region" data-toast-region aria-live="polite" aria-atomic="false"></div>
+
+  <script src="../../static/js/theme.js"></script>
+  <script src="../../static/js/app-shell.js"></script>
+  <script src="../../static/js/main.js"></script>
+  <script src="../../static/js/dashboard.js"></script>
+</body>
+</html>

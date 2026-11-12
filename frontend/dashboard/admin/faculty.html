@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Faculty Management · Administration · GMU Management System</title>
+  <meta name="description" content="Administration faculty management — GM University Management System. Stage 2 interface preview with sample data.">
+  <meta name="theme-color" content="#f8f6f0">
+  <link rel="icon" href="../../static/img/branding/gmu-official-logo.jpg" type="image/jpeg">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+  <script src="../../static/js/theme-init.js"></script>
+  <link rel="stylesheet" href="../../static/css/tokens.css">
+  <link rel="stylesheet" href="../../static/css/themes.css">
+  <link rel="stylesheet" href="../../static/css/reset.css">
+  <link rel="stylesheet" href="../../static/css/layout.css">
+  <link rel="stylesheet" href="../../static/css/components.css">
+  <link rel="stylesheet" href="../../static/css/dashboard.css">
+  <link rel="stylesheet" href="../../static/css/responsive.css">
+</head>
+<body data-role="admin" data-page="faculty"
+      data-title="Faculty Management" data-subtitle="Staff records · Sample data"
+      data-breadcrumb="Faculty Management" data-search="Search sample faculty…">
+
+  <div class="nx-app" data-app-shell>
+    <main class="nx-main" id="main-content">
+      <div class="nx-page">
+
+        <section class="nx-section" aria-labelledby="faculty-title">
+          <div class="nx-section__head">
+            <h2 id="faculty-title">Faculty management</h2>
+            <p>Sample staff records · six departments</p>
+          </div>
+
+          <div class="dashboard-stat-grid" aria-label="Sample faculty summary">
+            <article class="nx-stat">
+              <div class="nx-stat__top"><span class="nx-stat__label">Total faculty</span><span class="nx-stat__icon" aria-hidden="true"><svg class="nx-icon nx-icon--sm"><use href="#i-faculty"/></svg></span></div>
+              <p class="nx-stat__value">86</p>
+              <p class="nx-stat__foot">Illustrative institution total</p>
+            </article>
+            <article class="nx-stat">
+              <div class="nx-stat__top"><span class="nx-stat__label">Professors</span><span class="nx-stat__icon" aria-hidden="true"><svg class="nx-icon nx-icon--sm"><use href="#i-award"/></svg></span></div>
+              <p class="nx-stat__value">18</p>
+              <p class="nx-stat__foot">Sample senior cadre</p>
+            </article>
+            <article class="nx-stat">
+              <div class="nx-stat__top"><span class="nx-stat__label">Associate professors</span><span class="nx-stat__icon" aria-hidden="true"><svg class="nx-icon nx-icon--sm"><use href="#i-users"/></svg></span></div>
+              <p class="nx-stat__value">26</p>
+              <p class="nx-stat__foot">Sample mid cadre</p>
+            </article>
+            <article class="nx-stat">
+              <div class="nx-stat__top"><span class="nx-stat__label">Open positions</span><span class="nx-stat__icon" aria-hidden="true"><svg class="nx-icon nx-icon--sm"><use href="#i-user-plus"/></svg></span></div>
+              <p class="nx-stat__value">7</p>
+              <p class="nx-stat__foot">Sample recruitment plan</p>
+            </article>
+          </div>
+
+          <div data-table-section>
+            <div class="dashboard-filter-bar">
+              <label class="nx-search">
+                <span class="nx-sr-only">Search faculty records</span>
+                <svg class="nx-icon" aria-hidden="true"><use href="#i-search"/></svg>
+                <input type="search" data-table-search placeholder="Search by name, ID, or department…" autocomplete="off">
+              </label>
+              <div class="dashboard-chip-row" role="group" aria-label="Filter faculty by department">
+                <button class="nx-chip is-active" type="button" data-filter="dept" data-value="" aria-pressed="true">All departments</button>
+                <button class="nx-chip" type="button" data-filter="dept" data-value="cse" aria-pressed="false">CSE</button>
+                <button class="nx-chip" type="button" data-filter="dept" data-value="ece" aria-pressed="false">ECE</button>
+                <button class="nx-chip" type="button" data-filter="dept" data-value="me" aria-pressed="false">ME</button>
+                <button class="nx-chip" type="button" data-filter="dept" data-value="management" aria-pressed="false">Management</button>
+              </div>
+              <button class="nx-btn nx-btn--primary nx-btn--sm" type="button" data-dialog-open="#add-faculty-dialog">
+                <svg class="nx-icon nx-icon--sm" aria-hidden="true"><use href="#i-plus"/></svg>
+                Add sample faculty
+              </button>
+            </div>
+
+            <div class="nx-table-wrap">
+              <table class="nx-table" data-demo-table data-page-size="8">
+                <caption>Sample faculty records · illustrative names and IDs</caption>
+                <thead>
+                  <tr>
+                    <th scope="col">Employee ID</th>
+                    <th scope="col">Faculty</th>
+                    <th scope="col">Department</th>
+                    <th scope="col">Designation</th>
+                    <th scope="col" class="nx-table__num">Subjects</th>
+                    <th scope="col">Status</th>
+                    <th scope="col"><span class="nx-sr-only">Actions</span></th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr data-dept="cse"><td class="nx-mono">GMU-FAC-0142</td><td><strong>Dr. Anita Rao</strong></td><td>CSE</td><td>Associate Professor</td><td class="nx-table__num">3</td><td><span class="nx-badge nx-badge--success">Active</span></td><td><button class="nx-btn nx-btn--ghost nx-btn--sm" type="button" data-toast="Sample record|Faculty details are static in Stage 2. No database query ran.">View</button></td></tr>
+                  <tr data-dept="cse"><td class="nx-mono">GMU-FAC-0143</td><td><strong>Prof. Rajesh Kumar</strong></td><td>CSE</td><td>Professor</td><td class="nx-table__num">2</td><td><span class="nx-badge nx-badge--success">Active</span></td><td><button class="nx-btn nx-btn--ghost nx-btn--sm" type="button" data-toast="Sample record|Faculty details are static in Stage 2. No database query ran.">View</button></td></tr>
+                  <tr data-dept="cse"><td class="nx-mono">GMU-FAC-0144</td><td><strong>Ms. Sneha Reddy</strong></td><td>CSE</td><td>Assistant Professor</td><td class="nx-table__num">3</td><td><span class="nx-badge nx-badge--success">Active</span></td><td><button class="nx-btn nx-btn--ghost nx-btn--sm" type="button" data-toast="Sample record|Faculty details are static in Stage 2. No database query ran.">View</button></td></tr>
+                  <tr data-dept="cse"><td class="nx-mono">GMU-FAC-0145</td><td><strong>Dr. Vikram Singh</strong></td><td>CSE</td><td>Associate Professor</td><td class="nx-table__num">2</td><td><span class="nx-badge nx-badge--success">Active</span></td><td><button class="nx-btn nx-btn--ghost nx-btn--sm" type="button" data-toast="Sample record|Faculty details are static in Stage 2. No database query ran.">View</button></td></tr>
+                  <tr data-dept="cse"><td class="nx-mono">GMU-FAC-0146</td><td><strong>Ms. Priya Nair</strong></td><td>CSE</td><td>Assistant Professor</td><td class="nx-table__num">2</td><td><span class="nx-badge nx-badge--warning">On leave</span></td><td><button class="nx-btn nx-btn--ghost nx-btn--sm" type="button" data-toast="Sample record|Faculty details are static in Stage 2. No database query ran.">View</button></td></tr>
+                  <tr data-dept="ece"><td class="nx-mono">GMU-FAC-0201</td><td><strong>Dr. Suresh Babu</strong></td><td>ECE</td><td>Professor</td><td class="nx-table__num">2</td><td><span class="nx-badge nx-badge--success">Active</span></td><td><button class="nx-btn nx-btn--ghost nx-btn--sm" type="button" data-toast="Sample record|Faculty details are static in Stage 2. No database query ran.">View</button></td></tr>
+                  <tr data-dept="ece"><td class="nx-mono">GMU-FAC-0202</td><td><strong>Ms. Deepa Shetty</strong></td><td>ECE</td><td>Assistant Professor</td><td class="nx-table__num">3</td><td><span class="nx-badge nx-badge--success">Active</span></td><td><button class="nx-btn nx-btn--ghost nx-btn--sm" type="button" data-toast="Sample record|Faculty details are static in Stage 2. No database query ran.">View</button></td></tr>
+                  <tr data-dept="me"><td class="nx-mono">GMU-FAC-0301</td><td><strong>Dr. Mahesh Patil</strong></td><td>ME</td><td>Professor</td><td class="nx-table__num">2</td><td><span class="nx-badge nx-badge--success">Active</span></td><td><button class="nx-btn nx-btn--ghost nx-btn--sm" type="button" data-toast="Sample record|Faculty details are static in Stage 2. No database query ran.">View</button></td></tr>
+                  <tr data-dept="management"><td class="nx-mono">GMU-FAC-0401</td><td><strong>Dr. Meera Iyer</strong></td><td>Management</td><td>Associate Professor</td><td class="nx-table__num">2</td><td><span class="nx-badge nx-badge--success">Active</span></td><td><button class="nx-btn nx-btn--ghost nx-btn--sm" type="button" data-toast="Sample record|Faculty details are static in Stage 2. No database query ran.">View</button></td></tr>
+                  <tr data-dept="management"><td class="nx-mono">GMU-FAC-0402</td><td><strong>Mr. Anand Kulkarni</strong></td><td>Management</td><td>Assistant Professor</td><td class="nx-table__num">1</td><td><span class="nx-badge nx-badge--success">Active</span></td><td><button class="nx-btn nx-btn--ghost nx-btn--sm" type="button" data-toast="Sample record|Faculty details are static in Stage 2. No database query ran.">View</button></td></tr>
+                </tbody>
+              </table>
+            </div>
+
+            <div class="nx-empty" data-table-empty hidden>
+              <span class="nx-empty__icon" aria-hidden="true"><svg class="nx-icon nx-icon--lg"><use href="#i-search"/></svg></span>
+              <strong>No sample faculty match</strong>
+              <p>Try another name, ID, or department filter.</p>
+            </div>
+
+            <div class="dashboard-pagination">
+              <span data-page-info>Showing 1–8 of 10 sample records</span>
+              <div class="dashboard-pagination__controls">
+                <button class="nx-btn nx-btn--ghost nx-btn--sm" type="button" data-page-prev>Previous</button>
+                <button class="nx-btn nx-btn--ghost nx-btn--sm" type="button" data-page-next>Next</button>
+              </div>
+            </div>
+          </div>
+
+          <div class="nx-callout">
+            <svg class="nx-icon nx-icon--sm" aria-hidden="true"><use href="#i-info"/></svg>
+            <div>
+              <strong>Sample staff records only</strong>
+              <p>Faculty creation, transfer, leave, and subject allocation changes are not implemented in this interface preview.</p>
+            </div>
+          </div>
+        </section>
+
+      </div>
+    </main>
+  </div>
+
+  <dialog class="nx-dialog" id="add-faculty-dialog" aria-labelledby="add-faculty-title">
+    <div class="nx-dialog__head">
+      <span class="nx-dialog__icon" aria-hidden="true"><svg class="nx-icon"><use href="#i-faculty"/></svg></span>
+      <div>
+        <h2 id="add-faculty-title">Add sample faculty</h2>
+        <p>This form demonstrates layout only.</p>
+      </div>
+    </div>
+    <form data-demo-form data-demo-message="Faculty creation is not connected. No staff record was validated, stored, or sent to a server.">
+      <div class="nx-dialog__body">
+        <div class="dashboard-form-grid">
+          <div class="nx-field">
+            <label class="nx-label" for="new-faculty-name">Full name</label>
+            <input class="nx-input" type="text" id="new-faculty-name" name="name" placeholder="Sample faculty name" required>
+          </div>
+          <div class="nx-field">
+            <label class="nx-label" for="new-faculty-id">Employee ID</label>
+            <input class="nx-input" type="text" id="new-faculty-id" name="employee-id" placeholder="GMU-FAC-0000" required>
+          </div>
+          <div class="nx-field">
+            <label class="nx-label" for="new-faculty-dept">Department</label>
+            <select class="nx-select" id="new-faculty-dept" name="department">
+              <option>CSE</option>
+              <option>ECE</option>
+              <option>ME</option>
+              <option>CIV</option>
+              <option>Management</option>
+              <option>Sciences</option>
+            </select>
+          </div>
+          <div class="nx-field">
+            <label class="nx-label" for="new-faculty-designation">Designation</label>
+            <select class="nx-select" id="new-faculty-designation" name="designation">
+              <option>Assistant Professor</option>
+              <option>Associate Professor</option>
+              <option>Professor</option>
+            </select>
+          </div>
+          <div class="nx-field dashboard-span-2">
+            <label class="nx-label" for="new-faculty-email">Email</label>
+            <input class="nx-input" type="email" id="new-faculty-email" name="email" placeholder="faculty@gmu.ac.in">
+          </div>
+        </div>
+        <div class="nx-callout" style="margin-top: var(--nx-space-4);">
+          <svg class="nx-icon nx-icon--sm" aria-hidden="true"><use href="#i-info"/></svg>
+          <div>
+            <strong>No staff record is created</strong>
+            <p>Submitting this sample form only shows a preview notice.</p>
+          </div>
+        </div>
+      </div>
+      <div class="nx-dialog__foot">
+        <button class="nx-btn nx-btn--secondary" type="button" data-dialog-close>Cancel</button>
+        <button class="nx-btn nx-btn--primary" type="submit">Submit sample</button>
+      </div>
+    </form>
+  </dialog>
+
+  <div class="nx-toast-region" data-toast-region aria-live="polite" aria-atomic="false"></div>
+
+  <script src="../../static/js/theme.js"></script>
+  <script src="../../static/js/app-shell.js"></script>
+  <script src="../../static/js/main.js"></script>
+  <script src="../../static/js/dashboard.js"></script>
+</body>
+</html>

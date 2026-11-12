@@ -58,9 +58,26 @@
     apply(current === "dark" ? "light" : "dark");
   }
 
-  document.querySelectorAll("[data-theme-toggle]").forEach(function (button) {
+  function decorate(button) {
     button.setAttribute("role", "switch");
-    button.addEventListener("click", toggle);
+    button.setAttribute("aria-checked", String(current === "dark"));
+  }
+
+  // Delegated so controls injected later by app-shell.js also work.
+  document.addEventListener("click", function (event) {
+    var button = event.target.closest ? event.target.closest("[data-theme-toggle]") : null;
+    if (button) {
+      toggle();
+    }
+  });
+
+  document.querySelectorAll("[data-theme-toggle]").forEach(decorate);
+
+  // The shared shell is injected after this file runs, so sync again once the
+  // document has finished parsing.
+  document.addEventListener("DOMContentLoaded", function () {
+    document.querySelectorAll("[data-theme-toggle]").forEach(decorate);
+    apply(current, { skipStorage: true });
   });
 
   // Follow the operating system only when the user has not saved a choice.

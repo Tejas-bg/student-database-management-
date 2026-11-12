@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>My Profile · Student · GMU Management System</title>
+  <meta name="description" content="Student profile — GM University Management System. Stage 2 interface preview with sample data.">
+  <meta name="theme-color" content="#f8f6f0">
+  <link rel="icon" href="../../static/img/branding/gmu-official-logo.jpg" type="image/jpeg">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+  <script src="../../static/js/theme-init.js"></script>
+  <link rel="stylesheet" href="../../static/css/tokens.css">
+  <link rel="stylesheet" href="../../static/css/themes.css">
+  <link rel="stylesheet" href="../../static/css/reset.css">
+  <link rel="stylesheet" href="../../static/css/layout.css">
+  <link rel="stylesheet" href="../../static/css/components.css">
+  <link rel="stylesheet" href="../../static/css/dashboard.css">
+  <link rel="stylesheet" href="../../static/css/responsive.css">
+</head>
+<body data-role="student" data-page="profile"
+      data-title="My Profile" data-subtitle="Student profile · Sample data"
+      data-breadcrumb="My Profile" data-search="Search profile details…">
+
+  <div class="nx-app" data-app-shell>
+    <main class="nx-main" id="main-content">
+      <div class="nx-page">
+
+        <section class="nx-section" aria-labelledby="profile-title">
+          <div class="nx-section__head">
+            <h2 id="profile-title">Student profile</h2>
+            <p>Illustrative record · not from a database</p>
+          </div>
+
+          <div class="dashboard-split">
+            <section class="nx-card" aria-labelledby="personal-title">
+              <div class="nx-card__head">
+                <h3 id="personal-title">Personal information</h3>
+                <span class="nx-badge nx-badge--success">Sample record</span>
+              </div>
+              <div class="nx-card__body">
+                <div class="dashboard-avatar-block">
+                  <span class="nx-avatar nx-avatar--accent" aria-hidden="true">SA</span>
+                  <div>
+                    <strong>Demo Student</strong>
+                    <span>USN · STU-2025-0412</span>
+                  </div>
+                </div>
+
+                <dl class="dashboard-def-list">
+                  <div><dt>Programme</dt><dd>B.Tech Computer Science</dd></div>
+                  <div><dt>Department</dt><dd>Computer Science and Engineering</dd></div>
+                  <div><dt>Semester</dt><dd>5 · Section A</dd></div>
+                  <div><dt>Roll number</dt><dd>CS20250412</dd></div>
+                  <div><dt>Date of birth</dt><dd>15 March 2003</dd></div>
+                  <div><dt>Blood group</dt><dd>B+</dd></div>
+                  <div><dt>Email</dt><dd>demo.student@gmu.ac.in</dd></div>
+                  <div><dt>Phone</dt><dd>+91 98765 43210</dd></div>
+                </dl>
+              </div>
+              <div class="nx-card__foot">
+                <span class="dashboard-note">Profile editing is planned for a later stage</span>
+                <button class="nx-btn nx-btn--secondary nx-btn--sm" type="button"
+                        data-toast="Preview only|Profile editing needs the Flask API and MySQL update queries planned for a later stage.">
+                  Edit profile
+                </button>
+              </div>
+            </section>
+
+            <div class="nx-stack" style="gap: var(--nx-space-4);">
+              <section class="nx-card" aria-labelledby="guardian-title">
+                <div class="nx-card__head">
+                  <h3 id="guardian-title">Guardian and emergency contact</h3>
+                </div>
+                <div class="nx-card__body">
+                  <dl class="dashboard-def-list">
+                    <div><dt>Guardian name</dt><dd>Mr. Ramesh Kumar</dd></div>
+                    <div><dt>Relationship</dt><dd>Father</dd></div>
+                    <div><dt>Phone</dt><dd>+91 98765 12345</dd></div>
+                    <div><dt>Address</dt><dd>Davanagere, Karnataka</dd></div>
+                  </dl>
+                </div>
+              </section>
+
+              <section class="nx-card" aria-labelledby="academic-title">
+                <div class="nx-card__head">
+                  <h3 id="academic-title">Academic summary</h3>
+                </div>
+                <div class="nx-card__body">
+                  <dl class="dashboard-def-list">
+                    <div><dt>Admission year</dt><dd>2023</dd></div>
+                    <div><dt>Credits earned</dt><dd>86 / 160</dd></div>
+                    <div><dt>Current CGPA</dt><dd>8.4 / 10</dd></div>
+                    <div><dt>Academic standing</dt><dd>Good standing</dd></div>
+                  </dl>
+                </div>
+                <div class="nx-card__foot">
+                  <span class="dashboard-note">Values are illustrative sample data</span>
+                  <a class="nx-link" href="results.html">View results</a>
+                </div>
+              </section>
+            </div>
+          </div>
+
+          <div class="nx-callout" style="margin-top: var(--nx-space-4);">
+            <svg class="nx-icon nx-icon--sm" aria-hidden="true"><use href="#i-info"/></svg>
+            <div>
+              <strong>Sample profile</strong>
+              <p>No student record is stored or retrieved. These details exist only to demonstrate the interface layout.</p>
+            </div>
+          </div>
+        </section>
+
+      </div>
+    </main>
+  </div>
+
+  <div class="nx-toast-region" data-toast-region aria-live="polite" aria-atomic="false"></div>
+
+  <script src="../../static/js/theme.js"></script>
+  <script src="../../static/js/app-shell.js"></script>
+  <script src="../../static/js/main.js"></script>
+  <script src="../../static/js/dashboard.js"></script>
+</body>
+</html>

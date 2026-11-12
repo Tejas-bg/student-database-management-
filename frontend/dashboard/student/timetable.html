@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Timetable · Student · GMU Management System</title>
+  <meta name="description" content="Student weekly timetable — GM University Management System. Stage 2 interface preview with sample data.">
+  <meta name="theme-color" content="#f8f6f0">
+  <link rel="icon" href="../../static/img/branding/gmu-official-logo.jpg" type="image/jpeg">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+  <script src="../../static/js/theme-init.js"></script>
+  <link rel="stylesheet" href="../../static/css/tokens.css">
+  <link rel="stylesheet" href="../../static/css/themes.css">
+  <link rel="stylesheet" href="../../static/css/reset.css">
+  <link rel="stylesheet" href="../../static/css/layout.css">
+  <link rel="stylesheet" href="../../static/css/components.css">
+  <link rel="stylesheet" href="../../static/css/dashboard.css">
+  <link rel="stylesheet" href="../../static/css/responsive.css">
+</head>
+<body data-role="student" data-page="timetable"
+      data-title="Timetable" data-subtitle="Weekly schedule · Sample data"
+      data-breadcrumb="Timetable" data-search="Search timetable…">
+
+  <div class="nx-app" data-app-shell>
+    <main class="nx-main" id="main-content">
+      <div class="nx-page">
+
+        <section class="nx-section" aria-labelledby="timetable-title">
+          <div class="nx-section__head">
+            <h2 id="timetable-title">Weekly timetable</h2>
+            <p>Semester 5 · sample schedule</p>
+          </div>
+
+          <div class="nx-tabs" role="tablist" aria-label="Timetable view" data-tabs="timetable-panels">
+            <button class="nx-tab" type="button" role="tab" id="tab-week" data-tab="week" aria-selected="true" aria-controls="panel-week">Weekly classes</button>
+            <button class="nx-tab" type="button" role="tab" id="tab-labs" data-tab="labs" aria-selected="false" aria-controls="panel-labs" tabindex="-1">Laboratories</button>
+          </div>
+
+          <div id="timetable-panels">
+            <div role="tabpanel" id="panel-week" aria-labelledby="tab-week" data-tab-panel="week">
+              <div class="nx-table-wrap">
+                <table class="nx-table dashboard-timetable">
+                  <caption>Sample weekly class timetable · Monday to Saturday</caption>
+                  <thead>
+                    <tr>
+                      <th scope="col">Day</th>
+                      <th scope="col">09:00–10:00</th>
+                      <th scope="col">10:00–11:00</th>
+                      <th scope="col">11:15–12:15</th>
+                      <th scope="col">13:30–14:30</th>
+                      <th scope="col">14:30–15:30</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <th scope="row">Monday</th>
+                      <td><strong>Database Systems</strong><span>CS301 · Dr. Anita Rao</span></td>
+                      <td><strong>Operating Systems</strong><span>CS302 · Prof. Rajesh Kumar</span></td>
+                      <td><strong>Web Technologies</strong><span>CS305 · Ms. Priya Nair</span></td>
+                      <td><strong>Software Engineering</strong><span>CS303 · Ms. Sneha Reddy</span></td>
+                      <td><strong>Computer Networks</strong><span>CS304 · Dr. Vikram Singh</span></td>
+                    </tr>
+                    <tr>
+                      <th scope="row">Tuesday</th>
+                      <td><strong>Computer Networks</strong><span>CS304 · Dr. Vikram Singh</span></td>
+                      <td><strong>Database Systems</strong><span>CS301 · Dr. Anita Rao</span></td>
+                      <td><strong>Data Science</strong><span>CS381 · Dr. Meera Iyer</span></td>
+                      <td><strong>Operating Systems</strong><span>CS302 · Prof. Rajesh Kumar</span></td>
+                      <td><strong>Library / study</strong><span>Self-directed</span></td>
+                    </tr>
+                    <tr>
+                      <th scope="row">Wednesday</th>
+                      <td><strong>Software Engineering</strong><span>CS303 · Ms. Sneha Reddy</span></td>
+                      <td><strong>Web Technologies</strong><span>CS305 · Ms. Priya Nair</span></td>
+                      <td><strong>Operating Systems</strong><span>CS302 · Prof. Rajesh Kumar</span></td>
+                      <td><strong>Data Science</strong><span>CS381 · Dr. Meera Iyer</span></td>
+                      <td><strong>Database Systems</strong><span>CS301 · Dr. Anita Rao</span></td>
+                    </tr>
+                    <tr>
+                      <th scope="row">Thursday</th>
+                      <td><strong>Operating Systems</strong><span>CS302 · Prof. Rajesh Kumar</span></td>
+                      <td><strong>Computer Networks</strong><span>CS304 · Dr. Vikram Singh</span></td>
+                      <td><strong>Software Engineering</strong><span>CS303 · Ms. Sneha Reddy</span></td>
+                      <td><strong>Web Technologies</strong><span>CS305 · Ms. Priya Nair</span></td>
+                      <td><strong>Mentoring</strong><span>Faculty adviser</span></td>
+                    </tr>
+                    <tr>
+                      <th scope="row">Friday</th>
+                      <td><strong>Database Systems</strong><span>CS301 · Dr. Anita Rao</span></td>
+                      <td><strong>Software Engineering</strong><span>CS303 · Ms. Sneha Reddy</span></td>
+                      <td><strong>Data Science</strong><span>CS381 · Dr. Meera Iyer</span></td>
+                      <td><strong>Computer Networks</strong><span>CS304 · Dr. Vikram Singh</span></td>
+                      <td><strong>Web Technologies</strong><span>CS305 · Ms. Priya Nair</span></td>
+                    </tr>
+                    <tr>
+                      <th scope="row">Saturday</th>
+                      <td><strong>Seminar / review</strong><span>Department session</span></td>
+                      <td><strong>Operating Systems</strong><span>CS302 · Prof. Rajesh Kumar</span></td>
+                      <td><strong>Open study</strong><span>No scheduled class</span></td>
+                      <td><strong>Open study</strong><span>No scheduled class</span></td>
+                      <td><strong>Open study</strong><span>No scheduled class</span></td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+
+            <div role="tabpanel" id="panel-labs" aria-labelledby="tab-labs" data-tab-panel="labs" hidden>
+              <div class="nx-table-wrap">
+                <table class="nx-table dashboard-timetable">
+                  <caption>Sample laboratory timetable</caption>
+                  <thead>
+                    <tr>
+                      <th scope="col">Day</th>
+                      <th scope="col">Lab session</th>
+                      <th scope="col">Time</th>
+                      <th scope="col">Venue</th>
+                      <th scope="col">Faculty</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr><th scope="row">Monday</th><td><strong>Database Laboratory</strong></td><td>15:45–17:30</td><td>Lab 2 · Block C</td><td>Dr. Anita Rao</td></tr>
+                    <tr><th scope="row">Tuesday</th><td><strong>Networks Laboratory</strong></td><td>15:45–17:30</td><td>Lab 4 · Block C</td><td>Dr. Vikram Singh</td></tr>
+                    <tr><th scope="row">Wednesday</th><td><strong>Web Technologies Laboratory</strong></td><td>13:30–15:30</td><td>Lab 1 · Block B</td><td>Ms. Priya Nair</td></tr>
+                    <tr><th scope="row">Thursday</th><td><strong>Operating Systems Laboratory</strong></td><td>15:45–17:30</td><td>Lab 3 · Block C</td><td>Prof. Rajesh Kumar</td></tr>
+                    <tr><th scope="row">Friday</th><td><strong>Data Science Laboratory</strong></td><td>13:30–15:30</td><td>Lab 5 · Block D</td><td>Dr. Meera Iyer</td></tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+
+          <div class="nx-callout" style="margin-top: var(--nx-space-4);">
+            <svg class="nx-icon nx-icon--sm" aria-hidden="true"><use href="#i-clock"/></svg>
+            <div>
+              <strong>Sample schedule</strong>
+              <p>Periods, rooms, and faculty allocations are illustrative. Timetable generation and room allocation need the Flask API and MySQL schema planned for a later stage.</p>
+            </div>
+          </div>
+        </section>
+
+      </div>
+    </main>
+  </div>
+
+  <div class="nx-toast-region" data-toast-region aria-live="polite" aria-atomic="false"></div>
+
+  <script src="../../static/js/theme.js"></script>
+  <script src="../../static/js/app-shell.js"></script>
+  <script src="../../static/js/main.js"></script>
+  <script src="../../static/js/dashboard.js"></script>
+</body>
+</html>

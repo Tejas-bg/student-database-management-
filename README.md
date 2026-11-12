@@ -16,7 +16,7 @@ One common sign-in page serves students, faculty, and administrators. The user r
 
 > **Independent student project.** This is not an official GM University service and does not claim university endorsement. The official university logo is used to identify the institution the project is built for.
 
-**Current state:** Stage 1 — UI/UX design system and login preview. No backend, authentication, or database connection exists yet. See `project-context/CURRENT_STATUS.md`.
+**Current state:** Stage 2 — frontend interface preview with student, faculty, and administration workspaces. No backend, authentication, or database connection exists yet. See `project-context/CURRENT_STATUS.md`.
 
 ---
 
@@ -24,7 +24,7 @@ One common sign-in page serves students, faculty, and administrators. The user r
 
 | Layer | Technology |
 |---|---|
-| Frontend | HTML5, CSS3, JavaScript, Bootstrap 5, Chart.js |
+| Frontend | HTML5, CSS3, JavaScript (Bootstrap 5 and Chart.js approved for later stages, not yet loaded) |
 | Backend | Python, Flask, MySQL Connector/Python |
 | Database | MySQL 8+ |
 
@@ -32,7 +32,7 @@ One common sign-in page serves students, faculty, and administrators. The user r
 
 ## Preview the design
 
-The Stage 1 interface is static. From the `frontend/` folder, run a local file server:
+The interface is static. From the `frontend/` folder, run a local file server:
 
 ```powershell
 cd frontend
@@ -44,10 +44,12 @@ Then open:
 | Page | URL | What it shows |
 |---|---|---|
 | Common sign-in | `http://localhost:8000/login.html` | Branded login preview with validation and password toggle |
-| Dashboard | `http://localhost:8000/index.html` | Demonstration dashboard shell |
+| Student workspace | `http://localhost:8000/dashboard/student/` | Student overview, courses, attendance, marks, fees, timetable, notifications, feedback |
+| Faculty workspace | `http://localhost:8000/dashboard/faculty/` | Teaching overview, subjects, students, attendance, marks entry, performance, reports |
+| Administration workspace | `http://localhost:8000/dashboard/admin/` | Institution management across people, academics, operations, and reports |
 | Design reference | `http://localhost:8000/styleguide.html` | Colours, type, components, and accessibility patterns |
 
-The login form does not authenticate anyone. It deliberately shows a preview message instead of a fake success.
+The login form does not authenticate anyone. It deliberately shows a preview message instead of a fake success. Every dashboard uses invented sample data and says so on the page. Bootstrap 5 and Chart.js are part of the approved stack but are not loaded yet; the current interface and charts use the project's own CSS and SVG components.
 
 ---
 
@@ -96,9 +98,9 @@ If you are new to the project, read in this order:
 
 ## Current stage
 
-**Stage 1 — UI/UX Design System and Visual Identity.**
+**Stage 2 — Frontend Development.**
 
-Stage 1 is implemented and awaiting user approval. The rebrand and login-page preview are part of that review. Stage 2 (Frontend Development) has not started.
+Stage 2 is implemented and awaiting user review. It adds the shared application shell and 34 student, faculty, and administration pages on top of the Stage 1 design system and login preview. The interface remains UI-only.
 
 The full roadmap is in `project-context/DEVELOPMENT_WORKFLOW.md` and summarised in `ROADMAP.md`.
 
@@ -109,11 +111,11 @@ The full roadmap is in `project-context/DEVELOPMENT_WORKFLOW.md` and summarised 
 | Area | Status |
 |---|---|
 | Project implementation | UI preview only |
-| Frontend | Stage 1 design system and login preview implemented |
+| Frontend | Stage 2 shell and 34 role pages implemented and browser-verified |
 | Backend | Not Started |
 | Database | Not Started (schema is PLANNING) |
-| Testing | Manual browser verification only |
-| Documentation | Rebranded and current |
+| Testing | Scripted browser verification; no committed automated suite |
+| Documentation | Stage 2 docs current |
 
 ---
 

@@ -1,6 +1,6 @@
 # GM University Management System — Design System
 
-> **Stage 1 · Implemented design foundation.** This document explains how the CSS and JavaScript are organised, what each file does, and how to extend the system without breaking the themes.
+> **Stage 1 foundation, extended in Stage 2.** This document explains how the CSS and JavaScript are organised, what each file does, and how to extend the system without breaking the themes. Stage 2 added the shared application shell and the role dashboards described in `GMU_DASHBOARD_DESIGN.md`.
 
 ---
 
@@ -25,6 +25,10 @@ frontend/
 ├── login.html                  Common sign-in preview
 ├── index.html                  Dashboard preview (demo data)
 ├── styleguide.html             Live component and token reference
+├── dashboard/
+│   ├── student/                Ten student pages
+│   ├── faculty/                Ten faculty pages
+│   └── admin/                  Fourteen administration pages
 └── static/
     ├── css/
     │   ├── tokens.css          Primitive values: palette, type, space, radii, motion
@@ -32,12 +36,15 @@ frontend/
     │   ├── reset.css           Reset, base typography, focus, a11y utilities
     │   ├── layout.css          Shell, sidebar, header, grids, docs layout
     │   ├── components.css      Buttons, cards, forms, tables, dialogs, charts…
+    │   ├── dashboard.css       Dashboard grids, hero, filters, pagination
     │   ├── login.css           Split-screen brand panel and sign-in form
     │   └── responsive.css      Breakpoints, mobile drawer, print styles
     ├── js/
     │   ├── theme-init.js       Blocking pre-paint theme selection
     │   ├── theme.js            Theme switch, localStorage, system preference
+    │   ├── app-shell.js        Role configs, shared shell, sidebar, header, menus
     │   ├── main.js             Drawer, menus, tabs, dialogs, toasts, filter
+    │   ├── dashboard.js        Table/list filters, pagination, mark-read
     │   └── login.js            Password toggle, validation, preview loading state
     └── img/
         └── branding/
@@ -46,9 +53,11 @@ frontend/
 
 ### Load order (important)
 
-`tokens.css` → `themes.css` → `reset.css` → `layout.css` → `components.css` → `responsive.css`
+`tokens.css` → `themes.css` → `reset.css` → `layout.css` → `components.css` → `dashboard.css` → `responsive.css`
 
 CSS variables must be declared before the files that use them. Responsive rules load last so they can override layout and component defaults.
+
+Dashboard pages load scripts in this order: `theme.js` → `app-shell.js` → `main.js` → `dashboard.js`. The shell must exist before the interaction layer looks for its menus, tables, and filters.
 
 `login.html` is a standalone page. It loads `tokens.css` → `reset.css` → `login.css` only, so the dashboard shell styles never leak into the sign-in screen.
 
@@ -216,6 +225,10 @@ Do not add decorative shadows to ordinary cards. Thin borders and spacing carry 
 | `.nx-grid--split` | 1.35fr / 1fr |
 | `.nx-grid--halves` | 2 equal columns |
 | `.nx-grid--thirds` | 3 equal columns |
+| `.dashboard-stat-grid` | 4 / 2 / 1 responsive statistic cards |
+| `.dashboard-split` | 1.35fr / 1fr, stacks at 1120px |
+| `.dashboard-grid-3` | 3 / 2 / 1 responsive card row |
+| `.dashboard-filter-bar` | Search, chip filters, and action |
 | `.nx-stack` | Vertical flex with 16px gap |
 | `.nx-cluster` | Wrapping horizontal flex |
 
@@ -241,10 +254,12 @@ The layout is desktop-first with `max-width` queries. Mobile navigation is fully
 |---|---|---|
 | `theme-init.js` | Choose and apply the initial theme before paint | Contain UI logic |
 | `theme.js` | Toggle theme, persist choice, update labels and meta | Fetch data |
+| `app-shell.js` | Inject the shared shell, role navigation, header, menus, breadcrumbs, notice, footer | Authenticate, fetch, or decide a real role |
 | `main.js` | Drawer, menus, tabs, dialogs, toasts, doc filter | Pretend to save data |
+| `dashboard.js` | Filter, search, paginate, mark read, inert demo forms | Fetch, store, or submit data |
 | `login.js` | Password toggle, empty-field validation, preview loading state, reset dialog | Send, store, or authenticate credentials |
 
-No framework, build step, or package manager is required in Stage 1. This is deliberate: it keeps the foundation readable for a beginner and avoids a toolchain before the backend exists.
+No framework, build step, or package manager is required. This is deliberate: it keeps the foundation readable for a beginner and avoids a toolchain before the backend exists.
 
 ### Public API
 
@@ -259,7 +274,7 @@ Custom event: `gmu:themechange` fires on `document` with `{ detail: { theme } }`
 
 ---
 
-## 9. Charts in Stage 1
+## 9. Charts in Stages 1–2
 
 Charts are hand-built with CSS and inline SVG:
 
@@ -268,7 +283,7 @@ Charts are hand-built with CSS and inline SVG:
 - meters using width percentages,
 - sparkline using an SVG path.
 
-No chart library is loaded. Every chart has a text summary, an `aria-label`, or a data-table alternative. Chart.js can replace these in Stage 2 without changing the layout tokens.
+No chart library is loaded in either stage. Every chart has a text summary, an `aria-label`, or a data-table alternative. Chart.js remains available for Stage 5 if live analytics need interaction; the layout tokens would not change.
 
 ---
 
@@ -286,26 +301,27 @@ No chart library is loaded. Every chart has a text summary, an `aria-label`, or 
 
 ---
 
-## 11. How to add a page (Stage 2)
+## 11. How to add a dashboard page (Stage 2)
 
-1. Copy the shell structure from `index.html`.
-2. Keep landmarks: skip link, sidebar, header, main, footer.
-3. Mark the current navigation item with `aria-current="page"`.
-4. Use `.nx-page`, `.nx-section`, and the grid helpers.
-5. Reuse components; add new CSS only when needed.
-6. Verify the design in both themes and at mobile width.
+1. Create the file under `frontend/dashboard/<role>/` and add its key to the role config in `app-shell.js` if it is a new destination.
+2. Copy the page contract from an existing page: body `data-*` attributes, `[data-app-shell]`, `#main-content`, toast region, and script order.
+3. Use `.nx-page`, `.nx-section`, and the dashboard grid helpers.
+4. For a table, add `[data-table-section]`, `[data-demo-table]`, `[data-table-search]`, chips, pagination, and empty state.
+5. For a list, add `[data-filter-list]` with `[data-list-item]` and matching chips.
+6. Label every figure as sample or illustrative.
+7. Verify: one active nav item, both themes, `/` search focus, filters, pagination, dialogs, console, and no horizontal overflow at 375px.
 
 ---
 
 ## 12. Dependencies
 
-Stage 1 intentionally uses only:
+Stage 1–2 intentionally use only:
 
 - HTML, CSS, and vanilla JavaScript,
 - Google Fonts for Inter and JetBrains Mono,
 - inline SVG icons.
 
-Bootstrap 5 may be introduced in Stage 2 only if it solves a concrete problem. It is **not** included now because the custom token system already covers layout and components, and adding a framework early would duplicate styling.
+Bootstrap 5 and Chart.js are part of the approved long-term stack but are **not loaded** yet. The custom token system already covers layout and components, and the CSS/SVG charts meet the sample-data needs. Add either library only when a concrete Stage 5 need appears, and record the decision.
 
 ---
 
@@ -314,5 +330,6 @@ Bootstrap 5 may be introduced in Stage 2 only if it solves a concrete problem. I
 - The font CDN requires a network connection; fallbacks are defined but visually different.
 - Charts are static illustrations, not data-driven.
 - The styleguide filter is a small convenience, not a search engine.
+- Dashboard filters operate on static rows and reset on reload.
 - No automated visual regression or axe run is configured yet.
 - Borders on decorative cards are intentionally subtle; control borders use a stronger token to meet the 3:1 UI target.

@@ -6,6 +6,47 @@ The format is simple: date, stage, what changed, and why. It is not a commit log
 
 ---
 
+## 2026-11-12 — Stage 2: Application shell and role dashboards
+
+### Added
+
+- `frontend/static/js/app-shell.js` — role configuration for student, faculty, and administration; inline SVG sprite; skip link; collapsible sidebar; sticky header with search, notifications, theme toggle, and profile menu; breadcrumbs; sample-data notice; footer.
+- `frontend/static/js/dashboard.js` — client-side table search, chip filters, pagination, empty states, header-search synchronisation, list filters, page-level mark-read, inert demo forms, and a `/` search shortcut.
+- `frontend/static/css/dashboard.css` — dashboard hero, statistic and split grids, three-column responsive card grid, filter bar, meter rows, and pagination.
+- **34 dashboard pages:**
+  - 10 student pages: overview, profile, courses, attendance, internal assessment marks, semester results, fee details, timetable, notifications, feedback.
+  - 10 faculty pages: overview, profile, assigned subjects, student management, attendance management, internal marks entry, semester marks, class performance, reports, notifications.
+  - 14 administration pages: overview, student management, faculty management, department management, course management, subject management, semester management, enrolment management, attendance management, marks management, fee management, feedback management, reports and analytics, user and role management.
+- `docs/design/GMU_DASHBOARD_DESIGN.md` — page map, page contract, shell architecture, interaction hooks, responsive rules, accessibility, limitations, and verification evidence.
+
+### Changed
+
+- `theme.js` now uses delegated click handling and re-syncs controls after the document parses, so the theme button injected by `app-shell.js` works on every dashboard page.
+- `docs/design/DESIGN_SYSTEM.md` and `docs/design/README.md` document the dashboard file map, load order, grid helpers, and Stage 2 status.
+
+### Fixed
+
+- Header theme toggle had no click handler because it was injected after `theme.js` initialised. Delegation plus a `DOMContentLoaded` sync fixes it without touching the login page.
+- Removed an unused `mb-0` class from `frontend/dashboard/admin/marks.html`.
+
+### Verified
+
+- 34 dashboard pages loaded at 1366×768 with shell, header, sidebar, footer, breadcrumb, skip link, demo notice, one active nav item, and zero console/JS errors.
+- 376 automated assertions passed with 0 failures, covering navigation, table filters, search, empty states, pagination, header-search sync, dialogs, demo forms, profile/logout, notifications, sidebar collapse and persistence, theme toggle and persistence, tabs, list filters, page mark-read, and responsive layouts.
+- Zero horizontal overflow at 1920×1080, 1366×768, 768×1024, and 375×812 on every tested page; mobile tables scroll inside their wrapper.
+- Accessibility audit across 34 pages found no unnamed controls, unlabelled fields, images without `alt`, or missing sprite symbols.
+- Static validation across 34 pages found no tag-balance errors, duplicate IDs, page-contract violations, or broken local links/assets.
+- No `fetch`, `XMLHttpRequest`, `WebSocket`, or form submission exists in the dashboard JavaScript.
+
+### Notes
+
+- Stage 2 is **UI only**. Sample tables, charts, statistics, and forms are static; nothing is saved, sent, or stored.
+- Logout is a real link back to `frontend/login.html`; the login page and its authentication preview were not modified.
+- Chart.js and Bootstrap 5 remain part of the approved stack but are not loaded. Charts use the existing CSS/SVG components.
+- Stage 2 is **In Review** and awaits user approval.
+
+---
+
 ## 2026-11-12 — Stage 1: Login scrolling behaviour
 
 ### Changed
