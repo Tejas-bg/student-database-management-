@@ -6,6 +6,25 @@ The format is simple: date, stage, what changed, and why. It is not a commit log
 
 ---
 
+## 2026-11-12 — Stage 1: Login scrolling behaviour
+
+### Changed
+
+- Desktop login now uses a viewport-height shell: the maroon brand panel stays stationary while only the ivory sign-in panel scrolls (`overflow-y: auto`).
+- The sign-in panel is focusable (`tabindex="0"`), so Page Up, Page Down, Home, and End scroll it in addition to the mouse wheel and touchpad.
+- The page itself no longer scrolls on desktop, preventing nested scrollbars and horizontal overflow.
+- Mobile (≤ 860px) keeps the stacked layout and natural whole-page scrolling; the sign-in panel uses `overflow: visible` and the brand panel is not fixed.
+
+### Verified
+
+- 1920×1080: page height equalled the viewport; content fit without a scrollbar.
+- 1366×768: brand panel stayed at top 0 while the sign-in panel scrolled 0→121px; wheel, End, and Page Down reached the bottom; Home and Page Up returned to 0; window scroll stayed 0.
+- 768×1024 and 375×812: the whole page scrolled (297px and 556px) with panel scroll at 0 and the brand panel moving with the page; no horizontal overflow.
+- Footer, password field, and Sign In button were reachable at the bottom; the skip link and validation focus still scrolled the panel correctly.
+- No console errors or failed resources in the final warm run.
+
+---
+
 ## 2026-11-12 — Stage 1: GM University rebrand and common login preview
 
 ### Added

@@ -77,6 +77,8 @@ A two-column split screen:
 
 The form column is capped at 560px and vertically centred, so it remains the most prominent interactive element.
 
+On desktop the shell is exactly one viewport tall. The maroon brand panel stays fixed in place, and the sign-in panel is the only vertical scroll container (`overflow-y: auto`, `overscroll-behavior: contain`). The sign-in panel is focusable (`tabindex="0"`), so the mouse wheel, touchpad, Page Up, Page Down, Home, and End scroll it even before an input receives focus. The page behind it does not scroll, so the layout never produces a second, nested scrollbar.
+
 ### Tablet (≤ 1100px)
 
 The split remains, but padding and heading sizes reduce. Gold rings shrink so they never crowd the copy.
@@ -85,6 +87,7 @@ The split remains, but padding and heading sizes reduce. Gold rings shrink so th
 
 - Single column.
 - Brand panel becomes a compact header: logo, institution, welcome copy, tagline.
+- The desktop fixed-panel behaviour is disabled: the page itself scrolls normally and the sign-in panel uses `overflow: visible`.
 - Form panel follows immediately.
 - No horizontal overflow.
 - At ≤ 480px the logo drops to 56px, labels and forgot-password stack, and inputs stay at least 52px tall.
@@ -156,7 +159,8 @@ The submit button uses gold because it is the single most important action and m
 
 - Skip link is the first focusable element.
 - Logical tab order follows the visual order.
-- Focus is always visible: 4px gold halo plus a maroon border.
+- Focus is always visible: 4px gold halo plus a maroon border (the scrollable panel shows an inset maroon outline).
+- The sign-in panel is focusable, so Page Up, Page Down, Home, and End scroll it.
 - No keyboard trap.
 
 ### Motion
@@ -217,10 +221,10 @@ Rules:
 
 ## 9. Responsive test checklist
 
-- [ ] 1440 × 900 desktop: balanced split, no scroll on the form panel.
+- [ ] 1920 × 1080 and 1366 × 768 desktop: maroon brand panel stationary; sign-in panel scrolls independently when its content is taller than the viewport; mouse wheel and Page Up/Page Down/Home/End work; page itself does not scroll.
 - [ ] 1024 × 768 tablet: reduced padding, no overlap.
-- [ ] 768 × 1024 portrait: single column, brand header compact.
-- [ ] 390 × 844 mobile: logo 56px, inputs ≥ 52px, no horizontal scroll.
+- [ ] 768 × 1024 portrait: single column, brand header compact, whole page scrolls naturally.
+- [ ] 390 × 844 and 375 × 812 mobile: logo 56px, inputs ≥ 52px, no horizontal scroll, brand panel not fixed.
 - [ ] 320px width: labels wrap without clipping.
 - [ ] 200% browser zoom: no clipping or overlap.
 - [ ] Keyboard only: skip link, fields, toggle, forgot, submit, dialog.

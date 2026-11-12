@@ -115,6 +115,10 @@ The schema has not been reviewed or approved. Do not create tables yet.
 | Reduced motion removes entrance animation | Emulated `prefers-reduced-motion: reduce`; brand and panel animation names reported `none` |
 | Official logo loads unmodified | Login renders the 778x778 file at 96px (56px mobile), `object-fit: contain`, CSS filter `none`; dashboard and styleguide load the same asset at 40px |
 | Rebrand removed old visible branding | Dashboard, styleguide, and login body text contain no `NEXUS` or `lime` strings; titles use the GMU name |
+| Desktop login keeps the brand panel stationary | At 1920x1080 and 1366x768, brand `top` stayed 0 while the sign-in panel scrolled; the window did not scroll |
+| Sign-in panel scrolls independently | At 1366x768, panel `scrollTop` went 0→121 by wheel, Page Down, and End; Home and Page Up returned it to 0; only one scrollable element existed |
+| Login page scrolls naturally on mobile | At 768x1024 and 375x812, the document scrolled by 297px and 556px, panel `scrollTop` stayed 0, and the brand panel moved with the page |
+| Login has no horizontal or nested scrollbars | `scrollWidth === clientWidth` at 1920, 1366, 768, and 375px; real-scrollbar run also reported no horizontal overflow |
 | No backend, database, or auth is active | No such files or dependencies exist; the UI reports this in the system-status card and login notice |
 
 Anything not in this table is unverified.

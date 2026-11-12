@@ -204,6 +204,11 @@
   border-left: 1px solid rgba(91, 31, 31, 0.1);
 }
 
+.login-panel:focus-visible {
+  outline: 2px solid var(--login-maroon);
+  outline-offset: -6px;
+}
+
 .login-panel__inner {
   display: flex;
   flex-direction: column;
@@ -767,6 +772,36 @@
 /* --------------------------------------------------------------------------
    9. Responsive
    -------------------------------------------------------------------------- */
+
+/* Option B: on desktop the brand panel stays in place and only the sign-in
+   panel scrolls. The scroll region is focusable so Page Up, Page Down, Home,
+   and End work even before an input receives focus. */
+@media (min-width: 861px) {
+  .login-page {
+    height: 100svh;
+    overflow: hidden;
+  }
+
+  .login-shell {
+    height: 100svh;
+    min-height: 0;
+    overflow: hidden;
+  }
+
+  .login-brand {
+    height: 100svh;
+  }
+
+  .login-panel {
+    height: 100svh;
+    overflow-y: auto;
+    overscroll-behavior-y: contain;
+  }
+
+  .login-panel__inner {
+    min-height: 100%;
+  }
+}
 
 @media (max-width: 1100px) {
   .login-brand__inner {

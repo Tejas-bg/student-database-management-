@@ -56,7 +56,7 @@
 | S1-08 | Integrate the official GM University logo without modification. | 1 | P0 | In Review | S1-07 | `frontend/static/img/branding/gmu-official-logo.jpg`; source and checksum recorded in `GMU_BRAND_GUIDELINES.md`. |
 | S1-09 | Build the common login page for all roles. | 1 | P0 | In Review | S1-07 | `login.html`, `login.css`, `login.js`; no role selector, no real authentication. |
 | S1-10 | Document brand usage and the login specification. | 1 | P0 | Done | S1-07 | `GMU_BRAND_GUIDELINES.md` and `GMU_LOGIN_DESIGN.md`. |
-| S1-11 | Verify the login preview across widths, keyboard, reduced motion, and console. | 1 | P0 | Done | S1-09 | Verified at 1440/1024/768/390/320px; validation, password toggle, preview state, dialog focus, reduced motion, and console checked. See `CURRENT_STATUS.md`. |
+| S1-11 | Verify the login preview across widths, keyboard, reduced motion, and console. | 1 | P0 | Done | S1-09 | Verified at 1920/1366/768/375px for scrolling; earlier layout pass covered 1440/1024/390/320px. Validation, password toggle, preview state, dialog focus, reduced motion, and console checked. See `CURRENT_STATUS.md`. |
 
 **Stage 1 status:** In Review - implementation and verification are complete; awaiting user approval before Stage 2. Stage 1 is UI-only: no MySQL, Flask, authentication, backend, or real student data.
 
