@@ -1,4 +1,4 @@
-# NEXUS — Normalization
+# GM University Management System — Normalization
 
 > **Status: PLANNING.** Proposed normalization analysis. Not reviewed.
 > **Target:** Third Normal Form (3NF).
@@ -17,7 +17,7 @@ The project targets **3NF** because it is the standard expectation for a college
 
 **Rule:** Each column holds a single atomic value, and each row is unique.
 
-### Applied to NEXUS
+### Applied to the GM University Management System
 
 - No column stores a comma-separated list. For example, a student does not have a `subjects` column; enrolments are rows in `enrolments`.
 - No repeating groups. A student's marks are rows in `internal_marks` and `semester_marks`, not columns `mark1`, `mark2`, `mark3`.
@@ -38,7 +38,7 @@ This violates 1NF because `subjects` holds multiple values. The normalized form 
 
 **Rule:** The table is in 1NF, and every non-key column depends on the **whole** primary key, not part of it.
 
-2NF only matters when a table has a composite primary key. NEXUS mostly uses surrogate single-column keys, so most tables are automatically in 2NF. The junction tables are the places to check.
+2NF only matters when a table has a composite primary key. GM University Management System mostly uses surrogate single-column keys, so most tables are automatically in 2NF. The junction tables are the places to check.
 
 ### Example: `enrolments`
 
@@ -53,7 +53,7 @@ Suppose the primary key were `(student_id, subject_id)` and the table stored `st
 
 This violates 2NF. The fix is to keep names in `students` and `subjects`, and store only keys and enrolment-specific data in `enrolments`.
 
-### Applied to NEXUS
+### Applied to the GM University Management System
 
 - `students` stores student attributes.
 - `subjects` stores subject attributes.
@@ -79,7 +79,7 @@ A naive design might store:
 
 This violates 3NF. The fix is to store only `department_id` and `course_id` in `students`, and keep names in `departments` and `courses`.
 
-### Applied to NEXUS
+### Applied to the GM University Management System
 
 - Department names live only in `departments`.
 - Course names live only in `courses`.

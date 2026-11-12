@@ -1,40 +1,43 @@
 /* ==========================================================================
-   NEXUS — Semantic themes
-   Light = Apple-inspired calm. Dark = Nothing-inspired technical.
+   GM University Management System — Semantic themes
+   Light = warm ivory and maroon, inspired by the official university logo.
+   Dark = technical graphite with university gold as the signal colour.
    ========================================================================== */
+
+/* Brand colours are primitives from tokens.css and are never hardcoded here. */
 
 :root,
 [data-theme="light"] {
   color-scheme: light;
 
-  --nx-bg: var(--nx-paper);
-  --nx-bg-subtle: #ededE8;
+  --nx-bg: var(--nx-ivory);
+  --nx-bg-subtle: #f0ede5;
   --nx-surface: var(--nx-white);
   --nx-surface-raised: var(--nx-white);
-  --nx-surface-sunken: #f0f0eb;
-  --nx-surface-hover: #f7f7f3;
+  --nx-surface-sunken: #f2efe7;
+  --nx-surface-hover: #faf8f2;
   --nx-sidebar-bg: var(--nx-white);
-  --nx-header-bg: rgba(245, 245, 242, 0.88);
+  --nx-header-bg: rgba(248, 246, 240, 0.88);
 
-  --nx-text: var(--nx-obsidian);
+  --nx-text: var(--nx-graphite);
   --nx-text-muted: #5c5c5c;
   --nx-text-subtle: #6e6e6e;
 
-  --nx-border: #dadada;
+  --nx-border: #dedbd3;
   --nx-border-strong: var(--nx-silver);
-  --nx-border-subtle: #e8e8e4;
+  --nx-border-subtle: #eceae4;
   --nx-border-control: #767676;
 
-  --nx-accent: var(--nx-lime);
-  --nx-accent-text: var(--nx-obsidian);
-  --nx-accent-soft: #f0f9c8;
-  --nx-accent-border: #b8d92a;
-  --nx-indicator: var(--nx-obsidian);
-  --nx-nav-active-bg: #f0f9c8;
-  --nx-nav-active-text: var(--nx-obsidian);
+  --nx-accent: var(--nx-gold);
+  --nx-accent-text: var(--nx-maroon-deep);
+  --nx-accent-soft: #fbf3e3;
+  --nx-accent-border: #c79a3e;
+  --nx-indicator: var(--nx-maroon);
+  --nx-nav-active-bg: #fbf3e3;
+  --nx-nav-active-text: var(--nx-maroon-deep);
 
-  --nx-focus: var(--nx-obsidian);
-  --nx-focus-halo: rgba(215, 255, 53, 0.55);
+  --nx-focus: var(--nx-maroon);
+  --nx-focus-halo: rgba(227, 181, 89, 0.45);
 
   --nx-danger: var(--nx-danger-light);
   --nx-danger-soft: #fdecea;
@@ -45,28 +48,28 @@
   --nx-info: #245b8a;
   --nx-info-soft: #eaf2fa;
 
-  --nx-btn-primary-bg: var(--nx-obsidian);
-  --nx-btn-primary-text: var(--nx-paper);
-  --nx-btn-primary-hover: var(--nx-graphite);
+  --nx-btn-primary-bg: var(--nx-maroon);
+  --nx-btn-primary-text: var(--nx-ivory);
+  --nx-btn-primary-hover: var(--nx-maroon-deep);
   --nx-btn-danger-bg: var(--nx-danger-light);
   --nx-btn-danger-text: var(--nx-white);
 
-  --nx-shadow-sm: 0 1px 2px rgba(17, 17, 17, 0.05);
-  --nx-shadow-md: 0 8px 24px rgba(17, 17, 17, 0.08);
-  --nx-shadow-lg: 0 24px 64px rgba(17, 17, 17, 0.14);
+  --nx-shadow-sm: 0 1px 2px rgba(36, 36, 36, 0.05);
+  --nx-shadow-md: 0 8px 24px rgba(36, 36, 36, 0.08);
+  --nx-shadow-lg: 0 24px 64px rgba(36, 36, 36, 0.14);
   --nx-overlay: rgba(17, 17, 17, 0.45);
-  --nx-dot: rgba(17, 17, 17, 0.16);
+  --nx-dot: rgba(91, 31, 31, 0.14);
 
-  --nx-chart-grid: #e8e8e4;
-  --nx-chart-primary: var(--nx-obsidian);
-  --nx-chart-secondary: #8a8a8a;
-  --nx-chart-tertiary: var(--nx-silver);
-  --nx-chart-fill: rgba(17, 17, 17, 0.06);
+  --nx-chart-grid: #eceae4;
+  --nx-chart-primary: var(--nx-maroon);
+  --nx-chart-secondary: var(--nx-gold);
+  --nx-chart-tertiary: var(--nx-muted);
+  --nx-chart-fill: rgba(91, 31, 31, 0.06);
 
-  --nx-control-accent: var(--nx-obsidian);
-  --nx-skeleton: linear-gradient(90deg, #ededE8 25%, #f7f7f3 37%, #ededE8 63%);
-  --nx-selection-bg: var(--nx-lime);
-  --nx-selection-text: var(--nx-obsidian);
+  --nx-control-accent: var(--nx-maroon);
+  --nx-skeleton: linear-gradient(90deg, #f0ede5 25%, #faf8f2 37%, #f0ede5 63%);
+  --nx-selection-bg: var(--nx-gold);
+  --nx-selection-text: var(--nx-maroon-deep);
 }
 
 [data-theme="dark"] {
@@ -90,16 +93,16 @@
   --nx-border-subtle: #2a2a2a;
   --nx-border-control: #6a6a6a;
 
-  --nx-accent: var(--nx-lime);
-  --nx-accent-text: var(--nx-obsidian);
-  --nx-accent-soft: rgba(215, 255, 53, 0.12);
-  --nx-accent-border: #6e7f1a;
-  --nx-indicator: var(--nx-lime);
-  --nx-nav-active-bg: rgba(215, 255, 53, 0.12);
-  --nx-nav-active-text: var(--nx-paper);
+  --nx-accent: var(--nx-gold);
+  --nx-accent-text: var(--nx-maroon-deep);
+  --nx-accent-soft: rgba(227, 181, 89, 0.14);
+  --nx-accent-border: #8a6a2a;
+  --nx-indicator: var(--nx-gold);
+  --nx-nav-active-bg: rgba(227, 181, 89, 0.14);
+  --nx-nav-active-text: var(--nx-ivory);
 
-  --nx-focus: var(--nx-lime);
-  --nx-focus-halo: rgba(215, 255, 53, 0.3);
+  --nx-focus: var(--nx-gold);
+  --nx-focus-halo: rgba(227, 181, 89, 0.3);
 
   --nx-danger: var(--nx-danger-dark);
   --nx-danger-soft: rgba(255, 138, 128, 0.12);
@@ -110,9 +113,9 @@
   --nx-info: #8fc7f0;
   --nx-info-soft: rgba(143, 199, 240, 0.12);
 
-  --nx-btn-primary-bg: var(--nx-lime);
-  --nx-btn-primary-text: var(--nx-obsidian);
-  --nx-btn-primary-hover: #c4eb25;
+  --nx-btn-primary-bg: var(--nx-gold);
+  --nx-btn-primary-text: var(--nx-maroon-deep);
+  --nx-btn-primary-hover: #efc979;
   --nx-btn-danger-bg: var(--nx-danger-dark);
   --nx-btn-danger-text: var(--nx-obsidian);
 
@@ -120,16 +123,16 @@
   --nx-shadow-md: 0 8px 24px rgba(0, 0, 0, 0.35);
   --nx-shadow-lg: 0 24px 64px rgba(0, 0, 0, 0.55);
   --nx-overlay: rgba(0, 0, 0, 0.62);
-  --nx-dot: rgba(245, 245, 242, 0.18);
+  --nx-dot: rgba(227, 181, 89, 0.18);
 
   --nx-chart-grid: #333333;
-  --nx-chart-primary: var(--nx-lime);
+  --nx-chart-primary: var(--nx-gold);
   --nx-chart-secondary: var(--nx-silver);
   --nx-chart-tertiary: var(--nx-neutral-500);
-  --nx-chart-fill: rgba(215, 255, 53, 0.1);
+  --nx-chart-fill: rgba(227, 181, 89, 0.1);
 
-  --nx-control-accent: var(--nx-lime);
+  --nx-control-accent: var(--nx-gold);
   --nx-skeleton: linear-gradient(90deg, #1c1c1c 25%, #292929 37%, #1c1c1c 63%);
-  --nx-selection-bg: var(--nx-lime);
-  --nx-selection-text: var(--nx-obsidian);
+  --nx-selection-bg: var(--nx-gold);
+  --nx-selection-text: var(--nx-maroon-deep);
 }

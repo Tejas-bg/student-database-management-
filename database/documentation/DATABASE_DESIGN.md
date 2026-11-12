@@ -1,4 +1,4 @@
-# NEXUS — Database Design
+# GM University Management System — Database Design
 
 > **Status: PLANNING.** Proposed design only. No table has been created.
 > **Do not execute anything from this document until the user approves the schema.**
@@ -247,9 +247,9 @@ These will be demonstrated in Stage 6:
 
 ## 8. Security design
 
-- `nexus_admin` owns schema changes.
-- `nexus_app` has DML and `SELECT` on required tables and views.
-- `nexus_report` has `SELECT` on reporting views only.
+- `gmu_admin` owns schema changes.
+- `gmu_app` has DML and `SELECT` on required tables and views.
+- `gmu_report` has `SELECT` on reporting views only.
 - Passwords are hashed.
 - All application queries are parameterized.
 - No real data is stored.

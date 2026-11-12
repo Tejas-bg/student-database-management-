@@ -1,13 +1,13 @@
 ---
 name: deployment
-description: Use when preparing NEXUS to run outside the developer's machine, writing setup scripts, configuring environment variables, packaging the submission, or preparing a demo environment. Do not use it to introduce cloud infrastructure that is out of scope.
+description: Use when preparing GM University Management System to run outside the developer's machine, writing setup scripts, configuring environment variables, packaging the submission, or preparing a demo environment. Do not use it to introduce cloud infrastructure that is out of scope.
 ---
 
-# NEXUS Skill — Deployment and Setup
+# GM University Management System Skill — Deployment and Setup
 
 ## Purpose
 
-Make NEXUS reproducible: a clean machine can install it, configure it, run it, and demonstrate it. Deployment here means local setup and a reliable demo environment, not public cloud hosting.
+Make GM University Management System reproducible: a clean machine can install it, configure it, run it, and demonstrate it. Deployment here means local setup and a reliable demo environment, not public cloud hosting.
 
 ## When to use
 

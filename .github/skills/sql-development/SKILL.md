@@ -1,9 +1,9 @@
 ---
 name: sql-development
-description: Use when writing or reviewing NEXUS SQL queries, joins, subqueries, aggregate functions, reporting views, or query performance. Do not use it for schema design or server administration.
+description: Use when writing or reviewing GM University Management System SQL queries, joins, subqueries, aggregate functions, reporting views, or query performance. Do not use it for schema design or server administration.
 ---
 
-# NEXUS Skill — SQL Development
+# GM University Management System Skill — SQL Development
 
 ## Purpose
 

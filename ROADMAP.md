@@ -1,4 +1,4 @@
-# NEXUS — Roadmap
+# GM University Management System — Roadmap
 
 This is a one-page summary. The detailed version, with tasks, deliverables, dependencies, acceptance criteria, and testing requirements, is in `project-context/DEVELOPMENT_WORKFLOW.md`.
 
@@ -8,7 +8,7 @@ This is a one-page summary. The detailed version, with tasks, deliverables, depe
 
 | Stage | Name | Status |
 |---|---|---|
-| 0 | Project Workspace and Context Setup | Workspace created; awaiting review |
+| 0 | Project Workspace and Context Setup | Complete and approved |
 | 1 | UI/UX Design System and Visual Identity | Implemented and verified; awaiting approval |
 | 2 | Frontend Development | Not started |
 | 3 | MySQL Database Design and Implementation | Not started |
@@ -36,7 +36,15 @@ Do not start the next stage until:
 
 ## Immediate next step
 
-Stage 1 is complete for review. Open `frontend/index.html` through a local server and inspect the dashboard and `frontend/styleguide.html` in both themes.
+Stage 1 is complete for review. Open `frontend/login.html`, `frontend/index.html`, and `frontend/styleguide.html` through a local server and inspect the common login preview, the dashboard, and the component reference in both themes.
+
+For example, from the project folder:
+
+```powershell
+python -m http.server 8000 --directory frontend
+```
+
+Then open `http://127.0.0.1:8000/login.html`.
 
 When you are satisfied, approve Stage 2:
 

@@ -2,7 +2,7 @@
 applyTo: "**/*.md"
 ---
 
-# NEXUS Documentation Instructions
+# GM University Management System Documentation Instructions
 
 These rules apply to every Markdown file in the project.
 

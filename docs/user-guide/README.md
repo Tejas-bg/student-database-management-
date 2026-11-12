@@ -1,6 +1,6 @@
 # User Guide
 
-This folder will hold the end-user guide for NEXUS.
+This folder will hold the end-user guide for the GM University Management System.
 
 ## Planned contents
 

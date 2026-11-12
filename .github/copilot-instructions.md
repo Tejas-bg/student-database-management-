@@ -1,4 +1,4 @@
-# NEXUS — Global AI Agent Instructions
+# GM University Management System — Global AI Agent Instructions
 
 > **Read this file before doing anything else in this workspace.**
 > These instructions apply to every AI agent, every chat session, and every file in the repository.
@@ -9,9 +9,10 @@
 
 | Field | Value |
 |---|---|
-| Project name | **NEXUS** |
-| Full title | Student Management Database System Using DBMS and SQL |
-| Tagline | Education, connected. |
+| Project name | **GM University Management System** |
+| Short display name | GMU Management System |
+| Institution | GM University, Davanagere, Karnataka |
+| Tagline | Empowering Education Through Connected Technology |
 | Type | College DBMS project — web application |
 | Architecture | Three-tier web application |
 | Database | MySQL 8+ ONLY (never SQLite, never an in-memory substitute) |
@@ -21,6 +22,8 @@
 | IDE | Visual Studio Code with AI Agent Mode |
 
 The project must demonstrate: ER modelling, relational design, primary keys, foreign keys, constraints, 3NF normalisation, DDL, DML, DQL, DCL, TCL, joins, subqueries, aggregate functions, views, transactions (`COMMIT`, `ROLLBACK`, `SAVEPOINT`), `GRANT`, `REVOKE`, and database security.
+
+**Independence:** this is an independent student project. It is not an official GM University service, and no AI agent may add text or UI that implies university endorsement.
 
 ---
 
@@ -33,7 +36,7 @@ Before modifying code or structure, read these files **in this order**:
 3. `project-context/SYSTEM_ARCHITECTURE.md` — how the three tiers connect.
 4. `project-context/TECHNOLOGY_STACK.md` — approved tools and libraries.
 5. `project-context/CURRENT_STATUS.md` — the real, verified state of the project.
-6. `project-context/TASKS.md` (root `TASKS.md` is the working board) — what is next.
+6. `TASKS.md` (the root task board) — what is next.
 7. `project-context/DESIGN_PRINCIPLES.md` — the visual language.
 8. `project-context/CODING_STANDARDS.md` — how code must be written.
 9. `project-context/SECURITY_STANDARDS.md` — non-negotiable security rules.
@@ -106,16 +109,24 @@ Full rules: `project-context/CODING_STANDARDS.md`.
 
 ## 7. Design System Rules
 
-The UI follows the NEXUS hybrid design language:
+The UI follows the GM University Management System design language:
 
 - Apple-inspired minimalism, whitespace, elegant typography, refined interactions.
-- Nothing-inspired monochrome discipline, dot-matrix accents, technical detail.
-- Palette: Obsidian `#111111`, Paper `#F5F5F2`, White `#FFFFFF`, Silver `#BDBDBD`, Graphite `#292929`, Signal Lime `#D7FF35`.
-- Signal Lime is an accent, not a background for large areas.
+- Nothing-inspired neutral discipline, dot-matrix accents, technical detail.
+- Official identity: the unmodified GM University logo from `frontend/static/img/branding/gmu-official-logo.jpg`.
+- Palette: University Maroon `#5B2020`, Deep Maroon `#421919`, University Gold `#E3B559`, Warm Ivory `#F8F6F0`, White `#FFFFFF`, Graphite `#242424`, Muted Grey `#8A8580`.
+- University Gold is an accent, not body text and not a large background.
+- Never crop, stretch, recolour, redraw, or AI-generate the university logo.
 - Every new screen must support light and dark themes.
 - Every new component must meet WCAG 2.1 AA contrast and keyboard accessibility.
 
-Full rules: `project-context/DESIGN_PRINCIPLES.md`.
+### Authentication and roles
+
+- There is **one common login** for students, faculty, and administrators. Never add a role selector, user-type dropdown, or separate role login pages.
+- The backend determines the role from the registered MySQL account. Never infer a role from the login ID format, and never authorize only in JavaScript.
+- The Stage 1 login page is a preview. It must never fake a successful sign-in, create accounts, store passwords, or send credentials.
+
+Full rules: `project-context/DESIGN_PRINCIPLES.md`, `docs/design/GMU_BRAND_GUIDELINES.md`, and `docs/design/GMU_LOGIN_DESIGN.md`.
 
 ---
 
@@ -166,9 +177,9 @@ Do not pretend a skill was loaded. Do not invent tool or configuration names.
 
 ## 11. Current Stage
 
-The project is at **Stage 0 — Project Workspace and Context Setup**.
+The project is at **Stage 1 — UI/UX Design System and Visual Identity**, awaiting user approval.
 
-Do **not** start Stage 1 (UI/UX Design System) or any later stage until the user explicitly approves it.
+The design system, dashboard preview, component reference, GMU rebrand, and common login preview are implemented. Do **not** start Stage 2 or any later stage until the user explicitly approves it.
 
 See `project-context/DEVELOPMENT_WORKFLOW.md` for the full roadmap.
 

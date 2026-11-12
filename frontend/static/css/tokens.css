@@ -1,29 +1,37 @@
 /* ==========================================================================
-   NEXUS — Design tokens (Stage 1)
+   GM University Management System — Design tokens
    Primitive values only. Semantic light/dark mappings live in themes.css.
+
+   The brand palette is derived from the official GM University logo:
+   gold #E3B559 on university maroon #5B1F1F. This project is an independent
+   student project, not an official university service.
    ========================================================================== */
 
 :root {
   /* Brand palette */
   --nx-obsidian: #111111;
-  --nx-paper: #f5f5f2;
+  --nx-paper: #f8f6f0;
   --nx-white: #ffffff;
   --nx-silver: #bdbdbd;
-  --nx-graphite: #292929;
-  --nx-lime: #d7ff35;
+  --nx-graphite: #242424;
+  --nx-maroon: #5b1f1f;
+  --nx-maroon-deep: #421919;
+  --nx-gold: #e3b559;
+  --nx-ivory: #f8f6f0;
+  --nx-muted: #8a8580;
 
   /* Neutral steps */
   --nx-neutral-950: #0b0b0b;
   --nx-neutral-900: #111111;
   --nx-neutral-800: #1c1c1c;
-  --nx-neutral-700: #292929;
+  --nx-neutral-700: #242424;
   --nx-neutral-600: #3a3a3a;
   --nx-neutral-500: #5c5c5c;
   --nx-neutral-400: #8a8a8a;
   --nx-neutral-300: #bdbdbd;
-  --nx-neutral-200: #dadada;
-  --nx-neutral-100: #e8e8e4;
-  --nx-neutral-50: #f5f5f2;
+  --nx-neutral-200: #dedbd3;
+  --nx-neutral-100: #eceae4;
+  --nx-neutral-50: #f8f6f0;
   --nx-neutral-0: #ffffff;
 
   /* Status colours */

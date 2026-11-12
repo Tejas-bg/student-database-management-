@@ -1,5 +1,5 @@
 /* ==========================================================================
-   NEXUS — Theme bootstrap
+   GM University Management System — Theme bootstrap
    This file is loaded as a blocking script in <head>, before the page paints.
    It applies the saved theme immediately so the page never flashes the wrong
    colours. Actual toggle logic lives in theme.js.
@@ -8,7 +8,7 @@
 (function () {
   "use strict";
 
-  var STORAGE_KEY = "nexus-theme";
+  var STORAGE_KEY = "gmu-theme";
   var root = document.documentElement;
   var saved = null;
 
@@ -40,5 +40,5 @@
   root.style.colorScheme = theme;
 
   // Expose the initial value so theme.js does not need to re-read storage.
-  window.NEXUS_INITIAL_THEME = theme;
+  window.GMU_INITIAL_THEME = theme;
 })();

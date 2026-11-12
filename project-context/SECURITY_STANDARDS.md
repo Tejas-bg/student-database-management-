@@ -1,13 +1,13 @@
-# NEXUS — Security Standards
+# GM University Management System — Security Standards
 
-> **Status:** Approved for Stage 0.
+> **Status:** Approved baseline. Tables are created only in Stage 3 after schema approval.
 > **Rule:** These are non-negotiable. If a requested feature conflicts with them, raise the conflict before implementing.
 
 ---
 
 ## 1. Threat model (beginner-friendly)
 
-NEXUS is a college project, but it still handles personal and academic records. The realistic risks are:
+The GM University Management System is a college project, but it still handles personal and academic records. The realistic risks are:
 
 - Someone reading or changing another student's marks.
 - SQL injection through a form field.
@@ -39,10 +39,10 @@ FLASK_ENV=development
 FLASK_SECRET_KEY=replace-me
 DB_HOST=localhost
 DB_PORT=3306
-DB_NAME=nexus
-DB_USER=nexus_app
+DB_NAME=gmu_management
+DB_USER=gmu_app
 DB_PASSWORD=replace-me
-DB_ADMIN_USER=nexus_admin
+DB_ADMIN_USER=gmu_admin
 DB_ADMIN_PASSWORD=replace-me
 ```
 
@@ -101,6 +101,9 @@ cursor.execute(f"SELECT * FROM students WHERE department_id = {department_id}")
 
 ## 6. Authentication
 
+- Provide **one common login** for students, faculty, and administrators.
+- Never add role selection to the form. The role comes from the registered MySQL account after the password is verified.
+- Never infer a role from the login ID format.
 - Store passwords as strong hashes (`werkzeug.security` or an approved alternative). Never plaintext.
 - Never email or display a password.
 - Enforce a minimum password policy.
@@ -109,6 +112,8 @@ cursor.execute(f"SELECT * FROM students WHERE department_id = {department_id}")
 - Regenerate the session on login.
 - Provide a clear logout that destroys the session.
 - Do not implement "remember me" without a secure token design.
+- Password reset is not implemented. Do not fake it.
+- The Stage 1 login page is a preview: it must not send, check, or store credentials, and must not show a successful sign-in.
 
 ---
 
@@ -149,9 +154,9 @@ cursor.execute(f"SELECT * FROM students WHERE department_id = {department_id}")
 
 | User | Rights |
 |---|---|
-| `nexus_admin` | DDL and DML for migrations only |
-| `nexus_app` | DML and `SELECT` on required tables/views |
-| `nexus_report` | `SELECT` on reporting views only |
+| `gmu_admin` | DDL and DML for migrations only |
+| `gmu_app` | DML and `SELECT` on required tables/views |
+| `gmu_report` | `SELECT` on reporting views only |
 
 - Demonstrate `GRANT` and `REVOKE` in a script under `database/`.
 - Do not let the application user drop tables.

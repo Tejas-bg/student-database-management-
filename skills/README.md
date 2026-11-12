@@ -1,6 +1,6 @@
-# NEXUS Skills — Human Index
+# GM University Management System Skills — Human Index
 
-This folder is the human-readable map of the NEXUS AI skill set.
+This folder is the human-readable map of the GM University Management System AI skill set.
 
 ## Where the real skill files live
 

@@ -6,7 +6,9 @@ This folder holds the design system artifacts produced in **Stage 1** and refine
 
 | Document | Purpose |
 |---|---|
-| `VISUAL_IDENTITY.md` | Brand idea, logo/mark rationale, palette, typography, voice. |
+| `VISUAL_IDENTITY.md` | Brand idea, official logo usage, palette, typography, voice. |
+| `GMU_BRAND_GUIDELINES.md` | Official logo source and rules, colour contrast, naming, checklists. |
+| `GMU_LOGIN_DESIGN.md` | Common login layout, states, accessibility, future auth flow. |
 | `DESIGN_SYSTEM.md` | Token architecture, theme strategy, file map, layout, extension guide. |
 | `UI_COMPONENTS.md` | Component classes, markup examples, states, and usage rules. |
 | `ACCESSIBILITY.md` | WCAG target, measured contrast results, keyboard behaviour, limitations. |
@@ -16,6 +18,7 @@ This folder holds the design system artifacts produced in **Stage 1** and refine
 The design system is not only documented — it is rendered:
 
 - `frontend/styleguide.html` — every token and component in one scrollable reference.
+- `frontend/login.html` — the common sign-in preview.
 - `frontend/index.html` — dashboard preview using the same system with demonstration data.
 
 Both pages support light and dark themes. Use the header toggle, or append `?theme=light` / `?theme=dark` to preview without changing the saved preference.
@@ -26,4 +29,4 @@ The design principles live in `project-context/DESIGN_PRINCIPLES.md`. This folde
 
 ## Status
 
-**Stage 1 — In Review.** The design system, dashboard preview, light/dark themes, component library, and documentation are implemented. Stage 1 is UI-only: there is no backend, authentication, or database connection. Awaiting user approval before Stage 2.
+**Stage 1 — In Review.** The design system, dashboard preview, common login preview, light/dark themes, component library, and documentation are implemented. Stage 1 is UI-only: there is no backend, authentication, or database connection. Awaiting user approval before Stage 2.

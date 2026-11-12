@@ -1,13 +1,13 @@
 ---
 name: ui-ux-design
-description: Use when designing, reviewing, or documenting NEXUS screens, components, colour, typography, spacing, motion, themes, or accessibility. Do not use it for backend, database, or deployment work.
+description: Use when designing, reviewing, or documenting GM University Management System screens, components, colour, typography, spacing, motion, themes, or accessibility. Do not use it for backend, database, or deployment work.
 ---
 
-# NEXUS Skill — UI/UX Design
+# GM University Management System Skill — UI/UX Design
 
 ## Purpose
 
-Keep every NEXUS screen inside one coherent visual language: a hybrid of Apple-style minimalism and Nothing-style monochrome technical detail. This skill turns `DESIGN_PRINCIPLES.md` into concrete design decisions and checks.
+Keep every GM University Management System screen inside one coherent visual language: Apple-style calm, Nothing-style technical restraint, and the official GM University maroon and gold identity. This skill turns `DESIGN_PRINCIPLES.md` into concrete design decisions and checks.
 
 ## When to use
 
@@ -40,7 +40,7 @@ Keep every NEXUS screen inside one coherent visual language: a hybrid of Apple-s
 
 ## Rules and restrictions
 
-- Use only the approved palette. Signal Lime is an accent, not a large background.
+- Use only the approved palette. University Gold is an accent, not body text and not a large background. Never crop, stretch, recolour, redraw, or AI-generate the official university logo.
 - Do not add a new font without approval and a licence note.
 - Do not use colour alone to communicate status.
 - Do not hide essential navigation on desktop.
@@ -52,7 +52,7 @@ Keep every NEXUS screen inside one coherent visual language: a hybrid of Apple-s
 
 - [ ] The screen has one clear primary action.
 - [ ] Colours come from the approved tokens.
-- [ ] Signal Lime is used sparingly.
+- [ ] University Gold is used sparingly and never as body text on light surfaces.
 - [ ] Typography follows the scale and line-height rules.
 - [ ] Spacing follows the 4px scale.
 - [ ] Light and dark themes both work.
@@ -76,10 +76,10 @@ Keep every NEXUS screen inside one coherent visual language: a hybrid of Apple-s
 ## Common mistakes to avoid
 
 - Treating whitespace as empty space and filling it.
-- Using Signal Lime for large surfaces or every button.
+- Using University Gold for large surfaces, body text, or every button.
 - Designing only the happy path.
 - Forgetting keyboard focus.
 - Using low-contrast grey text because it looks elegant.
 - Adding a new font or icon set without approval.
-- Copying a generic admin template instead of following the NEXUS language.
+- Copying a generic admin template instead of following the GM University Management System language.
 - Claiming contrast passes without measuring it.

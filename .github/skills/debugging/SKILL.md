@@ -1,9 +1,9 @@
 ---
 name: debugging
-description: Use when diagnosing a NEXUS error, unexpected behaviour, failed test, broken query, connection problem, layout bug, or performance issue. Use it to find the real cause before changing code.
+description: Use when diagnosing a GM University Management System error, unexpected behaviour, failed test, broken query, connection problem, layout bug, or performance issue. Use it to find the real cause before changing code.
 ---
 
-# NEXUS Skill — Debugging
+# GM University Management System Skill — Debugging
 
 ## Purpose
 

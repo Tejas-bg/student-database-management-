@@ -7,7 +7,7 @@
 
 ## Context
 
-NEXUS is a relational academic records system. The project must demonstrate primary keys, foreign keys, constraints, normalization, joins, subqueries, views, transactions, and access control. The database must run locally and be familiar to the evaluator.
+The GM University Management System is a relational academic records system. The project must demonstrate primary keys, foreign keys, constraints, normalization, joins, subqueries, views, transactions, and access control. The database must run locally and be familiar to the evaluator.
 
 ## Options considered
 

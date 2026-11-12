@@ -1,4 +1,4 @@
-# NEXUS Database
+# GM University Management System â€” Database
 
 > **Schema state: PLANNING.** Nothing in this folder has been executed against MySQL.
 > **Rule:** Do not create tables until the schema is reviewed and approved.

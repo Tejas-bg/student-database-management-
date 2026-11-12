@@ -1,18 +1,18 @@
 ---
 name: frontend-development
-description: Use when building or changing NEXUS HTML, Jinja2 templates, CSS, JavaScript, Bootstrap 5 layouts, Chart.js charts, forms, tables, navigation, or theme behaviour. Do not use it for Flask business logic or SQL.
+description: Use when building or changing GM University Management System HTML, Jinja2 templates, CSS, JavaScript, Bootstrap 5 layouts, Chart.js charts, forms, tables, navigation, or theme behaviour. Do not use it for Flask business logic or SQL.
 ---
 
-# NEXUS Skill — Frontend Development
+# GM University Management System Skill — Frontend Development
 
 ## Purpose
 
-Build accessible, responsive, maintainable interfaces that follow the NEXUS design system and talk to Flask over HTTP. The frontend never touches MySQL directly.
+Build accessible, responsive, maintainable interfaces that follow the GM University Management System design system and talk to Flask over HTTP. The frontend never touches MySQL directly.
 
 ## When to use
 
 - Creating or editing pages and partials.
-- Styling components with the NEXUS tokens.
+- Styling components with the GM University Management System tokens.
 - Adding client-side behaviour or charts.
 - Building forms, tables, and navigation.
 - Implementing the light/dark theme toggle.
@@ -78,7 +78,7 @@ Build accessible, responsive, maintainable interfaces that follow the NEXUS desi
 ## Common mistakes to avoid
 
 - Building a page before the design tokens exist.
-- Copying Bootstrap markup without applying the NEXUS design.
+- Copying Bootstrap markup without applying the GM University Management System design.
 - Using a `<div>` for a button.
 - Forgetting mobile layouts.
 - Using a chart with no accessible alternative.

@@ -1,4 +1,4 @@
-# NEXUS — SQL and DBMS Concept Mapping
+# GM University Management System — SQL and DBMS Concept Mapping
 
 > **Status: PLANNING.** This maps each required concept to a planned artifact.
 > **No concept is implemented yet.** Status changes only after the artifact runs and is verified.
@@ -63,7 +63,7 @@ File names may change when the schema is approved; the mapping must be updated i
 For each concept, prepare:
 
 1. A one-sentence definition.
-2. Where it appears in NEXUS.
+2. Where it appears in the GM University Management System.
 3. Why it matters.
 4. A live example the examiner can run.
 

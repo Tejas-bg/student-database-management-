@@ -2,7 +2,7 @@
 
 > **Status: PLANNING.** These are planning documents, not implementation records.
 
-This folder explains the NEXUS database in enough detail to design it, review it, build it, and defend it in a viva.
+This folder explains the GM University Management System database in enough detail to design it, review it, build it, and defend it in a viva.
 
 ## Documents
 

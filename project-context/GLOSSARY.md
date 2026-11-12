@@ -1,4 +1,4 @@
-# NEXUS — Glossary
+# GM University Management System — Glossary
 
 > Beginner-friendly definitions of the technical words used in this project.
 > Terms are grouped by area. Read the section you need.
@@ -297,14 +297,17 @@ The command-line window inside VS Code where you run commands.
 
 ## 6. Project-specific terms
 
-**NEXUS**
-The name of this project.
+**GM University Management System**
+The name of this project. Short display name: GMU Management System.
 
-**Signal Lime**
-The accent colour `#D7FF35`. Used sparingly.
+**Official logo**
+The GM University logo downloaded from the official website and stored at `frontend/static/img/branding/gmu-official-logo.jpg`. It must never be altered.
 
-**Obsidian, Paper, Silver, Graphite**
-The neutral colours in the NEXUS palette.
+**University Gold**
+The accent colour `#E3B559`, published by GM University. Used sparingly.
+
+**University Maroon, Warm Ivory, Graphite, Muted Grey**
+The core colours in the GM University Management System palette, derived from the official logo. Obsidian and Silver remain neutral support colours.
 
 **Module**
 A functional area of the system, such as Students or Attendance.

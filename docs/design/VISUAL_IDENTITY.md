@@ -1,73 +1,76 @@
-# NEXUS — Visual Identity
+# GM University Management System — Visual Identity
 
-> **Stage 1 · UI/UX design system.** This document explains the visual idea behind NEXUS. The working implementation lives in `frontend/` and the live reference is `frontend/styleguide.html`.
+> **Stage 1 · UI/UX design system.** This document explains the visual idea behind the GM University Management System. The working implementation lives in `frontend/`, the live reference is `frontend/styleguide.html`, and the login has its own specification in `GMU_LOGIN_DESIGN.md`.
 
 ---
 
-## 1. What NEXUS is
+## 1. What the GM University Management System is
 
-**NEXUS** is a student information and academic management platform for a college.
+The **GM University Management System** is a centralized student and academic management platform for **GM University, Davanagere, Karnataka**.
 
-- **Tagline:** “Education, connected.”
+- **Tagline:** “Empowering Education Through Connected Technology”
+- **Short display name:** GMU Management System
 - **Personality:** calm, precise, technical, trustworthy, quietly premium.
-- **Audience:** college staff (registrar, faculty, administration) and students.
+- **Audience:** university staff (registrar, faculty, administration) and students.
 - **Promise:** many academic records — students, faculty, departments, courses, attendance, assessments, fees, feedback, reports — in one coherent workspace.
+- **Status:** an independent student project, not an official university service.
 
-The name suggests a connection point. The mark turns that idea into geometry: two dot-matrix columns connected by a diagonal bridge, like records linked across a system.
+The identity is carried by the **official GM University logo**. The interface supplies the calm typography, spacing, and technical detail around it.
 
 ---
 
 ## 2. Design influences — and what we did not copy
 
-NEXUS is inspired by two design philosophies:
+The interface is inspired by two design philosophies, applied to a real institutional identity:
 
 | Influence | What we take | What we avoid |
 |---|---|---|
 | Apple-inspired product design | Generous whitespace, strong typography, simple navigation, restrained motion, premium surfaces | Apple logos, product layouts, SF fonts, trademarked assets |
-| Nothing-inspired technical design | Monochrome discipline, dot-matrix motifs, mono labels, visible geometry, lime signal colour | Nothing logos, glyphs, packaging layouts, copied assets |
+| Nothing-inspired technical design | Neutral discipline, dot-matrix motifs, mono labels, visible geometry | Nothing logos, glyphs, packaging layouts, copied assets |
+| GM University identity | Official logo, university gold, maroon, and a serious academic tone | Invented logos, recoloured logos, implied official endorsement |
 
-Everything in this identity — the mark, wordmark, palette usage, layout, and component styling — is original to this project.
+The layout, typography, component styling, and interaction design are original to this project. The university logo is used as supplied.
 
 ---
 
-## 3. The mark
+## 3. The official logo
 
-The NEXUS mark is a geometric “N” built from dots.
+The official GM University logo is the primary identity of the application. It shows the university emblem in gold on a maroon field.
 
-- Two vertical columns of five dots form the sides of the letter.
-- A descending diagonal of four dots bridges the columns.
-- The dot grid reads as nodes in a network and as a dot-matrix display.
-- The mark works at 16px (favicon) and at 128px (documentation).
-- The default presentation is Signal Lime on Obsidian with a rounded square container.
+- **Source page:** `https://www.gmu.ac.in/flag`
+- **Image URL:** `https://www.gmu.ac.in/assets/imgs/logo.jpg`
+- **Local file:** `frontend/static/img/branding/gmu-official-logo.jpg`
+- **Format:** JPEG, 778 × 778 px, 60,862 bytes
+- **SHA-256:** `CCEC422F7C519F16228CD527A81C9B54EB376B4620A032A8AB9879A2861B6959`
+- **Sampled background:** `#5B1F1F`
+- **Downloaded:** 12 November 2026
 
 ### Files
 
 | File | Purpose |
 |---|---|
-| `frontend/static/img/favicon.svg` | Browser favicon and small mark. |
-| `frontend/static/img/nexus-mark.svg` | Larger standalone mark for documentation, slides, or reports. |
-| Inline symbol in `index.html` / `styleguide.html` | The same geometry, drawn with `currentColor` so it inherits theme colours. |
+| `frontend/static/img/branding/gmu-official-logo.jpg` | The only logo file. Used in the sidebar, the login page, the styleguide, and as the favicon. |
 
-### Clear space and minimum size
+There is no derived mark. The old NEXUS SVG assets were removed, and nothing is clipped, rounded, or recoloured around the official logo.
 
-- Keep clear space equal to at least the width of one dot on every side.
-- Do not place the mark on a busy photograph or pattern.
-- Minimum size: 16px for the favicon, 24px for the inline mark.
-- Do not rotate, outline, stretch, or recolour the mark outside the approved palette.
+### Usage rules
+
+- Keep the original aspect ratio. The image is square; always set both `width` and `height` (or `aspect-ratio: 1`) and use `object-fit: contain`.
+- Do not crop, stretch, rotate, recolour, outline, or redraw the logo.
+- Do not place it on a busy photograph.
+- Keep clear space equal to at least 10% of the logo width on every side.
+- Minimum size: 32px in compact navigation, 56px in headers, 96px on the login page.
+- Use `alt="Official GM University logo"` when the logo is meaningful, and `alt=""` when a visible text label already names the institution.
+- The maroon panel behind the logo may be `#5B1F1F` (exact logo background) or `#5B2020` (interface maroon). Never place the logo on white and apply a filter.
 
 ### Wordmark
 
-The wordmark is **NEXUS**, set in Inter Semibold with wide tracking (`0.16em`). The tagline is set in JetBrains Mono, lowercase: `education, connected.`
+The interface wordmark is text, not part of the logo:
 
-### Lockup
+1. **GM UNIVERSITY** — Inter, semibold, tracked.
+2. **Management System** — small mono or muted sans line underneath.
 
-The standard lockup is:
-
-1. Rounded square mark.
-2. Wordmark.
-3. Tagline underneath in mono.
-
-The stacked mark-only lockup is used where horizontal space is limited.
+The full formal name is **GM University Management System**. Compact areas use **GMU Management System**.
 
 ---
 
@@ -77,24 +80,28 @@ The stacked mark-only lockup is used where horizontal space is limited.
 
 | Token | Name | Hex | Role |
 |---|---|---|---|
-| `--nx-obsidian` | Obsidian | `#111111` | Primary ink, light-theme primary button, dark-theme page background |
-| `--nx-paper` | Paper | `#F5F5F2` | Light-theme page background, dark-theme primary text |
-| `--nx-white` | White | `#FFFFFF` | Light-theme surfaces |
-| `--nx-silver` | Silver | `#BDBDBD` | Strong decorative borders, secondary chart series |
-| `--nx-graphite` | Graphite | `#292929` | Dark-theme raised surfaces, primary button hover |
-| `--nx-lime` | Signal Lime | `#D7FF35` | Accent: active navigation, focus halo, key indicators, dark-theme primary action |
+| `--nx-maroon` | University Maroon | `#5B2020` | Institutional structure, primary button, active marker |
+| `--nx-maroon-deep` | Deep Maroon | `#421919` | Hover/pressed states, text on gold |
+| `--nx-gold` | University Gold | `#E3B559` | Accent: focus halo, active highlight, dark-theme primary action |
+| `--nx-ivory` | Warm Ivory | `#F8F6F0` | Light-theme page background |
+| `--nx-white` | White | `#FFFFFF` | Light-theme surfaces and inputs |
+| `--nx-graphite` | Graphite | `#242424` | Primary text, dark-theme raised surfaces |
+| `--nx-muted` | Muted Grey | `#8A8580` | Secondary text, dividers, disabled states |
 
-### How Signal Lime is used
+Obsidian `#111111`, Paper `#F8F6F0`, Silver `#BDBDBD`, and the neutral ramp remain available for dark-theme structure and secondary borders.
 
-Signal Lime is deliberately rare. It appears as:
+### How University Gold is used
 
-- the active navigation tint and indicator line,
+Gold is deliberately rare. It appears as:
+
+- the active navigation tint and indicator accent,
 - the dark-theme primary button,
 - focus halos,
 - small “active/preview” badges,
-- the primary chart series in dark theme.
+- the primary chart series in dark theme,
+- the accent rule and eyebrow marks on the login page.
 
-It is **not** used for large backgrounds, body text, or every icon. If a screen is mostly lime, the hierarchy is wrong.
+It is **not** used for large backgrounds, body text, or every icon. If a screen is mostly gold, the hierarchy is wrong. Gold on ivory/white fails body-text contrast and must never carry essential text alone.
 
 ### Semantic colours
 
@@ -109,8 +116,8 @@ Semantic colours are always paired with a word or icon so colour is never the on
 
 ### Theme mood
 
-- **Light:** Apple-inspired calm. Paper background, white surfaces, hairline borders, Obsidian text, lime only as a signal.
-- **Dark:** Nothing-inspired technical. Obsidian background, Graphite surfaces, Silver secondary text, lime as the active signal and chart primary.
+- **Light:** Apple-inspired calm. Warm ivory background, white surfaces, hairline borders, graphite text, maroon structure, gold as a signal.
+- **Dark:** technical graphite. Obsidian background, graphite surfaces, silver secondary text, gold as the active signal and chart primary.
 
 ---
 
@@ -159,18 +166,19 @@ Semantic colours are always paired with a word or icon so colour is never the on
 
 - Calm, direct, and specific.
 - Prefer “Add student” over “Submit”.
-- Explain limitations honestly: “Database not connected”, “Demo data”, “Not implemented in Stage 1”.
+- Explain limitations honestly: “Database not connected”, “Design preview”, “Not implemented in Stage 1”.
 - Never imply that demo data is real.
+- Never imply that a preview login authenticated a user.
 - Errors say what happened and what to do next.
 
 ---
 
 ## 8. Identity checklist
 
-- [x] Original mark and wordmark.
-- [x] Tagline: “Education, connected.”
-- [x] Approved palette only.
+- [x] Official GM University logo, unmodified.
+- [x] Tagline: “Empowering Education Through Connected Technology”.
+- [x] Approved maroon and gold palette only.
 - [x] Inter + JetBrains Mono hierarchy.
 - [x] Light and dark expression.
 - [x] Dot-matrix motif used with restraint.
-- [x] No copied logos, trademarks, or proprietary assets.
+- [x] No invented university logo and no implied endorsement.

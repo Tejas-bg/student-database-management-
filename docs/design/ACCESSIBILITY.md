@@ -1,4 +1,4 @@
-# NEXUS — Accessibility
+# GM University Management System — Accessibility
 
 > **Stage 1 · WCAG 2.1 AA target.** This document records what was implemented, how it was checked, the measured contrast results, and the limitations that remain.
 
@@ -6,7 +6,7 @@
 
 ## 1. Target
 
-NEXUS aims for **WCAG 2.1 Level AA**:
+The GM University Management System aims for **WCAG 2.1 Level AA**:
 
 - **1.4.3 Contrast (Minimum):** body text at least 4.5:1; large text at least 3:1.
 - **1.4.11 Non-text Contrast:** UI component boundaries, states, and meaningful graphics at least 3:1.
@@ -46,8 +46,8 @@ Stage 1 is a visual preview, so accessibility of *data operations* cannot be tes
 ### Focus
 
 - Global `:focus-visible` outline: 2px solid focus colour, 2px offset, plus a 4px halo.
-- Light theme focus colour: Obsidian `#111111` on Paper `#F5F5F2` → **17.29:1**.
-- Dark theme focus colour: Signal Lime `#D7FF35` on Obsidian `#111111` → **16.41:1**.
+- Light theme focus colour: University Maroon `#5B2020` on Warm Ivory `#F8F6F0` → **11.70:1**.
+- Dark theme focus colour: University Gold `#E3B559` on Obsidian `#111111` → **9.91:1**.
 - Inputs also change border colour and add a halo on focus.
 
 ### Colour independence
@@ -83,48 +83,52 @@ Stage 1 is a visual preview, so accessibility of *data operations* cannot be tes
 
 ## 3. Measured contrast
 
-Ratios were computed with the WCAG relative-luminance formula in Python:
+Ratios were computed with the WCAG relative-luminance formula:
 
 ```
 L = 0.2126 R + 0.7152 G + 0.0722 B
 ratio = (Lighter + 0.05) / (Darker + 0.05)
 ```
 
+These values reflect the GM University palette after the rebrand. Re-run the check if a token changes.
+
 ### Light theme
 
 | Pair | Colours | Ratio | Result |
 |---|---|---|---|
-| Body text on page | `#111111` on `#F5F5F2` | 17.29:1 | Pass AA |
-| Body text on surface | `#111111` on `#FFFFFF` | 18.88:1 | Pass AA |
-| Muted text on page | `#5C5C5C` on `#F5F5F2` | 6.12:1 | Pass AA |
+| Body text on page | `#242424` on `#F8F6F0` | 14.36:1 | Pass AAA |
+| Body text on surface | `#242424` on `#FFFFFF` | 15.52:1 | Pass AAA |
+| Muted text on page | `#5C5C5C` on `#F8F6F0` | 6.19:1 | Pass AA |
 | Muted text on surface | `#5C5C5C` on `#FFFFFF` | 6.69:1 | Pass AA |
-| Subtle text on page | `#6E6E6E` on `#F5F5F2` | 4.67:1 | Pass AA |
-| Active nav text | `#111111` on `#F0F9C8` | 17.17:1 | Pass AA |
-| Text on Signal Lime | `#111111` on `#D7FF35` | 16.41:1 | Pass AA |
+| Subtle text on page | `#6E6E6E` on `#F8F6F0` | 4.72:1 | Pass AA |
+| Active nav text | `#421919` on `#FBF3E3` | 13.74:1 | Pass AAA |
+| Text on University Gold | `#421919` on `#E3B559` | 7.96:1 | Pass AAA |
 | Success badge | `#1F7A3D` on `#E8F5EC` | 4.78:1 | Pass AA |
 | Danger badge | `#B42318` on `#FDECEA` | 5.75:1 | Pass AA |
 | Warning badge | `#8A5A00` on `#FFF4D6` | 5.41:1 | Pass AA |
 | Info badge | `#245B8A` on `#EAF2FA` | 6.32:1 | Pass AA |
 | Control border | `#767676` on `#FFFFFF` | 4.54:1 | Pass UI (3:1) |
-| Focus outline | `#111111` on `#F5F5F2` | 17.29:1 | Pass UI |
+| Focus outline | `#5B2020` on `#F8F6F0` | 11.62:1 | Pass UI |
+| Logo panel text | `#F8F6F0` on `#5B1F1F` | 11.70:1 | Pass AAA |
+| Logo panel accent | `#E3B559` on `#5B1F1F` | 6.64:1 | Pass AA |
 
 ### Dark theme
 
 | Pair | Colours | Ratio | Result |
 |---|---|---|---|
-| Body text on page | `#F5F5F2` on `#111111` | 17.29:1 | Pass AA |
+| Body text on page | `#F8F6F0` on `#111111` | 17.47:1 | Pass AAA |
 | Muted text on page | `#BDBDBD` on `#111111` | 10.05:1 | Pass AA |
 | Muted text on raised surface | `#BDBDBD` on `#1C1C1C` | 9.07:1 | Pass AA |
 | Subtle text on page | `#9A9A9A` on `#111111` | 6.71:1 | Pass AA |
 | Subtle text on raised surface | `#9A9A9A` on `#1C1C1C` | 6.06:1 | Pass AA |
-| Signal Lime on page | `#D7FF35` on `#111111` | 16.41:1 | Pass AA |
-| Text on Signal Lime | `#111111` on `#D7FF35` | 16.41:1 | Pass AA |
+| University Gold on page | `#E3B559` on `#111111` | 9.91:1 | Pass AAA |
+| Text on University Gold | `#421919` on `#E3B559` | 7.96:1 | Pass AAA |
 | Success badge | `#7EE2A8` on 12% tint over `#1C1C1C` | 8.23:1 | Pass AA |
 | Danger badge | `#FF8A80` on 12% tint over `#1C1C1C` | 6.09:1 | Pass AA |
 | Warning badge | `#FFD27A` on 12% tint over `#1C1C1C` | 8.95:1 | Pass AA |
 | Info badge | `#8FC7F0` on 12% tint over `#1C1C1C` | 7.30:1 | Pass AA |
 | Control border | `#6A6A6A` on `#1C1C1C` | 3.15:1 | Pass UI (3:1) |
-| Focus outline | `#D7FF35` on `#111111` | 16.41:1 | Pass UI |
+| Focus outline | `#E3B559` on `#111111` | 9.91:1 | Pass UI |
 
 ### Deliberate exception
 
@@ -151,6 +155,15 @@ If a future component relies on a hairline border to identify a control, it must
 6. Press `Escape`: the menu closes and focus returns to the bell.
 7. Open the page at 375px width, click the menu button, then use Tab and Escape.
 8. Focus the theme toggle and press `Space`: the theme changes and the switch state updates.
+
+### Login page keyboard
+
+1. Open `frontend/login.html`.
+2. Press `Tab` once: the skip link should appear; `Enter` moves focus to the sign-in form.
+3. Submit with both fields empty: the error summary appears and focus moves to the first invalid field.
+4. Tab to the show/hide password button and press `Enter`: the input type changes and `aria-pressed` updates.
+5. Activate “Forgot password?”: the dialog opens, `Escape` closes it, and focus returns to the link.
+6. Tab through the form in visual order with no keyboard trap.
 
 ### Theme and contrast
 
@@ -182,7 +195,8 @@ Not yet performed. Recommended next checks with NVDA (Windows) or VoiceOver:
 
 | Check | Status |
 |---|---|
-| Contrast calculations | Done (Python, values above) |
+| Contrast calculations | Done (WCAG formula, values above) |
+| Login layout, validation, password toggle, dialog focus, reduced motion, console | Done (Chrome DevTools Protocol; see `project-context/CURRENT_STATUS.md`) |
 | CSS token audit for raw hex in components | Done (`components.css` uses semantic tokens) |
 | Browser console errors | Checked during Stage 1 verification (see `project-context/CURRENT_STATUS.md`) |
 | Responsive layout screenshots | Checked at desktop, tablet, and mobile widths |

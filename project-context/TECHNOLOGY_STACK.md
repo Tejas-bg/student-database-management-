@@ -1,6 +1,6 @@
-# NEXUS — Technology Stack
+# GM University Management System — Technology Stack
 
-> **Status:** Approved baseline for Stage 0.
+> **Status:** Approved baseline for the current technology stack.
 > **Rule:** Do not add, remove, or replace a technology without user approval and, where relevant, an ADR.
 
 ---
@@ -41,9 +41,9 @@
 
 | User | Purpose | Rights |
 |---|---|---|
-| `nexus_admin` | Schema creation and migrations | DDL + DML on the NEXUS schema |
-| `nexus_app` | Application runtime | DML and `SELECT` on needed tables/views |
-| `nexus_report` | Read-only reporting | `SELECT` on views only |
+| `gmu_admin` | Schema creation and migrations | DDL + DML on the GM University Management System schema |
+| `gmu_app` | Application runtime | DML and `SELECT` on needed tables/views |
+| `gmu_report` | Read-only reporting | `SELECT` on views only |
 
 Actual usernames and passwords are created locally and stored in `.env`. They never appear in source control.
 
@@ -84,7 +84,7 @@ Additional packages require justification.
 **Rules:**
 
 - Semantic HTML5.
-- CSS custom properties for the NEXUS design tokens.
+- CSS custom properties for the GM University Management System design tokens.
 - Vanilla JavaScript modules; no jQuery.
 - Bootstrap 5 is used where appropriate, not everywhere. Custom design tokens override Bootstrap defaults.
 - Chart.js only for data visualisation.

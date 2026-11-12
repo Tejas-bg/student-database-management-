@@ -1,18 +1,22 @@
-# NEXUS
+# GM University Management System
 
-**Student Management Database System Using DBMS and SQL**
+**A centralized university student and academic management web application**
 
-> Education, connected.
+> Empowering Education Through Connected Technology
 
 ---
 
 ## What is this?
 
-NEXUS is a college DBMS project. It is a web application for managing students, departments, courses, subjects, faculty, attendance, marks, fees, feedback, and reports.
+The **GM University Management System** is a college DBMS project for **GM University, Davanagere, Karnataka**. It is a web application for managing students, departments, courses, subjects, faculty, attendance, marks, fees, feedback, and reports.
 
 It is also a demonstration of database concepts: ER modelling, relational design, keys, constraints, 3NF normalization, SQL DDL/DML/DQL/DCL/TCL, joins, subqueries, aggregates, views, transactions, and access control.
 
-**Current state:** Stage 0 — workspace and context setup. No application, backend, or database has been implemented. See `project-context/CURRENT_STATUS.md`.
+One common sign-in page serves students, faculty, and administrators. The user role will be detected by the backend from the registered MySQL account, never chosen in the browser.
+
+> **Independent student project.** This is not an official GM University service and does not claim university endorsement. The official university logo is used to identify the institution the project is built for.
+
+**Current state:** Stage 1 — UI/UX design system and login preview. No backend, authentication, or database connection exists yet. See `project-context/CURRENT_STATUS.md`.
 
 ---
 
@@ -23,6 +27,38 @@ It is also a demonstration of database concepts: ER modelling, relational design
 | Frontend | HTML5, CSS3, JavaScript, Bootstrap 5, Chart.js |
 | Backend | Python, Flask, MySQL Connector/Python |
 | Database | MySQL 8+ |
+
+---
+
+## Preview the design
+
+The Stage 1 interface is static. From the `frontend/` folder, run a local file server:
+
+```powershell
+cd frontend
+python -m http.server 8000
+```
+
+Then open:
+
+| Page | URL | What it shows |
+|---|---|---|
+| Common sign-in | `http://localhost:8000/login.html` | Branded login preview with validation and password toggle |
+| Dashboard | `http://localhost:8000/index.html` | Demonstration dashboard shell |
+| Design reference | `http://localhost:8000/styleguide.html` | Colours, type, components, and accessibility patterns |
+
+The login form does not authenticate anyone. It deliberately shows a preview message instead of a fake success.
+
+---
+
+## Official branding
+
+- **Logo:** `frontend/static/img/branding/gmu-official-logo.jpg`
+- **Source:** `https://www.gmu.ac.in/assets/imgs/logo.jpg` (official GM University website)
+- **Status:** Downloaded unmodified on 12 November 2026; 778×778 JPEG.
+- **Palette:** University Maroon `#5B2020`, Deep Maroon `#421919`, University Gold `#E3B559`, Warm Ivory `#F8F6F0`, White `#FFFFFF`, Graphite `#242424`, Muted Grey `#8A8580`.
+
+Read `docs/design/GMU_BRAND_GUIDELINES.md` before using the logo anywhere, and `docs/design/GMU_LOGIN_DESIGN.md` for the login specification.
 
 ---
 
@@ -50,7 +86,7 @@ If you are new to the project, read in this order:
 | `skills/` | Human index of AI skills; the loadable files are in `.github/skills/`. |
 | `docs/` | Architecture, design, API, testing, user guide, and ADRs. |
 | `database/` | Schema, migrations, seeds, views, procedures, triggers, and database docs. |
-| `frontend/` | HTML, CSS, and JavaScript (built in later stages). |
+| `frontend/` | HTML, CSS, JavaScript, and static design assets. |
 | `backend/` | Flask application (built in later stages). |
 | `tests/` | Automated tests (built in later stages). |
 | `scripts/` | Setup and utility scripts. |
@@ -60,9 +96,9 @@ If you are new to the project, read in this order:
 
 ## Current stage
 
-**Stage 0 — Project Workspace and Context Setup.**
+**Stage 1 — UI/UX Design System and Visual Identity.**
 
-Stage 1 (UI/UX Design System) has **not** started and requires approval.
+Stage 1 is implemented and awaiting user approval. The rebrand and login-page preview are part of that review. Stage 2 (Frontend Development) has not started.
 
 The full roadmap is in `project-context/DEVELOPMENT_WORKFLOW.md` and summarised in `ROADMAP.md`.
 
@@ -72,12 +108,12 @@ The full roadmap is in `project-context/DEVELOPMENT_WORKFLOW.md` and summarised 
 
 | Area | Status |
 |---|---|
-| Project implementation | Not Started |
-| Frontend | Not Started |
+| Project implementation | UI preview only |
+| Frontend | Stage 1 design system and login preview implemented |
 | Backend | Not Started |
 | Database | Not Started (schema is PLANNING) |
-| Testing | Not Started |
-| Documentation | Stage 0 context created |
+| Testing | Manual browser verification only |
+| Documentation | Rebranded and current |
 
 ---
 
@@ -88,9 +124,11 @@ The full roadmap is in `project-context/DEVELOPMENT_WORKFLOW.md` and summarised 
 - Do not claim something works without testing it.
 - Do not start a new stage without approval.
 - Read the project context before changing code.
+- Never implement role selection in the browser. The backend decides the role.
+- Never alter, crop, or recolour the official university logo.
 
 ---
 
-## Quick start (later stages)
+## Setup (later stages)
 
-There is nothing to run yet. Setup instructions will be added in Stage 4 and refined in Stage 9. Do not follow a tutorial that assumes the app already exists.
+The static preview needs only Python's built-in file server. Flask, MySQL, and the virtual environment are set up in Stage 4. Do not follow a tutorial that assumes the app already exists.

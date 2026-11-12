@@ -1,13 +1,13 @@
 ---
 name: documentation
-description: Use when writing or updating NEXUS project documentation, architecture notes, database documentation, API docs, user guides, ADRs, changelogs, or README files. Use it to keep documentation accurate and beginner-friendly.
+description: Use when writing or updating GM University Management System project documentation, architecture notes, database documentation, API docs, user guides, ADRs, changelogs, or README files. Use it to keep documentation accurate and beginner-friendly.
 ---
 
-# NEXUS Skill — Technical Documentation
+# GM University Management System Skill — Technical Documentation
 
 ## Purpose
 
-Keep NEXUS understandable to the student, future AI agents, and the evaluator. Documentation must describe reality, not intentions.
+Keep GM University Management System understandable to the student, future AI agents, and the evaluator. Documentation must describe reality, not intentions.
 
 ## When to use
 

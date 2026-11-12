@@ -1,4 +1,4 @@
-# NEXUS — System Architecture
+# GM University Management System — System Architecture
 
 > **Status:** Approved architecture (ADR-002). Planning only; no implementation exists.
 > **Implementation status:** None. No application code exists yet.
@@ -8,7 +8,7 @@
 
 ## 1. Overview
 
-NEXUS uses a **three-tier web application architecture**. Each tier has one job, and communication flows in one direction for requests and back for responses.
+The GM University Management System uses a **three-tier web application architecture**. Each tier has one job, and communication flows in one direction for requests and back for responses.
 
 ```mermaid
 flowchart TB
@@ -147,7 +147,7 @@ These paths are the recommended layout. They are created only when the relevant 
 - Foreign keys have explicit `ON DELETE` / `ON UPDATE`.
 - Money uses `DECIMAL`, never `FLOAT`.
 - The schema is marked **PLANNING** until reviewed.
-- No table is created in Stage 0.
+- No table is created before the Stage 3 schema is approved.
 
 ---
 

@@ -1,6 +1,6 @@
-# NEXUS — Contributing Guide (Beginner Friendly)
+# GM University Management System — Contributing Guide (Beginner Friendly)
 
-This guide explains how to work on NEXUS with Visual Studio Code and AI Agent Mode. It assumes you are new to Git, Flask, and AI coding agents.
+This guide explains how to work on the GM University Management System with Visual Studio Code and AI Agent Mode. It assumes you are new to Git, Flask, and AI coding agents.
 
 Technical words are explained in `project-context/GLOSSARY.md`.
 
@@ -10,9 +10,9 @@ Technical words are explained in `project-context/GLOSSARY.md`.
 
 1. Open **Visual Studio Code**.
 2. Choose **File → Open Folder**.
-3. Select the `NEXUS` folder.
+3. Select the `GM University Management System` folder.
 4. Open the integrated terminal with **Terminal → New Terminal** (or `` Ctrl+` ``).
-5. Check that the terminal path ends with `NEXUS`.
+5. Check that the terminal path ends with `GM University Management System`.
 
 If you open the wrong folder, the AI may not find the instructions.
 
@@ -137,7 +137,7 @@ When something breaks, give the agent:
 
 Example:
 
-> I ran `python -m flask --app backend.app run`. I expected the server to start. Instead I got `ModuleNotFoundError: No module named 'flask'`. I am in the NEXUS folder and my virtual environment is active.
+> I ran `python -m flask --app backend.app run`. I expected the server to start. Instead I got `ModuleNotFoundError: No module named 'flask'`. I am in the GM University Management System folder and my virtual environment is active.
 
 Do not say "it doesn't work". That gives the agent nothing to debug.
 
@@ -180,7 +180,7 @@ First-time setup:
 ```powershell
 git init
 git add .
-git commit -m "Stage 0: workspace and project context"
+git commit -m "docs: initialize project workspace and context"
 ```
 
 Before a risky change:

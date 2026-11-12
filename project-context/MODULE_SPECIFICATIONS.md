@@ -1,4 +1,4 @@
-# NEXUS — Module Specifications
+# GM University Management System — Module Specifications
 
 > **Status:** Planning. These specifications describe intended behaviour. No module is implemented.
 > **Rule:** Each module is built only in its roadmap stage and only after user approval.
@@ -33,16 +33,20 @@
 
 **Purpose:** Control who can enter the system and what they can do.
 
-**Inputs:** Username/email, password.
+**Inputs:** One common sign-in form: University Login ID and password. There is no role selector.
 
 **Outputs:** Authenticated session, role-aware navigation, safe error messages.
 
 **Rules:**
 
+- One login page serves students, faculty, and administrators.
+- The backend determines the role from the registered MySQL account, never from the login ID format or frontend JavaScript.
 - Passwords are hashed.
 - Login errors do not reveal whether an account exists.
 - Protected routes check the role on the server.
 - Logout clears the session.
+- Password reset and "remember me" are not implemented until a secure process exists.
+- The Stage 1 login page is a design preview and performs no authentication.
 
 **DB touchpoints:** `users`, `roles` (final names confirmed in Stage 3).
 

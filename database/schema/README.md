@@ -2,7 +2,7 @@
 
 > **Status: PLANNING.** No DDL has been executed.
 
-This folder will hold the table definitions for NEXUS.
+This folder will hold the table definitions for the GM University Management System.
 
 ## Planned files
 

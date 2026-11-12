@@ -1,13 +1,13 @@
 ---
 name: mysql-database
-description: Use when working with the NEXUS MySQL 8+ server itself: connection setup, database and user creation, privileges, transactions, views, stored procedures, triggers, backups, or migration execution. Do not use it for ER modelling or normalization decisions.
+description: Use when working with the GM University Management System MySQL 8+ server itself: connection setup, database and user creation, privileges, transactions, views, stored procedures, triggers, backups, or migration execution. Do not use it for ER modelling or normalization decisions.
 ---
 
-# NEXUS Skill — MySQL Database Operations
+# GM University Management System Skill — MySQL Database Operations
 
 ## Purpose
 
-Operate the NEXUS MySQL 8+ database safely: create the schema, manage users and privileges, run transactions, build views, procedures, and triggers, and keep the database reproducible.
+Operate the GM University Management System MySQL 8+ database safely: create the schema, manage users and privileges, run transactions, build views, procedures, and triggers, and keep the database reproducible.
 
 ## When to use
 
@@ -52,7 +52,7 @@ Operate the NEXUS MySQL 8+ database safely: create the schema, manage users and 
 - No real student data.
 - No credentials in SQL files.
 - Do not run destructive commands without confirmation.
-- Do not create tables in Stage 0.
+- Do not create tables before the Stage 3 schema is approved.
 - Do not grant `ALL PRIVILEGES` to the application user.
 
 ## Quality checklist

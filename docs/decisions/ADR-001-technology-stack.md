@@ -7,7 +7,7 @@
 
 ## Context
 
-NEXUS is a college DBMS project. The student is a beginner. The project must demonstrate database concepts, not hide them behind an ORM or a heavy framework. It must run locally on a typical student laptop and be explainable in a viva.
+The GM University Management System is a college DBMS project. The student is a beginner. The project must demonstrate database concepts, not hide them behind an ORM or a heavy framework. It must run locally on a typical student laptop and be explainable in a viva.
 
 ## Options considered
 

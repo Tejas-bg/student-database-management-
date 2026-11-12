@@ -16,7 +16,7 @@ Stage `<number>` — `<stage name>`
 2. `project-context/PROJECT_OVERVIEW.md`
 3. `project-context/SYSTEM_ARCHITECTURE.md`
 4. `project-context/CURRENT_STATUS.md`
-5. `project-context/TASKS.md`
+5. `TASKS.md`
 6. `<any stage-specific document>`
 
 ## Allowed scope

@@ -1,4 +1,4 @@
-# NEXUS — Design System
+# GM University Management System — Design System
 
 > **Stage 1 · Implemented design foundation.** This document explains how the CSS and JavaScript are organised, what each file does, and how to extend the system without breaking the themes.
 
@@ -22,6 +22,7 @@ The goal is simple: change a value once, and every screen updates consistently.
 
 ```
 frontend/
+├── login.html                  Common sign-in preview
 ├── index.html                  Dashboard preview (demo data)
 ├── styleguide.html             Live component and token reference
 └── static/
@@ -31,14 +32,16 @@ frontend/
     │   ├── reset.css           Reset, base typography, focus, a11y utilities
     │   ├── layout.css          Shell, sidebar, header, grids, docs layout
     │   ├── components.css      Buttons, cards, forms, tables, dialogs, charts…
+    │   ├── login.css           Split-screen brand panel and sign-in form
     │   └── responsive.css      Breakpoints, mobile drawer, print styles
     ├── js/
     │   ├── theme-init.js       Blocking pre-paint theme selection
     │   ├── theme.js            Theme switch, localStorage, system preference
-    │   └── main.js             Drawer, menus, tabs, dialogs, toasts, filter
+    │   ├── main.js             Drawer, menus, tabs, dialogs, toasts, filter
+    │   └── login.js            Password toggle, validation, preview loading state
     └── img/
-        ├── favicon.svg         Browser icon
-        └── nexus-mark.svg      Standalone brand mark
+        └── branding/
+            └── gmu-official-logo.jpg   Official GM University logo (unmodified)
 ```
 
 ### Load order (important)
@@ -46,6 +49,8 @@ frontend/
 `tokens.css` → `themes.css` → `reset.css` → `layout.css` → `components.css` → `responsive.css`
 
 CSS variables must be declared before the files that use them. Responsive rules load last so they can override layout and component defaults.
+
+`login.html` is a standalone page. It loads `tokens.css` → `reset.css` → `login.css` only, so the dashboard shell styles never leak into the sign-in screen.
 
 ---
 
@@ -55,7 +60,9 @@ Tokens live on `:root` in `tokens.css`. They are **primitive** values and should
 
 ```css
 :root {
-  --nx-obsidian: #111111;
+  --nx-maroon: #5b1f1f;
+  --nx-gold: #e3b559;
+  --nx-ivory: #f8f6f0;
   --nx-space-4: 16px;
   --nx-radius-lg: 16px;
   --nx-text-sm: 0.875rem;
@@ -67,16 +74,16 @@ Tokens live on `:root` in `tokens.css`. They are **primitive** values and should
 ```css
 :root,
 [data-theme="light"] {
-  --nx-bg: var(--nx-paper);
+  --nx-bg: var(--nx-ivory);
   --nx-surface: var(--nx-white);
-  --nx-text: var(--nx-obsidian);
+  --nx-text: var(--nx-graphite);
   --nx-border-control: #767676;
 }
 
 [data-theme="dark"] {
   --nx-bg: var(--nx-obsidian);
   --nx-surface: var(--nx-neutral-800);
-  --nx-text: var(--nx-paper);
+  --nx-text: var(--nx-ivory);
   --nx-border-control: #6a6a6a;
 }
 ```
@@ -96,15 +103,15 @@ Components use semantic tokens only:
 
 | Group | Examples | Notes |
 |---|---|---|
-| Palette | `--nx-obsidian`, `--nx-lime` | Fixed brand values |
+| Palette | `--nx-maroon`, `--nx-gold`, `--nx-ivory`, `--nx-obsidian` | Fixed brand values |
 | Neutrals | `--nx-neutral-950` … `--nx-neutral-0` | Supporting steps |
 | Text | `--nx-text`, `--nx-text-muted`, `--nx-text-subtle` | Three levels only |
 | Surfaces | `--nx-bg`, `--nx-surface`, `--nx-surface-sunken`, `--nx-surface-hover` | Theme-aware |
 | Borders | `--nx-border-subtle`, `--nx-border`, `--nx-border-strong`, `--nx-border-control` | Control borders meet 3:1 |
-| Accent | `--nx-accent`, `--nx-accent-soft`, `--nx-indicator` | Lime roles |
+| Accent | `--nx-accent`, `--nx-accent-soft`, `--nx-indicator` | Gold and maroon roles |
 | Status | `--nx-success`, `--nx-warning`, `--nx-danger`, `--nx-info` + soft variants | Always paired with text |
 | Charts | `--nx-chart-primary`, `--nx-chart-secondary`, `--nx-chart-tertiary`, `--nx-chart-grid`, `--nx-chart-fill` | Theme-aware series |
-| Focus | `--nx-focus`, `--nx-focus-halo` | Obsidian in light, lime in dark |
+| Focus | `--nx-focus`, `--nx-focus-halo` | Maroon in light, gold in dark |
 | Type | `--nx-font-sans`, `--nx-font-mono`, `--nx-text-*`, `--nx-leading-*` | Two families, fixed scale |
 | Space | `--nx-space-1` … `--nx-space-10` | 4px base |
 | Radius | `--nx-radius-sm` … `--nx-radius-pill` | Consistent shape |
@@ -123,10 +130,10 @@ Components use semantic tokens only:
 1. `theme-init.js` runs in `<head>` before the page paints.
 2. It checks, in order:
    - `?theme=light` or `?theme=dark` in the URL (preview override, not saved),
-   - `localStorage["nexus-theme"]`,
+   - `localStorage["gmu-theme"]`,
    - the operating system preference.
 3. It sets `<html data-theme="…">` immediately, preventing a flash of the wrong theme.
-4. `theme.js` handles the toggle buttons, saves the choice, updates the browser theme colour, and exposes `NEXUS.theme`.
+4. `theme.js` handles the toggle buttons, saves the choice, updates the browser theme colour, and exposes `GMU.theme`.
 
 ### Preview without changing the saved preference
 
@@ -235,19 +242,20 @@ The layout is desktop-first with `max-width` queries. Mobile navigation is fully
 | `theme-init.js` | Choose and apply the initial theme before paint | Contain UI logic |
 | `theme.js` | Toggle theme, persist choice, update labels and meta | Fetch data |
 | `main.js` | Drawer, menus, tabs, dialogs, toasts, doc filter | Pretend to save data |
+| `login.js` | Password toggle, empty-field validation, preview loading state, reset dialog | Send, store, or authenticate credentials |
 
 No framework, build step, or package manager is required in Stage 1. This is deliberate: it keeps the foundation readable for a beginner and avoids a toolchain before the backend exists.
 
 ### Public API
 
 ```js
-NEXUS.theme.get();      // "light" | "dark"
-NEXUS.theme.set("dark");
-NEXUS.theme.toggle();
-NEXUS.toast("Title", "Message", { duration: 4200 });
+GMU.theme.get();      // "light" | "dark"
+GMU.theme.set("dark");
+GMU.theme.toggle();
+GMU.toast("Title", "Message", { duration: 4200 });
 ```
 
-Custom event: `nexus:themechange` fires on `document` with `{ detail: { theme } }`.
+Custom event: `gmu:themechange` fires on `document` with `{ detail: { theme } }`.
 
 ---
 

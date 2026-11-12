@@ -2,7 +2,7 @@
 applyTo: "frontend/**"
 ---
 
-# NEXUS Frontend Instructions
+# GM University Management System Frontend Instructions
 
 These rules apply to every file under `frontend/`.
 
@@ -16,7 +16,9 @@ These rules apply to every file under `frontend/`.
 
 - Use semantic HTML5 elements (`header`, `nav`, `main`, `section`, `table`, `form`, `label`).
 - Every form input must have an associated `<label>`.
-- Use the NEXUS design tokens. Do not invent new colours or fonts.
+- Use the GM University Management System design tokens. Do not invent new colours or fonts.
+- Use the official logo exactly as supplied in `frontend/static/img/branding/gmu-official-logo.jpg`. Never crop, stretch, recolour, redraw, or replace it.
+- One common login only. Never add a role selector or separate role login pages.
 - Support light and dark themes.
 - Meet WCAG 2.1 AA: contrast, focus states, keyboard access, alt text.
 - Do not connect directly to MySQL or hold database credentials.

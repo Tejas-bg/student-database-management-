@@ -2,7 +2,7 @@
 applyTo: "database/**,**/*.sql"
 ---
 
-# NEXUS Database Instructions
+# GM University Management System â€” Database Instructions
 
 These rules apply to every file under `database/` and every `.sql` file.
 

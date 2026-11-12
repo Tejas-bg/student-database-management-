@@ -1,4 +1,4 @@
-# NEXUS — ER Diagram
+# GM University Management System — ER Diagram
 
 > **Status: PLANNING.** This is a proposed model. It has not been reviewed or approved.
 > **Do not create tables from this diagram yet.**
@@ -243,7 +243,7 @@ erDiagram
 
 ## 4. Open design questions
 
-These are intentionally unresolved at Stage 0:
+These are intentionally unresolved in the planning phase:
 
 1. Is a semester a global term or a per-course term? The diagram assumes per-course.
 2. Should `students.current_semester` be a number or a foreign key to `semesters`? The diagram uses a number for simplicity.
@@ -262,7 +262,7 @@ These questions are answered in Stage 3 after user review.
 
 | Item | Status |
 |---|---|
-| Draft created | Yes (Stage 0) |
+| Draft created | Yes (Stage 0 planning) |
 | Reviewed by user | No |
 | Approved for implementation | No |
 

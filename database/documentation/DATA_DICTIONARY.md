@@ -1,4 +1,4 @@
-# NEXUS — Data Dictionary
+# GM University Management System — Data Dictionary
 
 > **Status: PLANNING.** Proposed columns and types. Not approved.
 > **Note:** MySQL `CHECK` constraints are enforced from MySQL 8.0.16 onward. Confirm the local version before relying on them.

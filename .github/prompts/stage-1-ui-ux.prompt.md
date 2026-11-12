@@ -1,11 +1,11 @@
 # Stage 1 — UI/UX Design System and Visual Identity
 
-> **Do not run this prompt until the user approves Stage 1.**
-> Stage 0 must be verified first.
+> **Status:** Executed. Stage 1 deliverables are implemented and awaiting user approval.
+> Use this prompt as a record of scope and acceptance criteria, not as a new instruction.
 
 ## Goal
 
-Create the NEXUS design system and visual identity: colour tokens, typography scale, spacing, component specifications, and static design reference pages. Do not build the application modules yet.
+Create the GM University Management System design system and visual identity: colour tokens, typography scale, spacing, component specifications, and static design reference pages. Do not build the application modules yet.
 
 ## Read first
 
@@ -14,7 +14,7 @@ Create the NEXUS design system and visual identity: colour tokens, typography sc
 3. `project-context/PROJECT_SCOPE.md`
 4. `project-context/SYSTEM_ARCHITECTURE.md`
 5. `project-context/CURRENT_STATUS.md`
-6. `project-context/TASKS.md`
+6. `TASKS.md`
 
 ## Allowed scope
 

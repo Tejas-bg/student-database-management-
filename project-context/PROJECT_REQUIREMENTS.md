@@ -1,6 +1,6 @@
-# NEXUS — Project Requirements
+# GM University Management System — Project Requirements
 
-> **Status:** Baseline requirements. No requirement is implemented or tested at Stage 0.
+> **Status:** Baseline requirements. At Stage 1, design and login requirements are In Review; all functional, database, security, testing, and submission requirements remain Not Started.
 > **Rule:** Preserve the original college requirements. Add new requirements explicitly; do not silently remove any.
 
 ---
@@ -33,6 +33,10 @@
 | FR-22 | The system shall validate all user input on the server. | All | 4–5 | Validation tests | Not Started |
 | FR-23 | The system shall show safe, helpful error messages. | All | 4 | Error-path tests | Not Started |
 | FR-24 | The system shall log technical errors server-side without exposing them to users. | All | 4 | Log review | Not Started |
+| FR-25 | The system shall provide one common login page for students, faculty, and administrators, with no manual role selection. | M01 | 1 (preview), 4 (working) | Login review | In Review |
+| FR-26 | The backend shall determine the authenticated role from the registered MySQL account, never from the login ID format or frontend JavaScript. | M01 | 4 | Role detection tests | Not Started |
+| FR-27 | The login identifier policy shall be configurable and subject to university approval: student USN, faculty employee ID, administrator email; Aadhaar only if explicitly approved. | M01 | 4 | Policy review | Not Started |
+| FR-28 | After successful authentication the system shall redirect by verified role to `/student/dashboard`, `/faculty/dashboard`, or `/admin/dashboard`. | M01 | 4 | Redirect tests | Not Started |
 
 ---
 
@@ -98,16 +102,18 @@
 
 | ID | Requirement | Stage | Verification | Status |
 |---|---|---|---|---|
-| UX-01 | The interface shall follow `DESIGN_PRINCIPLES.md`. | 1–2 | Design review | Not Started |
-| UX-02 | The palette shall use Obsidian, Paper, White, Silver, Graphite, and Signal Lime as specified. | 1 | Token review | Not Started |
-| UX-03 | Signal Lime shall be used as an accent, not a large background. | 1–2 | Visual review | Not Started |
-| UX-04 | The interface shall support light and dark themes. | 1–2 | Theme toggle test | Not Started |
+| UX-01 | The interface shall follow `DESIGN_PRINCIPLES.md`. | 1–2 | Design review | In Review |
+| UX-02 | The palette shall use University Maroon, Deep Maroon, University Gold, Warm Ivory, White, Graphite, and Muted Grey as specified. | 1 | Token review | In Review |
+| UX-03 | University Gold shall be used as an accent, never as body text on light surfaces or a large background. | 1–2 | Visual review | In Review |
+| UX-04 | The interface shall support light and dark themes. | 1–2 | Theme toggle test | In Review |
 | UX-05 | The interface shall be responsive across mobile, tablet, and desktop. | 2 | Responsive checks | Not Started |
-| UX-06 | The interface shall meet WCAG 2.1 AA contrast and keyboard access. | 1–2 | Contrast + keyboard tests | Not Started |
+| UX-06 | The interface shall meet WCAG 2.1 AA contrast and keyboard access. | 1–2 | Contrast + keyboard tests | In Review |
 | UX-07 | Every form input shall have a visible label. | 2 | Form review | Not Started |
 | UX-08 | Tables shall be readable and support small screens. | 2 | Responsive table test | Not Started |
 | UX-09 | Charts shall include a text summary or data alternative. | 2 | Accessibility review | Not Started |
-| UX-10 | Motion shall respect `prefers-reduced-motion`. | 1–2 | CSS review | Not Started |
+| UX-10 | Motion shall respect `prefers-reduced-motion`. | 1–2 | CSS review | In Review |
+| UX-11 | The official GM University logo shall be used unmodified, with its original aspect ratio. | 1–2 | Brand review | In Review |
+| UX-12 | The login page shall include a logo, welcome copy, login ID, password, show/hide control, forgot-password placeholder, error area, loading state, and responsive layout. | 1 | Login review | In Review |
 
 ---
 
@@ -143,18 +149,18 @@
 
 ## H. Requirements traceability summary
 
-> Statuses at Stage 0: **all requirements are Not Started.** Workspace documentation is not the same as requirement implementation.
+> Statuses at Stage 1: **design and login requirements are In Review; all remaining functional, database, security, testing, and submission requirements remain Not Started.** Workspace documentation is not the same as requirement implementation.
 
-| Requirement group | Total | Not Started | In Progress | Implemented | Tested | Blocked |
-|---|---|---|---|---|---|---|
-| Functional | 24 | 24 | 0 | 0 | 0 | 0 |
-| Non-functional | 10 | 10 | 0 | 0 | 0 | 0 |
-| Database | 15 | 15 | 0 | 0 | 0 | 0 |
-| Security | 12 | 12 | 0 | 0 | 0 | 0 |
-| UI/UX | 10 | 10 | 0 | 0 | 0 | 0 |
-| Testing | 8 | 8 | 0 | 0 | 0 | 0 |
-| Submission | 8 | 8 | 0 | 0 | 0 | 0 |
-| **Total** | **87** | **87** | **0** | **0** | **0** | **0** |
+| Requirement group | Total | Not Started | In Progress | In Review | Implemented | Tested | Blocked |
+|---|---|---|---|---|---|---|---|
+| Functional | 28 | 27 | 0 | 1 | 0 | 0 | 0 |
+| Non-functional | 10 | 10 | 0 | 0 | 0 | 0 | 0 |
+| Database | 15 | 15 | 0 | 0 | 0 | 0 | 0 |
+| Security | 12 | 12 | 0 | 0 | 0 | 0 | 0 |
+| UI/UX | 12 | 4 | 0 | 8 | 0 | 0 | 0 |
+| Testing | 8 | 8 | 0 | 0 | 0 | 0 | 0 |
+| Submission | 8 | 8 | 0 | 0 | 0 | 0 | 0 |
+| **Total** | **93** | **84** | **0** | **9** | **0** | **0** | **0** |
 
 ---
 
@@ -164,6 +170,7 @@
 |---|---|
 | Not Started | No work has begun. |
 | In Progress | Work has begun but is not verified. |
+| In Review | Work is complete enough for the user to inspect and approve. |
 | Implemented | The feature exists but is not fully tested. |
 | Tested | The feature is implemented and has passing verification evidence. |
 | Blocked | Work cannot continue without a decision, dependency, or fix. |

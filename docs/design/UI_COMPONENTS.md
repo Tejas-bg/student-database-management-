@@ -1,4 +1,4 @@
-# NEXUS — UI Components
+# GM University Management System — UI Components
 
 > **Stage 1 component reference.** Every pattern below is implemented in `frontend/static/css/components.css` and demonstrated live in `frontend/styleguide.html`. Classes use the `nx-` prefix to avoid collisions with future libraries.
 
@@ -27,8 +27,8 @@
 |---|---|
 | Default | Muted text, transparent background |
 | Hover | Surface hover background, full text colour |
-| Active | Lime-tinted background, 3px indicator, current text |
-| Focus | Global focus ring + lime halo |
+| Active | Gold-tinted background, 3px maroon indicator, current text |
+| Focus | Global focus ring + gold halo |
 
 - Set `aria-current="page"` on exactly one item.
 - Icons are decorative (`aria-hidden="true"`); the text is the label.
@@ -299,7 +299,7 @@ Native `<dialog>` powers both modal and confirmation patterns.
 Programmatic:
 
 ```js
-NEXUS.toast("Saved preview", "Nothing was written to a database.");
+GMU.toast("Saved preview", "Nothing was written to a database.");
 ```
 
 - The region is `aria-live="polite"`.

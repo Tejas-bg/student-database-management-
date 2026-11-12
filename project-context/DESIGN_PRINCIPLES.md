@@ -1,13 +1,13 @@
-# NEXUS — Design Principles
+# GM University Management System — Design Principles
 
-> **Status:** Design reference for Stage 1. No frontend has been built yet.
+> **Status:** Design reference for Stage 1. The design system and preview pages are implemented; the login page was added during the GMU rebrand.
 > **Purpose:** Define the visual language so every screen feels like part of one product.
 
 ---
 
 ## 1. Design direction
 
-NEXUS is a hybrid of two inspirations:
+The GM University Management System is a hybrid of two inspirations, presented through the official university identity:
 
 **Apple — the calm layer**
 
@@ -25,6 +25,13 @@ NEXUS is a hybrid of two inspirations:
 - Geometric accents.
 - An experimental but controlled identity.
 
+**GM University — the institutional layer**
+
+- The official university logo, used unmodified and at its original aspect ratio.
+- University gold `#E3B559` and maroon, taken from the logo itself.
+- A warm ivory reading surface rather than clinical white.
+- A serious, trustworthy tone appropriate to academic records.
+
 The result should feel like a precise academic instrument: calm, legible, and quietly technical. It should not feel like a generic admin template.
 
 ---
@@ -33,7 +40,7 @@ The result should feel like a precise academic instrument: calm, legible, and qu
 
 1. **Clarity over decoration.** Every element earns its place.
 2. **Whitespace is structure.** Space groups information; it is not empty space to fill.
-3. **Monochrome first, accent second.** Most of the interface is neutral. Signal Lime is a signal, not a theme.
+3. **Neutral first, gold second.** Most of the interface is ivory, white, and graphite. University Gold is a signal, not a theme.
 4. **One primary action per view.** The user should never wonder what to do next.
 5. **Calm motion.** Animation explains a change; it never delays the user.
 6. **Accessible by default.** Contrast, focus, labels, and keyboard paths are part of the design, not an afterthought.
@@ -47,34 +54,38 @@ The result should feel like a precise academic instrument: calm, legible, and qu
 
 | Token | Hex | Role |
 |---|---|---|
-| Obsidian | `#111111` | Primary text, dark surfaces, strong borders |
-| Paper | `#F5F5F2` | Light background |
-| White | `#FFFFFF` | Cards, elevated surfaces |
-| Silver | `#BDBDBD` | Muted text, dividers, disabled states |
-| Graphite | `#292929` | Secondary dark surface, dark cards |
-| Signal Lime | `#D7FF35` | Accent, focus, active state, key data |
+| University Maroon | `#5B2020` | Institutional structure, primary buttons, active markers |
+| Deep Maroon | `#421919` | Hover/pressed states, text on gold |
+| University Gold | `#E3B559` | Accent, focus halo, active highlight, dark-theme primary action |
+| Warm Ivory | `#F8F6F0` | Light background |
+| White | `#FFFFFF` | Cards, elevated surfaces, inputs |
+| Graphite | `#242424` | Primary text, dark surfaces |
+| Muted Grey | `#8A8580` | Secondary text, dividers, disabled states |
+
+The logo itself sits on `#5B1F1F`; the interface uses `#5B2020` so the logo panel and the UI feel related without pretending to be an exact official specification. The gold `#E3B559` is the value published on the university website.
 
 ### 3.2 Semantic tokens
 
 | Token | Light theme | Dark theme | Use |
 |---|---|---|---|
-| `--nx-bg` | Paper `#F5F5F2` | Obsidian `#111111` | Page background |
-| `--nx-surface` | White `#FFFFFF` | Graphite `#292929` | Cards, panels |
-| `--nx-text` | Obsidian `#111111` | Paper `#F5F5F2` | Primary text |
+| `--nx-bg` | Warm Ivory `#F8F6F0` | Obsidian `#111111` | Page background |
+| `--nx-surface` | White `#FFFFFF` | Graphite `#242424` | Cards, panels |
+| `--nx-text` | Graphite `#242424` | Ivory `#F8F6F0` | Primary text |
 | `--nx-text-muted` | `#5C5C5C` | Silver `#BDBDBD` | Secondary text |
-| `--nx-border` | `#DADADA` | `#3A3A3A` | Dividers, input borders |
-| `--nx-accent` | Signal Lime `#D7FF35` | Signal Lime `#D7FF35` | Accent, focus ring |
-| `--nx-accent-text` | Obsidian `#111111` | Obsidian `#111111` | Text on accent |
+| `--nx-border` | `#DEDBD3` | `#3A3A3A` | Dividers, input borders |
+| `--nx-accent` | University Gold `#E3B559` | University Gold `#E3B559` | Accent, highlights |
+| `--nx-accent-text` | Deep Maroon `#421919` | Deep Maroon `#421919` | Text on gold |
 | `--nx-danger` | `#B42318` | `#FF8A80` | Errors, destructive actions |
 | `--nx-success` | `#1F7A3D` | `#7EE2A8` | Success states |
 | `--nx-warning` | `#8A5A00` | `#FFD27A` | Warnings |
 
-`#5C5C5C` on `#F5F5F2` and `#BDBDBD` on `#111111` are chosen for readable contrast. Verify every pairing with a contrast checker during Stage 1.
+Verified contrast pairs: `#242424` on `#F8F6F0` = 14.36:1; `#FFFFFF` on `#5B1F1F` = 12.65:1; `#E3B559` on `#5B1F1F` = 6.64:1; `#421919` on `#E3B559` = 7.96:1. Muted Grey `#8A8580` on Warm Ivory is only 3.38:1, so it is never used for essential body text — only for large or decorative text and non-essential hints.
 
 ### 3.3 Colour rules
 
-- Do not use Signal Lime as a large background. It is for accents, focus rings, active indicators, and small highlights.
-- Do not introduce new brand colours without approval.
+- Do not use University Gold as body text on ivory or white; contrast is too low. It is a surface, border, and accent colour.
+- Do not use gold as a large full-page background. Maroon carries the brand panel; gold supplies the signal.
+- Gold and maroon are institutional colours. Do not introduce new brand colours without approval.
 - Never use colour alone to communicate status. Pair it with text or an icon.
 - Error red is for errors, not decoration.
 
@@ -170,8 +181,8 @@ Shadows are subtle and sparse. Prefer a 1px border over a heavy shadow. Dark the
 
 | Variant | Light theme | Dark theme | Use |
 |---|---|---|---|
-| Primary | Obsidian background, Paper text | Signal Lime background, Obsidian text | The one main action |
-| Secondary | Transparent, 1px Obsidian border | Transparent, 1px Silver border | Supporting actions |
+| Primary | University Maroon background, Ivory text | University Gold background, Deep Maroon text | The one main action |
+| Secondary | Transparent, 1px Maroon border | Transparent, 1px Silver border | Supporting actions |
 | Ghost | No border, text only | No border, text only | Low-emphasis actions |
 | Danger | Error red background, White text | Error red background, White text | Destructive actions |
 
@@ -180,7 +191,7 @@ Shadows are subtle and sparse. Prefer a 1px border over a heavy shadow. Dark the
 - One primary button per view.
 - Button height: 40px default, 48px for primary form actions.
 - Padding: 16–24px horizontal.
-- Focus ring: 2px Signal Lime offset by 2px.
+- Focus ring: 2px Maroon outline with a 4px gold halo.
 - Disabled buttons reduce opacity and block pointer events.
 - Loading state shows a spinner and keeps the button width stable.
 - Destructive actions require confirmation.
@@ -221,7 +232,7 @@ Shadows are subtle and sparse. Prefer a 1px border over a heavy shadow. Dark the
 - A card contains one idea: a metric, a chart, or a short list.
 - Card anatomy: label, value, optional trend, optional action.
 - Use large tabular numbers for the primary value.
-- Use Signal Lime sparingly for the most important metric or an active state.
+- Use University Gold sparingly for the most important metric or an active state.
 - Cards have a 1px border, a subtle radius, and generous padding.
 - Do not nest cards inside cards.
 - Charts sit inside a card with a title and a text summary.
@@ -239,7 +250,7 @@ Shadows are subtle and sparse. Prefer a 1px border over a heavy shadow. Dark the
 
 ### 11.2 Rules
 
-- The active section is clearly indicated with text weight and a Signal Lime marker.
+- The active section is clearly indicated with text weight and a Maroon marker on a gold-tinted background.
 - Navigation labels are plain nouns ("Students", "Attendance").
 - Do not hide essential navigation behind a hamburger on desktop.
 - Keyboard users can reach every link.
@@ -250,11 +261,11 @@ Shadows are subtle and sparse. Prefer a 1px border over a heavy shadow. Dark the
 ## 12. Light and dark themes
 
 - Both themes are first-class. Do not design only one and invert it later.
-- Theme choice is stored in `localStorage` and respects `prefers-color-scheme` on first visit.
+- Theme choice is stored in `localStorage["gmu-theme"]` and respects `prefers-color-scheme` on first visit.
 - Theme toggle has an accessible label and shows the current state.
 - Images and charts must remain legible in both themes.
-- Signal Lime stays the same in both themes; surrounding neutrals change.
-- Avoid pure black `#000000` and pure white `#FFFFFF` for large reading surfaces in dark mode. Use Obsidian and Graphite.
+- University Gold stays the same in both themes; surrounding neutrals change from ivory to graphite.
+- Avoid pure black `#000000` for large reading surfaces in dark mode. Use Obsidian and Graphite.
 
 ---
 
@@ -316,12 +327,14 @@ Target: **WCAG 2.1 AA**.
 
 ## 17. Design deliverables for Stage 1
 
-Stage 1 will produce:
+Stage 1 produced:
 
-- A token file with CSS custom properties.
+- A token file with CSS custom properties, rebranded to the GM University palette.
 - A type and spacing reference.
 - Component specifications for buttons, forms, tables, cards, and navigation.
 - Light and dark reference pages.
 - Accessibility notes and contrast results.
+- A common login page for students, faculty, and administrators, with a matching design specification in `../docs/design/GMU_LOGIN_DESIGN.md`.
+- Brand usage rules in `../docs/design/GMU_BRAND_GUIDELINES.md`.
 
-No application pages are built in Stage 0.
+No application modules are built in Stage 1.

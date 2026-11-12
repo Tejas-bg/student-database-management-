@@ -1,6 +1,6 @@
-# NEXUS — Development Workflow and Roadmap
+# GM University Management System — Development Workflow and Roadmap
 
-> **Status:** Stage 0 workspace created; awaiting user review. No later stage has started.
+> **Status:** Stage 0 complete and approved. Stage 1 implemented and awaiting user approval. No later stage has started.
 > **Rule:** Do not begin a stage until the user approves it and the previous stage's acceptance criteria are met.
 
 ---
@@ -23,7 +23,7 @@ A stage is **not** complete because files exist. It is complete when the accepta
 
 ## 2. Stage 0 — Project Workspace and Context Setup
 
-**Status:** Workspace created; user review pending. No application implementation.
+**Status:** Complete and approved. No application implementation.
 
 **Objectives**
 
@@ -93,14 +93,15 @@ A stage is **not** complete because files exist. It is complete when the accepta
 
 - `frontend/static/css/tokens.css`
 - `frontend/static/css/themes.css` (light + dark semantics)
-- `frontend/static/css/reset.css`, `layout.css`, `components.css`, `responsive.css`
-- `frontend/static/js/theme-init.js`, `theme.js`, `main.js`
+- `frontend/static/css/reset.css`, `layout.css`, `components.css`, `login.css`, `responsive.css`
+- `frontend/static/js/theme-init.js`, `theme.js`, `main.js`, `login.js`
 - `frontend/index.html` — dashboard preview with demonstration data
 - `frontend/styleguide.html` — live token and component reference
-- `frontend/static/img/favicon.svg`, `nexus-mark.svg`
-- `docs/design/VISUAL_IDENTITY.md`, `DESIGN_SYSTEM.md`, `UI_COMPONENTS.md`, `ACCESSIBILITY.md`
+- `frontend/login.html` — common sign-in preview
+- `frontend/static/img/branding/gmu-official-logo.jpg` — official, unmodified logo
+- `docs/design/VISUAL_IDENTITY.md`, `GMU_BRAND_GUIDELINES.md`, `GMU_LOGIN_DESIGN.md`, `DESIGN_SYSTEM.md`, `UI_COMPONENTS.md`, `ACCESSIBILITY.md`
 
-**Delivered as planned:** tokens, type/spacing scale, component specs, both themes, contrast checks, keyboard checks, and documentation.
+**Delivered as planned:** tokens, type/spacing scale, component specs, both themes, contrast checks, keyboard checks, documentation, GMU rebrand, and the common login preview.
 
 **Dependencies:** Stage 0 approval. *(Received.)*
 

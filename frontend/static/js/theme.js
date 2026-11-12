@@ -1,5 +1,5 @@
 /* ==========================================================================
-   NEXUS — Theme controller
+   GM University Management System — Theme controller
    Keeps the <html data-theme> attribute, toggle buttons, and localStorage in
    sync. Toggle buttons use [data-theme-toggle] and are announced as a switch.
    ========================================================================== */
@@ -7,12 +7,12 @@
 (function () {
   "use strict";
 
-  var STORAGE_KEY = "nexus-theme";
+  var STORAGE_KEY = "gmu-theme";
   var root = document.documentElement;
-  var current = window.NEXUS_INITIAL_THEME || root.getAttribute("data-theme") || "light";
+  var current = window.GMU_INITIAL_THEME || root.getAttribute("data-theme") || "light";
 
   function themeColor(theme) {
-    return theme === "dark" ? "#111111" : "#f5f5f2";
+    return theme === "dark" ? "#111111" : "#f8f6f0";
   }
 
   function apply(theme, options) {
@@ -50,7 +50,7 @@
     });
 
     document.dispatchEvent(
-      new CustomEvent("nexus:themechange", { detail: { theme: current } })
+      new CustomEvent("gmu:themechange", { detail: { theme: current } })
     );
   }
 
@@ -88,8 +88,8 @@
   apply(current, { skipStorage: true });
 
   // Small public API so future stages can control the theme from other files.
-  window.NEXUS = window.NEXUS || {};
-  window.NEXUS.theme = {
+  window.GMU = window.GMU || {};
+  window.GMU.theme = {
     get: function () {
       return current;
     },

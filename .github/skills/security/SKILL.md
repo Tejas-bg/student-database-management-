@@ -1,9 +1,9 @@
 ---
 name: security
-description: Use when reviewing or implementing NEXUS authentication, authorization, input validation, SQL safety, session security, CSRF, XSS, secrets management, database privileges, or error handling. Use it before submission and before any security-sensitive change.
+description: Use when reviewing or implementing GM University Management System authentication, authorization, input validation, SQL safety, session security, CSRF, XSS, secrets management, database privileges, or error handling. Use it before submission and before any security-sensitive change.
 ---
 
-# NEXUS Skill — Application Security
+# GM University Management System Skill — Application Security
 
 ## Purpose
 

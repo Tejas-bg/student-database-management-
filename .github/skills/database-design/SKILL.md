@@ -1,13 +1,13 @@
 ---
 name: database-design
-description: Use when modelling NEXUS entities and relationships, drawing the ER diagram, designing tables, reviewing cardinality, normalizing to 3NF, or checking schema integrity. Do not use it for server operations or query tuning.
+description: Use when modelling GM University Management System entities and relationships, drawing the ER diagram, designing tables, reviewing cardinality, normalizing to 3NF, or checking schema integrity. Do not use it for server operations or query tuning.
 ---
 
-# NEXUS Skill — Database Design and Normalization
+# GM University Management System Skill — Database Design and Normalization
 
 ## Purpose
 
-Design a correct, normalized relational schema for NEXUS before any table is created. This skill covers ER modelling, relationship cardinality, key selection, normalization to 3NF, and schema review.
+Design a correct, normalized relational schema for the GM University Management System before any table is created. This skill covers ER modelling, relationship cardinality, key selection, normalization to 3NF, and schema review.
 
 ## When to use
 

@@ -1,13 +1,13 @@
-# NEXUS — Project Scope
+# GM University Management System — Project Scope
 
 > **Status:** Baseline scope. Changes require user approval and an ADR if they affect architecture.
-> **Last reviewed:** Stage 0.
+> **Last reviewed:** Stage 1.
 
 ---
 
 ## 1. Purpose of this document
 
-This file defines what NEXUS will and will not include. It prevents scope creep — the gradual addition of features that were never planned — and protects the college submission from becoming too large to finish well.
+This file defines what the GM University Management System will and will not include. It prevents scope creep — the gradual addition of features that were never planned — and protects the college submission from becoming too large to finish well.
 
 ---
 
@@ -20,20 +20,30 @@ This file defines what NEXUS will and will not include. It prevents scope creep 
 - Faculty records and faculty–subject assignments.
 - Student enrolments in subjects.
 
-### 2.2 Academic operations
+### 2.2 Identity and access
+
+- One common login page for students, faculty, and administrators.
+- Backend account lookup in MySQL.
+- Password hashing and server-verified sessions (Stage 4).
+- Automatic role detection from the registered account.
+- Server-side role checks on every protected route.
+
+The Stage 1 login page is a **design preview only**. It does not authenticate, store credentials, or create accounts.
+
+### 2.3 Academic operations
 
 - Attendance recording and viewing.
 - Internal assessment marks.
 - Semester examination marks.
 - Academic performance summaries and analytics.
 
-### 2.3 Administration
+### 2.4 Administration
 
 - Fee records and payments.
 - Student feedback submission and review.
 - Reports for students, faculty, and administrators.
 
-### 2.4 DBMS demonstration
+### 2.5 DBMS demonstration
 
 - ER model and relational schema.
 - Normalization to 3NF.
@@ -44,7 +54,7 @@ This file defines what NEXUS will and will not include. It prevents scope creep 
 - `GRANT` and `REVOKE` with least-privilege users.
 - Input validation and parameterized queries.
 
-### 2.5 Documentation and submission
+### 2.6 Documentation and submission
 
 - Project report material.
 - Setup instructions.
@@ -64,6 +74,8 @@ This file defines what NEXUS will and will not include. It prevents scope creep 
 - Real student personal data. All data must be fake sample data.
 - Production cloud deployment with public access.
 - Single sign-on with a college identity provider.
+- Aadhaar-based login unless university policy explicitly approves and supports it.
+- Separate student, faculty, and administrator login pages, or any manual role selection.
 - Complex timetabling or room allocation.
 - Library, hostel, or transport management.
 

@@ -1,5 +1,5 @@
 /* ==========================================================================
-   NEXUS — Interaction layer (Stage 1)
+   GM University Management System — Interaction layer (Stage 1)
    Stage 1 is a visual preview. Everything here is interface behaviour only:
    navigation drawer, dropdown menus, tabs, dialogs, and toasts. There is no
    backend, no authentication, and no database connection.
@@ -468,8 +468,8 @@
     initPlaceholderLinks();
     initDocFilter();
 
-    window.NEXUS = window.NEXUS || {};
-    window.NEXUS.toast = toast;
+    window.GMU = window.GMU || {};
+    window.GMU.toast = toast;
   }
 
   if (document.readyState === "loading") {

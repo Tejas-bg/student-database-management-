@@ -1,13 +1,13 @@
 ---
 name: testing
-description: Use when planning, writing, running, or reporting NEXUS tests for routes, services, repositories, SQL, security controls, or end-to-end flows. Use it before marking any task complete.
+description: Use when planning, writing, running, or reporting GM University Management System tests for routes, services, repositories, SQL, security controls, or end-to-end flows. Use it before marking any task complete.
 ---
 
-# NEXUS Skill — Testing and Quality Assurance
+# GM University Management System Skill — Testing and Quality Assurance
 
 ## Purpose
 
-Provide real evidence that NEXUS works. Tests protect working features from future changes and give the college submission credible verification.
+Provide real evidence that the GM University Management System works. Tests protect working features from future changes and give the college submission credible verification.
 
 ## When to use
 

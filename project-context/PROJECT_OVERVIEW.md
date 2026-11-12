@@ -1,18 +1,22 @@
-# NEXUS — Project Overview
+# GM University Management System — Project Overview
 
 > **Status:** Authoritative project overview. Read this first.
-> **Last reviewed:** Stage 0 (workspace setup).
+> **Last reviewed:** Stage 1 (design system and login preview).
 > **Do not mark any implementation work as done here.** See `CURRENT_STATUS.md` for the verified state.
 
 ---
 
-## 1. What is NEXUS?
+## 1. What is the GM University Management System?
 
-NEXUS is a **college DBMS project** that builds a web-based **Student Management Database System**.
+The GM University Management System is a **college DBMS project** for **GM University, Davanagere, Karnataka**. It builds a web-based, centralized university student and academic management application.
 
 It is a practical demonstration of database management concepts: modelling data with entities and relationships, designing normalized relational tables, enforcing integrity with keys and constraints, and querying data with SQL. The application is the visible layer on top of that database work.
 
-The tagline is **"Education, connected."** — the idea is that student records, courses, faculty, attendance, marks, fees, and feedback all live in one connected system instead of in separate spreadsheets.
+The tagline is **"Empowering Education Through Connected Technology"** — the idea is that student records, courses, faculty, attendance, marks, fees, and feedback all live in one connected system instead of in separate spreadsheets.
+
+The short display name **GMU Management System** is used in compact interface areas such as the sidebar, page titles, and browser tabs. Formal documentation uses the full name.
+
+> **Independence:** this is a student project built for the university. It is not an official university service and must not imply university endorsement.
 
 ---
 
@@ -26,7 +30,7 @@ A college typically stores student information in disconnected places: paper reg
 - Weak auditability of fee payments.
 - No single view of a student's academic performance.
 
-NEXUS brings those records into one normalized MySQL database and exposes them through a clean web interface.
+The GM University Management System brings those records into one normalized MySQL database and exposes them through a clean web interface.
 
 ---
 
@@ -39,7 +43,7 @@ NEXUS brings those records into one normalized MySQL database and exposes them t
 | Administrator | Manage students, faculty, departments, courses, subjects, enrolments, fees, and reports. |
 | Examiner / evaluator | See the DBMS concepts demonstrated clearly in schema and SQL. |
 
-Authentication and role-based access are part of the design. The exact role model is confirmed during later stages.
+Everyone signs in through **one common login page**. There is no student/faculty/admin selection. The backend looks up the registered MySQL account, verifies the password hash, reads the stored role, and redirects to the correct dashboard. The role is never decided by the login ID format or by frontend JavaScript.
 
 ---
 
@@ -103,7 +107,7 @@ The full list, with versions and rules, is in `TECHNOLOGY_STACK.md`.
 
 ## 7. Architecture at a glance
 
-NEXUS uses a **three-tier architecture**:
+The GM University Management System uses a **three-tier architecture**:
 
 1. **Presentation layer** — what the user sees in the browser.
 2. **Application layer** — Flask routes, services, validation, and authorization.
@@ -115,24 +119,27 @@ The browser never talks to MySQL directly. The full design, with diagrams, is in
 
 ## 8. Design direction at a glance
 
-The visual language is a hybrid of **Apple-style minimalism** and **Nothing-style monochrome technical detail**.
+The visual language combines **Apple-style calm and precision** with **Nothing-style monochrome technical detail**, anchored by the official GM University identity.
 
-- Obsidian `#111111`
-- Paper `#F5F5F2`
+The palette is derived from the official logo — gold artwork on university maroon:
+
+- University Maroon `#5B2020`
+- Deep Maroon `#421919`
+- University Gold `#E3B559`
+- Warm Ivory `#F8F6F0`
 - White `#FFFFFF`
-- Silver `#BDBDBD`
-- Graphite `#292929`
-- Signal Lime `#D7FF35` (accent only)
+- Graphite `#242424`
+- Muted Grey `#8A8580`
 
-Full rules: `DESIGN_PRINCIPLES.md`.
+The official logo is used unmodified. Full rules: `DESIGN_PRINCIPLES.md`, `../docs/design/GMU_BRAND_GUIDELINES.md`, and `../docs/design/GMU_LOGIN_DESIGN.md`.
 
 ---
 
 ## 9. Current stage
 
-**Stage 0 — Project Workspace and Context Setup.**
+**Stage 1 — UI/UX Design System and Visual Identity.**
 
-No application, backend, or database implementation has started. See `CURRENT_STATUS.md` for the verified state.
+The design system, dashboard preview, component reference, and common login preview are implemented and awaiting user approval. No backend, authentication, or database implementation has started. See `CURRENT_STATUS.md` for the verified state.
 
 ---
 

@@ -7,7 +7,7 @@
 
 ## Context
 
-Most student projects use a generic Bootstrap admin template. NEXUS should look intentional and professional while staying accessible and buildable by a beginner. The interface must support dense academic data without feeling cluttered.
+Most student projects use a generic Bootstrap admin template. The GM University Management System should look intentional and professional while staying accessible and buildable by a beginner. The interface must support dense academic data without feeling cluttered.
 
 ## Options considered
 
@@ -20,16 +20,19 @@ Most student projects use a generic Bootstrap admin template. NEXUS should look 
 
 ## Decision
 
-Use a **hybrid design language**: Apple-inspired minimalism, whitespace, typography, and refined interactions, combined with Nothing-inspired monochrome discipline, dot-matrix accents, and technical detail.
+Use a **hybrid design language**: Apple-inspired minimalism, whitespace, typography, and refined interactions, combined with Nothing-inspired monochrome discipline, dot-matrix accents, and technical detail, presented through the official GM University identity.
 
 Palette:
 
-- Obsidian `#111111`
-- Paper `#F5F5F2`
+- University Maroon `#5B2020`
+- Deep Maroon `#421919`
+- University Gold `#E3B559` (accent only, never body text on light surfaces)
+- Warm Ivory `#F8F6F0`
 - White `#FFFFFF`
-- Silver `#BDBDBD`
-- Graphite `#292929`
-- Signal Lime `#D7FF35` (accent only)
+- Graphite `#242424`
+- Muted Grey `#8A8580`
+- Silver `#BDBDBD` (dark-theme borders and secondary text)
+- Obsidian `#111111` (dark-theme page background)
 
 ## Reasons
 
@@ -37,6 +40,7 @@ Palette:
 - It supports both calm reading and dense data.
 - The palette is small enough to apply consistently.
 - It is achievable with CSS custom properties and Bootstrap 5.
+- The official logo supplies institutional recognition while the interface remains original.
 
 ## Consequences
 
@@ -49,7 +53,7 @@ Palette:
 ### Negative
 
 - More design work than copying a template.
-- Signal Lime must be used carefully to avoid visual noise.
+- University Gold must be used carefully to avoid visual noise, and never as body text on ivory or white.
 - Accessibility must be checked, not assumed.
 
 ### Follow-up work

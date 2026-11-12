@@ -1,4 +1,4 @@
-# NEXUS — Table Relationships
+# GM University Management System — Table Relationships
 
 > **Status: PLANNING.** Proposed relationships. Not approved.
 > **Read with:** `ER_DIAGRAM.md` and `DATABASE_DESIGN.md`.

@@ -2,7 +2,7 @@
 applyTo: "backend/**"
 ---
 
-# NEXUS Backend Instructions
+# GM University Management System Backend Instructions
 
 These rules apply to every file under `backend/`.
 

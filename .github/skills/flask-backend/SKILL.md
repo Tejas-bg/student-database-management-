@@ -1,9 +1,9 @@
 ---
 name: flask-backend
-description: Use when building or changing the NEXUS Flask application, routes, services, repositories, validation, authentication, authorization, configuration, error handling, or MySQL connection code. Do not use it for pure UI design or standalone SQL scripts.
+description: Use when building or changing the GM University Management System Flask application, routes, services, repositories, validation, authentication, authorization, configuration, error handling, or MySQL connection code. Do not use it for pure UI design or standalone SQL scripts.
 ---
 
-# NEXUS Skill — Flask Backend
+# GM University Management System Skill — Flask Backend
 
 ## Purpose
 

@@ -1,6 +1,6 @@
-# NEXUS — Coding Standards
+# GM University Management System — Coding Standards
 
-> **Status:** Approved for Stage 0.
+> **Status:** Approved baseline. Applies from Stage 1 onward.
 > **Rule:** These standards apply to all code written from Stage 1 onward.
 
 ---
@@ -151,7 +151,7 @@ LIMIT %s OFFSET %s;
 
 - Every schema change is a numbered migration.
 - Never edit an applied migration; add a new one.
-- Do not create tables in Stage 0.
+- Do not create tables before the Stage 3 schema is approved.
 - Keep seed data clearly fake.
 - Name constraints explicitly.
 - Document every table and column in the data dictionary.

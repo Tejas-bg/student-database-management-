@@ -1,4 +1,4 @@
-# NEXUS — Task Board
+# GM University Management System — Task Board
 
 > **Status:** Stage 1 design system implemented and verified; awaiting user approval. Stage 2 has not started.
 > **Rule:** A task is only `Done` when it is implemented and verified. File creation is not verification of an application feature.
@@ -27,7 +27,7 @@
 
 | ID | Task | Stage | Priority | Status | Dependencies | Notes |
 |---|---|---|---|---|---|---|
-| S0-01 | Inspect the workspace and create the NEXUS directory structure. | 0 | P0 | Done | — | Directory tree created under `NEXUS/`. |
+| S0-01 | Inspect the workspace and create the GM University Management System directory structure. | 0 | P0 | Done | — | Directory tree created under `GM University Management System/`. |
 | S0-02 | Create global AI instructions. | 0 | P0 | Done | S0-01 | `.github/copilot-instructions.md`. |
 | S0-03 | Create path-specific instructions. | 0 | P0 | Done | S0-02 | Backend, frontend, database, documentation. |
 | S0-04 | Create prompt templates. | 0 | P1 | Done | S0-02 | `.github/prompts/`. |
@@ -51,9 +51,14 @@
 | S1-03 | Specify buttons, forms, tables, cards, navigation. | 1 | P0 | Done | S1-01 | All required components implemented in `components.css`, with states and variants. |
 | S1-04 | Build light and dark reference pages. | 1 | P0 | Done | S1-01–S1-03 | `index.html` dashboard + `styleguide.html`; theme toggle, `?theme=` preview, persisted preference. |
 | S1-05 | Check contrast and keyboard accessibility. | 1 | P0 | Done | S1-04 | Contrast computed; keyboard, focus return, drawer trap, no console errors verified via Chrome DevTools Protocol. See `docs/design/ACCESSIBILITY.md`. |
-| S1-06 | Document the design system. | 1 | P1 | Done | S1-04 | Four documents in `docs/design/` plus the live styleguide. |
+| S1-06 | Document the design system. | 1 | P1 | Done | S1-04 | Design documents in `docs/design/` plus the live styleguide. |
+| S1-07 | Rebrand the interface and documentation to the GM University identity. | 1 | P0 | In Review | S1-04 | Maroon/gold/ivory palette, official name, tagline, metadata, and all active docs updated. |
+| S1-08 | Integrate the official GM University logo without modification. | 1 | P0 | In Review | S1-07 | `frontend/static/img/branding/gmu-official-logo.jpg`; source and checksum recorded in `GMU_BRAND_GUIDELINES.md`. |
+| S1-09 | Build the common login page for all roles. | 1 | P0 | In Review | S1-07 | `login.html`, `login.css`, `login.js`; no role selector, no real authentication. |
+| S1-10 | Document brand usage and the login specification. | 1 | P0 | Done | S1-07 | `GMU_BRAND_GUIDELINES.md` and `GMU_LOGIN_DESIGN.md`. |
+| S1-11 | Verify the login preview across widths, keyboard, reduced motion, and console. | 1 | P0 | Done | S1-09 | Verified at 1440/1024/768/390/320px; validation, password toggle, preview state, dialog focus, reduced motion, and console checked. See `CURRENT_STATUS.md`. |
 
-**Stage 1 status:** In Review — implementation and verification are complete; awaiting user approval before Stage 2. Stage 1 is UI-only: no MySQL, Flask, authentication, backend, or real student data.
+**Stage 1 status:** In Review - implementation and verification are complete; awaiting user approval before Stage 2. Stage 1 is UI-only: no MySQL, Flask, authentication, backend, or real student data.
 
 ---
 
@@ -62,7 +67,7 @@
 | ID | Task | Stage | Priority | Status | Dependencies | Notes |
 |---|---|---|---|---|---|---|
 | S2-01 | Create base layout and partials. | 2 | P0 | Not Started | S1-06 | Header, sidebar, footer, theme toggle. |
-| S2-02 | Build authentication pages. | 2 | P0 | Not Started | S2-01 | Login, logout, error pages. |
+| S2-02 | Build remaining authentication pages and convert the login preview into a template. | 2 | P0 | Not Started | S2-01 | Logout, error pages; no real authentication until Stage 4. |
 | S2-03 | Build student and department pages. | 2 | P0 | Not Started | S2-01 | Static or preview data. |
 | S2-04 | Build course, subject, and faculty pages. | 2 | P0 | Not Started | S2-01 | Static or preview data. |
 | S2-05 | Build attendance and marks pages. | 2 | P0 | Not Started | S2-01 | Forms and tables. |
@@ -182,6 +187,6 @@
 
 ## 13. Current focus
 
-The only open Stage 0 task is **S0-11 (review)** and **S0-12 (approval)**.
+Stage 1 is **In Review**. The design system, GMU rebrand, and common login preview are implemented and verified. User approval of Stage 1 is the only remaining gate.
 
-Do not start Stage 1 work until S0-12 is marked Done.
+Do not start Stage 2 work until Stage 1 is approved.
