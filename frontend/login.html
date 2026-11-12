@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Sign in · GMU Management System</title>
-  <meta name="description" content="Common sign-in for the GM University Management System. Design preview only; authentication is not connected yet.">
+  <meta name="description" content="Sign in to the GM University Management System.">
   <meta name="theme-color" content="#5b1f1f">
   <link rel="icon" href="static/img/branding/gmu-official-logo.jpg" type="image/jpeg">
 
@@ -64,34 +64,15 @@
          ============================================================ -->
     <section class="login-panel" aria-labelledby="login-heading" tabindex="0">
       <div class="login-panel__inner">
-        <div class="login-panel__top">
-          <span class="login-demo-badge">
-            <span class="login-demo-badge__dot" aria-hidden="true"></span>
-            Design preview
-          </span>
-          <a class="login-text-link" href="styleguide.html">Design system</a>
-        </div>
-
         <div class="login-panel__body">
           <header class="login-panel__header">
             <p class="login-eyebrow">
               <span class="login-eyebrow__line" aria-hidden="true"></span>
-              Common sign-in
+              Sign-IN
             </p>
             <h2 id="login-heading">Sign in to your account</h2>
-            <p class="login-panel__lede">Use the university ID issued to you. Your account type is detected automatically after sign-in, so there is no role to choose.</p>
+            <p class="login-panel__lede">Use the university ID issued to you.</p>
           </header>
-
-          <div class="login-alert login-alert--info" role="note">
-            <svg class="login-alert__icon" viewBox="0 0 24 24" aria-hidden="true">
-              <circle cx="12" cy="12" r="9"></circle>
-              <path d="M12 11v5M12 8h.01"></path>
-            </svg>
-            <div>
-              <strong>Preview only.</strong>
-              <p>Authentication is not connected yet. No credentials are sent, checked, or stored. This page demonstrates the planned experience for students, faculty, and administrators.</p>
-            </div>
-          </div>
 
           <div class="login-alert login-alert--error" id="login-error" role="alert" hidden>
             <svg class="login-alert__icon" viewBox="0 0 24 24" aria-hidden="true">
@@ -121,10 +102,9 @@
                   autocomplete="username"
                   autocapitalize="none"
                   spellcheck="false"
-                  aria-describedby="login-id-hint login-id-error"
+                  aria-describedby="login-id-error"
                   required>
               </div>
-              <p class="login-hint" id="login-id-hint">Student USN, faculty employee ID, or administrator email.</p>
               <p class="login-field-error" id="login-id-error" hidden>Enter your university login ID.</p>
             </div>
 
@@ -182,22 +162,11 @@
               <span class="login-submit__spinner" aria-hidden="true"></span>
             </button>
 
-            <p class="login-demo-note">
-              <svg class="login-demo-note__icon" viewBox="0 0 24 24" aria-hidden="true">
-                <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10Z"></path>
-                <path d="m9 12 2 2 4-4"></path>
-              </svg>
-              No account is created or authenticated in this preview.
-            </p>
           </form>
 
           <div class="login-status" role="status" aria-live="polite" data-login-status></div>
         </div>
 
-        <footer class="login-panel__footer">
-          <p><strong>Independent student project.</strong> Not an official GM University service. For public or commercial use, university permission is required.</p>
-          <p class="login-mono">Stage 1 · UI preview · v0.2.0</p>
-        </footer>
       </div>
     </section>
   </main>

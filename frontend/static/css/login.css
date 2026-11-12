@@ -219,52 +219,6 @@
   padding: clamp(24px, 2.8vh, 42px) clamp(24px, 4.2vw, 64px);
 }
 
-.login-panel__top {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 16px;
-  margin-bottom: clamp(24px, 4.2vh, 48px);
-}
-
-.login-demo-badge {
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-  padding: 6px 10px;
-  border: 1px solid var(--login-line);
-  border-radius: var(--nx-radius-pill);
-  background: rgba(255, 255, 255, 0.62);
-  color: #5c5c5c;
-  font-family: var(--nx-font-mono);
-  font-size: 0.625rem;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-}
-
-.login-demo-badge__dot {
-  width: 6px;
-  height: 6px;
-  border-radius: 50%;
-  background: var(--login-gold);
-  box-shadow: 0 0 0 3px rgba(227, 181, 89, 0.18);
-}
-
-.login-text-link {
-  color: var(--login-maroon);
-  font-size: 0.8125rem;
-  font-weight: var(--nx-weight-medium);
-  text-decoration: underline;
-  text-decoration-color: rgba(227, 181, 89, 0.75);
-  text-decoration-thickness: 2px;
-  text-underline-offset: 4px;
-  transition: color var(--nx-duration-fast) var(--nx-ease-standard);
-}
-
-.login-text-link:hover {
-  color: var(--login-maroon-deep);
-}
-
 .login-panel__body {
   display: flex;
   flex: 1 1 auto;
@@ -332,12 +286,6 @@
 
 .login-alert strong {
   font-weight: var(--nx-weight-semibold);
-}
-
-.login-alert--info {
-  border-color: #e6c98a;
-  background: #fbf3e3;
-  color: var(--login-maroon-deep);
 }
 
 .login-alert--error {
@@ -598,27 +546,6 @@
   display: block;
 }
 
-.login-demo-note {
-  display: flex;
-  align-items: center;
-  gap: 7px;
-  margin: 0;
-  color: #6e6e6e;
-  font-size: 0.75rem;
-  line-height: 1.5;
-}
-
-.login-demo-note__icon {
-  width: 14px;
-  height: 14px;
-  flex: 0 0 auto;
-  fill: none;
-  stroke: currentColor;
-  stroke-linecap: round;
-  stroke-linejoin: round;
-  stroke-width: 1.7;
-}
-
 .login-status {
   min-height: 22px;
   margin-top: 10px;
@@ -637,33 +564,6 @@
 /* --------------------------------------------------------------------------
    6. Panel footer
    -------------------------------------------------------------------------- */
-
-.login-panel__footer {
-  margin-top: 28px;
-  padding-top: 18px;
-  border-top: 1px solid var(--login-line);
-  color: var(--login-muted);
-  font-size: 0.6875rem;
-  line-height: 1.55;
-}
-
-.login-panel__footer p {
-  max-width: 52ch;
-  margin: 0;
-}
-
-.login-panel__footer strong {
-  color: #5c5c5c;
-  font-weight: var(--nx-weight-semibold);
-}
-
-.login-mono {
-  margin-top: 8px !important;
-  font-family: var(--nx-font-mono);
-  font-size: 0.625rem;
-  letter-spacing: 0.06em;
-  text-transform: uppercase;
-}
 
 /* --------------------------------------------------------------------------
    7. Forgot-password dialog
@@ -869,10 +769,6 @@
     padding: 32px 24px 40px;
   }
 
-  .login-panel__top {
-    margin-bottom: 30px;
-  }
-
   .login-panel__body {
     justify-content: flex-start;
   }
@@ -910,10 +806,6 @@
 
   .login-panel__inner {
     padding: 24px 18px 32px;
-  }
-
-  .login-panel__top {
-    margin-bottom: 26px;
   }
 
   .login-panel h2 {
