@@ -200,7 +200,7 @@ Work carefully and incrementally. Preserve the existing project structure and ma
 ## Expected file areas
 
 - `database/schema/` — schema and DDL scripts.
-- `database/seed/` — fictional sample data.
+- `database/seeds/` - fictional sample data.
 - `database/views/` — reporting views.
 - `database/documentation/` — architecture, ER source, data dictionary, normalization, security.
 - `database/demonstrations/` — DDL/DML/DQL/DCL/TCL and join demonstrations.

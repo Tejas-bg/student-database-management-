@@ -29,7 +29,8 @@
 .login-shell {
   display: grid;
   grid-template-columns: minmax(0, 1.08fr) minmax(0, 1fr);
-  min-height: 100svh;
+  height: 100svh;
+  overflow: hidden;
 }
 
 /* --------------------------------------------------------------------------
@@ -214,9 +215,10 @@
   flex-direction: column;
   width: 100%;
   max-width: 560px;
-  min-height: 100svh;
+  min-height: 0;
   margin-inline: auto;
   padding: clamp(24px, 2.8vh, 42px) clamp(24px, 4.2vw, 64px);
+  box-sizing: border-box;
 }
 
 .login-panel__body {
@@ -699,7 +701,12 @@
   }
 
   .login-panel__inner {
-    min-height: 100%;
+    min-height: 0;
+  }
+
+  .login-panel__body {
+    justify-content: flex-start;
+    padding-block: clamp(24px, 2.8vh, 32px);
   }
 }
 

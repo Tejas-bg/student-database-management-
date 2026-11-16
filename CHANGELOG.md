@@ -6,6 +6,104 @@ The format is simple: date, stage, what changed, and why. It is not a commit log
 
 ---
 
+## 2026-11-13 - Stage 4: Flask backend, login system, and role dashboards
+
+### Added
+
+- `backend/config.py` — reads `.env` for the secret key, session flags, and MySQL connection; never hardcodes a secret.
+- `backend/app/__init__.py` — `create_app()` with blueprints, CSRF enforcement on every state-changing request, security headers (CSP, `X-Frame-Options`, `nosniff`, `Referrer-Policy`), and template globals.
+- `backend/app/db.py` — connection and cursor helpers that always close, plus `ping()` used by `/health`.
+- `backend/app/repositories/user_repository.py` — account lookup and login bookkeeping using only `%s` placeholders.
+- `backend/app/repositories/dashboard_repository.py` — administrator counts, student profile/overview, and faculty workload queries.
+- `backend/app/services/auth_service.py` — Werkzeug hash verification, sentinel rejection, and identical failure handling for unknown users, wrong passwords, and inactive accounts.
+- `backend/app/auth/security.py` — per-session CSRF tokens, `login_required`, `roles_required`, open-redirect-safe `next` handling, and session rotation on login.
+- `backend/app/routes/auth.py` — common `GET/POST /login` and `POST /logout`.
+- `backend/app/routes/dashboard.py` — role-aware landing page populated from MySQL.
+- `backend/app/routes/health.py` — `/health` reporting the MySQL version and connected schema.
+- `backend/app/routes/prototype.py` — the 34-page Stage 2 interface mounted at `/prototype/` behind authentication, with per-role folder checks.
+- `backend/app/errors.py` — safe pages for 400, 401, 403, 404, 405, and 500 that never expose tracebacks, SQL, or paths.
+- `frontend/templates/login.html` — the Stage 2 login markup as a Jinja template with a CSRF token and server-rendered error messages.
+- `frontend/templates/dashboard.html` — the authenticated landing page for student, faculty, and administrator roles.
+- `frontend/templates/errors/error.html` and `prototype_sign_out.html`.
+- `frontend/static/css/backend.css` and `frontend/static/js/login-form.js`.
+- `tests/conftest.py`, `tests/unit/test_security.py`, `tests/integration/test_auth.py` — 22 tests against MySQL.
+- `pytest.ini` — test paths and import paths.
+
+### Fixed
+
+- `dashboard_repository.student_overview` originally queried `attendance_records.student_id`, which does not exist. Attendance links through `student_enrolments.enrolment_id`; the query now joins that table.
+- `db.ping()` returned a `database` key that collided with `jsonify(database="connected")`. It now returns `schema`.
+
+### Why
+
+Stage 4 was approved and required a real connection to MySQL. The backend now
+proves the database design works: the login system authenticates against the
+`users` table, role checks are enforced on the server, and all three role
+dashboards read live figures. The original 34-page interface is preserved and
+reached through `/prototype/` rather than being rewritten.
+
+---
+
+## 2026-11-13 — Stage 3: MySQL database architecture and ER design
+
+### Added
+
+- `database/schema/001_schema.sql` — complete MySQL 8 DDL for 24 InnoDB/`utf8mb4` tables covering roles/users, password resets, departments, courses, academic years, semesters, subjects, students, faculty, teaching assignments, enrolments, timetable, attendance, internal assessments/marks, semester exams/marks, fee structures/payments, notifications, read receipts, and feedback. Final counts: 51 FKs, 32 unique keys, 29 CHECK constraints, 25 secondary indexes.
+- `database/views/001_views.sql` — eight reporting views: student profile, attendance summary, internal marks, semester results, fee summary, faculty workload, class performance, and feedback summary.
+- `database/triggers/001_integrity_triggers.sql` — 10 cross-table integrity triggers (5 rules × INSERT/UPDATE) for attendance vs assignment/enrolment, internal marks vs assessment, semester marks vs exam, fee payments vs course/amount, and notification target role.
+- `database/seeds/001_sample_data.sql` — clearly fictional seed data for all modules; accounts use the non-authenticating sentinel `!NO_LOGIN_HASH_SET` and `pending_reset` status (no plaintext and no usable hash).
+- `database/demonstrations/001_ddl.sql` — DDL examples on a disposable demo table.
+- `database/demonstrations/002_dml.sql` — INSERT/UPDATE/DELETE examples.
+- `database/demonstrations/003_dql_joins.sql` — INNER, LEFT, RIGHT, self, and multi-table joins.
+- `database/demonstrations/004_dql_subqueries_aggregates.sql` — scalar/IN/EXISTS/derived-table subqueries, aggregates, GROUP BY/HAVING, and a window function.
+- `database/demonstrations/005_dcl.sql` — least-privilege accounts created with `IDENTIFIED BY RANDOM PASSWORD` (MySQL 8.0.18+), GRANT, REVOKE, and privilege inspection; no reusable secret committed.
+- `database/demonstrations/006_tcl.sql` — COMMIT, ROLLBACK, SAVEPOINT, and transaction outlines.
+- `database/documentation/DATABASE_ARCHITECTURE.md` — module map, authentication model, indexing, and Flask-readiness.
+- `database/documentation/ER_DIAGRAM.md` — Mermaid ER diagram with 24 entities, 51 relationship lines, keys, cardinalities, and optional/mandatory relationships.
+- `database/documentation/DATA_DICTIONARY.md` — column-level reference for every table.
+- `database/documentation/TABLE_DESCRIPTIONS_AND_RELATIONSHIPS.md` — table purposes, FK actions, and cardinality explanations.
+- `database/documentation/NORMALIZATION.md` — 1NF/2NF/3NF analysis, anomaly examples, and table-by-table review.
+- `database/documentation/SECURITY.md` — password storage, RBAC, least privilege, sensitive-data minimization, transactions, and auditability.
+- `database/documentation/REQUIREMENTS_TO_TABLE_MAPPING.md` — maps every Stage 2 page, form, filter, and action to tables/columns.
+- Updated `database/documentation/SQL_CONCEPT_MAPPING.md` and the database/schema/seed/view/trigger READMEs.
+
+### Fixed (Stage 3 correction review)
+
+- ER/FK mismatch: added the missing `users` → `notifications.target_user_id` relationship line, so the diagram now mirrors all 51 FKs.
+- Normalization: removed the transitive `student_enrolments.academic_year_id`; the academic year is derived through `semesters`. Retained `subjects.department_id` and `students.department_id` as documented business attributes.
+- Attendance/workload matching: added `student_enrolments.section` and a composite FK `fk_tt_assignment` from `timetable_entries` to `faculty_subject_assignments`.
+- Cross-table integrity: added 10 triggers for rules a single FK cannot express.
+- Nullable composite unique keys: replaced the nullable feedback key with a functional unique index using `COALESCE`, made `fee_structures.semester_number` NOT NULL, and made `attendance_sessions.start_time` NOT NULL.
+- Reporting views: corrected the attendance denominator to count held sessions, scoped fee demand by academic year and semester, and matched faculty workload by section.
+- Credentials: replaced placeholder hashes with the non-authenticating `!NO_LOGIN_HASH_SET` sentinel and `pending_reset`, and switched DCL to `IDENTIFIED BY RANDOM PASSWORD`.
+- Documentation: reconciled table counts, FK counts, run order, and the `database/seeds/` path across all Stage 3 documents.
+
+### Changed
+
+- `database/documentation/DATABASE_DESIGN.md` and `TABLE_RELATIONSHIPS.md` are retained as historical drafts and marked superseded by the final Stage 3 documents.
+- `ROADMAP.md`, `TASKS.md`, and `project-context/CURRENT_STATUS.md` now record Stage 3 design completion and the Stage 4 gate.
+
+### Verified
+
+- Static schema validation: 24/24 tables have primary keys; all 51 foreign-key targets exist; no duplicate table definitions.
+- Count consistency: 24 tables, 24 PKs, 51 FKs, 32 unique keys, 29 CHECK constraints, 25 secondary indexes.
+- Data dictionary/schema comparison: 24 tables and all columns match (after normalizing grouped audit columns).
+- ER/schema comparison: 24 entities and 51 relationship lines match the 51 FKs; no unknown entities.
+- Views: every referenced table and column exists in the schema; attendance, fee, and workload logic reviewed against the seed data.
+- Triggers: 10 structurally valid triggers (5 rules × INSERT/UPDATE) with balanced blocks and the delimiter restored.
+- Seeds: every INSERT targets an existing table; no usable password hash is present.
+- No executable `DROP DATABASE` is present; destructive examples are commented out.
+- No MySQL client is installed, no SQL was executed, and no database connection exists.
+
+### Notes
+
+- Stage 3 is **design only**. The schema, views, triggers, seed data, and demonstrations are prepared for review and have **not** been run against MySQL.
+- The login page, dashboards, and all frontend files are unchanged.
+- Role is determined from `users.role_id`; no client-selected role is trusted. Password storage is hash-only; Aadhaar is not used.
+- Stage 3 is **Done** and awaits explicit approval before Stage 4. SQL execution and trigger testing are deferred to the implementation stage.
+
+---
+
 ## 2026-11-12 — Stage 2: Application shell and role dashboards
 
 ### Added

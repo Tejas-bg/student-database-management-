@@ -16,7 +16,7 @@ One common sign-in page serves students, faculty, and administrators. The user r
 
 > **Independent student project.** This is not an official GM University service and does not claim university endorsement. The official university logo is used to identify the institution the project is built for.
 
-**Current state:** Stage 2 — frontend interface preview with student, faculty, and administration workspaces. No backend, authentication, or database connection exists yet. See `project-context/CURRENT_STATUS.md`.
+**Current state:** Stage 3 — frontend interface preview plus a complete MySQL database design for student, faculty, and administration workspaces. No backend, authentication, or live database connection exists yet. See `project-context/CURRENT_STATUS.md`.
 
 ---
 
@@ -98,11 +98,13 @@ If you are new to the project, read in this order:
 
 ## Current stage
 
-**Stage 2 — Frontend Development.**
+**Stage 3 — MySQL Database Architecture and ER Design.**
 
-Stage 2 is implemented and awaiting user review. It adds the shared application shell and 34 student, faculty, and administration pages on top of the Stage 1 design system and login preview. The interface remains UI-only.
+Stage 3 is complete, corrected, and statically validated. It defines a 24-table MySQL 8 schema with 51 foreign keys, 8 reporting views, 10 cross-table integrity triggers, fictional seed data, SQL demonstrations, an ER diagram, a data dictionary, a normalization report, security guidance, and a page-to-table mapping. The schema has **not** been executed and no database is connected.
 
-The full roadmap is in `project-context/DEVELOPMENT_WORKFLOW.md` and summarised in `ROADMAP.md`.
+Stage 2 remains the current interface: a shared shell and 34 student, faculty, and administration pages on top of the Stage 1 design system and login preview. The interface is UI-only.
+
+Start with `database/documentation/README.md`. The full roadmap is in `project-context/DEVELOPMENT_WORKFLOW.md` and summarised in `ROADMAP.md`.
 
 ---
 
@@ -110,12 +112,12 @@ The full roadmap is in `project-context/DEVELOPMENT_WORKFLOW.md` and summarised 
 
 | Area | Status |
 |---|---|
-| Project implementation | UI preview only |
+| Project implementation | UI preview + database design |
 | Frontend | Stage 2 shell and 34 role pages implemented and browser-verified |
 | Backend | Not Started |
-| Database | Not Started (schema is PLANNING) |
-| Testing | Scripted browser verification; no committed automated suite |
-| Documentation | Stage 2 docs current |
+| Database | Stage 3 design complete, corrected, and statically validated — 24 tables, 51 FKs, 8 views, 10 triggers, scripts and docs; not executed |
+| Testing | Stage 2 scripted browser verification + Stage 3 static SQL/document validation; no committed automated suite |
+| Documentation | Stage 3 database docs current |
 
 ---
 

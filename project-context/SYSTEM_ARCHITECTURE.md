@@ -146,7 +146,7 @@ These paths are the recommended layout. They are created only when the relevant 
 - Every table has a primary key.
 - Foreign keys have explicit `ON DELETE` / `ON UPDATE`.
 - Money uses `DECIMAL`, never `FLOAT`.
-- The schema is marked **PLANNING** until reviewed.
+- The schema is **design-complete, corrected, and statically validated** and has not been executed or connected.
 - No table is created before the Stage 3 schema is approved.
 
 ---

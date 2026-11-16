@@ -1,7 +1,7 @@
-# GM University Management System — Task Board
+﻿# GM University Management System — Task Board
 
-> **Status:** Stage 2 application shell and role dashboards implemented and browser-verified; awaiting user review. The Stage 1 login preview is unchanged and no backend, database, or real authentication exists.
-> **Rule:** A task is only `Done` when it is implemented and verified. File creation is not verification of an application feature.
+> **Status:** Stage 3 MySQL database design is complete, corrected, and statically validated. The schema, ER model, views, integrity triggers, seed data, demonstrations, and documentation are prepared but **not executed**; no database is connected. Stage 2 dashboards remain UI-only, and the Stage 1 login preview is unchanged.
+> **Rule:** A task is only `Done` when it is implemented and verified. For Stage 3, “Done” means the design artifact is complete and statically validated; SQL execution is a later stage.
 
 ---
 
@@ -76,22 +76,32 @@
 | S2-08 | Build the administration management workspace. | 2 | P0 | Done | S2-01 | 14 pages, including enrolment and user/role management. |
 | S2-09 | Document Stage 2 and record verification evidence. | 2 | P1 | In Review | S2-01–S2-08 | `docs/design/GMU_DASHBOARD_DESIGN.md`, changelog, status, and this board updated. Awaiting user review. |
 
-**Stage 2 status:** In Review — all planned role pages are implemented and browser-verified. The interface is UI-only: no backend, database, authentication, session, or persistence. Every dashboard labels its data as sample/demo.
+**Stage 2 status:** Done — all planned role pages are implemented and browser-verified, and the user proceeded to Stage 3. S2-02 (authentication pages and Jinja2 conversion) remains deliberately deferred to Stage 4. The interface is UI-only: no backend, database, authentication, session, or persistence. Every dashboard labels its data as sample/demo.
 
 ---
 
-## 5. Stage 3 — MySQL Database Design and Implementation
+## 5. Stage 3 — MySQL Database Architecture and ER Design
+
+> **Scope:** design only. The schema is not executed, no database is connected, and no frontend files are changed.
 
 | ID | Task | Stage | Priority | Status | Dependencies | Notes |
 |---|---|---|---|---|---|---|
-| S3-01 | Review and approve the ER model. | 3 | P0 | Not Started | S0-12 | Resolve open questions. |
-| S3-02 | Finalize the data dictionary. | 3 | P0 | Not Started | S3-01 | Match approved columns. |
-| S3-03 | Write DDL for reference and people tables. | 3 | P0 | Not Started | S3-02 | Departments, courses, semesters, roles, students, faculty, users. |
-| S3-04 | Write DDL for academic and assessment tables. | 3 | P0 | Not Started | S3-03 | Subjects, assignments, enrolments, attendance, assessments, marks. |
-| S3-05 | Write DDL for finance and feedback. | 3 | P0 | Not Started | S3-04 | Fee structure, payments, feedback. |
-| S3-06 | Create migrations and run them on a clean database. | 3 | P0 | Not Started | S3-03–S3-05 | Verify with `SHOW CREATE TABLE`. |
-| S3-07 | Create fake seed data. | 3 | P0 | Not Started | S3-06 | No real data. |
-| S3-08 | Document normalization and relationships. | 3 | P0 | Not Started | S3-02 | Update the planning docs to match reality. |
+| S3-01 | Inspect all Stage 2 pages, forms, tables, filters, and actions. | 3 | P0 | Done | S2-01–S2-08 | Page/data inventory mapped in `REQUIREMENTS_TO_TABLE_MAPPING.md`. |
+| S3-02 | Design the ER model with keys and cardinalities. | 3 | P0 | Done | S3-01 | 24 entities, 51 relationships; `ER_DIAGRAM.md`. |
+| S3-03 | Finalize the data dictionary for every table. | 3 | P0 | Done | S3-02 | `DATA_DICTIONARY.md`; validated against the schema. |
+| S3-04 | Write complete DDL for reference, people, academic, assessment, finance, and feedback tables. | 3 | P0 | Done | S3-03 | `schema/001_schema.sql`; 24 InnoDB/utf8mb4 tables, 51 FKs, 32 unique keys, 29 CHECK constraints. |
+| S3-05 | Design authentication and RBAC tables. | 3 | P0 | Done | S3-02 | `roles`, `users`, `password_reset_tokens`; no plaintext passwords. |
+| S3-06 | Create reporting views. | 3 | P0 | Done | S3-04 | `views/001_views.sql`; 8 views, including corrected attendance/fee/workload logic. |
+| S3-07 | Create fictional seed data. | 3 | P0 | Done | S3-04 | `seeds/001_sample_data.sql`; clearly labelled fictional, no usable password hashes. |
+| S3-08 | Prepare DDL/DML/DQL/DCL/TCL and join/subquery/aggregate demonstrations. | 3 | P0 | Done | S3-04 | `demonstrations/001`–`006`; DCL uses `IDENTIFIED BY RANDOM PASSWORD`. |
+| S3-09 | Document normalization, relationships, security, and requirements mapping. | 3 | P0 | Done | S3-02–S3-08 | Architecture, normalization, security, mapping, and table docs updated. |
+| S3-10 | Statically validate tables, keys, foreign keys, dictionary, and ER entities. | 3 | P0 | Done | S3-04–S3-09 | 24/24 tables have PKs; 0 missing FK targets; dictionary and ER match; 51 FKs / 51 ER lines. |
+| S3-13 | Apply the Stage 3 correction review: ER target-user FK, normalization decision, cross-table integrity, nullable unique keys, view logic, credential handling, and documentation consistency. | 3 | P0 | Done | S3-10 | Removed `student_enrolments.academic_year_id`; added `section`; added composite timetable FK; added 10 triggers; fixed 3 views; removed usable seed hashes; updated docs. |
+| S3-11 | Execute the schema on a clean MySQL 8 instance and record evidence. | 3/6 | P0 | Not Started | User approval | Deferred: Stage 3 is design-only; no MySQL client is installed. |
+| S3-12 | Create numbered migrations and test them on a clean database. | 3/6 | P0 | Not Started | S3-11 | Deferred to the implementation stage. |
+
+**Stage 3 status:** Done - the design is complete, corrected, and statically validated, and the scripts have been executed against MySQL 8.4.9 (24 tables, 8 views, 10 triggers, seed data loaded). Trigger negative tests remain deferred.
+**Stage 4 status:** Done - a Flask application is running on http://127.0.0.1:5000, connected to MySQL. The common login, session handling, role-based authorization, CSRF protection, safe error pages, and 22 automated tests all work against the live database.
 
 ---
 
@@ -99,13 +109,13 @@
 
 | ID | Task | Stage | Priority | Status | Dependencies | Notes |
 |---|---|---|---|---|---|---|
-| S4-01 | Create the Flask application factory and config. | 4 | P0 | Not Started | S3-06 | Read `.env`. |
-| S4-02 | Create the MySQL connection helper. | 4 | P0 | Not Started | S4-01 | Verify a real connection. |
-| S4-03 | Create repositories for core tables. | 4 | P0 | Not Started | S4-02 | Parameterized SQL. |
-| S4-04 | Implement authentication and sessions. | 4 | P0 | Not Started | S4-01 | Hashed passwords. |
-| S4-05 | Implement role-based authorization. | 4 | P0 | Not Started | S4-04 | Server-side checks. |
-| S4-06 | Add error handlers. | 4 | P0 | Not Started | S4-01 | Safe pages for 400/401/403/404/500. |
-| S4-07 | Add backend tests. | 4 | P0 | Not Started | S4-02–S4-06 | Against MySQL. |
+| S4-01 | Create the Flask application factory and config. | 4 | P0 | Done | S3-06 | `create_app()`, blueprints, `.env` loading, pinned dependencies; app boots. |
+| S4-02 | Create the MySQL connection helper. | 4 | P0 | Done | S4-01 | `db.py` opens and closes connections; `/health` reports MySQL 8.4.9. |
+| S4-03 | Create repositories for core tables. | 4 | P0 | Done | S4-02 | `user_repository` and `dashboard_repository` use `%s` placeholders only. |
+| S4-04 | Implement authentication and sessions. | 4 | P0 | Done | S4-01 | Werkzeug hashes, generic failure message, session rotation, `POST` logout. |
+| S4-05 | Implement role-based authorization. | 4 | P0 | Done | S4-04 | `login_required` and `roles_required`; cross-role preview returns 403. |
+| S4-06 | Add error handlers. | 4 | P0 | Done | S4-01 | Safe pages for 400/401/403/404/405/500; no internals leaked. |
+| S4-07 | Add backend tests. | 4 | P0 | Done | S4-02-S4-06 | 22 tests pass against MySQL (auth, CSRF, RBAC, logout, error pages). |
 
 ---
 

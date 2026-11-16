@@ -1,7 +1,7 @@
-# GM University Management System — Database Design
+# GM University Management System — Database Design (Historical Draft)
 
-> **Status: PLANNING.** Proposed design only. No table has been created.
-> **Do not execute anything from this document until the user approves the schema.**
+> **Status: HISTORICAL / SUPERSEDED.** This was an early planning draft. The final Stage 3 design is in `DATABASE_ARCHITECTURE.md`, `ER_DIAGRAM.md`, `DATA_DICTIONARY.md`, and `TABLE_DESCRIPTIONS_AND_RELATIONSHIPS.md`.
+> **No table has been created.** Do not execute anything from this document.
 
 ---
 
@@ -278,4 +278,4 @@ These will be demonstrated in Stage 6:
 | User review | Pending |
 | Approved for implementation | No |
 
-The schema remains **PLANNING** until approved.
+This historical draft is superseded. The final Stage 3 schema is design-complete for review and still not executed.

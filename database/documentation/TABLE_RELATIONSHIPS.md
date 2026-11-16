@@ -1,7 +1,7 @@
-# GM University Management System — Table Relationships
+# GM University Management System — Table Relationships (Historical Draft)
 
-> **Status: PLANNING.** Proposed relationships. Not approved.
-> **Read with:** `ER_DIAGRAM.md` and `DATABASE_DESIGN.md`.
+> **Status: HISTORICAL / SUPERSEDED.** The final relationship reference is `TABLE_DESCRIPTIONS_AND_RELATIONSHIPS.md`. This draft is retained for history only.
+> **Read with:** `ER_DIAGRAM.md` and `DATABASE_ARCHITECTURE.md`.
 
 ---
 

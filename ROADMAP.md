@@ -10,8 +10,8 @@ This is a one-page summary. The detailed version, with tasks, deliverables, depe
 |---|---|---|
 | 0 | Project Workspace and Context Setup | Complete and approved |
 | 1 | UI/UX Design System and Visual Identity | Complete and approved |
-| 2 | Frontend Development | Implemented and verified; awaiting review |
-| 3 | MySQL Database Design and Implementation | Not started |
+| 2 | Frontend Development | Complete and approved |
+| 3 | MySQL Database Design and Implementation | Design complete, corrected, and statically validated; not executed |
 | 4 | Flask Backend and Database Connection | Not started |
 | 5 | Functional Module Development | Not started |
 | 6 | SQL and DBMS Concept Demonstration | Not started |
@@ -36,24 +36,23 @@ Do not start the next stage until:
 
 ## Immediate next step
 
-Stage 2 is complete for review. Open `frontend/login.html` and the three workspaces through a local server:
+Stage 3 database design is complete, corrected, and statically validated (24 tables, 51 FKs, 8 views, 10 integrity triggers). Nothing has been executed against MySQL, and Stage 4 awaits explicit user approval.
 
-- `frontend/dashboard/student/`
-- `frontend/dashboard/faculty/`
-- `frontend/dashboard/admin/`
+Review these first:
 
-Inspect navigation, filters, dialogs, the profile menu, notifications, sidebar collapse, and both themes. Every page labels its content as sample data.
+- `database/documentation/DATABASE_ARCHITECTURE.md`
+- `database/documentation/ER_DIAGRAM.md`
+- `database/documentation/DATA_DICTIONARY.md`
+- `database/documentation/NORMALIZATION.md`
+- `database/schema/001_schema.sql`
+- `database/views/001_views.sql`
+- `database/seeds/001_sample_data.sql`
+- `database/demonstrations/`
 
-For example, from the project folder:
+The design supports every Stage 2 student, faculty, and administration page. It is **not** connected to the application and no tables have been created.
 
-```powershell
-python -m http.server 8000 --directory frontend
-```
+When you are satisfied, approve Stage 4:
 
-Then open `http://127.0.0.1:8000/login.html`.
+> "Start Stage 4: Flask Backend and Database Connection."
 
-When you are satisfied, approve Stage 3:
-
-> "Start Stage 3: MySQL Database Design and Implementation."
-
-Until then, do not build the backend or the database.
+Until then, do not execute the schema, create the database, or connect the application.

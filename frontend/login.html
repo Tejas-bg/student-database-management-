@@ -1,99 +1,13 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Sign in · GMU Management System</title>
-  <meta name="description" content="Sign in to the GM University Management System.">
-  <meta name="theme-color" content="#5b1f1f">
-  <link rel="icon" href="static/img/branding/gmu-official-logo.jpg" type="image/jpeg">
-
-  <!-- Fonts: Inter for interface text, JetBrains Mono for technical labels. -->
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
-
-  <link rel="stylesheet" href="static/css/tokens.css">
-  <link rel="stylesheet" href="static/css/reset.css">
-  <link rel="stylesheet" href="static/css/login.css">
-</head>
-<body class="login-page">
-  <a class="nx-skip-link" href="#login-form">Skip to sign-in form</a>
-
-  <main class="login-shell">
-    <!-- ============================================================
+<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>Sign in · GMU Management System</title><meta name="description" content="Sign in to the GM University Management System."><meta name="theme-color" content="#5b1f1f"><link rel="icon" href="static/img/branding/gmu-official-logo.jpg" type="image/jpeg"><!-- Fonts: Inter for interface text, JetBrains Mono for technical labels. --><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet"><link rel="stylesheet" href="static/css/tokens.css"><link rel="stylesheet" href="static/css/reset.css"><link rel="stylesheet" href="static/css/login.css"></head><body class="login-page"><a class="nx-skip-link" href="#login-form">Skip to sign-in form</a><main class="login-shell"><!-- ============================================================
          Brand panel
-         ============================================================ -->
-    <section class="login-brand" aria-labelledby="login-welcome">
-      <div class="login-brand__pattern" aria-hidden="true"></div>
-      <div class="login-brand__ring login-brand__ring--one" aria-hidden="true"></div>
-      <div class="login-brand__ring login-brand__ring--two" aria-hidden="true"></div>
-
-      <div class="login-brand__inner">
-        <header class="login-brand__header">
-          <img
+         ============================================================ --><section class="login-brand" aria-labelledby="login-welcome"><div class="login-brand__pattern" aria-hidden="true"></div><div class="login-brand__ring login-brand__ring--one" aria-hidden="true"></div><div class="login-brand__ring login-brand__ring--two" aria-hidden="true"></div><div class="login-brand__inner"><header class="login-brand__header"><img
             class="login-brand__logo"
             src="static/img/branding/gmu-official-logo.jpg"
             alt="Official GM University logo"
             width="96"
-            height="96">
-          <p class="login-brand__institution">
-            <span>GM University</span>
-            <span>Davanagere, Karnataka</span>
-          </p>
-        </header>
-
-        <div class="login-brand__copy">
-          <p class="login-eyebrow login-eyebrow--gold">
-            <span class="login-eyebrow__line" aria-hidden="true"></span>
-            One university · One sign-in
-          </p>
-          <h1 id="login-welcome">Welcome to GM University</h1>
-          <p class="login-brand__lede">Your academic journey, connected in one place.</p>
-        </div>
-
-        <footer class="login-brand__footer">
-          <p class="login-brand__system">GM University Management System</p>
-          <p class="login-brand__tagline">Empowering Education Through Connected Technology</p>
-        </footer>
-      </div>
-    </section>
-
-    <!-- ============================================================
+            height="96"><p class="login-brand__institution"><span>GM University</span><span>Davanagere, Karnataka</span></p></header><div class="login-brand__copy"><p class="login-eyebrow login-eyebrow--gold"><span class="login-eyebrow__line" aria-hidden="true"></span>One university · One sign-in</p><h1 id="login-welcome">Welcome to GM University</h1><p class="login-brand__lede">Your academic journey, connected in one place.</p></div><footer class="login-brand__footer"><p class="login-brand__system">GM University Management System</p><p class="login-brand__tagline">Empowering Education Through Connected Technology</p></footer></div></section><!-- ============================================================
          Sign-in panel
-         ============================================================ -->
-    <section class="login-panel" aria-labelledby="login-heading" tabindex="0">
-      <div class="login-panel__inner">
-        <div class="login-panel__body">
-          <header class="login-panel__header">
-            <p class="login-eyebrow">
-              <span class="login-eyebrow__line" aria-hidden="true"></span>
-              Sign-IN
-            </p>
-            <h2 id="login-heading">Sign in to your account</h2>
-            <p class="login-panel__lede">Use the university ID issued to you.</p>
-          </header>
-
-          <div class="login-alert login-alert--error" id="login-error" role="alert" hidden>
-            <svg class="login-alert__icon" viewBox="0 0 24 24" aria-hidden="true">
-              <path d="M10.3 3.9 1.8 18a2 2 0 0 0 1.7 3h17a2 2 0 0 0 1.7-3L13.7 3.9a2 2 0 0 0-3.4 0Z"></path>
-              <path d="M12 9v4M12 17h.01"></path>
-            </svg>
-            <p id="login-error-text">Please check the highlighted fields and try again.</p>
-          </div>
-
-          <form class="login-form" id="login-form" novalidate>
-            <div class="login-field">
-              <label class="login-label" for="login-id">
-                University Login ID
-                <span class="login-required" aria-hidden="true">Required</span>
-              </label>
-              <div class="login-input-wrap">
-                <svg class="login-input-icon" viewBox="0 0 24 24" aria-hidden="true">
-                  <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
-                  <circle cx="12" cy="7" r="4"></circle>
-                </svg>
-                <input
+         ============================================================ --><section class="login-panel" aria-labelledby="login-heading" tabindex="0"><div class="login-panel__inner"><div class="login-panel__body"><header class="login-panel__header"><p class="login-eyebrow"><span class="login-eyebrow__line" aria-hidden="true"></span>Sign-IN</p><h2 id="login-heading">Sign in to your account</h2><p class="login-panel__lede">Use the university ID issued to you.</p></header><div class="login-alert login-alert--error" id="login-error" role="alert" hidden><svg class="login-alert__icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M10.3 3.9 1.8 18a2 2 0 0 0 1.7 3h17a2 2 0 0 0 1.7-3L13.7 3.9a2 2 0 0 0-3.4 0Z"></path><path d="M12 9v4M12 17h.01"></path></svg><p id="login-error-text">Please check the highlighted fields and try again.</p></div><form class="login-form" id="login-form" novalidate><div class="login-field"><label class="login-label" for="login-id">University Login ID<span class="login-required" aria-hidden="true">Required</span></label><div class="login-input-wrap"><svg class="login-input-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg><input
                   class="login-input"
                   id="login-id"
                   name="identifier"
@@ -103,89 +17,21 @@
                   autocapitalize="none"
                   spellcheck="false"
                   aria-describedby="login-id-error"
-                  required>
-              </div>
-              <p class="login-field-error" id="login-id-error" hidden>Enter your university login ID.</p>
-            </div>
-
-            <div class="login-field">
-              <div class="login-label-row">
-                <label class="login-label" for="password">
-                  Password
-                  <span class="login-required" aria-hidden="true">Required</span>
-                </label>
-                <button
+                  required></div><p class="login-field-error" id="login-id-error" hidden>Enter your university login ID.</p></div><div class="login-field"><div class="login-label-row"><label class="login-label" for="password">Password<span class="login-required" aria-hidden="true">Required</span></label><button
                   class="login-forgot"
                   type="button"
                   data-dialog-open="forgot-dialog"
-                  aria-haspopup="dialog">
-                  Forgot password?
-                </button>
-              </div>
-              <div class="login-input-wrap">
-                <svg class="login-input-icon" viewBox="0 0 24 24" aria-hidden="true">
-                  <rect x="4" y="10" width="16" height="11" rx="2"></rect>
-                  <path d="M8 10V7a4 4 0 0 1 8 0v3"></path>
-                </svg>
-                <input
+                  aria-haspopup="dialog">Forgot password?</button></div><div class="login-input-wrap"><svg class="login-input-icon" viewBox="0 0 24 24" aria-hidden="true"><rect x="4" y="10" width="16" height="11" rx="2"></rect><path d="M8 10V7a4 4 0 0 1 8 0v3"></path></svg><input
                   class="login-input login-input--password"
                   id="password"
                   name="password"
                   type="password"
                   autocomplete="current-password"
                   aria-describedby="password-error"
-                  required>
-                <button
+                  required><button
                   class="login-password-toggle"
                   type="button"
                   aria-label="Show password"
                   aria-pressed="false"
                   data-password-toggle
-                  data-target="password">
-                  <svg class="login-eye login-eye--show" viewBox="0 0 24 24" aria-hidden="true">
-                    <path d="M2 12s3.5-7 10-7 10 7 10 7-3.5 7-10 7S2 12 2 12Z"></path>
-                    <circle cx="12" cy="12" r="3"></circle>
-                  </svg>
-                  <svg class="login-eye login-eye--hide" viewBox="0 0 24 24" aria-hidden="true">
-                    <path d="m3 3 18 18"></path>
-                    <path d="M10.6 5.2A10.9 10.9 0 0 1 12 5c6.5 0 10 7 10 7a17 17 0 0 1-3.4 4.2"></path>
-                    <path d="M6.3 6.3C3.5 8.2 2 12 2 12s3.5 7 10 7a10.7 10.7 0 0 0 4.1-.8"></path>
-                    <path d="M9.9 9.9a3 3 0 0 0 4.2 4.2"></path>
-                  </svg>
-                </button>
-              </div>
-              <p class="login-field-error" id="password-error" hidden>Enter your password.</p>
-            </div>
-
-            <button class="login-submit" type="submit" data-login-submit>
-              <span class="login-submit__label">Sign In</span>
-              <span class="login-submit__spinner" aria-hidden="true"></span>
-            </button>
-
-          </form>
-
-          <div class="login-status" role="status" aria-live="polite" data-login-status></div>
-        </div>
-
-      </div>
-    </section>
-  </main>
-
-  <!-- Password reset placeholder -->
-  <dialog class="login-dialog" id="forgot-dialog" aria-labelledby="forgot-title">
-    <div class="login-dialog__body">
-      <span class="login-dialog__icon" aria-hidden="true">
-        <svg viewBox="0 0 24 24">
-          <circle cx="12" cy="12" r="9"></circle>
-          <path d="M12 7v5l3 2"></path>
-        </svg>
-      </span>
-      <h2 id="forgot-title">Password reset is coming later</h2>
-      <p>Password recovery will be connected with the university authentication service in a later stage. This preview has no account database, so no reset email is sent.</p>
-      <button class="login-dialog__close" type="button" data-dialog-close>Close</button>
-    </div>
-  </dialog>
-
-  <script src="static/js/login.js"></script>
-</body>
-</html>
+                  data-target="password"><svg class="login-eye login-eye--show" viewBox="0 0 24 24" aria-hidden="true"><path d="M2 12s3.5-7 10-7 10 7 10 7-3.5 7-10 7S2 12 2 12Z"></path><circle cx="12" cy="12" r="3"></circle></svg><svg class="login-eye login-eye--hide" viewBox="0 0 24 24" aria-hidden="true"><path d="m3 3 18 18"></path><path d="M10.6 5.2A10.9 10.9 0 0 1 12 5c6.5 0 10 7 10 7a17 17 0 0 1-3.4 4.2"></path><path d="M6.3 6.3C3.5 8.2 2 12 2 12s3.5 7 10 7a10.7 10.7 0 0 0 4.1-.8"></path><path d="M9.9 9.9a3 3 0 0 0 4.2 4.2"></path></svg></button></div><p class="login-field-error" id="password-error" hidden>Enter your password.</p></div><button class="login-submit" type="submit" data-login-submit><span class="login-submit__label">Sign In</span><span class="login-submit__spinner" aria-hidden="true"></span></button></form><div class="login-status" role="status" aria-live="polite" data-login-status></div></div></div></section></main><!-- Password reset placeholder --><dialog class="login-dialog" id="forgot-dialog" aria-labelledby="forgot-title"><div class="login-dialog__body"><span class="login-dialog__icon" aria-hidden="true"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"></circle><path d="M12 7v5l3 2"></path></svg></span><h2 id="forgot-title">Password reset is coming later</h2><p>Password recovery will be connected with the university authentication service in a later stage. This preview has no account database, so no reset email is sent.</p><button class="login-dialog__close" type="button" data-dialog-close>Close</button></div></dialog><script src="static/js/login.js"></script></body></html>

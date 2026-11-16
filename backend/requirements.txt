@@ -1,0 +1,8 @@
+# GM University Management System — backend dependencies
+# Pinned deliberately; update only after review.
+Flask==3.1.2
+mysql-connector-python==9.5.0
+python-dotenv==1.1.1
+
+# Development / test only
+pytest==8.4.2

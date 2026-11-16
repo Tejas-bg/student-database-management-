@@ -1,6 +1,6 @@
 # GM University Management System — Project Requirements
 
-> **Status:** Baseline requirements. At Stage 1, design and login requirements are In Review; all functional, database, security, testing, and submission requirements remain Not Started.
+> **Status:** Baseline requirements. At Stage 3, design, login, and database-design requirements are In Review; backend, security implementation, testing, and submission requirements remain Not Started.
 > **Rule:** Preserve the original college requirements. Add new requirements explicitly; do not silently remove any.
 
 ---
@@ -61,21 +61,21 @@
 
 | ID | Requirement | Stage | Verification | Status |
 |---|---|---|---|---|
-| DB-01 | The database shall be MySQL 8+ using InnoDB and `utf8mb4`. | 3 | `SHOW VARIABLES` / table check | Not Started |
-| DB-02 | Every table shall have a primary key. | 3 | Schema review | Not Started |
-| DB-03 | Relationships shall be enforced with foreign keys and explicit `ON DELETE`/`ON UPDATE` actions. | 3 | Schema review | Not Started |
-| DB-04 | The schema shall be normalized to 3NF. | 3 | Normalization review | Not Started |
-| DB-05 | The schema shall include `NOT NULL`, `UNIQUE`, `CHECK`, and `DEFAULT` constraints where appropriate. | 3 | Schema review | Not Started |
-| DB-06 | Money shall use `DECIMAL`, not `FLOAT` or `DOUBLE`. | 3 | Schema review | Not Started |
-| DB-07 | The schema shall include an ER diagram and data dictionary. | 3 | Document review | Not Started |
-| DB-08 | The project shall include DDL, DML, DQL, DCL, and TCL scripts. | 3, 6 | Script execution | Not Started |
-| DB-09 | The project shall demonstrate joins, subqueries, and aggregate functions. | 5–6 | Query review | Not Started |
-| DB-10 | The project shall include reporting views. | 6 | View execution | Not Started |
-| DB-11 | The project shall demonstrate transactions with `COMMIT`, `ROLLBACK`, and `SAVEPOINT`. | 6 | Transaction demo | Not Started |
-| DB-12 | The project shall demonstrate `GRANT` and `REVOKE`. | 6 | DCL script execution | Not Started |
-| DB-13 | Schema changes shall be delivered as numbered migrations. | 3 | Migration review | Not Started |
-| DB-14 | Seed data shall be fake and clearly labelled. | 3 | Data review | Not Started |
-| DB-15 | The final schema shall be reviewed and approved before implementation. | 3 | User approval | Not Started |
+| DB-01 | The database shall be MySQL 8+ using InnoDB and `utf8mb4`. | 3 | `SHOW VARIABLES` / table check | In Review (design; not executed) |
+| DB-02 | Every table shall have a primary key. | 3 | Schema review | In Review (24/24 statically verified) |
+| DB-03 | Relationships shall be enforced with foreign keys and explicit `ON DELETE`/`ON UPDATE` actions. | 3 | Schema review | In Review (design) |
+| DB-04 | The schema shall be normalized to 3NF. | 3 | Normalization review | In Review (report complete) |
+| DB-05 | The schema shall include `NOT NULL`, `UNIQUE`, `CHECK`, and `DEFAULT` constraints where appropriate. | 3 | Schema review | In Review (design) |
+| DB-06 | Money shall use `DECIMAL`, not `FLOAT` or `DOUBLE`. | 3 | Schema review | In Review (design) |
+| DB-07 | The schema shall include an ER diagram and data dictionary. | 3 | Document review | In Review (both complete) |
+| DB-08 | The project shall include DDL, DML, DQL, DCL, and TCL scripts. | 3, 6 | Script execution | In Review (scripts prepared; not executed) |
+| DB-09 | The project shall demonstrate joins, subqueries, and aggregate functions. | 5–6 | Query review | In Review (demonstration scripts prepared) |
+| DB-10 | The project shall include reporting views. | 6 | View execution | In Review (8 views prepared) |
+| DB-11 | The project shall demonstrate transactions with `COMMIT`, `ROLLBACK`, and `SAVEPOINT`. | 6 | Transaction demo | In Review (TCL script prepared) |
+| DB-12 | The project shall demonstrate `GRANT` and `REVOKE`. | 6 | DCL script execution | In Review (DCL script prepared) |
+| DB-13 | Schema changes shall be delivered as numbered migrations. | 3 | Migration review | Not Started (deferred to implementation) |
+| DB-14 | Seed data shall be fake and clearly labelled. | 3 | Data review | In Review (prepared, not loaded) |
+| DB-15 | The final schema shall be reviewed and approved before implementation. | 3 | User approval | In Review (awaiting user) |
 
 ---
 
@@ -149,18 +149,18 @@
 
 ## H. Requirements traceability summary
 
-> Statuses at Stage 1: **design and login requirements are In Review; all remaining functional, database, security, testing, and submission requirements remain Not Started.** Workspace documentation is not the same as requirement implementation.
+> Statuses at Stage 3: **design, login, and database-design requirements are In Review; backend, security implementation, testing, and submission requirements remain Not Started.** Workspace documentation is not the same as requirement implementation, and no SQL has been executed.
 
 | Requirement group | Total | Not Started | In Progress | In Review | Implemented | Tested | Blocked |
 |---|---|---|---|---|---|---|---|
 | Functional | 28 | 27 | 0 | 1 | 0 | 0 | 0 |
 | Non-functional | 10 | 10 | 0 | 0 | 0 | 0 | 0 |
-| Database | 15 | 15 | 0 | 0 | 0 | 0 | 0 |
+| Database | 15 | 1 | 0 | 14 | 0 | 0 | 0 |
 | Security | 12 | 12 | 0 | 0 | 0 | 0 | 0 |
 | UI/UX | 12 | 4 | 0 | 8 | 0 | 0 | 0 |
 | Testing | 8 | 8 | 0 | 0 | 0 | 0 | 0 |
 | Submission | 8 | 8 | 0 | 0 | 0 | 0 | 0 |
-| **Total** | **93** | **84** | **0** | **9** | **0** | **0** | **0** |
+| **Total** | **93** | **70** | **0** | **23** | **0** | **0** | **0** |
 
 ---
 
