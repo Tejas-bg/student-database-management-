@@ -1,0 +1,542 @@
+/* ==========================================================================
+   GM University Management System — Application layout
+   Defines the shell: sidebar, header, page grid, footer, and overlays.
+   Component-level styling lives in components.css.
+   ========================================================================== */
+
+/* --------------------------------------------------------------------------
+   1. App shell
+   Desktop: fixed sidebar + fluid content column.
+   -------------------------------------------------------------------------- */
+
+.nx-app {
+  min-height: 100vh;
+}
+
+.nx-shell {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  min-height: 100vh;
+  margin-left: var(--nx-sidebar-width);
+}
+
+.nx-shell--full {
+  margin-left: 0;
+}
+
+/* --------------------------------------------------------------------------
+   2. Sidebar
+   -------------------------------------------------------------------------- */
+
+.nx-sidebar {
+  position: fixed;
+  inset: 0 auto 0 0;
+  z-index: var(--nx-z-sidebar);
+  display: flex;
+  flex-direction: column;
+  width: var(--nx-sidebar-width);
+  padding: var(--nx-space-5) var(--nx-space-4) var(--nx-space-4);
+  background: var(--nx-sidebar-bg);
+  border-right: 1px solid var(--nx-border-subtle);
+  overflow-y: auto;
+  overscroll-behavior: contain;
+}
+
+.nx-sidebar__brand {
+  display: flex;
+  align-items: center;
+  gap: var(--nx-space-3);
+  padding: 0 var(--nx-space-2) var(--nx-space-5);
+}
+
+.nx-brand {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  color: var(--nx-text);
+}
+
+.nx-brand__mark {
+  display: grid;
+  place-items: center;
+  width: 40px;
+  height: 40px;
+  background: var(--nx-maroon);
+  flex: 0 0 auto;
+}
+
+.nx-brand__mark img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+.nx-brand__text {
+  display: flex;
+  flex-direction: column;
+  gap: 1px;
+}
+
+.nx-brand__name {
+  font-size: 1.0625rem;
+  font-weight: var(--nx-weight-semibold);
+  letter-spacing: 0.16em;
+  line-height: 1.1;
+}
+
+.nx-brand__tagline {
+  color: var(--nx-text-subtle);
+  font-family: var(--nx-font-mono);
+  font-size: 0.625rem;
+  letter-spacing: 0.04em;
+  text-transform: none;
+}
+
+.nx-sidebar__section {
+  padding: var(--nx-space-3) var(--nx-space-2);
+}
+
+.nx-sidebar__label {
+  margin: 0 0 var(--nx-space-2);
+  padding: 0 var(--nx-space-2);
+  color: var(--nx-text-subtle);
+  font-family: var(--nx-font-mono);
+  font-size: 0.625rem;
+  font-weight: var(--nx-weight-medium);
+  letter-spacing: var(--nx-tracking-wider);
+  text-transform: uppercase;
+}
+
+.nx-sidebar__nav {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.nx-sidebar__footer {
+  margin-top: auto;
+  padding-top: var(--nx-space-4);
+  border-top: 1px solid var(--nx-border-subtle);
+}
+
+.nx-sidebar__meta {
+  display: flex;
+  flex-direction: column;
+  gap: var(--nx-space-2);
+  padding: var(--nx-space-2);
+  color: var(--nx-text-muted);
+  font-size: var(--nx-text-xs);
+}
+
+.nx-sidebar__status {
+  display: flex;
+  align-items: center;
+  gap: var(--nx-space-2);
+}
+
+/* --------------------------------------------------------------------------
+   3. Header
+   -------------------------------------------------------------------------- */
+
+.nx-header {
+  position: sticky;
+  top: 0;
+  z-index: var(--nx-z-header);
+  display: flex;
+  align-items: center;
+  gap: var(--nx-space-4);
+  height: var(--nx-header-height);
+  padding: 0 var(--nx-page-pad);
+  background: var(--nx-header-bg);
+  border-bottom: 1px solid var(--nx-border-subtle);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+}
+
+.nx-header__leading {
+  display: flex;
+  align-items: center;
+  gap: var(--nx-space-3);
+  min-width: 0;
+}
+
+.nx-header__title {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  min-width: 0;
+}
+
+.nx-header__title strong {
+  font-size: var(--nx-text-sm);
+  font-weight: var(--nx-weight-semibold);
+  letter-spacing: var(--nx-tracking-normal);
+}
+
+.nx-header__title span {
+  color: var(--nx-text-subtle);
+  font-family: var(--nx-font-mono);
+  font-size: 0.625rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+.nx-header__search {
+  flex: 1 1 auto;
+  display: flex;
+  justify-content: center;
+  min-width: 0;
+  max-width: 460px;
+  margin-inline: auto;
+}
+
+.nx-header__actions {
+  display: flex;
+  align-items: center;
+  gap: var(--nx-space-2);
+}
+
+.nx-nav-toggle {
+  display: none;
+}
+
+/* --------------------------------------------------------------------------
+   4. Main content
+   -------------------------------------------------------------------------- */
+
+.nx-main {
+  flex: 1 1 auto;
+  width: 100%;
+  padding: var(--nx-space-5) var(--nx-page-pad) var(--nx-space-7);
+}
+
+.nx-page {
+  width: 100%;
+  max-width: var(--nx-content-max);
+  margin-inline: auto;
+  display: flex;
+  flex-direction: column;
+  gap: var(--nx-space-5);
+}
+
+/* Breadcrumbs ------------------------------------------------------------- */
+
+.nx-breadcrumb {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: var(--nx-space-2);
+  color: var(--nx-text-subtle);
+  font-family: var(--nx-font-mono);
+  font-size: 0.6875rem;
+  letter-spacing: 0.04em;
+}
+
+.nx-breadcrumb a {
+  color: var(--nx-text-muted);
+  border-radius: var(--nx-radius-sm);
+  transition: color var(--nx-duration-fast) var(--nx-ease-standard);
+}
+
+.nx-breadcrumb a:hover {
+  color: var(--nx-text);
+}
+
+.nx-breadcrumb__sep {
+  color: var(--nx-border-strong);
+}
+
+.nx-breadcrumb [aria-current="page"] {
+  color: var(--nx-text);
+}
+
+/* Welcome / hero ---------------------------------------------------------- */
+
+.nx-hero {
+  position: relative;
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: var(--nx-space-5);
+  flex-wrap: wrap;
+  padding: clamp(24px, 4vw, 40px);
+  border: 1px solid var(--nx-border-subtle);
+  border-radius: var(--nx-radius-lg);
+  background: var(--nx-surface);
+  overflow: hidden;
+}
+
+.nx-hero__copy {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  gap: var(--nx-space-3);
+  max-width: 62ch;
+}
+
+.nx-hero h1 {
+  font-size: clamp(1.75rem, 4vw, 2.5rem);
+  line-height: 1.12;
+}
+
+.nx-hero h1 em {
+  font-style: normal;
+  color: inherit;
+  background: linear-gradient(transparent 62%, var(--nx-accent-soft) 62%);
+  padding-inline: 2px;
+}
+
+.nx-hero__lede {
+  color: var(--nx-text-muted);
+  font-size: var(--nx-text-sm);
+  max-width: 58ch;
+}
+
+.nx-hero__aside {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  gap: var(--nx-space-3);
+  align-items: flex-start;
+}
+
+.nx-hero__meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--nx-space-2);
+}
+
+.nx-hero__pattern {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background-image: radial-gradient(var(--nx-dot) 1px, transparent 1px);
+  background-size: 18px 18px;
+  opacity: 0.55;
+  mask-image: linear-gradient(120deg, transparent 55%, #000 100%);
+  -webkit-mask-image: linear-gradient(120deg, transparent 55%, #000 100%);
+}
+
+/* Section headings -------------------------------------------------------- */
+
+.nx-section {
+  display: flex;
+  flex-direction: column;
+  gap: var(--nx-space-3);
+  min-width: 0;
+}
+
+.nx-section__head {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: var(--nx-space-3);
+  flex-wrap: wrap;
+}
+
+.nx-section__head h2 {
+  font-size: var(--nx-text-lg);
+}
+
+.nx-section__head p {
+  color: var(--nx-text-muted);
+  font-size: var(--nx-text-xs);
+}
+
+/* Grids ------------------------------------------------------------------- */
+
+.nx-grid {
+  display: grid;
+  gap: var(--nx-space-4);
+}
+
+.nx-grid--stats {
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+}
+
+.nx-grid--split {
+  grid-template-columns: minmax(0, 1.35fr) minmax(0, 1fr);
+  align-items: start;
+}
+
+.nx-grid--halves {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  align-items: start;
+}
+
+.nx-grid--thirds {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+.nx-stack {
+  display: flex;
+  flex-direction: column;
+  gap: var(--nx-space-4);
+  min-width: 0;
+}
+
+.nx-cluster {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: var(--nx-space-2);
+}
+
+/* Footer ------------------------------------------------------------------ */
+
+.nx-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--nx-space-3);
+  flex-wrap: wrap;
+  padding: var(--nx-space-4) var(--nx-page-pad) var(--nx-space-6);
+  color: var(--nx-text-subtle);
+  font-family: var(--nx-font-mono);
+  font-size: 0.6875rem;
+  letter-spacing: 0.03em;
+  border-top: 1px solid var(--nx-border-subtle);
+}
+
+.nx-footer a {
+  color: var(--nx-text-muted);
+}
+
+.nx-footer a:hover {
+  color: var(--nx-text);
+}
+
+/* --------------------------------------------------------------------------
+   5. Overlay (mobile navigation)
+   -------------------------------------------------------------------------- */
+
+.nx-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: var(--nx-z-overlay);
+  background: var(--nx-overlay);
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity var(--nx-duration-base) var(--nx-ease-standard),
+    visibility var(--nx-duration-base) var(--nx-ease-standard);
+}
+
+.nx-overlay.is-visible {
+  opacity: 1;
+  visibility: visible;
+}
+
+/* --------------------------------------------------------------------------
+   6. Styleguide page helpers
+   -------------------------------------------------------------------------- */
+
+.nx-doc {
+  display: flex;
+  flex-direction: column;
+  gap: var(--nx-space-6);
+  min-width: 0;
+}
+
+.nx-doc-block {
+  display: flex;
+  flex-direction: column;
+  gap: var(--nx-space-4);
+  min-width: 0;
+  padding: clamp(20px, 3vw, 32px);
+  border: 1px solid var(--nx-border-subtle);
+  border-radius: var(--nx-radius-lg);
+  background: var(--nx-surface);
+  scroll-margin-top: calc(var(--nx-header-height) + var(--nx-space-4));
+}
+
+.nx-doc-block > header {
+  display: flex;
+  flex-direction: column;
+  gap: var(--nx-space-2);
+  padding-bottom: var(--nx-space-4);
+  border-bottom: 1px solid var(--nx-border-subtle);
+}
+
+.nx-doc-block > header p {
+  color: var(--nx-text-muted);
+  font-size: var(--nx-text-sm);
+  max-width: 72ch;
+}
+
+.nx-doc-grid {
+  display: grid;
+  gap: var(--nx-space-4);
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+}
+
+.nx-swatch {
+  display: flex;
+  flex-direction: column;
+  border: 1px solid var(--nx-border-subtle);
+  border-radius: var(--nx-radius-md);
+  overflow: hidden;
+}
+
+.nx-swatch__chip {
+  height: 76px;
+  border-bottom: 1px solid var(--nx-border-subtle);
+}
+
+.nx-swatch__meta {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: var(--nx-space-2);
+  padding: var(--nx-space-3);
+}
+
+.nx-swatch__meta strong {
+  font-size: var(--nx-text-sm);
+}
+
+.nx-swatch__meta code {
+  color: var(--nx-text-muted);
+  font-family: var(--nx-font-mono);
+  font-size: 0.6875rem;
+}
+
+.nx-token-list {
+  display: flex;
+  flex-direction: column;
+  gap: var(--nx-space-2);
+  font-family: var(--nx-font-mono);
+  font-size: 0.6875rem;
+  color: var(--nx-text-muted);
+}
+
+.nx-token-list li {
+  display: flex;
+  justify-content: space-between;
+  gap: var(--nx-space-3);
+  padding-bottom: var(--nx-space-2);
+  border-bottom: 1px dashed var(--nx-border-subtle);
+}
+
+.nx-demo-row {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: var(--nx-space-3);
+}
+
+.nx-demo-tile {
+  display: grid;
+  place-items: center;
+  min-height: 96px;
+  padding: var(--nx-space-4);
+  border: 1px dashed var(--nx-border-strong);
+  border-radius: var(--nx-radius-md);
+  color: var(--nx-text-muted);
+  font-family: var(--nx-font-mono);
+  font-size: 0.6875rem;
+  text-align: center;
+}

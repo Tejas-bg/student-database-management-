@@ -1116,7 +1116,7 @@
 }
 
 /* --------------------------------------------------------------------------
-   13. Charts (static SVG / CSS, no chart library in Stage 1)
+   13. Charts (static SVG / CSS, no chart library in interface)
    -------------------------------------------------------------------------- */
 
 .nx-chart {
@@ -1549,28 +1549,6 @@
   line-height: 1.5;
 }
 
-.nx-demo-notice {
-  display: flex;
-  align-items: center;
-  gap: var(--nx-space-3);
-  flex-wrap: wrap;
-  padding: 10px var(--nx-space-4);
-  border: 1px dashed var(--nx-border-strong);
-  border-radius: var(--nx-radius-md);
-  background: var(--nx-surface-sunken);
-  color: var(--nx-text-muted);
-  font-size: var(--nx-text-xs);
-}
-
-.nx-demo-notice .nx-icon {
-  color: var(--nx-text-muted);
-}
-
-.nx-demo-notice strong {
-  color: var(--nx-text);
-  font-weight: var(--nx-weight-semibold);
-}
-
 /* --------------------------------------------------------------------------
    17. Dialogs (native <dialog>)
    -------------------------------------------------------------------------- */
@@ -1931,3 +1909,149 @@ details > summary:hover {
     animation: none;
   }
 }
+
+/* --------------------------------------------------------------------------
+   21. Page transition
+   Reusable fade-and-rise used by authenticated dashboard views and the static
+   application shell. Applied to the main content region rather than the whole
+   page to avoid layout shift and background flicker.
+   -------------------------------------------------------------------------- */
+
+.backend-main,
+.nx-main {
+  animation: nx-page-enter var(--nx-duration-slow) var(--nx-ease-standard) both;
+}
+
+@keyframes nx-page-enter {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .backend-main,
+  .nx-main {
+    animation: none;
+  }
+}
+
+/* --------------------------------------------------------------------------
+   22. Search results panel
+   Server-backed results rendered by the shared app shell below the header
+   search field. Loading, empty, and error states are all explicit.
+   -------------------------------------------------------------------------- */
+
+.nx-search-results {
+  display: flex;
+  flex-direction: column;
+  gap: var(--nx-space-3);
+  margin-top: var(--nx-space-5);
+  padding: var(--nx-space-5);
+  border: 1px solid var(--nx-border);
+  border-radius: var(--nx-radius-lg);
+  background: var(--nx-surface);
+}
+
+.nx-search-results[hidden] {
+  display: none;
+}
+
+.nx-search-results__head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--nx-space-3);
+}
+
+.nx-search-results__title {
+  margin: 0;
+  font-size: var(--nx-text-sm);
+  font-weight: var(--nx-weight-semibold);
+  color: var(--nx-text);
+}
+
+.nx-search-results__list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: var(--nx-space-2);
+}
+
+.nx-search-result {
+  border: 1px solid var(--nx-border-subtle);
+  border-radius: var(--nx-radius-md);
+  background: var(--nx-surface-sunken);
+  transition: border-color var(--nx-duration-fast) var(--nx-ease-standard);
+}
+
+.nx-search-result:hover {
+  border-color: var(--nx-focus);
+}
+
+.nx-search-result__link {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: var(--nx-space-3);
+  padding: var(--nx-space-3);
+  color: var(--nx-text);
+  text-decoration: none;
+}
+
+.nx-search-result__link:hover {
+  text-decoration: underline;
+}
+
+.nx-search-result__label {
+  font-size: var(--nx-text-sm);
+  font-weight: var(--nx-weight-medium);
+}
+
+.nx-search-result__meta {
+  font-size: var(--nx-text-xs);
+  color: var(--nx-text-muted);
+}
+
+.nx-search-results__empty {
+  padding: var(--nx-space-4);
+  color: var(--nx-text-muted);
+  font-size: var(--nx-text-sm);
+  text-align: center;
+}
+
+.nx-search-results.is-loading .nx-search-results__title::after {
+  content: "";
+  display: inline-block;
+  width: 12px;
+  height: 12px;
+  margin-left: 8px;
+  border: 2px solid var(--nx-border-strong);
+  border-top-color: var(--nx-text);
+  border-radius: 50%;
+  vertical-align: -1px;
+  animation: nx-spin 0.8s linear infinite;
+}
+
+.nx-search-results.is-error {
+  border-color: var(--nx-danger);
+}
+
+.nx-search-results__error {
+  margin: 0;
+  color: var(--nx-danger);
+  font-size: var(--nx-text-sm);
+}
+
+@keyframes nx-spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+

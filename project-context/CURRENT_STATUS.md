@@ -1,7 +1,7 @@
 # GM University Management System — Current Status
 
 > **This file must reflect verified reality, not intentions.**
-> **Last updated:** 2026-11-13 (Stage 4 Flask backend built, running against MySQL 8.4.9, and verified end to end; Stage 3 schema executed).
+> **Last updated:** 2026-11-17 (UI/API polish, account setup/reset tools, and full test suite verified).
 > **Update rule:** Change a status only after the work is implemented and verified.
 
 ---
@@ -11,9 +11,9 @@
 - **Current Stage:** Stage 4 – Flask Backend and Database Connection
 - **Project implementation status:** UI preview, a live MySQL database, and a working authenticated Flask backend serving the login system and the three role dashboards
 - **Frontend status:** Stage 2 shared shell and student/faculty/administration pages implemented and verified; Stage 4 login and landing templates added
-- **Backend status:** Running on http://127.0.0.1:5000 — application factory, blueprints, repositories, sessions, CSRF, RBAC, error pages, 22 passing tests
+- **Backend status:** Application factory, blueprints, repositories, sessions, CSRF, RBAC, feedback/search endpoints, error pages, 54 passing tests
 - **Database status:** Executed and live — 24 tables, 51 FKs, 8 views, 10 integrity triggers, fictional seed data
-- **Testing status:** 22 automated backend tests passing against MySQL; Stage 2 browser verification and Stage 3 static validation earlier
+- **Testing status:** 54 automated backend tests passing; suite uses MySQL-backed tests and isolated fakes as appropriate
 
 ---
 
@@ -22,7 +22,7 @@
 | Field | Value |
 |---|---|
 | Current stage | **Stage 4 — Flask Backend and Database Connection** |
-| Stage 4 deliverable state | Application factory, config, MySQL connection helpers, repositories, common login with sessions, server-side role checks, CSRF protection, safe error pages, role landing dashboards, and 22 tests — all passing against MySQL 8.4.9 |
+| Stage 4 deliverable state | Application factory, config, MySQL connection helpers, repositories, common login with sessions, server-side role checks, CSRF protection, safe error pages, role landing dashboards, and 54 passing tests |
 | Next stage | Stage 5 — Functional Module Development (not started) |
 | Approval required | No — Stage 4 was approved and has been implemented |
 
@@ -36,7 +36,7 @@
 | Frontend | **Stage 2 complete** | Stage 1 design system and login preview, plus the shared shell and 34 student/faculty/administration pages. |
 | Backend | **Stage 4 complete** | `backend/` runs on http://127.0.0.1:5000 with authentication, sessions, CSRF, RBAC, and error handlers. |
 | Database | **Live** | 24 tables, 51 FKs, 32 unique keys, 29 CHECK constraints, 25 secondary indexes, 8 views, and 10 integrity triggers executed in MySQL 8.4.9. |
-| Testing | **22 automated tests passing** | `pytest` runs against MySQL, not SQLite. Stage 2 browser verification and Stage 3 static validation remain as recorded evidence. |
+| Testing | **54 automated tests passing** | `pytest -q` passed on 2026-11-17; database integration tests use MySQL, with isolated route-flow tests using fakes. |
 | Documentation | **Current** | Stage 1/2 docs, the Stage 3 database documentation set, the Stage 4 backend README, and this status. |
 
 ---
@@ -112,11 +112,13 @@ The schema is created and live in the local MySQL 8.4.9 instance. Trigger negati
 - `backend/app/services/auth_service.py` — Werkzeug password verification and login bookkeeping.
 - `backend/app/auth/security.py` — session rotation, CSRF token handling, `login_required`, and `roles_required`.
 - `backend/app/routes/` — `auth.py` (login/logout), `dashboard.py` (role landing pages), `health.py`, and `prototype.py`.
+- `backend/scripts/create_sample_student_account.py` — confirmed, transactional local setup for the fictional `1GM23CS052` student; it has not been run, so no password was set and no account was added by this utility.
+- `backend/scripts/reset_account_password.py` — local operator utility for resetting active Admin, Student, or Faculty accounts; Admin IDs are listed from MySQL, and password hashes are verified before commit.
 - `backend/app/errors.py` — safe 400/401/403/404/405/500 pages that never leak internals.
 - `frontend/templates/login.html` — the Stage 2 login markup converted into a Jinja template that posts to the backend.
 - `frontend/templates/dashboard.html`, `errors/error.html`, `prototype_sign_out.html` — authenticated landing, error, and sign-out templates.
 - `frontend/static/css/backend.css` and `frontend/static/js/login-form.js` — styling and form behaviour for the live pages.
-- `tests/conftest.py`, `tests/unit/test_security.py`, and `tests/integration/test_auth.py` — 22 tests running against MySQL.
+- `tests/conftest.py`, `tests/unit/test_security.py`, and `tests/integration/` — 39 tests running against MySQL.
 
 ---
 
@@ -249,3 +251,4 @@ Anything not in this table is unverified.
 | 2026-11-13 | Applied the Stage 3 correction review: removed `student_enrolments.academic_year_id`, added `section`, added the composite timetable FK, added 10 integrity triggers, fixed the attendance/fee/workload views, removed usable seed hashes, and reconciled all documentation. Stage 3 marked Done; execution and trigger testing remain deferred. |
 | 2026-11-13 | Executed the Stage 3 schema, views, triggers, and seed data against MySQL 8.4.9; found and fixed `ERROR 3823` on `fk_notif_target_user`; confirmed 24 tables, 8 views, 10 triggers, and seed counts. |
 | 2026-11-13 | Stage 4: built the Flask backend, authenticated login, sessions, CSRF, RBAC, error pages, and role dashboards. 22 automated tests pass against MySQL; the app is running on http://127.0.0.1:5000. |
+| 2026-11-16 | Added and tested a transactional local setup utility for the fictional `1GM23CS052` student. The account itself remains absent until the operator runs the script and sets a password locally; the full MySQL suite reports 39 passing tests. |

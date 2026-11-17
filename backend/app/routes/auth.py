@@ -8,6 +8,7 @@ from flask import (
     Blueprint,
     current_app,
     flash,
+    jsonify,
     redirect,
     render_template,
     request,
@@ -15,7 +16,7 @@ from flask import (
     url_for,
 )
 
-from app.auth.security import login_required, safe_redirect_target, start_session
+from app.auth.security import csrf_token as issue_csrf_token, login_required, safe_redirect_target, start_session
 from app.services.auth_service import (
     authenticate,
     reset_password_with_token,
@@ -74,7 +75,37 @@ def login():
 @login_required
 def logout():
     session.clear()
-    return redirect(url_for("auth.login"))
+    return redirect(url_for("auth.login") + "?signed_out=1")
+
+
+@bp.get("/me")
+def me():
+    """Return the identity of the signed-in user for interface context.
+
+    Powers database-backed personalization (for example the time-aware
+    greeting) without exposing password data. Anonymous callers get a JSON 401.
+    """
+    if not session.get("user_id"):
+        return jsonify({"authenticated": False}), 401
+
+    return jsonify(
+        {
+            "authenticated": True,
+            "user_id": int(session.get("user_id")),
+            "role": session.get("role"),
+            "role_name": session.get("role_name"),
+            "display_name": session.get("display_name") or session.get("login_identifier") or "there",
+            "login_identifier": session.get("login_identifier"),
+            "student_id": session.get("student_id"),
+            "faculty_id": session.get("faculty_id"),
+        }
+    )
+
+
+@bp.get("/csrf-token")
+def csrf_token_endpoint():
+    """Issue the current CSRF token as JSON for fetch/AJAX submissions."""
+    return jsonify({"csrf_token": issue_csrf_token()})
 
 
 @bp.route("/forgot-password", methods=["GET", "POST"])

@@ -1,0 +1,271 @@
+/* ==========================================================================
+   GM University Management System — Responsive rules
+   Desktop first. Breakpoints document where the shell changes shape.
+   ========================================================================== */
+
+/* --------------------------------------------------------------------------
+   ≤ 1280px — tighten grids before the sidebar collapses
+   -------------------------------------------------------------------------- */
+
+@media (max-width: 1280px) {
+  .nx-grid--stats {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .nx-grid--thirds {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+/* --------------------------------------------------------------------------
+   ≤ 1120px — stack the two-column dashboard regions
+   -------------------------------------------------------------------------- */
+
+@media (max-width: 1120px) {
+  .nx-grid--split,
+  .nx-grid--halves {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}
+
+/* --------------------------------------------------------------------------
+   ≤ 1024px — sidebar becomes an off-canvas panel
+   -------------------------------------------------------------------------- */
+
+@media (max-width: 1024px) {
+  .nx-shell {
+    margin-left: 0;
+  }
+
+  .nx-sidebar {
+    width: min(300px, calc(100vw - 56px));
+    transform: translateX(-100%);
+    transition: transform var(--nx-duration-slow) var(--nx-ease-out);
+    box-shadow: var(--nx-shadow-lg);
+  }
+
+  .nx-sidebar.is-open {
+    transform: translateX(0);
+  }
+
+  .nx-nav-toggle {
+    display: inline-flex;
+  }
+
+  .nx-header__search {
+    max-width: none;
+  }
+
+  .nx-header__title strong {
+    font-size: var(--nx-text-xs);
+  }
+
+  body.nx-nav-open {
+    overflow: hidden;
+  }
+}
+
+/* --------------------------------------------------------------------------
+   ≤ 860px — compact header and single-column sections
+   -------------------------------------------------------------------------- */
+
+@media (max-width: 860px) {
+  .nx-header {
+    gap: var(--nx-space-2);
+  }
+
+  .nx-header__title {
+    display: none;
+  }
+
+  .nx-header__search kbd {
+    display: none;
+  }
+
+  .nx-header__search input {
+    padding-right: var(--nx-space-3);
+  }
+
+  .nx-profile-btn__meta {
+    display: none;
+  }
+
+  .nx-profile-btn {
+    padding: 3px;
+    border-radius: 50%;
+  }
+
+  .nx-grid--thirds {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .nx-hero {
+    align-items: flex-start;
+  }
+
+  .nx-hero__aside {
+    width: 100%;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .nx-footer {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: var(--nx-space-2);
+  }
+
+  .nx-quick-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+/* --------------------------------------------------------------------------
+   ≤ 640px — phone layout
+   -------------------------------------------------------------------------- */
+
+@media (max-width: 640px) {
+  :root {
+    --nx-header-height: 64px;
+  }
+
+  .nx-header {
+    padding-inline: var(--nx-space-4);
+  }
+
+  .nx-main {
+    padding: var(--nx-space-4) var(--nx-space-4) var(--nx-space-6);
+  }
+
+  .nx-grid--stats {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: var(--nx-space-3);
+  }
+
+  .nx-stat {
+    padding: var(--nx-space-3);
+  }
+
+  .nx-stat__value {
+    font-size: 1.625rem;
+  }
+
+  .nx-stat__foot {
+    font-size: 0.6875rem;
+  }
+
+  .nx-hero {
+    padding: var(--nx-space-4);
+  }
+
+  .nx-hero h1 {
+    font-size: 1.5rem;
+  }
+
+  .nx-hero__aside {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .nx-bars {
+    height: 140px;
+    gap: var(--nx-space-2);
+  }
+
+  .nx-bar__fill {
+    max-width: 22px;
+  }
+
+  .nx-donut-row {
+    justify-content: center;
+  }
+
+  .nx-quick-grid {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .nx-dialog__head,
+  .nx-dialog__body,
+  .nx-dialog__foot {
+    padding-inline: var(--nx-space-4);
+  }
+
+  .nx-dialog__foot {
+    flex-direction: column-reverse;
+    align-items: stretch;
+  }
+
+  .nx-dialog__foot .nx-btn {
+    width: 100%;
+  }
+
+  .nx-toast-region {
+    right: var(--nx-space-3);
+    left: var(--nx-space-3);
+    bottom: var(--nx-space-3);
+    width: auto;
+  }
+
+  .nx-activity__item {
+    grid-template-columns: 30px minmax(0, 1fr);
+  }
+
+  .nx-activity__time {
+    grid-column: 2;
+    padding-top: 0;
+  }
+}
+
+/* --------------------------------------------------------------------------
+   ≤ 420px — very small phones
+   -------------------------------------------------------------------------- */
+
+@media (max-width: 420px) {
+  .nx-grid--stats {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .nx-header__search {
+    display: none;
+  }
+
+  .nx-section__head {
+    flex-direction: column;
+    gap: var(--nx-space-1);
+  }
+
+  .nx-demo-notice {
+    align-items: flex-start;
+  }
+}
+
+/* --------------------------------------------------------------------------
+   Print
+   -------------------------------------------------------------------------- */
+
+@media print {
+  .nx-sidebar,
+  .nx-header,
+  .nx-footer,
+  .nx-overlay,
+  .nx-toast-region,
+  .nx-hero__pattern {
+    display: none !important;
+  }
+
+  .nx-shell {
+    margin-left: 0;
+  }
+
+  .nx-main {
+    padding: 0;
+  }
+
+  .nx-card,
+  .nx-stat,
+  .nx-doc-block {
+    border-color: var(--nx-print-border);
+    break-inside: avoid;
+  }
+}

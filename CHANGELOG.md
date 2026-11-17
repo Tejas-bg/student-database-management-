@@ -6,6 +6,53 @@ The format is simple: date, stage, what changed, and why. It is not a commit log
 
 ---
 
+## 2026-11-17 — GitHub publication safety
+
+### Changed
+
+- Removed the hard-coded shared demo password from the local bulk-reset utility; it now prompts for a strong temporary password and uses the Flask `.env` database configuration.
+- Password reset is verified within a transaction before commit, and generated SQL database dumps are ignored.
+- Removed password values from the UI polish report.
+
+### Verified
+
+- `pytest -q` — 54 tests passed against the current test configuration.
+- `.env` is ignored and not tracked. Generated local SQL dumps are excluded from the pending commit.
+
+---
+
+## 2026-11-16 — Admin and Faculty password reset utility
+
+### Fixed
+
+- `backend/scripts/reset_account_password.py` now resolves the Admin login ID from active database accounts instead of assuming `admin@gmail.com`.
+- Password changes are verified before the transaction commits; failed verification rolls back.
+- The utility now uses the Flask app's `.env` configuration and no longer creates a full database dump for a password-only update.
+
+### Added
+
+- `tests/unit/test_password_reset.py` — verifies commit-after-success and rollback-on-verification-failure behavior.
+
+---
+
+## 2026-11-16 — Local demo student account setup
+
+### Added
+
+- `backend/scripts/create_sample_student_account.py` — a local-only, confirmed setup utility for the fictional `1GM23CS052` account. It prompts for a password without echoing it, stores a Werkzeug hash, checks for conflicts and required reference rows, and commits the user and student records together.
+- `tests/integration/test_sample_account_setup.py` — MySQL integration coverage for password policy, creation, duplicate rejection, and transaction rollback.
+
+### Notes
+
+- The utility has not been used to create the account; the operator must run it and choose a password locally.
+
+### Verified
+
+- `python -m pytest -q` — 39 tests passed against the configured MySQL database.
+- The integration test rolled back its sample account; a follow-up query confirmed `1GM23CS052` remains absent until the operator runs the utility.
+
+---
+
 ## 2026-11-13 - Stage 4: Flask backend, login system, and role dashboards
 
 ### Added

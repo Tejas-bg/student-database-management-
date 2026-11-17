@@ -27,6 +27,8 @@ instance/
 *.dump
 *.sql.gz
 *.bak
+/backup/gmu_management_system_backup_*.sql
+/backend/backup/gmu_management_system_backup_*.sql
 
 # Node (only if a frontend build tool is ever approved)
 node_modules/

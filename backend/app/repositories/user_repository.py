@@ -6,7 +6,43 @@ from mysql.connector.cursor import MySQLCursor
 
 from app.models.user import User
 
-_FIND_USER_SQL = """
+def _aadhaar_columns_available(cursor: MySQLCursor) -> tuple[bool, bool]:
+    """Return whether students/faculty expose an ``aadhaar`` column.
+
+    The schema used by some deployments includes Aadhaar columns while the
+    base schema does not.  Probing keeps authentication working against both.
+    """
+    student_has_aadhaar = False
+    faculty_has_aadhaar = False
+    try:
+        cursor.execute("SHOW COLUMNS FROM students LIKE 'aadhaar'")
+        student_has_aadhaar = cursor.fetchone() is not None
+    except Exception:
+        student_has_aadhaar = False
+    try:
+        cursor.execute("SHOW COLUMNS FROM faculty LIKE 'aadhaar'")
+        faculty_has_aadhaar = cursor.fetchone() is not None
+    except Exception:
+        faculty_has_aadhaar = False
+    return student_has_aadhaar, faculty_has_aadhaar
+
+
+def _identifier_conditions(student_aadhaar: bool, faculty_aadhaar: bool) -> list[str]:
+    conditions = [
+        "u.login_identifier = %s",
+        "s.usn = %s",
+        "f.employee_id = %s",
+    ]
+    if student_aadhaar:
+        conditions.append("s.aadhaar = %s")
+    if faculty_aadhaar:
+        conditions.append("f.aadhaar = %s")
+    return conditions
+
+
+def _find_user_sql(student_aadhaar: bool, faculty_aadhaar: bool) -> str:
+    where = "\n   OR ".join(_identifier_conditions(student_aadhaar, faculty_aadhaar))
+    return f"""
 SELECT
     u.user_id,
     u.login_identifier,
@@ -28,11 +64,7 @@ FROM users AS u
 JOIN roles AS r ON r.role_id = u.role_id
 LEFT JOIN students AS s ON s.user_id = u.user_id
 LEFT JOIN faculty AS f ON f.user_id = u.user_id
-WHERE u.login_identifier = %s
-   OR s.usn = %s
-   OR f.employee_id = %s
-   OR s.aadhaar = %s
-   OR f.aadhaar = %s
+WHERE {where}
 LIMIT 1
 """
 
@@ -40,30 +72,31 @@ LIMIT 1
 def find_by_identifier(cursor: MySQLCursor, identifier: str) -> User | None:
     """Return the account matching an identifier, or ``None``.
 
-    The identifier is tried against five fields:
-    1. users.login_identifier (covers admin identifiers like admin@domain.com)
-    2. students.usn (covers student USN numbers)
-    3. faculty.employee_id (covers faculty employee IDs)
-    4. students.aadhaar (covers student Aadhaar numbers)
-    5. faculty.aadhaar (covers faculty Aadhaar numbers)
+    The identifier is tried against the account login identifier plus the
+    role-specific identifiers (USN / employee ID) and, where the schema
+    exposes them, Aadhaar numbers.
 
-    Ambiguous matches (more than one distinct user matching any of the five
+    Ambiguous matches (more than one distinct user matching any of the
     fields) are rejected safely by returning ``None`` rather than
     authenticating the wrong account.
     """
+    student_aadhaar, faculty_aadhaar = _aadhaar_columns_available(cursor)
+    conditions = _identifier_conditions(student_aadhaar, faculty_aadhaar)
+    where = "\n           OR ".join(conditions)
+    placeholder_count = len(conditions)
+
     # Detect ambiguous matches: count distinct users matching any identifier field
-    cursor.execute("""
+    cursor.execute(
+        f"""
         SELECT COUNT(DISTINCT u.user_id) AS match_count
         FROM users AS u
         JOIN roles AS r ON r.role_id = u.role_id
         LEFT JOIN students AS s ON s.user_id = u.user_id
         LEFT JOIN faculty AS f ON f.user_id = u.user_id
-        WHERE u.login_identifier = %s
-           OR s.usn = %s
-           OR f.employee_id = %s
-           OR s.aadhaar = %s
-           OR f.aadhaar = %s
-    """, (identifier, identifier, identifier, identifier, identifier))
+        WHERE {where}
+        """,
+        (identifier,) * placeholder_count,
+    )
 
     row = cursor.fetchone()
     match_count = row["match_count"] if row else 0
@@ -76,7 +109,10 @@ def find_by_identifier(cursor: MySQLCursor, identifier: str) -> User | None:
         return None
 
     # Exactly one match - proceed with authentication lookup
-    cursor.execute(_FIND_USER_SQL, (identifier, identifier, identifier, identifier, identifier))
+    cursor.execute(
+        _find_user_sql(student_aadhaar, faculty_aadhaar),
+        (identifier,) * placeholder_count,
+    )
     row = cursor.fetchone()
     if row is None:
         return None

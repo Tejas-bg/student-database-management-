@@ -1,8 +1,8 @@
 /* ==========================================================================
-   GM University Management System — Interaction layer (Stage 1)
-   Stage 1 is a visual preview. Everything here is interface behaviour only:
-   navigation drawer, dropdown menus, tabs, dialogs, and toasts. There is no
-   backend, no authentication, and no database connection.
+   GM University Management System — Interaction layer (interface)
+   interface is a visual preview. Everything here is interface behaviour only:
+   dropdown menus, tabs, dialogs, and toasts. There is no backend, no
+   authentication, and no database connection.
    ========================================================================== */
 
 (function () {
@@ -11,119 +11,6 @@
   var reduceMotion = window.matchMedia
     ? window.matchMedia("(prefers-reduced-motion: reduce)")
     : { matches: false };
-
-  /* ------------------------------------------------------------------------
-     Mobile navigation drawer
-     ------------------------------------------------------------------------ */
-
-  function initNavigation() {
-    var sidebar = document.querySelector("[data-sidebar]");
-    var toggle = document.querySelector("[data-nav-toggle]");
-    var overlay = document.querySelector("[data-nav-overlay]");
-    var shell = document.querySelector(".nx-shell");
-
-    if (!sidebar || !toggle) {
-      return;
-    }
-
-    var lastFocused = null;
-
-    function focusableItems() {
-      return Array.prototype.slice
-        .call(sidebar.querySelectorAll("a[href], button:not([disabled]), input, select, textarea"))
-        .filter(function (el) {
-          return el.offsetParent !== null;
-        });
-    }
-
-    function setOpen(open) {
-      sidebar.classList.toggle("is-open", open);
-      document.body.classList.toggle("nx-nav-open", open);
-      toggle.setAttribute("aria-expanded", String(open));
-      toggle.setAttribute("aria-label", open ? "Close navigation" : "Open navigation");
-
-      if (overlay) {
-        overlay.classList.toggle("is-visible", open);
-        overlay.hidden = false;
-      }
-
-      // The drawer behaves like a modal panel on small screens: everything
-      // outside it becomes inert while it is open.
-      if (shell) {
-        shell.inert = open;
-      }
-
-      if (open) {
-        var active = document.activeElement;
-        lastFocused = active && active !== document.body ? active : toggle;
-        var firstLink = focusableItems()[0] || sidebar.querySelector("a, button");
-        if (firstLink) {
-          firstLink.focus({ preventScroll: true });
-        }
-      } else {
-        if (shell) {
-          shell.inert = false;
-        }
-        if (lastFocused && lastFocused.isConnected && typeof lastFocused.focus === "function") {
-          lastFocused.focus({ preventScroll: true });
-        } else {
-          toggle.focus({ preventScroll: true });
-        }
-      }
-    }
-
-    toggle.addEventListener("click", function () {
-      setOpen(toggle.getAttribute("aria-expanded") !== "true");
-    });
-
-    if (overlay) {
-      overlay.addEventListener("click", function () {
-        setOpen(false);
-      });
-    }
-
-    sidebar.addEventListener("click", function (event) {
-      var link = event.target.closest("a");
-      if (link && window.innerWidth <= 1024) {
-        setOpen(false);
-      }
-    });
-
-    document.addEventListener("keydown", function (event) {
-      if (!sidebar.classList.contains("is-open")) {
-        return;
-      }
-
-      if (event.key === "Escape") {
-        setOpen(false);
-        return;
-      }
-
-      // Keep Tab inside the open drawer.
-      if (event.key === "Tab") {
-        var items = focusableItems();
-        if (!items.length) {
-          return;
-        }
-        var first = items[0];
-        var last = items[items.length - 1];
-
-        if (event.shiftKey && document.activeElement === first) {
-          event.preventDefault();
-          last.focus();
-        } else if (!event.shiftKey && document.activeElement === last) {
-          event.preventDefault();
-          first.focus();
-        }
-      }
-    });
-
-    window.addEventListener("resize", function () {
-      if (window.innerWidth > 1024 && sidebar.classList.contains("is-open")) {
-        setOpen(false);
-      }
-    });
-  }
 
   /* ------------------------------------------------------------------------
      Dropdown menus
@@ -371,7 +258,7 @@
     document.querySelectorAll("[data-toast]").forEach(function (trigger) {
       trigger.addEventListener("click", function (event) {
         var parts = trigger.getAttribute("data-toast").split("|");
-        toast(parts[0] || "Preview", parts[1] || "This action is not wired up in Stage 1.");
+        toast(parts[0] || "Preview", parts[1] || "This action is not wired up in interface.");
         if (trigger.tagName === "A" && (trigger.getAttribute("href") || "#") === "#") {
           event.preventDefault();
         }
@@ -399,7 +286,7 @@
         if (count) {
           count.remove();
         }
-        toast("Notifications cleared", "All demo notifications are marked as read.");
+        toast("Notifications cleared", "All notifications are marked as read.");
       });
     }
   }
@@ -460,7 +347,6 @@
      ------------------------------------------------------------------------ */
 
   function boot() {
-    initNavigation();
     initMenus();
     initTabs();
     initDialogs();

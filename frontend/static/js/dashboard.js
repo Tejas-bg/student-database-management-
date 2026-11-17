@@ -1,10 +1,10 @@
 /* ==========================================================================
-   GM University Management System — Dashboard interaction layer (Stage 2)
+   GM University Management System — Dashboard interaction layer (interface)
 
    Frontend-only behaviour for the demonstration workspaces:
 
      - live table search and chip filters
-     - client-side pagination of sample rows
+     - client-side pagination of rows
      - header search that filters the current page's tables
      - demo form submissions that never send data anywhere
      - a "/" shortcut to focus search
@@ -104,8 +104,8 @@
 
         if (info) {
           info.textContent = visible.length
-            ? "Showing " + (start + 1) + "–" + end + " of " + visible.length + " sample records"
-            : "No sample records match these filters";
+            ? "Showing " + (start + 1) + "–" + end + " of " + visible.length + " records"
+            : "No records match these filters";
         }
         if (prev) {
           prev.disabled = state.page <= 1;
@@ -262,7 +262,7 @@
           summary.textContent = "0 unread";
         }
 
-        notify("Notifications marked read", "This only changes the sample interface. Nothing was stored or sent.");
+        notify("Notifications marked read", "This only changes the interface. Nothing was stored or sent.");
       });
     });
   }
@@ -277,8 +277,160 @@
         event.preventDefault();
         var message =
           form.getAttribute("data-demo-message") ||
-          "This form is a Stage 2 interface preview. Nothing was validated, stored, or sent to a server.";
-        notify("Preview only — nothing saved", message);
+          "This form is an interface preview. Nothing was validated, stored, or sent to a server.";
+        notify("Action not saved", message);
+      });
+    });
+  }
+
+  /* ------------------------------------------------------------------------
+     Feedback page wiring — courses from enrolment, faculty from assignment
+     ------------------------------------------------------------------------ */
+
+  function initFeedbackPage() {
+    var form = document.querySelector("#fb-form");
+    var courseSelect = document.querySelector("#fb-course");
+    var facultySelect = document.querySelector("#fb-faculty");
+    var termSelect = document.querySelector("#fb-term");
+    var hint = document.querySelector("#fb-faculty-hint");
+    if (!form || !courseSelect) {
+      return;
+    }
+
+    function loadCourses() {
+      fetch("/feedback/courses", { credentials: "same-origin" })
+        .then(function (response) { return response.ok ? response.json() : Promise.reject(new Error("courses")); })
+        .then(function (payload) {
+          var courses = (payload && payload.courses) || [];
+          courseSelect.innerHTML = '<option value="">Select a course</option>';
+          courses.forEach(function (course) {
+            var option = document.createElement("option");
+            option.value = String(course.subject_id);
+            option.textContent = ((course.subject_code || "") + " - " + (course.subject_name || "")).trim() + " (Semester " + (course.semester_number || "") + ")";
+            courseSelect.appendChild(option);
+            if (!window.FEEDBACK_COURSES) {
+              window.FEEDBACK_COURSES = {};
+            }
+            window.FEEDBACK_COURSES[String(course.subject_id)] = { semester_id: course.semester_id, subject_name: course.subject_name };
+          });
+        })
+        .catch(function () { /* keep the placeholder option */ });
+    }
+
+    function loadFaculty(subjectId, semesterId) {
+      if (!subjectId || !semesterId) {
+        if (facultySelect) { facultySelect.disabled = true; }
+        if (hint) { hint.hidden = false; }
+        return;
+      }
+      fetch("/feedback/faculty?subject_id=" + encodeURIComponent(String(subjectId)) + "&semester_id=" + encodeURIComponent(String(semesterId)), { credentials: "same-origin" })
+        .then(function (response) { return response.ok ? response.json() : Promise.reject(new Error("faculty")); })
+        .then(function (payload) {
+          var faculty = (payload && payload.faculty) || [];
+          facultySelect.innerHTML = '<option value="">Select faculty</option>';
+          faculty.forEach(function (member) {
+            var option = document.createElement("option");
+            option.value = String(member.faculty_id);
+            option.textContent = ((member.first_name || "") + " " + (member.last_name || "")).trim() + " - " + (member.designation || "");
+            facultySelect.appendChild(option);
+          });
+          if (facultySelect) { facultySelect.disabled = faculty.length === 0; }
+          if (hint) { hint.hidden = faculty.length > 0; }
+        })
+        .catch(function () { /* keep the placeholder option */ });
+    }
+
+    if (facultySelect && termSelect) {
+      courseSelect.addEventListener("change", function () {
+        var courseId = courseSelect.value ? parseInt(courseSelect.value, 10) : null;
+        var course = courseId ? (window.FEEDBACK_COURSES || {})[String(courseId)] : null;
+        loadFaculty(courseId, course ? course.semester_id : null);
+        if (termSelect) { termSelect.disabled = !courseId; }
+      });
+      loadCourses();
+    }
+  }
+
+  /* ------------------------------------------------------------------------
+     Feedback submission — validated, then persisted through the API
+     ------------------------------------------------------------------------ */
+
+  function submitFeedback(form) {
+    var courseSelect = form.querySelector("#fb-course");
+    var facultySelect = form.querySelector("#fb-faculty");
+    var termSelect = form.querySelector("#fb-term");
+    var ratingInput = null;
+    Array.prototype.forEach.call(form.querySelectorAll('input[name="rating"]'), function (input) {
+      if (input.checked) {
+        ratingInput = input;
+      }
+    });
+    var comment = form.querySelector("#fb-comment");
+    var consent = form.querySelector('input[name="consent"]');
+
+    var courseId = courseSelect ? parseInt(courseSelect.value, 10) : null;
+    var facultyId = facultySelect ? parseInt(facultySelect.value, 10) : null;
+    var semesterId = termSelect ? parseInt(termSelect.value, 10) : null;
+    var rating = ratingInput ? parseInt(ratingInput.value, 10) : null;
+    var comments = comment ? (comment.value || "").trim() : "";
+
+    if (!courseId) {
+      notify("Feedback not submitted", "Please choose a course first.");
+      return;
+    }
+    if (!facultyId) {
+      notify("Feedback not submitted", "Please choose a faculty member for the course.");
+      return;
+    }
+    if (!rating) {
+      notify("Feedback not submitted", "Please choose an overall rating.");
+      return;
+    }
+    if (consent && !consent.checked) {
+      notify("Feedback not submitted", "Please accept the consent statement to submit.");
+      return;
+    }
+
+    fetch("/auth/csrf-token", { credentials: "same-origin" })
+      .then(function (response) { return response.ok ? response.json() : Promise.reject(new Error("csrf")); })
+      .then(function (payload) {
+        return fetch("/feedback", {
+          method: "POST",
+          credentials: "same-origin",
+          headers: {
+            "Content-Type": "application/json",
+            "X-CSRF-Token": payload.csrf_token,
+          },
+          body: JSON.stringify({
+            subject_id: courseId,
+            faculty_id: facultyId,
+            semester_id: semesterId,
+            rating: rating,
+            comments: comments,
+            is_anonymous: false,
+          }),
+        }).then(function (response) {
+          return response.json().then(function (body) { return { ok: response.ok, body: body }; });
+        });
+      })
+      .then(function (result) {
+        if (result.ok) {
+          notify("Feedback submitted", "Thank you. Your course feedback was recorded.");
+          form.reset();
+        } else {
+          notify("Feedback could not be submitted", (result.body && result.body.message) || "Please try again.");
+        }
+      })
+      .catch(function () {
+        notify("Feedback could not be submitted", "Please try again.");
+      });
+  }
+
+  function initFeedbackForms() {
+    document.querySelectorAll("[data-feedback-form]").forEach(function (form) {
+      form.addEventListener("submit", function (event) {
+        event.preventDefault();
+        submitFeedback(form);
       });
     });
   }
@@ -312,6 +464,8 @@
     initLists();
     initMarkRead();
     initForms();
+    initFeedbackForms();
+    initFeedbackPage();
     initShortcut();
   });
 })();

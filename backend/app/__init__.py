@@ -37,12 +37,14 @@ def create_app(test_config: dict | None = None) -> Flask:
 
     from app.routes.auth import bp as auth_bp
     from app.routes.dashboard import bp as dashboard_bp
+    from app.routes.feedback import bp as feedback_bp
     from app.routes.health import bp as health_bp
     from app.routes.prototype import bp as prototype_bp
     from app.routes.students import bp as students_bp
 
     app.register_blueprint(auth_bp)
     app.register_blueprint(dashboard_bp)
+    app.register_blueprint(feedback_bp)
     app.register_blueprint(health_bp)
     app.register_blueprint(prototype_bp)
     app.register_blueprint(students_bp)
@@ -72,15 +74,25 @@ def create_app(test_config: dict | None = None) -> Flask:
 
     @app.context_processor
     def inject_globals():
-        return {
-            "session_user": {
+        # Identity comes from the server-side session so every template renders
+        # the same role and account details, including the student CRUD pages.
+        user = (
+            {
                 "user_id": session.get("user_id"),
                 "role": session.get("role"),
                 "role_name": session.get("role_name"),
                 "display_name": session.get("display_name"),
+                "login_identifier": session.get("login_identifier"),
             }
             if session.get("user_id")
-            else None,
+            else None
+        )
+        return {
+            "session_user": user,
+            "role": user["role"] if user else None,
+            "role_name": user["role_name"] if user else None,
+            "display_name": user["display_name"] if user else None,
+            "login_identifier": user["login_identifier"] if user else None,
             "app_name": "GM University Management System",
         }
 

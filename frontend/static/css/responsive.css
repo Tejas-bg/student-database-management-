@@ -29,27 +29,49 @@
 }
 
 /* --------------------------------------------------------------------------
-   ≤ 1024px — sidebar becomes an off-canvas panel
+   ≤ 1024px — sidebar stays visible as a compact icon rail
    -------------------------------------------------------------------------- */
 
 @media (max-width: 1024px) {
   .nx-shell {
-    margin-left: 0;
+    margin-left: 76px;
   }
 
   .nx-sidebar {
-    width: min(300px, calc(100vw - 56px));
-    transform: translateX(-100%);
-    transition: transform var(--nx-duration-slow) var(--nx-ease-out);
-    box-shadow: var(--nx-shadow-lg);
+    width: 76px;
+    padding-inline: 10px;
   }
 
-  .nx-sidebar.is-open {
-    transform: translateX(0);
+  .nx-brand {
+    justify-content: center;
   }
 
-  .nx-nav-toggle {
-    display: inline-flex;
+  .nx-brand__text,
+  .nx-sidebar__label,
+  .nx-sidebar__footer {
+    display: none;
+  }
+
+  .nx-sidebar__section {
+    padding-inline: 0;
+  }
+
+  .nx-nav-item {
+    justify-content: center;
+    padding-inline: 0;
+  }
+
+  /* Keep link names available to assistive technology in icon-rail mode. */
+  .nx-nav-item__text {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
   }
 
   .nx-header__search {
@@ -58,10 +80,6 @@
 
   .nx-header__title strong {
     font-size: var(--nx-text-xs);
-  }
-
-  body.nx-nav-open {
-    overflow: hidden;
   }
 }
 
@@ -74,6 +92,7 @@
     gap: var(--nx-space-2);
   }
 
+  .nx-header__leading,
   .nx-header__title {
     display: none;
   }
@@ -234,10 +253,6 @@
     flex-direction: column;
     gap: var(--nx-space-1);
   }
-
-  .nx-demo-notice {
-    align-items: flex-start;
-  }
 }
 
 /* --------------------------------------------------------------------------
@@ -248,7 +263,6 @@
   .nx-sidebar,
   .nx-header,
   .nx-footer,
-  .nx-overlay,
   .nx-toast-region,
   .nx-hero__pattern {
     display: none !important;

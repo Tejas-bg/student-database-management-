@@ -111,17 +111,43 @@ def request_password_reset(email: str) -> bool:
     return True
 
 
+def _lookup_reset_token(token: str, cursor) -> int | None:
+    """Return the user_id for a valid, unused, unexpired reset token.
+
+    This does not consume the token; consumption happens once the password
+    has actually been updated.
+    """
+    token_hash = user_repository.hash_token(token)
+    cursor.execute(
+        """
+        SELECT user_id, expires_at, used_at
+        FROM password_reset_tokens
+        WHERE token_hash = %s
+        LIMIT 1
+        """,
+        (token_hash,),
+    )
+    row = cursor.fetchone()
+    if row is None or row["used_at"] is not None:
+        return None
+    expires_at = row["expires_at"]
+    if expires_at.tzinfo is None:
+        expires_at = expires_at.replace(tzinfo=timezone.utc)
+    if expires_at < datetime.now(timezone.utc):
+        return None
+    return int(row["user_id"])
+
+
 def verify_reset_token(token: str) -> dict | None:
     """Verify a password reset token and return the user info if valid.
 
     Returns a dict with user_id, login_identifier, email if valid, None otherwise.
+    The token is not consumed here.
     """
-    token_hash = user_repository.hash_token(token)
     with get_cursor() as cursor:
-        user_id = user_repository.consume_password_reset_token(cursor, token_hash)
+        user_id = _lookup_reset_token(token, cursor)
         if user_id is None:
             return None
-        # Get user details
         cursor.execute(
             """
             SELECT u.user_id, u.login_identifier, u.email
@@ -166,6 +192,10 @@ def reset_password_with_token(token: str, new_password: str) -> bool:
             WHERE user_id = %s
             """,
             (new_hash, user_info["user_id"]),
+        )
+        # Consume the token only after the password update has succeeded.
+        user_repository.consume_password_reset_token(
+            cursor, user_repository.hash_token(token)
         )
 
     return True

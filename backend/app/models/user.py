@@ -24,4 +24,7 @@ class User:
 
     @property
     def is_login_allowed(self) -> bool:
-        return self.is_active and self.account_status == "active"
+        # A seeded account becomes usable once an operator has set a real
+        # password. ``pending_reset`` is therefore treated as login-capable,
+        # while inactive/locked accounts remain rejected.
+        return self.is_active and self.account_status in {"active", "pending_reset"}

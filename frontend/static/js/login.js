@@ -203,7 +203,7 @@
     loadingTimer = window.setTimeout(function () {
       setLoading(false);
       setStatus(
-        "Preview only — no credentials were sent or checked. Sign-in will connect to the university account system in a later stage."
+        "Sign-in will connect to the university account system in a later stage."
       );
     }, 900);
   });

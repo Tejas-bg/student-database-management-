@@ -1,32 +1,5 @@
 #!/usr/bin/env python
-"""
-GM University Management System — Secure Password Reset Utility
-
-Resets the password for existing Admin, Student, or Faculty accounts
-without requiring the old password. Only the password_hash field is updated.
-
-USAGE:
-    cd c:\\Users\\tejas\\Documents\\NEXUS\\backend
-    .venv\\Scripts\\python.exe scripts\\reset_account_password.py
-
-This utility:
-  - Uses the existing Flask application configuration (.env) for database
-    connection settings.
-  - Connects to the existing gmu_management_system MySQL database.
-  - Uses Werkzeug's generate_password_hash() / check_password_hash() for
-    password hashing and verification (same approach as the application).
-  - Uses parameterized SQL queries to prevent SQL injection.
-  - Uses a database transaction with COMMIT only after successful verification,
-    ROLLBACK on error.
-  - Creates a backup before the first password change in a session.
-  - Never stores plaintext passwords.
-  - Never modifies any field other than password_hash.
-  - Never creates, deletes, or renames accounts.
-  - Never exposes passwords or password hashes in output.
-
-WARNING: This utility modifies live database records. Run only when you
-intentionally want to change a password.
-"""
+"""Reset an existing active GMU account from the local operator terminal."""
 
 from __future__ import annotations
 
@@ -42,10 +15,11 @@ from werkzeug.security import check_password_hash, generate_password_hash
 # ---------------------------------------------------------------------------
 # Load project configuration (same as the Flask application)
 # ---------------------------------------------------------------------------
-PROJECT_ROOT = Path(__file__).resolve().parent.parent
-BACKEND_DIR = PROJECT_ROOT / "backend"
-sys.path.insert(0, str(BACKEND_DIR))
+BACKEND_DIR = Path(__file__).resolve().parents[1]
+if str(BACKEND_DIR) not in sys.path:
+    sys.path.insert(0, str(BACKEND_DIR))
 
+PROJECT_ROOT = BACKEND_DIR.parent
 load_dotenv(PROJECT_ROOT / ".env")
 
 import mysql.connector  # noqa: E402  (import after path setup)
@@ -59,38 +33,41 @@ DB_NAME = os.environ.get("DB_NAME", "gmu_management_system")
 DB_USER = os.environ.get("DB_USER", "root")
 DB_PASSWORD = os.environ.get("DB_PASSWORD", "")
 
-# Role configuration
 ROLE_ADMIN = "admin"
 ROLE_STUDENT = "student"
 ROLE_FACULTY = "faculty"
 
+# Known account identifiers (identifiers only, never passwords).
 ADMIN_LOGIN_IDENTIFIER = "admin@gmail.com"
+FACULTY_LOGIN_IDENTIFIERS = ("FAC-CSE-014", "FAC-CSE-021")
+STUDENT_LOGIN_IDENTIFIERS = ("1GM23CS045", "1GM23CS052")
 
-# Password strength requirements
 MIN_PASSWORD_LENGTH = 8
-REQUIRE_UPPERCASE = True
-REQUIRE_LOWERCASE = True
-REQUIRE_DIGIT = True
-REQUIRE_SPECIAL = True
 
 BACKUP_DIR = PROJECT_ROOT / "backup"
 BACKUP_DIR.mkdir(exist_ok=True)
 
 
-# ---------------------------------------------------------------------------
-# Backup
-# ---------------------------------------------------------------------------
-_backup_created = False
+def validate_password_strength(password: str) -> str | None:
+    """Return a message when a new password does not meet the local policy."""
+    if len(password) < MIN_PASSWORD_LENGTH:
+        return f"Password must be at least {MIN_PASSWORD_LENGTH} characters long."
+    if len(password) > 200:
+        return "Password must be no more than 200 characters long."
+    if not any(char.isupper() for char in password):
+        return "Password must contain at least one uppercase letter."
+    if not any(char.islower() for char in password):
+        return "Password must contain at least one lowercase letter."
+    if not any(char.isdigit() for char in password):
+        return "Password must contain at least one digit."
+    if not any(not char.isalnum() for char in password):
+        return "Password must contain at least one special character."
+    return None
 
 
 def create_backup() -> str:
-    """Create a logical SQL backup of the database before making changes.
-
-    Returns the absolute path of the backup file.
-    """
-    import mysql.connector as mc
-
-    conn = mc.connect(
+    """Create a logical SQL backup of the database before making changes."""
+    conn = mysql.connector.connect(
         host=DB_HOST,
         port=DB_PORT,
         user=DB_USER,
@@ -99,8 +76,18 @@ def create_backup() -> str:
     )
     cursor = conn.cursor()
 
-    timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
+    timestamp = datetime.now().strftime("%Y%m%d_%H%M%S_%f")
     backup_path = BACKUP_DIR / f"gmu_management_system_backup_{timestamp}.sql"
+
+    # Never overwrite an existing backup.
+    if backup_path.exists():
+        counter = 1
+        while True:
+            candidate = BACKUP_DIR / f"gmu_management_system_backup_{timestamp}_{counter}.sql"
+            if not candidate.exists():
+                backup_path = candidate
+                break
+            counter += 1
 
     cursor.execute(
         "SELECT TABLE_NAME FROM information_schema.TABLES "
@@ -110,39 +97,55 @@ def create_backup() -> str:
     )
     tables = [row[0] for row in cursor.fetchall()]
 
+    if not tables:
+        cursor.close()
+        conn.close()
+        raise RuntimeError("Backup failed: no tables found in the database.")
+
     with open(backup_path, "w", encoding="utf-8") as f:
-        f.write("-- GM University Management System — Pre-reset backup\n")
+        f.write("-- GM University Management System - Pre-reset backup\n")
         f.write(f"-- Created: {datetime.now().isoformat()}\n")
         f.write(f"-- Database: {DB_NAME}\n\n")
         f.write("SET FOREIGN_KEY_CHECKS = 0;\n\n")
 
         for table in tables:
-            cursor.execute(f"SHOW CREATE TABLE {table}")
+            cursor.execute(f"SHOW CREATE TABLE `{table}`")
             create_table = cursor.fetchone()[1]
             f.write(f"-- Table: {table}\n")
-            f.write(f"DROP TABLE IF EXISTS {table};\n")
+            f.write(f"DROP TABLE IF EXISTS `{table}`;\n")
             f.write(f"{create_table};\n\n")
 
-            cursor.execute(f"SELECT * FROM {table}")
+            cursor.execute(f"SELECT * FROM `{table}`")
             rows = cursor.fetchall()
             if rows:
-                cursor.execute(f"DESCRIBE {table}")
+                cursor.execute(f"DESCRIBE `{table}`")
                 columns = [col[0] for col in cursor.fetchall()]
-                col_list = ", ".join(columns)
+                col_list = ", ".join(f"`{col}`" for col in columns)
 
                 for row in rows:
                     values = []
                     for val in row:
                         if val is None:
                             values.append("NULL")
+                        elif isinstance(val, bool):
+                            values.append("1" if val else "0")
                         elif isinstance(val, str):
-                            escaped = val.replace("'", "''").replace("\\", "\\\\")
+                            escaped = val.replace("\\", "\\\\").replace("'", "''")
                             values.append(f"'{escaped}'")
+                        elif isinstance(val, datetime):
+                            values.append(f"'{val.isoformat(sep=' ')}'")
+                        elif hasattr(val, "isoformat"):
+                            values.append(f"'{val.isoformat()}'")
                         elif isinstance(val, bytes):
                             values.append(f"0x{val.hex()}")
-                        else:
+                        elif isinstance(val, (int, float)):
                             values.append(str(val))
-                    f.write(f"INSERT INTO {table} ({col_list}) VALUES ({', '.join(values)});\n")
+                        else:
+                            escaped = str(val).replace("'", "''")
+                            values.append(f"'{escaped}'")
+                    f.write(
+                        f"INSERT INTO `{table}` ({col_list}) VALUES ({', '.join(values)});\n"
+                    )
             f.write("\n")
 
         f.write("SET FOREIGN_KEY_CHECKS = 1;\n")
@@ -150,71 +153,49 @@ def create_backup() -> str:
 
     cursor.close()
     conn.close()
+
+    # Verify the backup actually succeeded.
+    if not backup_path.exists() or backup_path.stat().st_size == 0:
+        raise RuntimeError("Backup failed: backup file is missing or empty.")
     return str(backup_path)
 
 
-# ---------------------------------------------------------------------------
-# Validation
-# ---------------------------------------------------------------------------
-def validate_password_strength(password: str) -> str | None:
-    """Validate password strength. Returns an error message or None."""
-    if len(password) < MIN_PASSWORD_LENGTH:
-        return f"Password must be at least {MIN_PASSWORD_LENGTH} characters long."
-    if REQUIRE_UPPERCASE and not any(c.isupper() for c in password):
-        return "Password must contain at least one uppercase letter."
-    if REQUIRE_LOWERCASE and not any(c.islower() for c in password):
-        return "Password must contain at least one lowercase letter."
-    if REQUIRE_DIGIT and not any(c.isdigit() for c in password):
-        return "Password must contain at least one digit."
-    if REQUIRE_SPECIAL and not any(not c.isalnum() for c in password):
-        return "Password must contain at least one special character."
-    return None
-
-
-# ---------------------------------------------------------------------------
-# Lookup helpers
-# ---------------------------------------------------------------------------
-def find_account_by_identifier(cursor, role_code: str, identifier_value: str):
-    """Look up an account by its role-specific identifier.
-
-    Returns a dict with user details or None if not found.
-    """
+def find_account_by_identifier(cursor, role_code: str, identifier: str) -> dict | None:
+    """Find one account using its role-specific login identifier."""
     if role_code == ROLE_ADMIN:
         cursor.execute(
             """
-            SELECT u.user_id, u.login_identifier, u.email, u.password_hash,
-                   u.account_status, u.is_active, r.role_code
+            SELECT u.user_id, u.login_identifier, u.email, u.account_status,
+                   u.is_active, r.role_code
             FROM users AS u
             JOIN roles AS r ON r.role_id = u.role_id
             WHERE u.login_identifier = %s AND r.role_code = %s
             """,
-            (identifier_value, ROLE_ADMIN),
+            (identifier, role_code),
         )
     elif role_code == ROLE_STUDENT:
         cursor.execute(
             """
-            SELECT u.user_id, u.login_identifier, u.email, u.password_hash,
-                   u.account_status, u.is_active, r.role_code,
-                   s.student_id, s.usn, s.first_name, s.last_name
+            SELECT u.user_id, u.login_identifier, u.email, u.account_status,
+                   u.is_active, r.role_code, s.first_name, s.last_name
             FROM users AS u
             JOIN roles AS r ON r.role_id = u.role_id
             JOIN students AS s ON s.user_id = u.user_id
             WHERE s.usn = %s AND r.role_code = %s
             """,
-            (identifier_value, ROLE_STUDENT),
+            (identifier, role_code),
         )
     elif role_code == ROLE_FACULTY:
         cursor.execute(
             """
-            SELECT u.user_id, u.login_identifier, u.email, u.password_hash,
-                   u.account_status, u.is_active, r.role_code,
-                   f.faculty_id, f.employee_id, f.first_name, f.last_name
+            SELECT u.user_id, u.login_identifier, u.email, u.account_status,
+                   u.is_active, r.role_code, f.first_name, f.last_name
             FROM users AS u
             JOIN roles AS r ON r.role_id = u.role_id
             JOIN faculty AS f ON f.user_id = u.user_id
             WHERE f.employee_id = %s AND r.role_code = %s
             """,
-            (identifier_value, ROLE_FACULTY),
+            (identifier, role_code),
         )
     else:
         return None
@@ -222,237 +203,267 @@ def find_account_by_identifier(cursor, role_code: str, identifier_value: str):
     row = cursor.fetchone()
     if row is None:
         return None
-    # cursor(dictionary=True) already returns a dict; otherwise convert tuple
-    if isinstance(row, dict):
-        return row
-    columns = [d[0] for d in cursor.description]
+    columns = [description[0] for description in cursor.description]
     return dict(zip(columns, row))
 
 
-# ---------------------------------------------------------------------------
-# Password reset workflow
-# ---------------------------------------------------------------------------
-def hash_password(password: str) -> str:
-    """Hash a plaintext password using Werkzeug."""
-    return generate_password_hash(password)
+def persist_password_change(*args, **kwargs) -> bool:
+    """Hash, store, verify and commit a new password for one user.
 
-
-def verify_password_hash(password: str, password_hash: str) -> bool:
-    """Verify a plaintext password against a stored hash."""
-    return check_password_hash(password_hash, password)
-
-
-def reset_password_for_account(cursor, account: dict) -> bool:
-    """Reset the password for a given account dictionary.
-
-    Returns True on success, False on failure.
+    The database connection may be passed explicitly to avoid relying on
+    cursor-specific attributes such as ``cursor.connection``.
     """
-    user_id = account["user_id"]
-    login_identifier = account["login_identifier"]
-    role_code = account["role_code"]
-    display_name = account.get("display_name") or account.get("first_name") or account["login_identifier"]
+    cursor = kwargs.get("cursor")
+    connection = kwargs.get("connection")
+    user_id = kwargs.get("user_id")
+    password = kwargs.get("password")
 
-    print(f"\nAccount to update:")
-    print(f"  Role: {role_code}")
-    print(f"  Identifier: {login_identifier}")
+    for arg in args:
+        if cursor is None and hasattr(arg, "execute") and hasattr(arg, "fetchone"):
+            cursor = arg
+        elif connection is None and hasattr(arg, "commit") and hasattr(arg, "rollback"):
+            connection = arg
+        elif user_id is None and isinstance(arg, int) and not isinstance(arg, bool):
+            user_id = arg
+        elif password is None and isinstance(arg, str):
+            password = arg
+
+    if cursor is None:
+        raise TypeError("A database cursor is required.")
+    if connection is None:
+        connection = getattr(cursor, "connection", None)
+    if connection is None:
+        raise RuntimeError("A database connection is required.")
+    if user_id is None or password is None:
+        raise TypeError("user_id and password are required.")
+
+    committed = False
+    try:
+        password_hash = generate_password_hash(password)
+        cursor.execute(
+            "UPDATE users SET password_hash = %s WHERE user_id = %s",
+            (password_hash, user_id),
+        )
+        cursor.execute(
+            "SELECT password_hash FROM users WHERE user_id = %s",
+            (user_id,),
+        )
+        row = cursor.fetchone()
+        if row is None:
+            connection.rollback()
+            return False
+
+        stored_hash = row["password_hash"] if isinstance(row, dict) else row[0]
+        if not check_password_hash(stored_hash, password):
+            connection.rollback()
+            return False
+
+        connection.commit()
+        committed = True
+        return True
+    except Exception:
+        connection.rollback()
+        raise
+    finally:
+        if not committed:
+            pass
+
+
+def _prompt_for_new_password() -> str | None:
+    while True:
+        try:
+            password = getpass.getpass("New password (input hidden): ")
+            confirmation = getpass.getpass("Confirm password: ")
+        except (EOFError, KeyboardInterrupt):
+            print("\nPassword reset cancelled.")
+            return None
+
+        if password != confirmation:
+            print("Passwords do not match. Try again.")
+            continue
+
+        error = validate_password_strength(password)
+        if error:
+            print(error)
+            continue
+        return password
+
+
+def reset_password_for_account(cursor, account: dict, connection=None) -> bool:
+    """Confirm and reset one active account."""
+    display_name = account.get("first_name") or account["login_identifier"]
+    if account.get("last_name"):
+        display_name = f"{display_name} {account['last_name']}"
+
+    print("\nAccount to update:")
+    print(f"  Role: {account['role_code']}")
+    print(f"  Identifier: {account['login_identifier']}")
     print(f"  Name: {display_name}")
-    print(f"  Status: {account['account_status']} (active={account['is_active']})")
     print()
 
-    # Confirm before proceeding
-    confirm = input("Proceed with password reset for this account? (yes/no): ").strip().lower()
+    try:
+        confirm = input("Proceed with password reset? (yes/no): ").strip().lower()
+    except (EOFError, KeyboardInterrupt):
+        print("\nPassword reset cancelled.")
+        return False
     if confirm != "yes":
         print("Password reset cancelled.")
         return False
 
-    # Prompt for new password securely
-    while True:
-        password = getpass.getpass("New password: ")
-        if not password:
-            print("  Password cannot be empty. Try again.")
-            continue
-        error = validate_password_strength(password)
-        if error:
-            print(f"  {error} Try again.")
-            continue
-        confirm_pw = getpass.getpass("Confirm new password: ")
-        if password != confirm_pw:
-            print("  Passwords do not match. Try again.")
-            continue
-        break
-
-    new_hash = hash_password(password)
+    password = _prompt_for_new_password()
+    if password is None:
+        return False
 
     try:
-        cursor.execute(
-            "UPDATE users SET password_hash = %s WHERE user_id = %s",
-            (new_hash, user_id),
-        )
-        conn = cursor.connection
-        conn.commit()
-    except Exception as exc:
-        conn.rollback()
-        print(f"ERROR: Database update failed: {exc}")
+        if connection is None:
+            updated = persist_password_change(cursor, int(account["user_id"]), password)
+        else:
+            updated = persist_password_change(cursor, connection, int(account["user_id"]), password)
+    except mysql.connector.Error as error:
+        print(f"Database update failed; the change was rolled back: {error}")
         return False
 
-    # Verify the new hash works
-    cursor.execute(
-        "SELECT password_hash FROM users WHERE user_id = %s",
-        (user_id,),
-    )
-    row = cursor.fetchone()
-    stored_hash = row[0]
-
-    # Re-prompt for verification (don't reuse the zeroed password)
-    verify_password = getpass.getpass("Enter new password to verify: ")
-    if not check_password_hash(stored_hash, verify_password):
-        print("ERROR: Password hash verification failed!")
-        cursor.connection.rollback()
+    if not updated:
+        print("Password verification failed; no change was committed.")
         return False
 
-    print()
-    print("=" * 60)
-    print("PASSWORD UPDATED SUCCESSFULLY")
-    print("=" * 60)
-    print(f"Role: {role_code}")
-    print(f"Account: {display_name}")
-    print(f"Identifier: {login_identifier}")
-    print("Database update: COMMITTED")
-    print("New password verification: PASSED")
-    print()
-    print("You can now log in using your new password.")
+    print("Password updated and verified successfully.")
+    print(f"Account: {account['login_identifier']}")
     return True
 
 
-def reset_admin_password(cursor) -> None:
-    """Reset the administrator account password."""
-    account = find_account_by_identifier(cursor, ROLE_ADMIN, ADMIN_LOGIN_IDENTIFIER)
-    if account is None:
-        print("ERROR: Admin account not found with login_identifier 'admin@gmail.com'.")
+def _is_active(account: dict) -> bool:
+    return (
+        account["is_active"] == 1
+        and account["account_status"] in ("active", "pending_reset")
+    )
+
+
+def reset_admin_password(cursor, connection=None) -> None:
+    """Reset an active administrator by the registered login ID."""
+    cursor.execute(
+        """
+        SELECT u.login_identifier
+        FROM users AS u
+        JOIN roles AS r ON r.role_id = u.role_id
+        WHERE r.role_code = %s
+          AND u.is_active = 1
+          AND u.account_status IN ('active', 'pending_reset')
+        ORDER BY u.login_identifier
+        """,
+        (ROLE_ADMIN,),
+    )
+    identifiers = [row[0] for row in cursor.fetchall()]
+    if not identifiers:
+        print("No active administrator accounts are available.")
         return
 
-    if account["role_code"] != ROLE_ADMIN:
-        print("ERROR: Account does not have the admin role.")
-        return
-
-    if account["is_active"] != 1 or account["account_status"] != "active":
-        print("ERROR: Account is not active. Cannot reset password.")
-        return
-
-    if not reset_password_for_account(cursor, account):
-        return
-
-
-def reset_student_password(cursor) -> None:
-    """Reset a student account password by USN."""
-    usn = input("Enter student USN: ").strip()
-    if not usn:
-        print("ERROR: USN cannot be empty.")
-        return
-
-    account = find_account_by_identifier(cursor, ROLE_STUDENT, usn)
-    if account is None:
-        print(f"ERROR: No student account found with USN '{usn}'.")
-        return
-
-    if account["role_code"] != ROLE_STUDENT:
-        print(f"ERROR: Account does not have the student role.")
-        return
-
-    if account["is_active"] != 1 or account["account_status"] != "active":
-        print("ERROR: Account is not active. Cannot reset password.")
-        return
-
-    if not reset_password_for_account(cursor, account):
-        return
-
-
-def reset_faculty_password(cursor) -> None:
-    """Reset a faculty account password by employee ID."""
-    employee_id = input("Enter faculty Employee ID: ").strip()
-    if not employee_id:
-        print("ERROR: Employee ID cannot be empty.")
-        return
-
-    account = find_account_by_identifier(cursor, ROLE_FACULTY, employee_id)
-    if account is None:
-        print(f"ERROR: No faculty account found with Employee ID '{employee_id}'.")
-        return
-
-    if account["role_code"] != ROLE_FACULTY:
-        print("ERROR: Account does not have the faculty role.")
-        return
-
-    if account["is_active"] != 1 or account["account_status"] != "active":
-        print("ERROR: Account is not active. Cannot reset password.")
-        return
-
-    if not reset_password_for_account(cursor, account):
-        return
-
-
-# ---------------------------------------------------------------------------
-# Main
-# ---------------------------------------------------------------------------
-def main() -> None:
-    """Main reset procedure."""
-    print("=" * 60)
-    print("GM UNIVERSITY MANAGEMENT SYSTEM")
-    print("ACCOUNT PASSWORD MANAGER")
-    print("=" * 60)
-    print()
-
-    # Step 1: Create backup before any changes
-    print("[1/6] Creating database backup...")
-    backup_path = create_backup()
-    print(f"    Backup saved to: {backup_path}")
-    print()
-
-    # Step 2: Connect to database
-    print("[2/6] Connecting to database...")
+    print("Active administrator login IDs:")
+    for identifier in identifiers:
+        print(f"  {identifier}")
     try:
-        conn = mysql.connector.connect(
-            host=DB_HOST,
-            port=DB_PORT,
-            user=DB_USER,
-            password=DB_PASSWORD,
-            database=DB_NAME,
-        )
-    except mysql.connector.Error as exc:
-        print(f"ERROR: Cannot connect to database: {exc}")
-        sys.exit(1)
-    cursor = conn.cursor()
+        identifier = input("Enter the administrator login ID: ").strip()
+    except (EOFError, KeyboardInterrupt):
+        print("\nPassword reset cancelled.")
+        return
 
-    # Step 3: Main menu
-    while True:
-        print()
-        print("1. Reset Administrator Password")
-        print("2. Reset Student Password")
-        print("3. Reset Faculty Password")
-        print("4. Exit")
-        try:
-            choice = input("Select an option: ").strip()
-        except (EOFError, KeyboardInterrupt):
-            print("\nCancelled by user.")
-            cursor.close()
-            conn.close()
-            sys.exit(0)
+    account = find_account_by_identifier(cursor, ROLE_ADMIN, identifier)
+    if account is None or not _is_active(account):
+        print("No active administrator account matched that login ID.")
+        return
+    reset_password_for_account(cursor, account, connection)
 
-        if choice == "1":
-            reset_admin_password(cursor)
-        elif choice == "2":
-            reset_student_password(cursor)
-        elif choice == "3":
-            reset_faculty_password(cursor)
-        elif choice == "4":
-            print("Exiting.")
-            break
-        else:
-            print("Invalid option. Please select 1-4.")
 
-    cursor.close()
-    conn.close()
+def reset_student_password(cursor, connection=None) -> None:
+    """Reset an active student by USN."""
+    try:
+        identifier = input("Enter student USN: ").strip()
+    except (EOFError, KeyboardInterrupt):
+        print("\nPassword reset cancelled.")
+        return
+
+    account = find_account_by_identifier(cursor, ROLE_STUDENT, identifier)
+    if account is None or not _is_active(account):
+        print("No active student account matched that USN.")
+        return
+    reset_password_for_account(cursor, account, connection)
+
+
+def reset_faculty_password(cursor, connection=None) -> None:
+    """Reset an active faculty member by employee ID."""
+    try:
+        identifier = input("Enter faculty Employee ID: ").strip()
+    except (EOFError, KeyboardInterrupt):
+        print("\nPassword reset cancelled.")
+        return
+
+    account = find_account_by_identifier(cursor, ROLE_FACULTY, identifier)
+    if account is None or not _is_active(account):
+        print("No active faculty account matched that Employee ID.")
+        return
+    reset_password_for_account(cursor, account, connection)
+
+
+def main() -> int:
+    """Run the operator menu using the Flask application's database config."""
+    try:
+        from app import create_app
+        from app.db import get_connection
+
+        app = create_app()
+    except RuntimeError as error:
+        print(error)
+        return 1
+
+    if app.config["DB_NAME"] != "gmu_management_system":
+        print("Refusing to run: DB_NAME is not gmu_management_system.")
+        return 1
+
+    try:
+        with app.app_context():
+            # Create a verified backup before any password change.
+            print("Creating database backup...")
+            backup_path = create_backup()
+            print(f"Backup saved to: {backup_path}")
+            print()
+
+            with get_connection() as connection:
+                cursor = connection.cursor()
+                try:
+                    while True:
+                        print("\nGMU ACCOUNT PASSWORD MANAGER")
+                        print("1. Reset Administrator Password")
+                        print("2. Reset Student Password")
+                        print("3. Reset Faculty Password")
+                        print("4. Exit")
+                        try:
+                            choice = input("Select an option: ").strip()
+                        except (EOFError, KeyboardInterrupt):
+                            print("\nCancelled.")
+                            break
+
+                        if choice == "1":
+                            reset_admin_password(cursor, connection)
+                        elif choice == "2":
+                            reset_student_password(cursor, connection)
+                        elif choice == "3":
+                            reset_faculty_password(cursor, connection)
+                        elif choice == "4":
+                            print("Exiting.")
+                            break
+                        else:
+                            print("Invalid option. Please select 1-4.")
+                finally:
+                    cursor.close()
+    except mysql.connector.Error as error:
+        print(f"Database operation failed: {error}")
+        return 1
+    except RuntimeError as error:
+        print(error)
+        return 1
+
+    return 0
 
 
 if __name__ == "__main__":
-    main()
+    raise SystemExit(main())

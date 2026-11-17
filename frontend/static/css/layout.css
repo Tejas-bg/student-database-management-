@@ -198,10 +198,6 @@
   gap: var(--nx-space-2);
 }
 
-.nx-nav-toggle {
-  display: none;
-}
-
 /* --------------------------------------------------------------------------
    4. Main content
    -------------------------------------------------------------------------- */
@@ -408,26 +404,6 @@
 
 .nx-footer a:hover {
   color: var(--nx-text);
-}
-
-/* --------------------------------------------------------------------------
-   5. Overlay (mobile navigation)
-   -------------------------------------------------------------------------- */
-
-.nx-overlay {
-  position: fixed;
-  inset: 0;
-  z-index: var(--nx-z-overlay);
-  background: var(--nx-overlay);
-  opacity: 0;
-  visibility: hidden;
-  transition: opacity var(--nx-duration-base) var(--nx-ease-standard),
-    visibility var(--nx-duration-base) var(--nx-ease-standard);
-}
-
-.nx-overlay.is-visible {
-  opacity: 1;
-  visibility: visible;
 }
 
 /* --------------------------------------------------------------------------

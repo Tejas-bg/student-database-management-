@@ -101,7 +101,7 @@
 | S3-12 | Create numbered migrations and test them on a clean database. | 3/6 | P0 | Not Started | S3-11 | Deferred to the implementation stage. |
 
 **Stage 3 status:** Done - the design is complete, corrected, and statically validated, and the scripts have been executed against MySQL 8.4.9 (24 tables, 8 views, 10 triggers, seed data loaded). Trigger negative tests remain deferred.
-**Stage 4 status:** Done - a Flask application is running on http://127.0.0.1:5000, connected to MySQL. The common login, session handling, role-based authorization, CSRF protection, safe error pages, and 22 automated tests all work against the live database.
+**Stage 4 status:** Done - a Flask application is running on http://127.0.0.1:5000, connected to MySQL. The common login, session handling, role-based authorization, CSRF protection, safe error pages, and 54 automated tests pass; integration checks use the configured MySQL database where required.
 
 ---
 
@@ -115,7 +115,9 @@
 | S4-04 | Implement authentication and sessions. | 4 | P0 | Done | S4-01 | Werkzeug hashes, generic failure message, session rotation, `POST` logout. |
 | S4-05 | Implement role-based authorization. | 4 | P0 | Done | S4-04 | `login_required` and `roles_required`; cross-role preview returns 403. |
 | S4-06 | Add error handlers. | 4 | P0 | Done | S4-01 | Safe pages for 400/401/403/404/405/500; no internals leaked. |
-| S4-07 | Add backend tests. | 4 | P0 | Done | S4-02-S4-06 | 22 tests pass against MySQL (auth, CSRF, RBAC, logout, error pages). |
+| S4-07 | Add backend tests. | 4 | P0 | Done | S4-02-S4-06 | Full suite: 54 passing tests, including MySQL integration and isolated route/service tests. |
+| S4-08 | Add a safe local utility for creating the fictional sample student login. | 4 | P1 | Done | S4-02 | `backend/scripts/create_sample_student_account.py`; actual account creation requires the operator to run it and enter a password locally. |
+| S4-09 | Correct the operator password-reset utility for Admin and Faculty accounts. | 4 | P1 | Done | S4-02 | Looks up the actual active Admin ID, verifies the hash before commit, and avoids making a full database dump. |
 
 ---
 

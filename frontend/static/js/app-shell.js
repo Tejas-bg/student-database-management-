@@ -1,12 +1,12 @@
 /* ==========================================================================
-   GM University Management System — Shared application shell (Stage 2)
+   GM University Management System — Shared application shell (interface)
 
    Every role page declares its identity on <body> and this module renders the
-   common sidebar, header, breadcrumb, demo notice, and footer around the page's
+   common sidebar, header, breadcrumb, and footer around the page's
    own <main> content:
 
      <body data-role="student" data-page="courses"
-           data-title="My Courses" data-subtitle="Enrolled subjects · Demo data"
+           data-title="My Courses" data-subtitle="Enrolled subjects"
            data-breadcrumb="My Courses" data-search="Search courses…">
 
    This is presentation-only wiring. No authentication, session, or database
@@ -20,9 +20,9 @@
   var role = body.getAttribute("data-role") || "student";
   var page = body.getAttribute("data-page") || "index";
   var pageTitle = body.getAttribute("data-title") || "Dashboard";
-  var pageSubtitle = body.getAttribute("data-subtitle") || "Demo workspace";
+  var pageSubtitle = body.getAttribute("data-subtitle") || "Workspace";
   var breadcrumb = body.getAttribute("data-breadcrumb") || pageTitle;
-  var searchPlaceholder = body.getAttribute("data-search") || "Search demo records…";
+  var searchPlaceholder = body.getAttribute("data-search") || "Search records…";
 
   var LOGIN_HREF = "../../login.html";
   var LOGO_SRC = "../../static/img/branding/gmu-official-logo.jpg";
@@ -81,7 +81,7 @@
   var ROLES = {
     student: {
       label: "Student workspace",
-      name: "Demo Student",
+      name: "Student record",
       meta: "Computer Science · Semester 5",
       initials: "SA",
       profile: "profile.html",
@@ -115,9 +115,9 @@
         }
       ],
       notifications: [
-        ["i-user-plus", "Sample: enrolment confirmation", "Semester 5 enrolment is confirmed in the sample data.", "Demo · 10 min"],
-        ["i-file-text", "Sample: IA-2 marks published", "Illustrative internal assessment marks are ready to review.", "Demo · 2 hr"],
-        ["i-credit-card", "Sample: fee reminder", "A sample tuition instalment is shown as due next week.", "Demo · 1 day"]
+        ["i-user-plus", "Update: enrolment confirmation", "Semester 5 enrolment is confirmed.", "10 min"],
+        ["i-file-text", "Update: IA-2 marks published", "Internal assessment marks are ready to review.", "2 hr"],
+        ["i-credit-card", "Update: fee reminder", "A tuition instalment is due next week.", "1 day"]
       ]
     },
 
@@ -157,15 +157,15 @@
         }
       ],
       notifications: [
-        ["i-file-text", "Sample: marks entry window", "IA-2 sample entry is shown as closing this Friday.", "Demo · 20 min"],
-        ["i-users", "Sample: attendance shortfall", "Three students in the sample roster are below 75%.", "Demo · 3 hr"],
-        ["i-message", "Sample: student query", "A sample doubt is waiting in the demo feedback list.", "Demo · 1 day"]
+        ["i-file-text", "Update: marks entry window", "The IA-2 entry closes this Friday.", "20 min"],
+        ["i-users", "Update: attendance shortfall", "Three students in the roster are below 75%.", "3 hr"],
+        ["i-message", "Update: student query", "A doubt is waiting in the feedback list.", "1 day"]
       ]
     },
 
     admin: {
       label: "Administration workspace",
-      name: "Demo Administrator",
+      name: "Administrator record",
       meta: "Registrar office · Administration",
       initials: "AD",
       profile: "users.html",
@@ -208,15 +208,37 @@
         }
       ],
       notifications: [
-        ["i-user-plus", "Sample: admission queue", "Twelve sample applications are marked pending review.", "Demo · 5 min"],
-        ["i-credit-card", "Sample: fee reconciliation", "A sample batch of 24 receipts is ready to reconcile.", "Demo · 2 hr"],
-        ["i-clipboard", "Sample: monthly report", "The illustrative attendance report is ready to preview.", "Demo · 1 day"]
+        ["i-user-plus", "Update: admission queue", "Twelve applications are marked pending review.", "5 min"],
+        ["i-credit-card", "Update: fee reconciliation", "A batch of 24 receipts is ready to reconcile.", "2 hr"],
+        ["i-clipboard", "Update: monthly report", "The attendance report is ready.", "1 day"]
       ]
     }
   };
 
   var config = ROLES[role] || ROLES.student;
   var roleTitle = role.charAt(0).toUpperCase() + role.slice(1);
+
+  var DEFAULT_SEARCH_TYPE_BY_PAGE = {
+    index: "students",
+    students: "students",
+    faculty: "faculty",
+    courses: "courses",
+    departments: "departments",
+  };
+  var SEARCH_TYPES = {
+    students: "students",
+    faculty: "faculty",
+    courses: "courses",
+    departments: "departments",
+  };
+  var GREETING_SELECTORS = [
+    "#page-title",
+    "#welcome-title",
+    "#student-welcome-title",
+    "#faculty-welcome-title",
+    "#admin-welcome-title",
+  ];
+
 
   /* ------------------------------------------------------------------------
      Small helpers
@@ -234,6 +256,14 @@
     return (
       '<svg class="nx-icon ' + (extraClass || "") + '" aria-hidden="true"><use href="#' + id + '"/></svg>'
     );
+  }
+
+  function hasNavPage(name) {
+    return config.nav.some(function (section) {
+      return section.items.some(function (item) {
+        return item.page === name;
+      });
+    });
   }
 
   /* ------------------------------------------------------------------------
@@ -283,9 +313,9 @@
       '<div class="nx-sidebar__meta">' +
       '<span class="nx-status nx-status--pending">' +
       '<span class="nx-status__dot" aria-hidden="true"></span>' +
-      "Database not connected" +
+      "University records" +
       "</span>" +
-      '<span class="nx-mono">STAGE 2 · UI PREVIEW</span>' +
+      '<span class="nx-mono">GMU · MANAGEMENT SYSTEM</span>' +
       "</div></div>" +
       "</aside>"
     );
@@ -319,10 +349,6 @@
     return (
       '<header class="nx-header">' +
       '<div class="nx-header__leading">' +
-      '<button class="nx-btn nx-btn--ghost nx-btn--icon nx-nav-toggle" type="button" ' +
-      'data-nav-toggle aria-controls="sidebar" aria-expanded="false" aria-label="Open navigation">' +
-      icon("i-menu") +
-      "</button>" +
       '<button class="nx-btn nx-btn--ghost nx-btn--icon nx-sidebar-collapse" type="button" ' +
       'data-sidebar-collapse aria-controls="sidebar" aria-expanded="true" aria-label="Collapse sidebar">' +
       icon("i-panel-left") +
@@ -354,10 +380,12 @@
       "</div>" +
       buildNotifications() +
       '<hr class="nx-menu__sep">' +
-      '<a class="nx-menu__item" href="notifications.html" style="display:none">Notifications</a>' +
+      (hasNavPage("notifications")
+        ? '<a class="nx-menu__item" href="notifications.html">Notifications</a>'
+        : "") +
       '<span class="nx-menu__item" style="cursor: default; color: var(--nx-text-subtle); font-size: var(--nx-text-xs);">' +
       icon("i-info", "nx-icon--sm") +
-      " Sample notifications only" +
+      " Notifications preview" +
       "</span>" +
       "</div></div>" +
 
@@ -369,7 +397,7 @@
 
       '<div class="nx-dropdown">' +
       '<button class="nx-profile-btn" type="button" data-menu-toggle aria-controls="profile-menu" ' +
-      'aria-label="Demo account menu">' +
+      'aria-label="Account menu">' +
       '<span class="nx-avatar nx-avatar--accent" aria-hidden="true">' + config.initials + "</span>" +
       '<span class="nx-profile-btn__meta">' +
       "<strong>" + esc(config.name) + "</strong>" +
@@ -378,7 +406,7 @@
       icon("i-chevron-down", "nx-icon--sm nx-text-muted") +
       "</button>" +
       '<div class="nx-menu" id="profile-menu">' +
-      '<p class="nx-menu__label">Demo account</p>' +
+      '<p class="nx-menu__label">Account</p>' +
       '<a class="nx-menu__item" href="' + config.profile + '">' +
       icon("i-user", "nx-icon--sm") + "Profile and preferences</a>" +
       '<a class="nx-menu__item" href="#" data-toast="Preferences|Theme, notification, and language settings arrive in a later stage.">' +
@@ -397,8 +425,8 @@
   function buildFooter() {
     return (
       '<footer class="nx-footer">' +
-      "<span>GM University Management System · Stage 2 interface preview · v0.2.0</span>" +
-      "<span>Sample interface data only. No backend, authentication, or database connection is active.</span>" +
+      "<span>GM University Management System</span>" +
+      "<span>Academic management workspace.</span>" +
       "</footer>"
     );
   }
@@ -423,21 +451,302 @@
     );
   }
 
-  function buildDemoNotice() {
-    return (
-      '<div class="nx-demo-notice" role="note">' +
-      icon("i-info", "nx-icon--sm") +
-      "<span><strong>Sample data.</strong> Every record, figure, and status on this page is illustrative " +
-      "interface data. The GM University Management System is not connected to MySQL, Flask, or any " +
-      "real student, faculty, or administrative record in Stage 2.</span>" +
-      '<span class="nx-badge nx-badge--warning" style="margin-left:auto;">Sample data</span>' +
-      "</div>"
-    );
+  /* ------------------------------------------------------------------------
+     Personalized greeting + server-backed search
+     ------------------------------------------------------------------------ */
+
+  function updateGreetings(name) {
+    var label = name && String(name).trim() ? String(name).trim() : "there";
+    var hour = new Date().getHours();
+    var period = hour < 12 ? "morning" : hour < 17 ? "afternoon" : "evening";
+    var text = "Good " + period + ", " + label + ".";
+    GREETING_SELECTORS.forEach(function (selector) {
+      var heading = document.querySelector(selector);
+      if (heading) {
+        heading.textContent = text;
+      }
+    });
   }
 
-  /* ------------------------------------------------------------------------
-     Collapsible sidebar (desktop only; mobile uses the drawer in main.js)
-     ------------------------------------------------------------------------ */
+  function applySessionUser(payload) {
+    if (!payload || !payload.authenticated) {
+      return;
+    }
+    var name = payload.display_name;
+    var profileName = document.querySelector(".nx-profile-btn__meta strong");
+    if (profileName && name) {
+      profileName.textContent = name;
+    }
+    updateGreetings(name);
+  }
+
+  function initGreeting() {
+    var name = null;
+    try {
+      if (window.GMU && window.GMU.user && window.GMU.user.displayName) {
+        name = window.GMU.user.displayName;
+      }
+    } catch (error) {
+      /* window.GMU may not be initialised yet on older cached pages. */
+    }
+    if (name) {
+      updateGreetings(name);
+      return;
+    }
+    fetch("/auth/me", { credentials: "same-origin" })
+      .then(function (response) { return response.ok ? response.json() : null; })
+      .then(function (payload) { applySessionUser(payload); })
+      .catch(function () { /* keep the authored heading when the lookup fails */ });
+  }
+
+  function searchResultsRegion() {
+    var app = document.querySelector("[data-app-shell]") || document.querySelector(".nx-app");
+    if (!app) {
+      return null;
+    }
+    var existing = app.querySelector("[data-search-results]");
+    if (existing) {
+      return existing;
+    }
+    var region = document.createElement("section");
+    region.className = "nx-search-results";
+    region.id = "search-results";
+    region.hidden = true;
+    var footer = app.querySelector(".nx-footer");
+    if (footer && footer.parentNode === app) {
+      app.insertBefore(region, footer);
+    } else {
+      app.appendChild(region);
+    }
+    return region;
+  }
+
+  function renderSearchResults(region, query, type, results) {
+    region.hidden = false;
+    region.classList.remove("is-loading", "is-error");
+    region.setAttribute("data-search-type", type);
+    region.setAttribute("data-search-query", query);
+
+    var count = results.length;
+    var head = region.querySelector(".nx-search-results__head");
+    if (count > 0) {
+      region.classList.remove("is-empty");
+    } else {
+      region.classList.add("is-empty");
+    }
+    if (!head) {
+      head = document.createElement("header");
+      head.className = "nx-search-results__head";
+      head.innerHTML =
+        '<div class="nx-cluster" style="justify-content: space-between; gap: var(--nx-space-3);">' +
+        '<p class="nx-search-results__title" data-search-title></p>' +
+        '<button class="nx-btn nx-btn--ghost nx-btn--sm" type="button" data-search-clear>Clear</button>' +
+        "</div>";
+      region.appendChild(head);
+    }
+
+    var list = region.querySelector(".nx-search-results__list");
+    if (!list) {
+      list = document.createElement("ul");
+      list.className = "nx-search-results__list";
+      region.appendChild(list);
+    }
+
+    region.querySelector("[data-search-title]").textContent =
+      "Search results · " + query;
+
+    if (count === 0) {
+      list.innerHTML =
+        '<li class="nx-search-results__empty" data-search-empty>' +
+        "No records match your search.</li>";
+      return;
+    }
+
+    var items = list.querySelectorAll(".nx-search-result");
+    items.forEach(function (item) { item.remove(); });
+
+    var fragment = document.createDocumentFragment();
+    results.forEach(function (result) {
+      var item = document.createElement("li");
+      item.className = "nx-search-result";
+      var href = resultHref(type);
+      var anchor = document.createElement("a");
+      anchor.className = "nx-search-result__link";
+      anchor.href = href;
+      anchor.setAttribute("data-search-result", "true");
+      if (href === "#") {
+        anchor.setAttribute("aria-disabled", "true");
+      }
+      var label = document.createElement("span");
+      label.className = "nx-search-result__label";
+      label.textContent = resultLabel(type, result);
+      var meta = document.createElement("span");
+      meta.className = "nx-search-result__meta";
+      meta.textContent = resultMeta(type, result);
+      anchor.appendChild(label);
+      anchor.appendChild(meta);
+      item.appendChild(anchor);
+      fragment.appendChild(item);
+    });
+    list.appendChild(fragment);
+
+    var empty = list.querySelector("[data-search-empty]");
+    if (empty) {
+      empty.remove();
+    }
+  }
+
+  function resultHref(type) {
+    if (type === "students") {
+      /* Faculty and admin workspaces open the student roster; students only
+         ever see their own record, so they get no cross-record link. */
+      return role === "student" ? "#" : "students.html";
+    }
+    if (type === "faculty") {
+      return role === "admin" ? "faculty.html" : "#";
+    }
+    if (type === "courses") {
+      /* Faculty see their assigned subjects page; students and admins use the
+         courses workspace that exists in their own role folder. */
+      return role === "faculty" ? "subjects.html" : "courses.html";
+    }
+    if (type === "departments") {
+      return "departments.html";
+    }
+    return "#";
+  }
+
+  function resultLabel(type, result) {
+    if (type === "students") {
+      var studentName = ((result.first_name || "") + " " + (result.last_name || "")).trim();
+      return studentName || result.usn || "Student record";
+    }
+    if (type === "faculty") {
+      var facultyName = ((result.first_name || "") + " " + (result.last_name || "")).trim();
+      return facultyName || result.employee_id || "Faculty member";
+    }
+    if (type === "courses") {
+      var subjectName = (result.subject_name || result.course_name || "").toString();
+      var code = (result.subject_code || result.course_code || "").toString();
+      return code ? code + " · " + subjectName : subjectName;
+    }
+    if (type === "departments") {
+      var deptName = (result.department_name || result.name || "").toString();
+      var deptCode = (result.department_code || result.code || "").toString();
+      return deptCode ? deptCode + " · " + deptName : deptName;
+    }
+    return "Record";
+  }
+
+  function resultMeta(type, result) {
+    if (type === "students") {
+      var parts = [];
+      if (result.usn) parts.push(result.usn);
+      if (result.course_name) parts.push(result.course_name);
+      if (result.email) parts.push(result.email);
+      if (result.current_semester) parts.push("Semester " + result.current_semester);
+      return parts.join(" · ");
+    }
+    if (type === "faculty") {
+      var fparts = [];
+      if (result.employee_id) fparts.push(result.employee_id);
+      if (result.designation) fparts.push(result.designation);
+      if (result.department_name) fparts.push(result.department_name);
+      return fparts.join(" · ");
+    }
+    if (type === "courses") {
+      var cparts = [];
+      if (result.semester_number) cparts.push("Semester " + result.semester_number);
+      if (result.subject_type) cparts.push(result.subject_type);
+      if (result.credits) cparts.push(result.credits + " credits");
+      if (result.level) cparts.push(result.level);
+      return cparts.join(" · ");
+    }
+    if (type === "departments") {
+      var dparts = [];
+      if (result.hod_name) dparts.push("HOD " + result.hod_name);
+      if (result.status) dparts.push(result.status);
+      return dparts.join(" · ");
+    }
+    return "";
+  }
+
+  function initSearch() {
+    var form = document.querySelector("[data-dashboard-search]");
+    if (!form) {
+      return;
+    }
+    form.addEventListener("submit", function (event) {
+      event.preventDefault();
+      var input = form.querySelector("input");
+      var query = input ? (input.value || "").trim() : "";
+      if (!query) {
+        var region = document.querySelector("[data-app-shell]") || document.querySelector(".nx-app");
+        var target = region ? region.querySelector("[data-search-results]") : null;
+        if (target) {
+          target.hidden = true;
+          target.classList.remove("is-loading", "is-error", "is-empty");
+        }
+        return;
+      }
+      var type = "students";
+      var explicit = document.body.getAttribute("data-search-type");
+      if (explicit && SEARCH_TYPES[explicit]) {
+        type = explicit;
+      } else {
+        var pageType = DEFAULT_SEARCH_TYPE_BY_PAGE[(document.body.getAttribute("data-page") || "").toLowerCase()];
+        if (pageType && SEARCH_TYPES[pageType]) {
+          type = pageType;
+        }
+      }
+      var app = document.querySelector("[data-app-shell]") || document.querySelector(".nx-app");
+      var region = app ? (app.querySelector("[data-search-results]") || searchResultsRegion()) : null;
+      if (!region) {
+        return;
+      }
+      region.hidden = false;
+      region.classList.add("is-loading");
+      region.classList.remove("is-error");
+      fetch("/dashboard/search?q=" + encodeURIComponent(query) + "&type=" + encodeURIComponent(type), {
+        credentials: "same-origin",
+      })
+        .then(function (response) { return response.ok ? response.json() : Promise.reject(new Error("Search failed")); })
+        .then(function (payload) { renderSearchResults(region, payload.query || query, payload.type || type, payload.results || []); })
+        .catch(function () {
+          region.classList.remove("is-loading");
+          region.classList.add("is-error");
+          var errorText = region.querySelector("[data-search-error-text]");
+          if (!errorText) {
+            errorText = document.createElement("p");
+            errorText.className = "nx-search-results__error";
+            errorText.setAttribute("data-search-error-text", "true");
+            region.appendChild(errorText);
+          }
+          errorText.textContent = "Search could not be completed. Please try again.";
+        });
+    });
+
+    var clearButton = document.querySelector("[data-search-clear]");
+    if (clearButton) {
+      clearButton.addEventListener("click", function () {
+        var form2 = clearButton.closest("form");
+        var input2 = document.querySelector("[data-dashboard-search] input");
+        if (input2) {
+          input2.value = "";
+        }
+        if (form2) {
+          form2.reset();
+        }
+        var app2 = document.querySelector("[data-app-shell]") || document.querySelector(".nx-app");
+        var target2 = app2 ? app2.querySelector("[data-search-results]") : null;
+        if (target2) {
+          target2.hidden = true;
+          target2.classList.remove("is-loading", "is-error", "is-empty");
+        }
+      });
+    }
+  }
+
 
   function initCollapse() {
     var app = document.querySelector(".nx-app");
@@ -496,19 +805,16 @@
     shell.appendChild(main);
     shell.insertAdjacentHTML("beforeend", buildFooter());
 
-    app.insertAdjacentHTML("afterbegin", buildSidebar() + '<div class="nx-overlay" data-nav-overlay hidden></div>');
+    app.insertAdjacentHTML("afterbegin", buildSidebar());
 
     var pageContainer = main.querySelector(".nx-page");
     if (pageContainer) {
       pageContainer.insertAdjacentHTML("afterbegin", buildBreadcrumb());
-      // The demo notice sits directly after the breadcrumb.
-      var crumbs = pageContainer.querySelector(".nx-breadcrumb");
-      if (crumbs) {
-        crumbs.insertAdjacentHTML("afterend", buildDemoNotice());
-      }
     }
 
     initCollapse();
+    initGreeting();
+    initSearch();
   }
 
   if (document.readyState === "loading") {

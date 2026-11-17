@@ -22,6 +22,7 @@ backend/
 │   ├── models/              # plain data structures
 │   └── validators/          # input validation
 ├── config.py                # configuration from environment variables
+├── scripts/                 # local operator utilities
 ├── requirements.txt         # pinned dependencies
 └── wsgi.py                  # entry point
 ```
@@ -42,6 +43,39 @@ cd backend
 ```
 
 The site is then served at <http://127.0.0.1:5000>.
+
+## Create the fictional sample student account
+
+The local database may not contain the sample student used in the login demo.
+To create `1GM23CS052` and its matching student record, run this operator-only
+script from PowerShell:
+
+```powershell
+Set-Location C:\Users\tejas\Documents\NEXUS\backend
+..\.venv\Scripts\python.exe scripts\create_sample_student_account.py
+```
+
+The script confirms the configured database, prompts for the password without
+echoing it, stores only a Werkzeug password hash, and creates the user and
+student rows in one transaction. It refuses to overwrite an existing account
+and requires the active `CSE` department and `BTECH-CSE` course. Use fictional
+data only, and do not send the password in chat or store it in source control.
+
+## Reset an existing Admin or Faculty password
+
+The operator utility can reset a password for an existing active account. From
+PowerShell:
+
+```powershell
+Set-Location C:\Users\tejas\Documents\NEXUS\backend
+..\.venv\Scripts\python.exe scripts\reset_account_password.py
+```
+
+Choose **1** for Admin; the utility lists active Admin login IDs. Choose **3**
+for Faculty, then enter the faculty Employee ID. Confirm the account, then set
+and confirm the new password in the hidden prompts. The password update is
+committed only after the stored hash is verified. This tool does not create
+accounts or generate a full database dump; it only resets active accounts.
 
 | Route | Purpose |
 |---|---|
@@ -98,7 +132,7 @@ The site is then served at <http://127.0.0.1:5000>.
 ## Known limitations
 
 - The running development server is for local demonstration only.
-- Password reset is not implemented; the link opens an honest placeholder dialog.
+- Self-service password reset is not implemented; local operator reset utilities are available under `scripts/`.
 - Sessions are stored server-side in the Flask cookie and expire after 30 idle minutes.
 - Least-privilege database users (`gmu_app`, `gmu_admin`, `gmu_report`) exist in
   `database/demonstrations/005_dcl.sql` but the local development instance is

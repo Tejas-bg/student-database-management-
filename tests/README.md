@@ -1,6 +1,6 @@
 # Tests
 
-> **Status: Stage 4 suite passing.** 22 automated tests run against the real
+> **Status: Stage 4 suite passing.** 54 automated tests pass; the suite uses the real
 > MySQL database, not SQLite.
 
 This folder holds automated tests for the backend, database access, and
@@ -13,10 +13,12 @@ tests/
 ├── conftest.py                # shared fixtures (Flask app, disposable MySQL user)
 ├── unit/
 │   ├── __init__.py
-│   └── test_security.py       # redirect allow-list, sentinel hash, malformed hash
+│   ├── test_security.py       # redirect allow-list, sentinel hash, malformed hash
+│   └── test_password_reset.py # verification-before-commit transaction
 ├── integration/
 │   ├── __init__.py
-│   └── test_auth.py           # health, CSRF, login, RBAC, logout, 404
+│   ├── test_auth.py           # health, CSRF, login, RBAC, logout, 404
+│   └── test_sample_account_setup.py # MySQL account setup and rollback
 ├── __init__.py
 └── README.md
 ```
@@ -67,6 +69,10 @@ tests import `app` directly.
 | `test_safe_redirect_target` | External and protocol-relative redirect targets are rejected |
 | `test_sentinel_hash_never_authenticates` | Seeded `!NO_LOGIN_HASH_SET` accounts cannot sign in |
 | `test_malformed_hash_never_raises` | A malformed stored hash is rejected without raising |
+| `test_sample_student_is_created_atomically_and_duplicate_is_rejected` | Sample account creation hashes the password, rejects duplicates, and rolls back test data |
+| `test_password_reset_commits_only_after_hash_verification` | Password update is committed only after the stored hash verifies |
+| `test_password_reset_rolls_back_when_hash_verification_fails` | A failed hash verification rolls back instead of changing the password |
+| `test_valid_admin_login_redirects_to_dashboard` and role variants | Login/session route flow works for each role with isolated MySQL fakes |
 
 ## Fixture hygiene
 
@@ -77,5 +83,5 @@ hardcoded in a committed file.
 
 ## Status
 
-Stage 4 backend tests exist and pass. The wider Stage 7 integration suite
+The current backend tests pass. The wider Stage 7 integration suite
 (modules for attendance, marks, fees, and reports) is still to be written.
